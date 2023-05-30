@@ -108,7 +108,7 @@ export const Logo = styled.div`
                     right: 0;
                     bottom: -2px;
                     height: 2px;
-                    background-color: var(--white);
+                    
                     transform: scaleX(0);
                     transform-origin: right;
                     transition: transform 400ms ease-in-out;
@@ -122,3 +122,47 @@ export const Logo = styled.div`
                             }
                             }
                             };`       
+
+// Header
+export const HeaderImg = styled.div`
+img {
+    transition: transform 400ms ease-in-out;
+    width: 25rem;
+    @media (max-width: 790px) {
+        width: 20rem;
+    }
+    @media (max-width: 660px) {
+        width: 15rem;
+    }
+    @media (max-width: 640px) {
+        width: 80%;
+    }
+}   
+:hover img{
+    transform: translateY(-10px);
+}
+
+`;
+
+export const Texts = styled.div`
+flex: 1;
+h1 {
+    font-size: 7rem;
+    text-transform: uppercase;
+    line-height: .9; 
+    font-weight: 300;
+    text-shadow: 4px 3px 4px rgba(19, 38, 42, 1);
+   
+    @media (max-width: 640px) {
+        font-size: 4rem; // Reduced font size for smaller screens
+    }
+}
+p {
+    font-size: 1.2rem;
+    font-weight: 200;
+    @media (max-width: 640px) {
+        font-size: 1rem; 
+    }
+    
+}
+`;
