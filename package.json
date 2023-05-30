@@ -1,5 +1,5 @@
 {
-  "name": "googlebooks-app",
+  "name": "tinysquares-app",
   "version": "1.0.0",
   "description": "",
   "engines": {"node": "16.x"},
@@ -10,10 +10,6 @@
     "start:dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "heroku-postbuild": "cd client && npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@work.github.com:arosenkranz/googlebooks-app.git"
   },
   "keywords": [],
   "author": "",
