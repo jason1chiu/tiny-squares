@@ -197,12 +197,48 @@ export const FeatureTitle = styled.div`
 h1 {
     margin-top: 40px;
     font-size: 2.5rem;
-    color: var(--text);
     text-decoration: none;
     transition: all 400ms ease-in-out;
     opacity: .6;
     :hover {
       opacity: 1;
     }
+  }
+`;
+
+// About
+const ImageWrapper = styled.div`
+  width: 50%;
+  background: url(${AboutImage});
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+`;
+
+const StyledImage = styled.img`
+  width: 100%;
+  height: auto;
+  
+`;
+
+const AboutTitle = styled.div`
+  h1 {
+    font-size: 2.5rem;
+    text-decoration: none;
+    transition: all 400ms ease-in-out;
+    opacity: .6;
+    :hover {
+      opacity: 1;
+    }
+  }
+`;
+const AboutDescription = styled.p`
+  font-size: 1.1rem
+  opacity: 0.6;
+  transition: all 400ms ease-in-out;
+  margin-bottom: 2rem;
+  :hover {
+    opacity: 1;
   }
 `;
