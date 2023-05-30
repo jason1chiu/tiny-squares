@@ -1,21 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Slide } from 'react-awesome-reveal';
 import { HeaderImg, Texts } from './LandingStyles';
 import HeaderPNG from '../../imgs/header.png';
 import { StyledButton } from '../partials/Button';
+import Login from '../partials/modal/Login';
+import SignUp from '../partials/modal/Signup';
 
 const Header = () => {
+    const [showLogin, setShowLogin] = useState(false);
+    const [showSignUp, setShowSignUp] = useState(false);
+
     <Container id="landing">
         <Slide direction="left">
             <Texts>
                 <h1>title</h1>
                 <p>description</p>
-                <StyledButton onClick={() => console.log("Button 2 clicked!")}>
-                    Login
-                </StyledButton>
-                <StyledButton onClick={() => console.log("Button 2 clicked!")}>
-                    SignUp
-                </StyledButton>
+                <StyledButton onClick={() => setShowLogin(true)}>
+                        Login
+                    </StyledButton>
+                    <StyledButton onClick={() => setShowSignUp(true)}>
+                        SignUp
+                    </StyledButton>
             </Texts>
         </Slide>
         <Slide direction="right">
@@ -23,6 +28,8 @@ const Header = () => {
                 <img src={HeaderPNG} />
             </HeaderImg>
         </Slide>
+        {showLogin && <Login onClose={() => setShowLogin(false)} />}
+            {showSignUp && <SignUp onClose={() => setShowSignUp(false)} />}
     </Container>
 }
 
