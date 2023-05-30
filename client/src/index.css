@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    
+  }
+
+  body {
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+    background-color: var(--white);
+  }
+
+  :root{
+    --text: #6F2DBD;
+    --babyblue: #B8D0EB;
+    --lav: #A663CC;
+    --lightlav: #B298DC;
+    --cyan: #B9FAF8;
+    --white: #FFFFFF;
+    
+  }
+
+  @keyframes header {
+    0%{
+      transform: translateY(-30px);
+      opacity: 0;
+    } 
+    100%{
+      transform: translateY(0);
+        opacity: 1;
+    }
+  }
