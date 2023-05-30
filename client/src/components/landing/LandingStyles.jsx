@@ -166,3 +166,43 @@ p {
     
 }
 `;
+// Features
+export const CardsContainer = styled.div`
+display: flex;
+justify-content: space-around;
+flex-wrap: wrap;
+width: 100%;
+`;
+
+export const Card = styled.div`
+display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--white);
+  padding: 20px;
+  margin: 20px;
+  border-radius: 1px;
+  width: 20%;
+  min-width: 200px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  h3 {
+    margin-bottom: 10px;
+  }
+  p {
+    margin-bottom: 20px;
+  }
+`;
+
+export const FeatureTitle = styled.div`
+h1 {
+    margin-top: 40px;
+    font-size: 2.5rem;
+    color: var(--text);
+    text-decoration: none;
+    transition: all 400ms ease-in-out;
+    opacity: .6;
+    :hover {
+      opacity: 1;
+    }
+  }
+`;
