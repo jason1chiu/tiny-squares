@@ -1,11 +1,29 @@
 {
-  "name": "tiny-squares",
+  "name": "googlebooks-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "engines": {"node": "16.x"},
+  "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "cd server && npm start",
+    "start:dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "heroku-postbuild": "cd client && npm run build"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@work.github.com:arosenkranz/googlebooks-app.git"
+  },
+  "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "if-env": "^1.0.4",
+    "json-web-token": "^3.2.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0"
+  }
 }
