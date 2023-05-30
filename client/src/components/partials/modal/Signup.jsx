@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import { Modal, ImageContainer, FormContainer } from './ModalStyles';
 import signUpImage from '../../imgs/signup.png';
 
 const SignUpForm = () => {
