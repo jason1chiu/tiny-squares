@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { Container, Logo, Nav } from './LandingStyles';
 
 const Navbar = () => {
     const [bar, setBar] = useState(false);
