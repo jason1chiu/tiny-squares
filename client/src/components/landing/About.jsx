@@ -30,7 +30,19 @@ const About = () => {
 
 export default About;
 
-const Container = styled.div``;
+const Container = styled.div`
+display: flex;
+  
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  
+  margin: 0 auto;
+  padding: 1.5rem 0;
+  height: 100vh;
+        @media (max-width: 640px) {
+          height: 100%;
+        padding-bottom: 2rem;`;
 
 const ImageWrapper = styled.div`
   width: 50%;
@@ -39,6 +51,7 @@ const ImageWrapper = styled.div`
     background-position: center;
     background-repeat: no-repeat;
     height: 100%;
+    border-radius: 1rem;
 `;
 
 const StyledImage = styled.img`
@@ -74,4 +87,5 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-left: 2rem;
 `;
