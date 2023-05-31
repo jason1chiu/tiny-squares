@@ -109,7 +109,7 @@ const Nav = styled.div`
 
 const StyledLink = styled(RouterLink)`
     text-decoration: none;
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     position: relative;
     font-weight: 300;
     font-family: 'Montserrat', sans-serif;

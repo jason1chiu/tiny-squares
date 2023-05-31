@@ -52,6 +52,7 @@ const ImageWrapper = styled.div`
     background-repeat: no-repeat;
     height: 100%;
     border-radius: 1rem;
+    box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
 `;
 
 const StyledImage = styled.img`

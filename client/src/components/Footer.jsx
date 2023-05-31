@@ -44,7 +44,8 @@ background-color: var(--babyblue);
 padding: 45px 0 20px;
 font-size: 15px;
 line-height: 24px;
-color: var(--white);`;
+color: var(--white);
+margin-top: 3rem;`;
 
 const Container = styled.div``;
 
