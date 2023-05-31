@@ -4,28 +4,29 @@ import { BrowserRouter as Router, Route, Switch, useLocation } from 'react-route
 import styled from "styled-components";
 import LandingPage from './components/landing/App';
 import React from 'react';
+import { ChakraProvider } from '@chakra-ui/react'
 
 // scroll to hash
-function useScrollToHash() {
-    const { hash } = useLocation();
+// function useScrollToHash() {
+//     const { hash } = useLocation();
 
-    useEffect(() => {
-        setTimeout(() => {
-          const id = hash.replace('#', '');
-          const element = document.getElementById(id);
-          if (element) element.scrollIntoView({ behavior: 'smooth' });
-        }, 0);
-      }, [hash]);
-    }
+//     useEffect(() => {
+//         setTimeout(() => {
+//           const id = hash.replace('#', '');
+//           const element = document.getElementById(id);
+//           if (element) element.scrollIntoView({ behavior: 'smooth' });
+//         }, 0);
+//       }, [hash]);
+//     }
     function App() {
         return (
           <Router>
             <ScrollToHash />
-            <Container>
+            <ChakraProvider>
               <Switch>
                 <Route path="/" element={<LandingPage />} />
                 </Switch>
-            </Container>
+            </ChakraProvider>
             </Router>
         );
     }
