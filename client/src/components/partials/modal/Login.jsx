@@ -2,8 +2,9 @@ import React from 'react';
 
 import loginImage from '../../../img/purple.jpg';
 import { Modal, ImageContainer, FormContainer, Overlay, CloseButton } from './ModalStyles';
+import { FaTimes } from "react-icons/fa";  
 
-const LoginForm = () => {
+const LoginForm = ({ onClose }) => {
 
     const handleClickOutside = (event) => {
         if (event.target.className.includes('overlay')) {

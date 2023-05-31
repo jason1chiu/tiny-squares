@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, ImageContainer, FormContainer, Overlay, CloseButton } from './ModalStyles';
-import { FaTimes } from "react-icons/fa";  // Importing React Icons package
+import { FaTimes } from "react-icons/fa";  
 import signUpImage from '../../../img/purple.jpg';
 
 const SignUpForm = ({ onClose }) => {

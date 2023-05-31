@@ -18,10 +18,10 @@ const Header = () => {
                 <p>Capture, create, and chronicle your journey with Tiny Squares, the Pixel Journal. Dive into the world of pixels and let each square color your memories, mood, habits, and more. Experience journaling like never before!</p>
                 <ButtonWrapper>
                     <Button onClick={() => setShowLogin(true)}>
-                        Login
+                        LOGIN
                     </Button>
                     <Button onClick={() => setShowSignUp(true)}>
-                        SignUp
+                        SIGNUP
                     </Button>
                 </ButtonWrapper>
             </Texts>
@@ -75,7 +75,7 @@ img {
 
 const Texts = styled.div`
 flex: 1;
-margin-top: 5rem;
+margin-top: 4rem;
 h1 {
     font-size:15vw;
     text-transform: uppercase;
@@ -103,7 +103,7 @@ h2 {
     }
 }
 p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 200;
     color: var(--white);
     @media (max-width: 640px) {
@@ -115,6 +115,6 @@ p {
 
 const ButtonWrapper = styled.div`
 display: flex;
-    justify-content: space-between;
     gap: 1rem; 
+    font-family: 'Montserrat', sans-serif;
 `;
