@@ -1,6 +1,6 @@
 import './index.css';
 import { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, useLocation } from 'react-router-dom';
 import styled from "styled-components";
 import LandingPage from './components/landing/App';
 import React from 'react';
@@ -22,9 +22,9 @@ function useScrollToHash() {
           <Router>
             <ScrollToHash />
             <Container>
-              <Routes>
+              <Switch>
                 <Route path="/" element={<LandingPage />} />
-                </Routes>
+                </Switch>
             </Container>
             </Router>
         );

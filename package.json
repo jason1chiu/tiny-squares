@@ -19,7 +19,8 @@
   "dependencies": {
     "dotenv": "^10.0.0",
     "if-env": "^1.0.4",
-    "json-web-token": "^3.2.0"
+    "json-web-token": "^3.2.0",
+    "react-icons": "^4.9.0"
   },
   "devDependencies": {
     "concurrently": "^5.2.0"

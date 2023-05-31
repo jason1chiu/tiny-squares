@@ -11,30 +11,28 @@ const Header = () => {
     const [showLogin, setShowLogin] = useState(false);
     const [showSignUp, setShowSignUp] = useState(false);
     return (
-    <Container id="landing">
-      
+        <Container id="landing">
             <Texts>
                 <h2>Your Life in</h2>
                 <h1>Pixels</h1>
                 <p>Capture, create, and chronicle your journey with Tiny Squares, the Pixel Journal. Dive into the world of pixels and let each square color your memories, mood, habits, and more. Experience journaling like never before!</p>
                 <ButtonWrapper>
-                <Button onClick={() => setShowLogin(true)}>
-                        Login
+                    <Button onClick={() => setShowLogin(true)}>
+                        LOGIN
                     </Button>
                     <Button onClick={() => setShowSignUp(true)}>
-                        SignUp
+                        SIGNUP
                     </Button>
-                    </ButtonWrapper>
+                </ButtonWrapper>
             </Texts>
-     
-       
+
             <HeaderImg>
                 <img src={HeaderPNG} alt="largeicon" />
             </HeaderImg>
-       
-        {showLogin && <Login onClose={() => setShowLogin(false)} />}
+
+            {showLogin && <Login onClose={() => setShowLogin(false)} />}
             {showSignUp && <SignUp onClose={() => setShowSignUp(false)} />}
-    </Container>
+        </Container>
     );
 }
 
@@ -77,7 +75,7 @@ img {
 
 const Texts = styled.div`
 flex: 1;
-margin-top: 5rem;
+margin-top: 4rem;
 h1 {
     font-size:15vw;
     text-transform: uppercase;
@@ -105,7 +103,7 @@ h2 {
     }
 }
 p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 200;
     color: var(--white);
 
@@ -118,6 +116,6 @@ p {
 
 const ButtonWrapper = styled.div`
 display: flex;
-    justify-content: space-between;
     gap: 1rem; 
+    font-family: 'Montserrat', sans-serif;
 `;
