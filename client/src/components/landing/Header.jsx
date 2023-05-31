@@ -108,6 +108,7 @@ p {
     font-size: 1.2rem;
     font-weight: 200;
     color: var(--white);
+
     @media (max-width: 640px) {
         font-size: 1rem; 
     }
