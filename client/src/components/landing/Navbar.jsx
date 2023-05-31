@@ -112,6 +112,9 @@ const StyledLink = styled(RouterLink)`
     font-size: 1.8rem;
     position: relative;
     font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+    padding: 0.5rem;
+
     :before {
         content: "";
         position: absolute;

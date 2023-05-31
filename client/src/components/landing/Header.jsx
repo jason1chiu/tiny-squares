@@ -14,14 +14,17 @@ const Header = () => {
     <Container id="landing">
       
             <Texts>
-                <h1>title</h1>
-                <p>description</p>
+                <h2>Your Life in</h2>
+                <h1>Pixels</h1>
+                <p>Capture, create, and chronicle your journey with Tiny Squares, the Pixel Journal. Dive into the world of pixels and let each square color your memories, mood, habits, and more. Experience journaling like never before!</p>
+                <ButtonWrapper>
                 <Button onClick={() => setShowLogin(true)}>
                         Login
                     </Button>
                     <Button onClick={() => setShowSignUp(true)}>
                         SignUp
                     </Button>
+                    </ButtonWrapper>
             </Texts>
      
        
@@ -74,12 +77,28 @@ img {
 
 const Texts = styled.div`
 flex: 1;
+margin-top: 5rem;
 h1 {
-    font-size: 7rem;
+    font-size:15vw;
     text-transform: uppercase;
     line-height: .9; 
     font-weight: 300;
     text-shadow: 4px 3px 4px rgba(19, 38, 42, 1);
+    font-family: 'Thunder-BoldLC', sans-serif;
+    color: var(--white);
+   
+    @media (max-width: 640px) {
+        font-size: 4rem; // Reduced font size for smaller screens
+    }
+}
+h2 {
+    font-size:8vw;
+    text-transform: uppercase;
+    line-height: .9; 
+    font-weight: 300;
+    
+    font-family: 'Thunder-LightLC', sans-serif;
+    color: var(--white);
    
     @media (max-width: 640px) {
         font-size: 4rem; // Reduced font size for smaller screens
@@ -88,9 +107,16 @@ h1 {
 p {
     font-size: 1.2rem;
     font-weight: 200;
+    color: var(--white);
     @media (max-width: 640px) {
         font-size: 1rem; 
     }
     
 }
+`;
+
+const ButtonWrapper = styled.div`
+display: flex;
+    justify-content: space-between;
+    gap: 1rem; 
 `;

@@ -1,11 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed&family=Montserrat:wght@200&display=swap');
+
+@font-face {
+  font-family: 'Thunder-BoldLC';
+  src: url('./fonts/Thunder-BoldLC.woff2') format('woff2'),
+       url('./fonts/Thunder-BoldLC.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Thunder-LightLC';
+  src: url('./fonts/Thunder-LightLC.woff2') format('woff2'),
+       url('./fonts/Thunder-LightLC.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
-    
   }
-
+p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
   body {
     overflow-x: hidden;
     position: relative;
