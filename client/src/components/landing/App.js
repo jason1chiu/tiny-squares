@@ -28,8 +28,9 @@ background: url(${LandingImg});
 background-size: cover;
 background-position: center;
 margin: 3rem;
+margin-top: 0;
 border-radius: 1rem;
-box-shadow: 0 0 1rem rgba(0,0,0,0.5);
+box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
 height: 85vh;
 @media (max-width: 640px) {
   height: 100%;
