@@ -11,30 +11,28 @@ const Header = () => {
     const [showLogin, setShowLogin] = useState(false);
     const [showSignUp, setShowSignUp] = useState(false);
     return (
-    <Container id="landing">
-      
+        <Container id="landing">
             <Texts>
                 <h2>Your Life in</h2>
                 <h1>Pixels</h1>
                 <p>Capture, create, and chronicle your journey with Tiny Squares, the Pixel Journal. Dive into the world of pixels and let each square color your memories, mood, habits, and more. Experience journaling like never before!</p>
                 <ButtonWrapper>
-                <Button onClick={() => setShowLogin(true)}>
+                    <Button onClick={() => setShowLogin(true)}>
                         Login
                     </Button>
                     <Button onClick={() => setShowSignUp(true)}>
                         SignUp
                     </Button>
-                    </ButtonWrapper>
+                </ButtonWrapper>
             </Texts>
-     
-       
+
             <HeaderImg>
                 <img src={HeaderPNG} alt="largeicon" />
             </HeaderImg>
-       
-        {showLogin && <Login onClose={() => setShowLogin(false)} />}
+
+            {showLogin && <Login onClose={() => setShowLogin(false)} />}
             {showSignUp && <SignUp onClose={() => setShowSignUp(false)} />}
-    </Container>
+        </Container>
     );
 }
 

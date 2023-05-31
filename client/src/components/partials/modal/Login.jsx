@@ -1,11 +1,22 @@
 import React from 'react';
 
 import loginImage from '../../../img/purple.jpg';
-import { Modal, ImageContainer, FormContainer } from './ModalStyles';
+import { Modal, ImageContainer, FormContainer, Overlay, CloseButton } from './ModalStyles';
 
 const LoginForm = () => {
+
+    const handleClickOutside = (event) => {
+        if (event.target.className.includes('overlay')) {
+            onClose();
+        }
+    }
+
     return (
-        <Modal>
+        <Overlay onClick={handleClickOutside} className='overlay'>
+        <Modal onClick={e => e.stopPropagation()}>
+            <CloseButton onClick={onClose}>
+                <FaTimes />
+            </CloseButton>
             <ImageContainer>
                 <img src={loginImage} alt="Login" />
             </ImageContainer>
@@ -22,6 +33,7 @@ const LoginForm = () => {
                 </form>
             </FormContainer>
         </Modal>
+        </Overlay>
         )
     }
     

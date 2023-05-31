@@ -1,10 +1,22 @@
-import React from 'react';
-import { Modal, ImageContainer, FormContainer } from './ModalStyles';
+import React, { useState } from 'react';
+import { Modal, ImageContainer, FormContainer, Overlay, CloseButton } from './ModalStyles';
+import { FaTimes } from "react-icons/fa";  // Importing React Icons package
 import signUpImage from '../../../img/purple.jpg';
 
-const SignUpForm = () => {
+const SignUpForm = ({ onClose }) => {
+
+    const handleClickOutside = (event) => {
+        if (event.target.className.includes('overlay')) {
+            onClose();
+        }
+    }
+
     return (
-        <Modal>
+        <Overlay onClick={handleClickOutside} className='overlay'>
+        <Modal onClick={e => e.stopPropagation()}>
+            <CloseButton onClick={onClose}>
+                <FaTimes />
+            </CloseButton>
             <ImageContainer>
                 <img src={signUpImage} alt="Sign Up" />
             </ImageContainer>
@@ -24,7 +36,8 @@ const SignUpForm = () => {
                 </form>
             </FormContainer>
         </Modal>
-    )
-}
+    </Overlay>
+             )
+            }
 
 export default SignUpForm;
