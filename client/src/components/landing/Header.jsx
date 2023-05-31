@@ -83,7 +83,7 @@ h1 {
     text-transform: uppercase;
     line-height: .9; 
     font-weight: 300;
-    text-shadow: 4px 3px 4px rgba(19, 38, 42, 1);
+    text-shadow: 1px 3px 2px rgba(19, 38, 42, 1);
     font-family: 'Thunder-BoldLC', sans-serif;
     color: var(--white);
    
