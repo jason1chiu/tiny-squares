@@ -1,8 +1,9 @@
-import './App.css';
+import './index.css';
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import styled from "styled-components";
 import LandingPage from './components/landing/App';
+import React from 'react';
 
 // scroll to hash
 function useScrollToHash() {

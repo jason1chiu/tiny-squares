@@ -24,7 +24,7 @@ export const ImageContainer = styled.div`
     }
 `;
 
-expor const FormContainer = styled.div`
+export const FormContainer = styled.div`
     flex: 1;
     padding-left: 20px;
 `;

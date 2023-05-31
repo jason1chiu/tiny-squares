@@ -4,14 +4,14 @@ import Footer from '../Footer.jsx';
 import Features from './Features';
 import About from './About';
 import Navbar from './Navbar';
-import LandingImg from '../../imgs/landing.png';
+import LandingImg from '../../img/gradient.jpeg';
 import styled from 'styled-components';
 
 const LandingPage = () => {
     return (
         <div>
+            <Navbar />
             <Banner>
-                <Navbar />
                 <Header />
             </Banner>
             <Features />
@@ -27,8 +27,10 @@ const Banner = styled.div`
 background: url(${LandingImg});
 background-size: cover;
 background-position: center;
-margin: 1rem;
-height: 100vh;
+margin: 3rem;
+border-radius: 1rem;
+box-shadow: 0 0 1rem rgba(0,0,0,0.5);
+height: 85vh;
 @media (max-width: 640px) {
   height: 100%;
 padding-bottom: 2rem;

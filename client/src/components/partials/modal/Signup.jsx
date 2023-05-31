@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, ImageContainer, FormContainer } from './ModalStyles';
-import signUpImage from '../../imgs/signup.png';
+import signUpImage from '../../../img/purple.jpg';
 
 const SignUpForm = () => {
     return (

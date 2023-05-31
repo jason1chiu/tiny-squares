@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
-import loginImage from '../../imgs/login.png';
+
+import loginImage from '../../../img/purple.jpg';
 import { Modal, ImageContainer, FormContainer } from './ModalStyles';
 
 const LoginForm = () => {
