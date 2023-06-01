@@ -1,12 +1,12 @@
 import {
-  Avatar,
+  // Avatar,
   Box,
-  Flex,
-  FormLabel,
-  Icon,
-  Select,
+  // Flex,
+  // FormLabel,
+  // Icon,
+  // Select,
   Grid,
-  useColorModeValue,
+  // useColorModeValue,
 } from "@chakra-ui/react";
 
 import React from "react";
