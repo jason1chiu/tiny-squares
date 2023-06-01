@@ -1,11 +1,11 @@
 import { Avatar, Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
-import Card from "components/card/Card.js";
+import Card from "../../../../components/card.js";
 import React from "react";
 
 export default function Profile(props) {
-    const { profile, avatar, name, entries, journals } = props;
+  const { profile, avatar, name, entries, journals } = props;
 
-    const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
+  const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "gray.400";
   const borderColor = useColorModeValue(
     "white !important",
@@ -20,7 +20,7 @@ export default function Profile(props) {
         h='131px'
         w='100%'
       />
-       <Avatar
+      <Avatar
         mx='auto'
         src={avatar}
         h='87px'
@@ -35,7 +35,7 @@ export default function Profile(props) {
       <Flex w='max-content' mx='auto' mt='26px'>
         <Flex mx='auto' me='60px' align='center' direction='column'>
           <Text color={textColorPrimary} fontSize='2xl' fontWeight='700'>
-            {entries  }
+            {entries}
           </Text>
           <Text color={textColorSecondary} fontSize='sm' fontWeight='400'>
             Entries

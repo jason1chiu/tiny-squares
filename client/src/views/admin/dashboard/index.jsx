@@ -9,15 +9,14 @@ import {
     useColorModeValue,
 } from "@chakra-ui/react";
 
-import Usa from "assets/img/purple.png";
 import React from "react";
-import { PieChart } from "views/admin/dashboard/components/PieChart";
-import { Profile } from "views/admin/dashboard/components/Profile";
-import { Journals } from "views/admin/dashboard/components/Journals";
-import { ColumnsTable } from "views/admin/dashboard/components/ColumnsTable";
+import PieChart from "./components/PieChart";
+import Profile from "./components/Profile";
+import Journals from "./components/Journals";
+import ColumnsTable from "./components/ColumnsTable";
 
-import profile from "assets/img/purple.png";
-import avatar from "assets/img/purple.png";
+import profile from "../../../assets/img/purple.jpg";
+import avatar from "../../../assets/img/purple.jpg";
 
 export default function Overview() {
     return (
