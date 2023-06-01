@@ -23,5 +23,3 @@ function App() {
 //   return null;
 // }
 export default App;
-
-const Container = styled.div``;
