@@ -8,12 +8,13 @@ import {
   MdMenuBook
 } from "react-icons/md";
 
+// Admin views
 //import Calendar from "./views/admin/calendar/Calendar.js";
-//import Create from "./views/admin/create/Create.js";
-//import Journals from "./views/admin/journals/Journals.js";
-import Dashboard from "./views/admin/dashboard/index";
+//import Create from "./views/admin/create";
+//import Journals from "./views/admin/journals";
+import Dashboard from "views/admin/dashboard";
 
-//auth 
+//auth views
 // import SignIn from "./views/admin/auth/SignIn.js";
 // import SignUp from "./views/admin/auth/SignUp.js";
 // import Landing from "./views/admin/auth/Landing.js";
@@ -22,7 +23,7 @@ const routes = [
   {
     name: "Dashboard",
     layout: "/admin",
-    path: "/default",
+    path: "/dashboard",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: Dashboard,
   },
