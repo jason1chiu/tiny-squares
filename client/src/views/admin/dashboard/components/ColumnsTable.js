@@ -7,13 +7,13 @@ import {
     useColorModeValue,
   } from "@chakra-ui/react";
 
-import Card from "components/card/Card.js";
+import Card from "../../../../components/card.js";
 import React from "react";
-import BarChart from "components/charts/BarChart";
+import BarChart from "../../../../components/charts/BarChart.js"
 import {
     barChartDataConsumption,
     barChartOptionsConsumption,
-  } from "variables/charts";
+  } from "../../../../variables/charts";
   import { MdBarChart } from "react-icons/md";
 
 export default function JournalBars(props) {

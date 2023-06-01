@@ -1,11 +1,10 @@
 import { Text, useColorModeValue } from "@chakra-ui/react";
-
-import Journal1 from "assets/img/purple.png";
-import Journal2 from "assets/img/purple.png";
-import Journal3 from "assets/img/purple.png";
-import Card from "components/card/Card.js";
+import Journal from "./Journal"
+import Journal1 from "../../../../assets/img/purple.jpg";
+import Journal2 from "../../../../assets/img/purple.jpg";
+import Journal3 from "../../../../assets/img/purple.jpg";
+import Card from "../../../../components/card.js";
 import React from "react";
-import Project from "views/admin/profile/components/Project";
 
 export default function Journals(props) {
     const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
