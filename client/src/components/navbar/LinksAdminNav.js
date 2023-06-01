@@ -20,7 +20,7 @@ import navImage from 'assets/img/purple.jpg';
 import { ItemContent } from 'components/menu/ItemContent';
 import { SidebarResponsive } from 'components/sidebar/Sidebar';
 import { FaEthereum } from 'react-icons/fa';
-import { ThemeEditor } from './ThemeEditor';
+
 
 export default function HeaderLinks(props) {
 	const { secondary } = props;
@@ -133,7 +133,7 @@ export default function HeaderLinks(props) {
 				</MenuList>
 			</Menu>
 
-            <ThemeEditor navbarIcon={navbarIcon} />
+         
             <Menu>
 				<MenuButton p="0px">
 					<Avatar
