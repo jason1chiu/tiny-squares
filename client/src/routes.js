@@ -22,14 +22,14 @@ const routes = [
   {
     name: "Dashboard",
     layout: "/admin",
-    path: "/dashboard",
+    path: "/admin/dashboard",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: Dashboard,
   },
   // {
   //     name: "Journals",
   //     layout: "/admin",
-  //     path: "/journals",
+  //     path: "/admin/journals",
   //     icon: <Icon as={MdMenuBook} width='20px' height='20px' color='inherit' />,
   //     component: Journals,
   // },
