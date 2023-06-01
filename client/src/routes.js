@@ -8,10 +8,12 @@ import {
   MdMenuBook
 } from "react-icons/md";
 
-//import Calendar from "./views/admin/calendar/Calendar.js";
-//import Create from "./views/admin/create/Create.js";
-//import Journals from "./views/admin/journals/Journals.js";
+// Admin Imports
 import Dashboard from "./views/admin/dashboard/index";
+// import Calendar from "./views/admin/calendar/Calendar.js";
+// import Create from "./views/admin/create/Create.js";
+// import Journals from "./views/admin/journals/Journals.js";
+
 
 //auth 
 // import SignIn from "./views/admin/auth/SignIn.js";
@@ -27,46 +29,46 @@ const routes = [
     component: Dashboard,
   },
   // {
-  //     name: "Journals",
-  //     layout: "/admin",
-  //     path: "/admin/journals",
-  //     icon: <Icon as={MdMenuBook} width='20px' height='20px' color='inherit' />,
-  //     component: Journals,
+  //   name: "Journals",
+  //   layout: "/admin",
+  //   path: "/admin/journals",
+  //   icon: <Icon as={MdMenuBook} width='20px' height='20px' color='inherit' />,
+  //   component: Journals,
   // },
   // {
-  //     name: "Create",
-  //     layout: "/admin",
-  //     path: "/create",
-  //     icon: <Icon as={MdLibraryAdd} width='20px' height='20px' color='inherit' />,
-  //     component: Create,
+  //   name: "Create",
+  //   layout: "/admin",
+  //   path: "/create",
+  //   icon: <Icon as={MdLibraryAdd} width='20px' height='20px' color='inherit' />,
+  //   component: Create,
   // },
   // {
-  //     name: "Calendar",
-  //     layout: "/admin",
-  //     path: "/calendar",
-  //     icon: <Icon as={MdOutlineCalendarMonth} width='20px' height='20px' color='inherit' />,
-  //     component: Calendar,
+  //   name: "Calendar",
+  //   layout: "/admin",
+  //   path: "/calendar",
+  //   icon: <Icon as={MdOutlineCalendarMonth} width='20px' height='20px' color='inherit' />,
+  //   component: Calendar,
   // },
   // {
-  //     name: "Signin",
-  //     layout: "/auth",
-  //     path: "/sign-in",
-  //     icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
-  //     component: SignIn,
+  //   name: "Signin",
+  //   layout: "/auth",
+  //   path: "/sign-in",
+  //   icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
+  //   component: SignIn,
   // },
   // {
-  //     name: "Signup",
-  //     layout: "/auth",
-  //     path: "/sign-up",
-  //     icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
-  //     component: SignUp,
+  //   name: "Signup",
+  //   layout: "/auth",
+  //   path: "/sign-up",
+  //   icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
+  //   component: SignUp,
   // },
   // {
-  //     name: "Landing",
-  //     layout: "/auth",
-  //     path: "/landing",
-  //     icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
-  //     component: Landing,
+  //   name: "Landing",
+  //   layout: "/auth",
+  //   path: "/landing",
+  //   icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
+  //   component: Landing,
   // },
 ];
 
