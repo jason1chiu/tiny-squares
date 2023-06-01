@@ -7,15 +7,15 @@ import { pieChartData, pieChartOptions } from "../../../../variables/charts";
 import { VSeparator } from "../../../../components/seperator/Seperator.jsx";
 
 export default function Conversion(props) {
-    const { ...rest } = props;
+  const { ...rest } = props;
 
-    const textColor = useColorModeValue("secondaryGray.900", "white");
-    const cardColor = useColorModeValue("white", "navy.700");
-    const cardShadow = useColorModeValue(
-      "0px 18px 40px rgba(112, 144, 176, 0.12)",
-      "unset"
-    );
-    return (
+  const textColor = useColorModeValue("secondaryGray.900", "white");
+  const cardColor = useColorModeValue("white", "navy.700");
+  const cardShadow = useColorModeValue(
+    "0px 18px 40px rgba(112, 144, 176, 0.12)",
+    "unset"
+  );
+  return (
     <Card p='20px' align='center' direction='column' w='100%' {...rest}>
       <Flex
         px={{ base: "0px", "2xl": "10px" }}
@@ -43,7 +43,7 @@ export default function Conversion(props) {
         chartData={pieChartData}
         chartOptions={pieChartOptions}
       />
-       <Card
+      <Card
         bg={cardColor}
         flexDirection='row'
         boxShadow={cardShadow}
@@ -52,7 +52,7 @@ export default function Conversion(props) {
         px='20px'
         mt='15px'
         mx='auto'>
-            <Flex direction='column' py='5px'>
+        <Flex direction='column' py='5px'>
           <Flex align='center'>
             <Box h='8px' w='8px' bg='brand.500' borderRadius='50%' me='4px' />
             <Text
@@ -66,7 +66,7 @@ export default function Conversion(props) {
           <Text fontSize='lg' color={textColor} fontWeight='700'>
             63%
           </Text>
-          </Flex>
+        </Flex>
         <VSeparator mx={{ base: "60px", xl: "60px", "2xl": "60px" }} />
         <Flex direction='column' py='5px' me='10px'>
           <Flex align='center'>

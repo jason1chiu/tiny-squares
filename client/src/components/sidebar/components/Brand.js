@@ -3,7 +3,7 @@ import React from "react";
 // Chakra imports
 import { Flex, useColorModeValue } from "@chakra-ui/react";
 
-import { HSeparator } from "components/separator/Separator";
+import { HSeparator } from "../../seperator/Seperator";
 
 export function SidebarBrand() {
 

@@ -22,34 +22,33 @@ export const textareaStyles = {
           },
         }),
         auth: (props) => ({
-            field: {
-              bg: "white",
-              border: "1px solid",
-              borderColor: "secondaryGray.100",
-              borderRadius: "16px",
-              _placeholder: { color: "secondaryGray.600" },
-            },
-          }),
-          authSecondary: (props) => ({
-            field: {
-              bg: "white",
-              border: "1px solid",
-  
-              borderColor: "secondaryGray.100",
-              borderRadius: "16px",
-              _placeholder: { color: "secondaryGray.600" },
-            },
-          }),
-          search: (props) => ({
-            field: {
-              border: "none",
-              py: "11px",
-              borderRadius: "inherit",
-              _placeholder: { color: "secondaryGray.600" },
-            },
-          }),
-        },
+          field: {
+            bg: "white",
+            border: "1px solid",
+            borderColor: "secondaryGray.100",
+            borderRadius: "16px",
+            _placeholder: { color: "secondaryGray.600" },
+          },
+        }),
+        authSecondary: (props) => ({
+          field: {
+            bg: "white",
+            border: "1px solid",
+
+            borderColor: "secondaryGray.100",
+            borderRadius: "16px",
+            _placeholder: { color: "secondaryGray.600" },
+          },
+        }),
+        search: (props) => ({
+          field: {
+            border: "none",
+            py: "11px",
+            borderRadius: "inherit",
+            _placeholder: { color: "secondaryGray.600" },
+          },
+        }),
       },
     },
-  };
-  
+  },
+};
