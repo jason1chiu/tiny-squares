@@ -3,7 +3,7 @@ import Journal from "./Journal"
 import Journal1 from "assets/img/purple.jpg";
 import Journal2 from "assets/img/purple.jpg";
 import Journal3 from "assets/img/purple.jpg";
-import Card from "components/card.js";
+import Card from "components/card/card.js";
 import React from "react";
 
 export default function Journals(props) {

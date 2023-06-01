@@ -1,5 +1,5 @@
 import { Box, Flex, Text, Select, useColorModeValue } from "@chakra-ui/react";
-import Card from "components/card.js";
+import Card from "components/card/card.js";
 //import the pie chart from components/charts
 import PieChart from "components/charts/Pie.js";
 import React from "react";

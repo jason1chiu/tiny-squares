@@ -1,5 +1,5 @@
 import { Avatar, Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
-import Card from "components/card.js";
+import Card from "components/card/card.js";
 import React from "react";
 
 export default function Profile(props) {

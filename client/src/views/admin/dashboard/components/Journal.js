@@ -8,7 +8,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import Card from "components/card.js";
+import Card from "components/card/card.js";
 import React from "react";
 
 import { MdEdit } from "react-icons/md";

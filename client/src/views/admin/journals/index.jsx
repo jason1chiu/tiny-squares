@@ -14,7 +14,7 @@ import {
 
   import Card from "components/card/card";
 
-  export default function CreateJournal() {
+  export default function JournalPage() {
     // Chakra Color Mode
     const textColor = useColorModeValue("secondaryGray.900", "white");
     const textColorBrand = useColorModeValue("brand.500", "white");
