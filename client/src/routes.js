@@ -61,6 +61,13 @@ const routes = [
   //     icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
   //     component: SignUp,
   // },
+  // {
+  //     name: "Landing",
+  //     layout: "/auth",
+  //     path: "/landing",
+  //     icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
+  //     component: Landing,
+  // },
 ];
 
 export default routes;
