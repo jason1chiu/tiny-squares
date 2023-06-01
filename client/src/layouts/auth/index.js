@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import routes from "routes.js";
+import routes from "../../routes.js";
 
 import { Box, useColorModeValue } from "@chakra-ui/react";
 
-import { SidebarContext } from "contexts/SidebarContext";
+import { SidebarContext } from "../../contexts/SidebarContext";
 
 export default function Auth() {
     // states and functions

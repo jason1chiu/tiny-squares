@@ -1,5 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
-import { CardComponent } from "./additions/card/card";
+import { CardComponent } from "./additions/card";
 import { buttonStyles } from "./components/button";
 import { badgeStyles } from "./components/badge";
 import { inputStyles } from "./components/input";

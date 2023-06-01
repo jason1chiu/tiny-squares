@@ -15,11 +15,12 @@ import {
 import PropTypes from 'prop-types';
 import React from 'react';
 import { MdNotificationsNone, MdInfoOutline } from 'react-icons/md';
-import routes from 'routes.js';
-import navImage from 'assets/img/purple.png';
-import { ItemContent } from 'components/menu/ItemContent';
-import { SidebarResponsive } from 'components/sidebar/Sidebar';
+import routes from '../../routes';
+import navImage from '../../assets/img/purple.jpg';
+import { ItemContent } from '../menu/ItemContent';
+import { SidebarResponsive } from '../sidebar/Sidebar';
 import { FaEthereum } from 'react-icons/fa';
+import { ThemeEditor } from './ThemeEditor';
 
 export default function HeaderLinks(props) {
 	const { secondary } = props;

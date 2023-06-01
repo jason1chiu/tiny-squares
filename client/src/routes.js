@@ -11,7 +11,7 @@ import {
 //import Calendar from "./views/admin/calendar/Calendar.js";
 //import Create from "./views/admin/create/Create.js";
 //import Journals from "./views/admin/journals/Journals.js";
-import Dashboard from "./views/admin/dashboard/Dashboard.js";
+import Dashboard from "./views/admin/dashboard/index";
 
 //auth 
 // import SignIn from "./views/admin/auth/SignIn.js";

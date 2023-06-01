@@ -10,7 +10,7 @@ import {
   } from "@chakra-ui/react";
   import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
-import LinksAdminNav from "components/navbar/LinksAdminNav.js";
+import LinksAdminNav from "./LinksAdminNav";
 
 export default function AdminNavbar(props) {
     const [scrolled, setScrolled] = useState(false);
@@ -132,7 +132,7 @@ export default function AdminNavbar(props) {
               </Link>
             </Box>
             <Box ms='auto' w={{ sm: "100%", md: "unset" }}>
-              <AdminNavbarLinks
+              <LinksAdminNav
                 onOpen={props.onOpen}
                 logoText={props.logoText}
                 secondary={props.secondary}

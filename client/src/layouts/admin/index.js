@@ -1,11 +1,11 @@
 import { Portal, Box, useDisclosure } from "@chakra-ui/react";
-import routes from "routes.js";
+import routes from "../../routes.js";
 import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import Footer from "components/footer/FooterAdmin.js";
-import Navbar from "components/navbar/NavbarAdmin.js";
-import Sidebar from "components/sidebar/Sidebar.js";
-import { SidebarContext } from "contexts/SidebarContext";
+import Footer from "../../components/footer/FooterAdmin";
+import Navbar from "../../components/navbar/AdminNav";
+import Sidebar from "../../components/sidebar/Sidebar";
+import { SidebarContext } from "../../contexts/SidebarContext";
 
 export default function Dashboard(props) {
     const { ...rest } = props;
