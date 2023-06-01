@@ -24,7 +24,7 @@ function useScrollToHash() {
     }
     function App() {
         return (
-        <CartProvider>
+     
           <Router>
             <ScrollToHash />
             <Container>
@@ -34,6 +34,7 @@ function useScrollToHash() {
               </Routes>
             </Container>
 
+            <CartProvider>
             <Container>
             <StoreHeader />
               <Routes>
@@ -42,8 +43,9 @@ function useScrollToHash() {
                 <Route path="/store/cancel" element={<Cancel />} />
               </Routes>
             </Container>
-            </Router>
             </CartProvider>
+            </Router>
+          
         );
     }
     function ScrollToHash() {
