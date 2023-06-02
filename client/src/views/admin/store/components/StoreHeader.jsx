@@ -2,11 +2,19 @@ import React, { useState, useEffect, useContext } from 'react';
 import Logo from "../../../../assets/img/Logo.png"
 import { CartContext } from "../js/CartContext"
 import CartProduct from '../js/CartProduct'
-import { Button, ButtonGroup } from '@chakra-ui/react'
+import { Button, ButtonGroup, Container,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton, } from '@chakra-ui/react'
 
 const StoreHeader = () => {
   const cart = useContext(CartContext)
 
+  
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
