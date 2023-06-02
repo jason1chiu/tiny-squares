@@ -1,6 +1,9 @@
 const express = require('express');
 const path = require('path');
 const db = require('./config/connection');
+var cors = require('cors');
+require('dotenv').config();
+const stripe = require('stripe')(process.env.STRIPE_API_KEY);
 
 const { ApolloServer } = require('apollo-server-express');
 const { typeDefs, resolvers } = require('./schemas');
@@ -8,7 +11,7 @@ const { authMiddleware } = require('./utils/auth');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-
+app.use(cors());
 // setup apollo server and use typeDefs, resolvers, and auth for context
 const server = new ApolloServer({
   typeDefs,
@@ -22,6 +25,31 @@ server.applyMiddleware({ app });
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.post("/admin/store/checkout", async (req, res) => {
+
+  console.log(req.body);
+  const items = req.body.items;
+  let lineItems = [];
+  items.forEach((item) => {
+    lineItems.push(
+      {
+        price: item.id,
+        quantity: item.quantity
+      }
+    )
+  });
+
+  const session = await stripe.checkout.sessions.create({
+    line_items: lineItems,
+    mode: 'payment',
+    success_url: "http://localhost:3000/store/success",
+    cancel_url: "http://localhost:3000/store/cancel"
+  });
+
+  res.send(JSON.stringify({
+    url: session.url
+  }))
+})
 // if we're in production, serve client/build as static assets
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
