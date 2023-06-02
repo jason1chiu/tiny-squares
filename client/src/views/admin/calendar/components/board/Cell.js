@@ -26,7 +26,7 @@ const Cell = ({ day, month, color, note, onSave, legends }) => {
         cursor="pointer"
         onClick={handleCellClick}
       ></Box>
-      <CellModal isOpen={isOpen} onClose={onClose} onSave={handleSave} legends={legends} />
+      <CellModal isOpen={isOpen} onClose={onClose} onSave={handleSave} initialColor={color} initialNote={note} legends={legends} />
     </>
   );
 };
