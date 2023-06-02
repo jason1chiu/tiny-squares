@@ -15,8 +15,8 @@ import Journals from "./views/admin/journals";
 import Dashboard from "views/admin/dashboard";
 import Store from "views/admin/store";
 
-import CancelPage from "views/admin/cancelOrderPage";
-//auth views
+// import CancelPage from "views/admin/cancelOrderPage";
+// Auth views
 import SignIn from "views/auth/signIn/index.jsx"
 import SignUp from "views/auth/signUp/index.jsx";
 // import Landing from "./views/admin/auth/Landing.js";
@@ -51,13 +51,12 @@ const routes = [
     component: Store,
   },
   // {
-  //   name: "Cancel",
+  //   name: "CancelOrderPage",
   //   layout: "/admin",
   //   path: "/store/cancel",
   //   icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
   //   component: CancelPage,
   // },
-  
   {
       name: "Calendar",
       layout: "/admin",
