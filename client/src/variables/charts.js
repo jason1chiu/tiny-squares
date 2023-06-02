@@ -1,5 +1,96 @@
 // Pie
 
+export const lineChartDataAreaEventsCalendar = [
+  {
+    name: "Price",
+    data: [100, 250, 300, 220, 280, 250, 300, 230, 300, 350, 250, 350],
+  },
+];
+
+export const lineChartOptionsAreaEventsCalendar = {
+  chart: {
+    height: "70px",
+    toolbar: {
+      show: false,
+    },
+    redrawOnParentResize: true,
+  },
+  tooltip: {
+    enabled: false,
+    theme: "dark",
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  stroke: {
+    curve: "smooth",
+    width: 3.5,
+  },
+  xaxis: {
+    type: "datetime",
+    categories: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    labels: {
+      show: false,
+      style: {
+        colors: "#c8cfca",
+        fontSize: "12px",
+      },
+    },
+    axisBorder: {
+      show: false,
+    },
+    axisTicks: {
+      show: false,
+    },
+  },
+  yaxis: {
+    show: false,
+    labels: {
+      style: {
+        colors: "#A3AED0",
+        fontSize: "12px",
+        fontWeight: "500",
+      },
+    },
+  },
+  legend: {
+    show: false,
+  },
+  grid: {
+    show: false,
+    strokeDashArray: 5,
+    borderColor: "#56577A",
+  },
+  fill: {
+    type: "gradient",
+    gradient: {
+      shade: "dark",
+      type: "vertical",
+      shadeIntensity: 0,
+      gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
+      inverseColors: true,
+      opacityFrom: 0.6,
+      opacityTo: 0,
+      stops: [],
+    },
+    colors: ["#707EAE"],
+  },
+  colors: ["#707EAE"],
+};
+
 export const pieChartOptions = {
   labels: ["Happy", "Sad", "Angry", "Neutral", "Fearful", "Disgusted", "Surprised"],
   colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],

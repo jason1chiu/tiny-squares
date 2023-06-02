@@ -33,7 +33,10 @@
     "react-table": "^7.7.0",
     "stylis": "^4.1.1",
     "stylis-plugin-rtl": "2.0.2",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "@fullcalendar/react": "5.9.0",
+    "@fullcalendar/daygrid": "5.9.0",
+    "@fullcalendar/interaction": "5.9.0"
   },
   "scripts": {
     "start": "react-scripts start",
