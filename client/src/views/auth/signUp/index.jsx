@@ -68,7 +68,7 @@ export default function SignUp() {
             color={textColorSecondary}
             fontWeight='400'
             fontSize='md'>
-              Enter your email and password to sign in!
+               Enter your email and password to sign up!
           </Text>
         </Box>
         <Flex
