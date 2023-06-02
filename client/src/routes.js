@@ -11,11 +11,11 @@ import {
 // Admin views
 //import Calendar from "./views/admin/calendar/Calendar.js";
 import Create from "views/admin/create";
-import Journals from "./views/admin/journals";
+import Journals from "views/admin/journals";
 import Dashboard from "views/admin/dashboard";
 
 //auth views
-// import SignIn from "./views/admin/auth/SignIn.js";
+import SignIn from "views/auth/signIn/index.jsx"
 // import SignUp from "./views/admin/auth/SignUp.js";
 // import Landing from "./views/admin/auth/Landing.js";
 
@@ -48,13 +48,13 @@ const routes = [
   //     icon: <Icon as={MdOutlineCalendarMonth} width='20px' height='20px' color='inherit' />,
   //     component: Calendar,
   // },
-  // {
-  //     name: "Signin",
-  //     layout: "/auth",
-  //     path: "/sign-in",
-  //     icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
-  //     component: SignIn,
-  // },
+  {
+      name: "Sign in",
+      layout: "/auth",
+      path: "/sign-in",
+      icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
+      component: SignIn,
+  },
   // {
   //     name: "Signup",
   //     layout: "/auth",
