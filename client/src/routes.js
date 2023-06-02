@@ -11,7 +11,7 @@ import {
 // Admin views
 import Calendar from "views/admin/calendar";
 import Create from "views/admin/create";
-import Journals from "./views/admin/journals";
+import Journals from "views/admin/journals";
 import Dashboard from "views/admin/dashboard";
 import Store from "views/admin/store";
 
@@ -78,13 +78,6 @@ const routes = [
       icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
       component: SignUp,
   },
-  // {
-  //     name: "Landing",
-  //     layout: "/auth",
-  //     path: "/landing",
-  //     icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
-  //     component: Landing,
-  // },
 ];
 
 export default routes;

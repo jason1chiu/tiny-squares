@@ -9,7 +9,7 @@ import AuthLayout from "layouts/auth";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "theme/theme";
 import CartProvider from "./views/admin/store/js/CartContext"
-
+import CancelPage from "./views/admin/cancelOrderPage/"
 // import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
 
 // let user = localStorage.getItem("user");

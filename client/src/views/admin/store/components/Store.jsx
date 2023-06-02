@@ -5,27 +5,25 @@ import ProductCard from 'views/admin/store/js/ProductsCard'
 import { productsArray } from 'views/admin/store/js/ProductsStore'
 
 const Store = () => {
-    return (
+  return (
+    <div className="parent">
+      <Center><Text fontSize='6xl'>Welcome to the Tiny Squares Store!</Text></Center>
+
+     
+      <Grid templateColumns='repeat(3, 1fr)' gap={3}>
+
+
+          {productsArray.map((product, id) => (
+            <GridItem w='100%' h='10' key={id}>
+              <ProductCard product={product} />
+            </GridItem>
+          ))}
+
+        </Grid>
     
-    
-        <div className="parent">
-            <h1 className="test">Welcome to our store</h1>
+    </div>
 
-            <div className="centered">
-                <section className="cards">
-
-                    {productsArray.map((product, id) => (
-                    <article className="card product-under" key={id}>
-                        <ProductCard product={product}/>
-                    </article>
-                    ))}
-
-                </section>
-
-            </div>
-        </div>
-    
-    )
+  )
 }
 
 export default Store;
