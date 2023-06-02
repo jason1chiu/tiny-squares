@@ -11,7 +11,7 @@ import {
 // Admin views
 import Calendar from "views/admin/calendar";
 import Create from "views/admin/create";
-import Journals from "./views/admin/journals";
+import Journals from "views/admin/journals";
 import Dashboard from "views/admin/dashboard";
 import Store from "views/admin/store";
 
