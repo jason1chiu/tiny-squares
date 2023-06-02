@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
@@ -38,8 +38,6 @@ export const ADD_JOURNAL = gql`
   mutation addJournal($title: String!) {
     addJournal(title: $title) {
       _id
-      username
-      email
       journals {
         _id
         title
@@ -52,8 +50,6 @@ export const REMOVE_JOURNAL = gql`
   mutation removeJournal($journalId: ID!) {
     removeJournal(journalId: $journalId) {
       _id
-      username
-      email
       journals {
         _id
         title
@@ -63,8 +59,18 @@ export const REMOVE_JOURNAL = gql`
 `;
 
 export const ADD_ENTRY = gql`
-  mutation addEntry($journalId: ID!, $description: String!, $date: String!, $status: String!) {
-    addEntry(journalId: $journalId, description: $description, date: $date, status: $status) {
+  mutation addEntry(
+    $journalId: ID!
+    $description: String!
+    $date: String!
+    $status: String!
+  ) {
+    addEntry(
+      journalId: $journalId
+      description: $description
+      date: $date
+      status: $status
+    ) {
       _id
       title
       entries {
@@ -93,8 +99,20 @@ export const REMOVE_ENTRY = gql`
 `;
 
 export const UPDATE_ENTRY = gql`
-  mutation updateEntry($journalId: ID!, $entryId: ID!, $description: String, $date: String, $status: String) {
-    updateEntry(journalId: $journalId, entryId: $entryId, description: $description, date: $date, status: $status) {
+  mutation updateEntry(
+    $journalId: ID!
+    $entryId: ID!
+    $description: String
+    $date: String
+    $status: String
+  ) {
+    updateEntry(
+      journalId: $journalId
+      entryId: $entryId
+      description: $description
+      date: $date
+      status: $status
+    ) {
       _id
       title
       entries {
