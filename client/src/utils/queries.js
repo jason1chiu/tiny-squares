@@ -6,15 +6,55 @@ export const GET_ME = gql`
       _id
       username
       email
-      bookCount
-      savedBooks {
-        bookId
-        authors
-        description
+      journals {
+        _id
         title
-        image
-        link
+        entries {
+          _id
+          description
+          date
+          status
+        }
       }
+    }
+  }
+`;
+
+export const GET_JOURNAL = gql`
+  query getJournal($id: ID!) {
+    journal(id: $id) {
+      _id
+      title
+      entries {
+        _id
+        description
+        date
+        status
+      }
+    }
+  }
+`;
+
+export const GET_JOURNALS = gql`
+  query getJournals {
+    journals {
+      _id
+      title
+      entries {
+        _id
+        description
+        date
+        status
+      }
+    }
+  }
+`;
+
+export const GET_STATS = gql`
+  query getStats($userId: ID!) {
+    stats(userId: $userId) {
+      category
+      totalEntries
     }
   }
 `;
