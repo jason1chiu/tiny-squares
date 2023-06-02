@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/store.css';
 import ProductCard from '../js/ProductsCard'
 
-import { productsArray } from '../js/ProductsStore'
+import { productsArray } from '../js/productsStore'
 
 const Store = () => {
   return (
