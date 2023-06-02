@@ -33,6 +33,8 @@ ReactDOM.render(
             <Switch>
               <Route path={`/auth`} component={AuthLayout} />
               <Route path={`/admin`} component={AdminLayout} />
+              <Route path={`/cancel`} component={CancelPage} />
+              <Route path={`/success`} component={SuccessPage} />
               <Redirect from='/' to='/admin/dashboard' />
             </Switch>
           </HashRouter>
