@@ -15,11 +15,9 @@ import Journals from "views/admin/journals";
 import Dashboard from "views/admin/dashboard";
 import Store from "views/admin/store";
 
-// import CancelPage from "views/admin/cancelOrderPage";
 // Auth views
 import SignIn from "views/auth/signIn/index.jsx"
 import SignUp from "views/auth/signUp/index.jsx";
-// import Landing from "./views/admin/auth/Landing.js";
 
 const routes = [
   {
@@ -50,13 +48,6 @@ const routes = [
     icon: <Icon as={MdLibraryAdd} width='20px' height='20px' color='inherit' />,
     component: Store,
   },
-  // {
-  //   name: "CancelOrderPage",
-  //   layout: "/admin",
-  //   path: "/store/cancel",
-  //   icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
-  //   component: CancelPage,
-  // },
   {
       name: "Calendar",
       layout: "/admin",
@@ -77,14 +68,7 @@ const routes = [
       path: "/sign-up",
       icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
       component: SignUp,
-  },
-  // {
-  //     name: "Landing",
-  //     layout: "/auth",
-  //     path: "/landing",
-  //     icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
-  //     component: Landing,
-  // },
+  }
 ];
 
 export default routes;
