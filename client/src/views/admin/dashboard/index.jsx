@@ -10,8 +10,8 @@ import {
 } from "@chakra-ui/react";
 
 import React, { useState, useEffect } from "react";
-import { useQuery } from "@apollo/client";
-import { GET_ME } from "../../utils/queries";
+// import { useQuery } from "@apollo/client";
+// import { GET_ME } from "../../utils/queries";
 import PieChart from "views/admin/dashboard/components/PieChart";
 import Profile from "views/admin/dashboard/components/Profile";
 import Journals from "views/admin/dashboard/components/Journals";
