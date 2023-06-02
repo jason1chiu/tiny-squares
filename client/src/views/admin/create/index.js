@@ -14,6 +14,7 @@ import Banner from "views/admin/create/components/Banner";
 import Preview from "components/card/preview"
 import Card from "components/card/card";
 import P2 from "assets/img/purple.jpg"
+import NewCard from "views/admin/create/components/NewCard";
 
 export default function CreateJournal() {
     // Chakra Color Mode
@@ -32,9 +33,53 @@ export default function CreateJournal() {
                     gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}>
 
                     <Banner />
-
                     <Flex direction='column'>
-                        
+
+                        <Flex
+                            mt='45px'
+                            mb='20px'
+                            justifyContent='space-between'
+                            direction={{ base: "column", md: "row" }}
+                            align={{ base: "start", md: "center" }}>
+                            <Text color={textColor} fontSize='2xl' ms='24px' fontWeight='700'>
+                                Create New
+                            </Text>
+                            <Flex
+                                align='center'
+                                me='20px'
+                                ms={{ base: "24px", md: "0px" }}
+                                mt={{ base: "20px", md: "0px" }}>
+                                <Link
+                                    color={textColorBrand}
+                                    fontWeight='500'
+                                    me={{ base: "34px", md: "44px" }}
+                                    to='#'>
+                                    Mood
+                                </Link>
+                                <Link
+                                    color={textColorBrand}
+                                    fontWeight='500'
+                                    me={{ base: "34px", md: "44px" }}
+                                    to='#'>
+                                    Health
+                                </Link>
+                                <Link
+                                    color={textColorBrand}
+                                    fontWeight='500'
+                                    me={{ base: "34px", md: "44px" }}
+                                    to='#collectibles'>
+                                    Habit
+                                </Link>
+                            </Flex>
+                        </Flex>
+                        <SimpleGrid columns={{ base: 1, md: 3 }} gap='20px'>
+
+                            <NewCard />
+                           
+                        </SimpleGrid>
+                    </Flex>
+                    <Flex direction='column'>
+
                         <Flex
                             mt='45px'
                             mb='20px'
@@ -44,33 +89,7 @@ export default function CreateJournal() {
                             <Text color={textColor} fontSize='2xl' ms='24px' fontWeight='700'>
                                 Mood Journals
                             </Text>
-                            <Flex
-                align='center'
-                me='20px'
-                ms={{ base: "24px", md: "0px" }}
-                mt={{ base: "20px", md: "0px" }}>
-                <Link
-                  color={textColorBrand}
-                  fontWeight='500'
-                  me={{ base: "34px", md: "44px" }}
-                  to='#'>
-                  Mood
-                </Link>
-                <Link
-                  color={textColorBrand}
-                  fontWeight='500'
-                  me={{ base: "34px", md: "44px" }}
-                  to='#'>
-                  Health
-                </Link>
-                <Link
-                  color={textColorBrand}
-                  fontWeight='500'
-                  me={{ base: "34px", md: "44px" }}
-                  to='#collectibles'>
-                  Habit
-                </Link>
-              </Flex>
+                            
                         </Flex>
                         <SimpleGrid columns={{ base: 1, md: 3 }} gap='20px'>
 
