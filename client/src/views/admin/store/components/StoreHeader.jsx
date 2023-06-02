@@ -13,7 +13,7 @@ const StoreHeader = () => {
   const productsCount = cart.items.reduce((sum, product) => sum + product.quantity, 0);
 
   const checkout = async () => {
-    await fetch("http://localhost:3001/#/admin/store/checkout", {
+    await fetch("http://localhost:3001/admin/store/checkout", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
