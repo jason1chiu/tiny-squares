@@ -1,9 +1,8 @@
-import { squareLength } from "views/admin/calendar/components/board/Cell";
-import { ABBR_MONTH_NAMES } from "views/admin/calendar/components/Constants";
+import { squareLength } from "./Cell";
+import { ABBR_MONTH_NAMES } from "js/components/main/Constants";
 import { Box, Text, Grid, GridItem } from "@chakra-ui/react";
 
-const getBoardGridLayout = (getCell) => {
-  return function BoardGridLayout() {
+export default function getBoardGridLayout(getCell) {
     let chartData = [];
     for (let d = 0; d < 31; d++) {
       let rowData = [
@@ -38,6 +37,3 @@ const getBoardGridLayout = (getCell) => {
       </Box>
     );
   }
-}
-
-export default getBoardGridLayout;
