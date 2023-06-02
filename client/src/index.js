@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import "assets/css/index.css";
 
 import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
-// import AuthLayout from "./layouts/auth";
 import AdminLayout from "layouts/admin";
 import AuthLayout from "layouts/auth";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -23,8 +22,6 @@ const client = new ApolloClient({
   },
 });
 
-// let user = localStorage.getItem("user");
-// user = JSON.parse(user);
 ReactDOM.render(
   <ApolloProvider client={client} >
     <CartProvider>
