@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Logo from "../../../../assets/img/Logo.png"
 import { CartContext } from "../js/CartContext"
 import CartProduct from '../js/CartProduct'
+import { Button, ButtonGroup } from '@chakra-ui/react'
 
 const StoreHeader = () => {
   const cart = useContext(CartContext)
@@ -57,7 +58,7 @@ const StoreHeader = () => {
 
                 <h1>Total: {cart.getTotalCost().toFixed(2)}</h1>
 
-                <button onClick={(checkout)}>Purchase Items</button>
+                <Button colorScheme="purple" onClick={(checkout)}>Purchase Items</Button>
               </>
               :
               <p>Items go here</p>
