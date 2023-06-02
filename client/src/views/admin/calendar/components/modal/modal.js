@@ -1,20 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, Select, Textarea, useDisclosure } from "@chakra-ui/react";
 
-const CellModal = ({ isOpen, onClose, onSave }) => {
-  const [selectedColor, setSelectedColor] = useState("");
-  const [note, setNote] = useState("");
+const CellModal = ({ isOpen, onClose, onSave, color, note }) => {
+  const [selectedColor, setSelectedColor] = useState(color || "");
+  const [selectedNote, setSelectedNote] = useState(note || "");
+
+  // Update state when color or note props change
+  useEffect(() => {
+    setSelectedColor(color || "");
+    setSelectedNote(note || "");
+  }, [color, note]);
 
   const handleColorChange = (e) => {
     setSelectedColor(e.target.value);
   };
 
   const handleNoteChange = (e) => {
-    setNote(e.target.value);
+    setSelectedNote(e.target.value);
   };
 
   const handleSave = () => {
-    onSave(selectedColor, note);
+    onSave(selectedColor, selectedNote);
   };
 
   return (
