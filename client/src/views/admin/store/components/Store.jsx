@@ -10,20 +10,16 @@ const Store = () => {
       <Center><Text fontSize='5xl'>Welcome to our store!</Text></Center>
 
       <div className="centered">
-        <section className="cards">
+      <Grid templateColumns='repeat(3, 1fr)' gap={3}>
 
-    <Grid templateColumns='repeat(5, 1fr)' gap={6}>
-  <GridItem w='100%' h='10' bg='blue.500' />
-  <GridItem w='100%' h='10' bg='blue.500' />
-  <GridItem w='100%' h='10' bg='blue.500' />
-</Grid>
+
           {productsArray.map((product, id) => (
-            <article className="card product-under" key={id}>
+            <GridItem w='100%' h='10' key={id}>
               <ProductCard product={product} />
-            </article>
+            </GridItem>
           ))}
 
-        </section>
+        </Grid>
       </div>
     </div>
 

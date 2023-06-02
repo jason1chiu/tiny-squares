@@ -9,15 +9,13 @@ import { Button, ButtonGroup, Container,
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton, } from '@chakra-ui/react'
+  ModalCloseButton,
+  useDisclosure } from '@chakra-ui/react'
 
 const StoreHeader = () => {
   const cart = useContext(CartContext)
 
-  
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const productsCount = cart.items.reduce((sum, product) => sum + product.quantity, 0);
 
@@ -45,13 +43,45 @@ const StoreHeader = () => {
             <img src={Logo} alt="logo" />
           </div>
 
-          <div className="menu-wrapper">
-            <button onClick={handleShow}>Cart ({productsCount} Items)</button>
+          <div className="">
+            <Button onClick={onOpen}>Cart ({productsCount} Items)</Button>
+            <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Shopping Cart</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+          {productsCount > 0 ?
+              <>
+                <p>Items In Your Cart:</p>
+                {cart.items.map((currentProduct, id) => (
+                  <CartProduct key={id} id={currentProduct.id} quantity={currentProduct.quantity}></CartProduct>
+                ))}
+
+
+                <h1>Total: {cart.getTotalCost().toFixed(2)}</h1>
+
+                <Button colorScheme="purple" onClick={(checkout)}>Purchase Items</Button>
+              </>
+              :
+              <p>Your Shopping Cart Is Empty!</p>
+            }
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme='blue' mr={3} onClick={onClose}>
+              Close
+            </Button>
+      
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
           </div>
         </div>
       </nav>
 
-      {show && (
+      {/* {show && (
+        
         <div id="open-modal" className="modal-window">
           <div className="modal-content">
             <button onClick={handleClose} className="modal-x">X</button>
@@ -75,7 +105,7 @@ const StoreHeader = () => {
 
           </div>
         </div>
-      )}
+      )} */}
 
     </>
   )
