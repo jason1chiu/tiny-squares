@@ -17,16 +17,15 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import { HSeparator } from "components/separator/Separator";
+import { HSeparator } from "components/seperator/Seperator";
 import DefaultAuth from "layouts/auth/Default";
-
-// img
+import illustration from "assets/img/Logo.png"
 
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 
-function SignUp() {
+export default function SignUp() {
     const textColor = useColorModeValue("navy.700", "white");
     const textColorSecondary = "gray.400";
     const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
@@ -259,5 +258,3 @@ function SignUp() {
     </DefaultAuth>
   );
 }
-
-export default SignUp;
