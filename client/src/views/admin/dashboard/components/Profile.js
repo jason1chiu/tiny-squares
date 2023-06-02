@@ -1,9 +1,10 @@
 import { Avatar, Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import Card from "components/card/card.js";
 import React from "react";
+import profile from "assets/img/bannercover.png";
 
 export default function Profile(props) {
-  const { profile, avatar, name, entries, journals } = props;
+  const { banner, avatar, name, entries, journals } = props;
 
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "gray.400";
@@ -14,7 +15,7 @@ export default function Profile(props) {
   return (
     <Card mb={{ base: "0px", lg: "20px" }} align='center'>
       <Box
-        bg={`url(${profile})`}
+        bgImage={profile}
         bgSize='cover'
         borderRadius='16px'
         h='131px'
