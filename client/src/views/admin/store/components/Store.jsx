@@ -1,8 +1,8 @@
 import React from 'react';
-import '../css/store.css';
-import ProductCard from '../js/ProductsCard'
+import 'views/admin/store/css/store.css';
+import ProductCard from 'views/admin/store/js/ProductsCard'
 
-import { productsArray } from '../js/productsStore'
+import { productsArray } from 'views/admin/store/js/ProductsStore'
 
 const Store = () => {
     return (

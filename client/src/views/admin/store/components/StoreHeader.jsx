@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Logo from "../../../../assets/img/Logo.png"
-import { CartContext } from "../js/CartContext"
-import CartProduct from '../js/CartProduct'
+import Logo from "assets/img/Logo.png"
+import { CartContext } from "views/admin/store/js/CartContext"
+import CartProduct from 'views/admin/store/js/CartProduct'
 
 const StoreHeader = () => {
   const cart = useContext(CartContext)
