@@ -13,12 +13,12 @@ import Calendar from "views/admin/calendar";
 import Create from "views/admin/create";
 import Journals from "./views/admin/journals";
 import Dashboard from "views/admin/dashboard";
-import Store from "views/admin/store"
+import Store from "views/admin/store";
 
 import CancelPage from "views/admin/cancelOrderPage";
 //auth views
-// import SignIn from "./views/admin/auth/SignIn.js";
-// import SignUp from "./views/admin/auth/SignUp.js";
+import SignIn from "views/auth/signIn/index.jsx"
+import SignUp from "views/auth/signUp/index.jsx";
 // import Landing from "./views/admin/auth/Landing.js";
 
 const routes = [
