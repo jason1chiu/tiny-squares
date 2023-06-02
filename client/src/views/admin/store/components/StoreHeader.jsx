@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Logo from "../../../../assets/img/Logo.png"
 import { CartContext } from "../js/CartContext"
 import CartProduct from '../js/CartProduct'
-import { Button, ButtonGroup, Container,
+import { Button, Flex, Text, Box, Grid, Image, GridItem,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -37,27 +37,48 @@ const StoreHeader = () => {
 
   return (
     <>
-      <nav id="header">
-        <div className="store-container">
-          <div className="logo-wrapper">
-            <img src={Logo} alt="logo" />
-          </div>
+    <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
+        {/* Main Fields */}
+        <Grid
+          mb='20px'
+          gridTemplateColumns={{ xl: "repeat(3, 1fr)", "2xl": "1fr 0.46fr" }}
+          gap={{ base: "20px", xl: "20px" }}
+          display={{ base: "block", xl: "grid" }}>
+          <Flex
+            flexDirection='column'
+            gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}>
+        </Flex>
+      </Grid>
+      </Box> 
 
-          <div className="">
-            <Button onClick={onOpen}>Cart ({productsCount} Items)</Button>
-            <Modal isOpen={isOpen} onClose={onClose}>
+
+
+
+        {/* Logo as the Store Banner */}
+        <Grid templateColumns='repeat(2, 1fr)' gap={4}>
+          <GridItem w='100%'>
+            <Image src={Logo} alt="logo"></Image>
+            </GridItem>
+
+            <Flex justifyContent="flex-end">
+              <Button onClick={onOpen}>Cart ({productsCount} Items)</Button>
+            </Flex>
+        </Grid>
+
+        <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Shopping Cart</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
+            {/* If products 0, say cart is empty. If > 0, show items */}
           {productsCount > 0 ?
               <>
                 <p>Items In Your Cart:</p>
+
                 {cart.items.map((currentProduct, id) => (
                   <CartProduct key={id} id={currentProduct.id} quantity={currentProduct.quantity}></CartProduct>
                 ))}
-
 
                 <h1>Total: {cart.getTotalCost().toFixed(2)}</h1>
 
@@ -76,9 +97,9 @@ const StoreHeader = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-          </div>
-        </div>
-      </nav>
+       
+      
+     
 
       {/* {show && (
         

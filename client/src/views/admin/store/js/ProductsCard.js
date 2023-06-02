@@ -13,7 +13,7 @@ function ProductCard(props) {   //props.productt is the product we are selling
     <div>
       <section>
       
-        <Center>{product.title}</Center>
+        <Center fontSize="lg">{product.title}</Center>
 
         <Stack spacing={3}>
         <Center>${product.price}</Center>
