@@ -1,30 +1,61 @@
-export const getSavedBookIds = () => {
-  const savedBookIds = localStorage.getItem('saved_books')
-    ? JSON.parse(localStorage.getItem('saved_books'))
+export const getSavedJournalIds = () => {
+  const savedJournalIds = localStorage.getItem('saved_journals')
+    ? JSON.parse(localStorage.getItem('saved_journals'))
     : [];
 
-  return savedBookIds;
+  return savedJournalIds;
 };
 
-export const saveBookIds = (bookIdArr) => {
-  if (bookIdArr.length) {
-    localStorage.setItem('saved_books', JSON.stringify(bookIdArr));
+export const saveJournalIds = (journalIdArr) => {
+  if (journalIdArr.length) {
+    localStorage.setItem('saved_journals', JSON.stringify(journalIdArr));
   } else {
-    localStorage.removeItem('saved_books');
+    localStorage.removeItem('saved_journals');
   }
 };
 
-export const removeBookId = (bookId) => {
-  const savedBookIds = localStorage.getItem('saved_books')
-    ? JSON.parse(localStorage.getItem('saved_books'))
+export const removeJournalId = (journalId) => {
+  const savedJournalIds = localStorage.getItem('saved_journals')
+    ? JSON.parse(localStorage.getItem('saved_journals'))
     : null;
 
-  if (!savedBookIds) {
+  if (!savedJournalIds) {
     return false;
   }
 
-  const updatedSavedBookIds = savedBookIds?.filter((savedBookId) => savedBookId !== bookId);
-  localStorage.setItem('saved_books', JSON.stringify(updatedSavedBookIds));
+  const updatedSavedJournalIds = savedJournalIds?.filter((savedJournalId) => savedJournalId !== journalId);
+  localStorage.setItem('saved_journals', JSON.stringify(updatedSavedJournalIds));
+
+  return true;
+};
+
+export const getSavedEntryIds = () => {
+  const savedEntryIds = localStorage.getItem('saved_entries')
+    ? JSON.parse(localStorage.getItem('saved_entries'))
+    : [];
+
+  return savedEntryIds;
+};
+
+export const saveEntryIds = (entryIdArr) => {
+  if (entryIdArr.length) {
+    localStorage.setItem('saved_entries', JSON.stringify(entryIdArr));
+  } else {
+    localStorage.removeItem('saved_entries');
+  }
+};
+
+export const removeEntryId = (entryId) => {
+  const savedEntryIds = localStorage.getItem('saved_entries')
+    ? JSON.parse(localStorage.getItem('saved_entries'))
+    : null;
+
+  if (!savedEntryIds) {
+    return false;
+  }
+
+  const updatedSavedEntryIds = savedEntryIds?.filter((savedEntryId) => savedEntryId !== entryId);
+  localStorage.setItem('saved_entries', JSON.stringify(updatedSavedEntryIds));
 
   return true;
 };
