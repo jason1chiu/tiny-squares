@@ -14,6 +14,7 @@ function AuthImage(props) {
     return (
         <Flex position='relative' h='max-content'>
           <Flex
+
             h={{
               sm: "initial",
               md: "unset",
@@ -53,6 +54,7 @@ function AuthImage(props) {
         </NavLink>
         {children}
         <Box
+        
           display={{ base: "none", md: "block" }}
           h='100%'
           minH='100vh'

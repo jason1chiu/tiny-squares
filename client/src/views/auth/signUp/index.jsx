@@ -47,19 +47,19 @@ export default function SignUp() {
     return (
         <DefaultAuth imageBackground={imageAuth} image={imageAuth}>
           <Flex
-            maxW={{ base: "100%", md: "max-content" }}
-            w='100%'
-            mx={{ base: "auto", lg: "0px" }}
-            me='auto'
-            h='100%'
-            alignItems='start'
-            justifyContent='center'
-            mb={{ base: "30px", md: "60px" }}
-            px={{ base: "25px", md: "0px" }}
-            mt={{ base: "40px", md: "14vh" }}
-            flexDirection='column'>
-            <Box me='auto'>
-              <Heading color={textColor} fontSize='36px' mb='10px'>
+          maxW={{ base: "100%", md: "max-content" }}
+          w='100%'
+          mx={{ base: "auto", lg: "0px" }}
+          me='auto'
+          h='100%'
+          alignItems='start'
+          justifyContent='center'
+          mb={{ base: "30px", md: "60px" }}
+          px={{ base: "25px", md: "0px" }}
+          mt={{ base: "40px", md: "14vh" }}
+          flexDirection='column'>
+          <Box me='auto'>
+              <Heading color={textColor} fontSize='36px' mb='10px' >
                 Sign Up
               </Heading>
               <Text
@@ -68,7 +68,7 @@ export default function SignUp() {
             color={textColorSecondary}
             fontWeight='400'
             fontSize='md'>
-            Enter your email and password to sign up!
+              Enter your email and password to sign in!
           </Text>
         </Box>
         <Flex
@@ -80,7 +80,7 @@ export default function SignUp() {
           borderRadius='15px'
           mx={{ base: "auto", lg: "unset" }}
           me='auto'
-          mb={{ base: "20px", md: "auto" }}>
+          mb={{ base: "60px", md: "auto" }}>
              <Button
             fontSize='sm'
             me='0px'
