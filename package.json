@@ -17,6 +17,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "axios": "^1.4.0",
     "dotenv": "^10.0.0",
     "if-env": "^1.0.4",
     "json-web-token": "^3.2.0",
