@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Center, Box } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
+import Confetti from 'react-confetti';
 
-function CancelPage() {
+function Success() {
   return (
     <>
+    <Confetti />
       <Box
         display="flex"
         justifyContent="center"
@@ -12,7 +14,7 @@ function CancelPage() {
         height="100vh"
         fontSize="50px"
       >
-      <p>Your order has been cancelled. <br />
+      <p>Thank You For Your Order! 🎊 <br />
 
         <Link to={"/"}>
             <Center fontSize="2rem" css={{
@@ -30,4 +32,4 @@ function CancelPage() {
   );
 }
 
-export default CancelPage;
+export default Success;

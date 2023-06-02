@@ -10,6 +10,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import theme from "theme/theme";
 import CartProvider from "./views/admin/store/js/CartContext"
 import CancelPage from "./views/admin/cancelOrderPage/"
+import SuccessPage from "./views/admin/successOrderPage"
 // import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
 
 // let user = localStorage.getItem("user");
@@ -24,6 +25,8 @@ ReactDOM.render(
             <Switch>
               <Route path={`/auth`} component={AuthLayout} />
               <Route path={`/admin`} component={AdminLayout} />
+              <Route path={`/cancel`} component={CancelPage} />
+              <Route path={`/success`} component={SuccessPage} />
               <Redirect from='/' to='/admin/dashboard' />
               </Switch>
         </HashRouter>
