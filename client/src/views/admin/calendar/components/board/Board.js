@@ -12,18 +12,18 @@ const Board = () => {
   };
 
   return (
-    <Card mt={4} mb={6} mx="auto" h="80vh">
+    <Card mt={4} mb={4} mx="auto" minh="80vh" w="auto">
       <Grid templateColumns="repeat(13, 1fr)" gap={0} h="100%" w="100%">
         <GridItem></GridItem>
         {Array.from({ length: 12 }, (_, index) => (
           <GridItem key={`month-${index}`} textAlign="center">
-            <Text fontSize="lg" fontWeight="bold">{`Month ${index + 1}`}</Text>
+            <Text fontSize="sm" fontWeight="bold">{`Month`}</Text>
           </GridItem>
         ))}
         {Array.from({ length: 31 }, (_, rowIndex) => (
           <>
             <GridItem key={`day-label-${rowIndex}`} textAlign="center">
-              <Text fontSize="lg" fontWeight="bold">{`Day ${rowIndex + 1}`}</Text>
+              <Text fontSize="sm" fontWeight="bold">{`${rowIndex + 1}`}</Text>
             </GridItem>
             {Array.from({ length: 12 }, (_, colIndex) => {
               const id = `cell-${rowIndex}-${colIndex}`; // create unique id

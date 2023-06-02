@@ -14,7 +14,7 @@ import {
 
   export default function Overview() {
     return (
-      <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
+      <Box pt={{ base: "80vh", md: "80px", xl: "80px" }}>
         <Grid
           templateColumns={{
             base: "1fr",
@@ -27,7 +27,7 @@ import {
           gap={{ base: "20px", xl: "20px" }}>
 
             <Board
-          gridArea={{ base: "3 / 1 / 4 / 2", lg: "1 / 3 / 2 / 4" }}
+          gridArea={{ base: "1 / 3 / 4 / 4", lg: "1 / 3 / 4 / 4" }}
         />
 
       </Grid>

@@ -21,7 +21,7 @@ const Cell = ({ day, month, color, note, onSave }) => {
         cursor="pointer"
         onClick={handleCellClick}
       >
-        <Text textAlign="center" fontSize="sm">{`${day}/${month}`}</Text>
+       
       </Box>
 
       <CellModal 
