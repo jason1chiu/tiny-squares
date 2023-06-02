@@ -1,12 +1,17 @@
 import React from "react";
-import { Box, useDisclosure, Text } from "@chakra-ui/react";
+import { Box, useDisclosure } from "@chakra-ui/react";
 import CellModal from "views/admin/calendar/components/modal/modal";
 
-const Cell = ({ day, month, color, note, onSave }) => {
+const Cell = ({ day, month, color, note, onSave, legends }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleCellClick = () => {
     onOpen();
+  };
+
+  const handleSave = (color, note) => {
+    onSave(color, note);
+    onClose();
   };
 
   return (
@@ -20,17 +25,8 @@ const Cell = ({ day, month, color, note, onSave }) => {
         borderRadius="md"
         cursor="pointer"
         onClick={handleCellClick}
-      >
-       
-      </Box>
-
-      <CellModal 
-        isOpen={isOpen} 
-        onClose={onClose} 
-        color={color} 
-        note={note} 
-        onSave={onSave} 
-      />
+      ></Box>
+      <CellModal isOpen={isOpen} onClose={onClose} onSave={handleSave} legends={legends} />
     </>
   );
 };

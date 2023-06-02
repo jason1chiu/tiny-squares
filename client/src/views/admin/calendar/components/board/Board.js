@@ -3,7 +3,7 @@ import { Grid, GridItem, Box, Text } from "@chakra-ui/react";
 import Card from "components/card/card";
 import Cell from "views/admin/calendar/components/board/Cell";
 
-const Board = () => {
+const Board = ({ legends }) => {
   // Create a state that stores the cell data
   const [cells, setCells] = useState({});
 
@@ -12,12 +12,12 @@ const Board = () => {
   };
 
   return (
-    <Card mt={4} mb={4} mx="auto" minh="80vh" w="auto">
+    <Card mt={4} mb={4} mx="auto" minH="80vh" w="auto">
       <Grid templateColumns="repeat(13, 1fr)" gap={0} h="100%" w="100%">
         <GridItem></GridItem>
         {Array.from({ length: 12 }, (_, index) => (
           <GridItem key={`month-${index}`} textAlign="center">
-            <Text fontSize="sm" fontWeight="bold">{`Month`}</Text>
+            <Text fontSize="sm" fontWeight="bold">{`Month ${index + 1}`}</Text>
           </GridItem>
         ))}
         {Array.from({ length: 31 }, (_, rowIndex) => (
@@ -34,6 +34,7 @@ const Board = () => {
                     <Cell 
                       day={rowIndex + 1} 
                       month={colIndex + 1} 
+                      legends={legends} 
                       color={cell.color} 
                       note={cell.note} 
                       onSave={(color, note) => handleSave(id, color, note)} 

@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, Select, Textarea, useDisclosure } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  Select,
+  Textarea,
+} from "@chakra-ui/react";
 
-const CellModal = ({ isOpen, onClose, onSave, color, note }) => {
-  const [selectedColor, setSelectedColor] = useState(color || "");
-  const [selectedNote, setSelectedNote] = useState(note || "");
+const CellModal = ({ isOpen, onClose, onSave, color, note, legends }) => {
+    const [selectedColor, setSelectedColor] = useState(color || "");
+    const [selectedNote, setSelectedNote] = useState(note || "");
 
   // Update state when color or note props change
   useEffect(() => {
@@ -21,6 +32,7 @@ const CellModal = ({ isOpen, onClose, onSave, color, note }) => {
 
   const handleSave = () => {
     onSave(selectedColor, selectedNote);
+    onClose();
   };
 
   return (
@@ -31,11 +43,13 @@ const CellModal = ({ isOpen, onClose, onSave, color, note }) => {
         <ModalCloseButton />
         <ModalBody>
           <Select value={selectedColor} onChange={handleColorChange} mb={4}>
-            <option value="#FF0000">Red</option>
-            <option value="#00FF00">Green</option>
-            <option value="#0000FF">Blue</option>
+            {legends.map((legend, index) => (
+              <option key={index} value={legend.color}>
+                {legend.label}
+              </option>
+            ))}
           </Select>
-          <Textarea value={note} onChange={handleNoteChange} placeholder="Add a note..." />
+          <Textarea value={selectedNote} onChange={handleNoteChange} placeholder="Add a note..." />
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="blue" mr={3} onClick={handleSave}>
