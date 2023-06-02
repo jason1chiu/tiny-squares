@@ -16,7 +16,7 @@ import Dashboard from "views/admin/dashboard";
 
 //auth views
 import SignIn from "views/auth/signIn/index.jsx"
-// import SignUp from "./views/admin/auth/SignUp.js";
+import SignUp from "./views/auth/signUp/index.jsx";
 // import Landing from "./views/admin/auth/Landing.js";
 
 const routes = [
@@ -55,13 +55,13 @@ const routes = [
       icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
       component: SignIn,
   },
-  // {
-  //     name: "Signup",
-  //     layout: "/auth",
-  //     path: "/sign-up",
-  //     icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
-  //     component: SignUp,
-  // },
+  {
+      name: "Signup",
+      layout: "/auth",
+      path: "/sign-up",
+      icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
+      component: SignUp,
+  },
   // {
   //     name: "Landing",
   //     layout: "/auth",

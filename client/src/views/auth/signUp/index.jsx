@@ -17,10 +17,9 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import { HSeparator } from "components/separator/Separator";
+import { HSeparator } from "components/seperator/Seperator";
 import DefaultAuth from "layouts/auth/Default";
-
-// img
+import illustration from "assets/img/Logo.png"
 
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
