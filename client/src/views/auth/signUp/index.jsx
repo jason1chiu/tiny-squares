@@ -159,33 +159,6 @@ export default function SignUp() {
               fontWeight='500'
               color={textColor}
               display='flex'>
-              Password<Text color={brandStars}>*</Text>
-            </FormLabel>
-            <InputGroup size='md'>
-              <Input
-                isRequired={true}
-                fontSize='sm'
-                placeholder='Min. 8 characters'
-                mb='12px'
-                size='lg'
-                type={show ? "text" : "password"}
-                variant='auth'
-              />
-              <InputRightElement display='flex' alignItems='center' mt='4px'>
-                <Icon
-                  color={textColorSecondary}
-                  _hover={{ cursor: "pointer" }}
-                  as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
-                  onClick={handleClick}
-                />
-              </InputRightElement>
-            </InputGroup>
-            <FormLabel
-              ms='4px'
-              fontSize='sm'
-              fontWeight='500'
-              color={textColor}
-              display='flex'>
               Confirm Password<Text color={brandStars}>*</Text>
             </FormLabel>
             <InputGroup size='md'>
