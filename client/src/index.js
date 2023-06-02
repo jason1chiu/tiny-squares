@@ -10,26 +10,35 @@ import { ChakraProvider } from "@chakra-ui/react";
 import theme from "theme/theme";
 import CartProvider from "./views/admin/store/js/CartContext"
 import CancelPage from "./views/admin/cancelOrderPage/"
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 // import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
+
+// Create an Apollo Client and specify the connection to your GraphQL API
+const client = new ApolloClient({
+  uri: 'localhost:3000/graphql',
+  cache: new InMemoryCache(),
+  headers: {
+    authorization: localStorage.getItem('id_token') ? `Bearer ${localStorage.getItem('id_token')}` : "",
+  },
+});
 
 // let user = localStorage.getItem("user");
 // user = JSON.parse(user);
 ReactDOM.render(
-  <CartProvider>
-    <ChakraProvider theme={theme}>
-      {/* <AuthProvider userData={user}> */}
-      <React.StrictMode>
-        {/* <ThemeEditorProvider> */}
+  <ApolloProvider client={client} >
+    <CartProvider>
+      <ChakraProvider theme={theme}>
+        <React.StrictMode>
           <HashRouter>
             <Switch>
               <Route path={`/auth`} component={AuthLayout} />
               <Route path={`/admin`} component={AdminLayout} />
               <Redirect from='/' to='/admin/dashboard' />
-              </Switch>
-        </HashRouter>
-      {/* </ThemeEditorProvider> */}
-    </React.StrictMode>
-  </ChakraProvider>
-  </CartProvider>,
+            </Switch>
+          </HashRouter>
+        </React.StrictMode>
+      </ChakraProvider>
+    </CartProvider>
+  </ApolloProvider>,
   document.getElementById("root")
 );

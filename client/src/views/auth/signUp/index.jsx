@@ -25,44 +25,68 @@ import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 
-export default function SignUp() {
-    const textColor = useColorModeValue("navy.700", "white");
-    const textColorSecondary = "gray.400";
-    const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
-    const textColorBrand = useColorModeValue("brand.500", "white");
-    const brandStars = useColorModeValue("brand.500", "brand.400");
-    const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
-    const googleText = useColorModeValue("navy.700", "white");
-    const googleHover = useColorModeValue(
-      { bg: "gray.200" },
-      { bg: "whiteAlpha.300" }
-    );
-    const googleActive = useColorModeValue(
-      { bg: "secondaryGray.300" },
-      { bg: "whiteAlpha.200" }
-    );
-    const [show, setShow] = React.useState(false);
-    const handleClick = () => setShow(!show);
+import { ADD_USER } from "utils/mutations.js";
+import { useMutation } from "@apollo/client";
 
-    return (
-        <DefaultAuth illustrationBackground={illustration} image={illustration}>
-          <Flex
-            maxW={{ base: "100%", md: "max-content" }}
-            w='100%'
-            mx={{ base: "auto", lg: "0px" }}
-            me='auto'
-            h='100%'
-            alignItems='start'
-            justifyContent='center'
-            mb={{ base: "30px", md: "60px" }}
-            px={{ base: "25px", md: "0px" }}
-            mt={{ base: "40px", md: "14vh" }}
-            flexDirection='column'>
-            <Box me='auto'>
-              <Heading color={textColor} fontSize='36px' mb='10px'>
-                Sign Up
-              </Heading>
-              <Text
+export default function SignUp() {
+  const textColor = useColorModeValue("navy.700", "white");
+  const textColorSecondary = "gray.400";
+  const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
+  const textColorBrand = useColorModeValue("brand.500", "white");
+  const brandStars = useColorModeValue("brand.500", "brand.400");
+  const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
+  const googleText = useColorModeValue("navy.700", "white");
+  const googleHover = useColorModeValue(
+    { bg: "gray.200" },
+    { bg: "whiteAlpha.300" }
+  );
+  const googleActive = useColorModeValue(
+    { bg: "secondaryGray.300" },
+    { bg: "whiteAlpha.200" }
+  );
+  const [show, setShow] = React.useState(false);
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
+
+  const [addUser, {data, loading, error}] = useMutation(ADD_USER)
+
+  const handleClick = () => setShow(!show);
+  const handleAddUser = () => {
+    let newUser = {
+      username: username,
+      email: email,
+      password: password
+    }
+    if (password === confirmPassword && password && username && email) {
+      addUser({variables: newUser});
+    } else {
+      alert("Passwords do not match or some fields are missing!");
+    }    
+  }
+
+  React.useEffect(() => {console.log({data, loading, error})}, [data, error])
+
+  return (
+    <DefaultAuth illustrationBackground={illustration} image={illustration}>
+      <Flex
+        maxW={{ base: "100%", md: "max-content" }}
+        w='100%'
+        mx={{ base: "auto", lg: "0px" }}
+        me='auto'
+        h='100%'
+        alignItems='start'
+        justifyContent='center'
+        mb={{ base: "30px", md: "60px" }}
+        px={{ base: "25px", md: "0px" }}
+        mt={{ base: "40px", md: "14vh" }}
+        flexDirection='column'>
+        <Box me='auto'>
+          <Heading color={textColor} fontSize='36px' mb='10px'>
+            Sign Up
+          </Heading>
+          <Text
             mb='36px'
             ms='4px'
             color={textColorSecondary}
@@ -81,7 +105,7 @@ export default function SignUp() {
           mx={{ base: "auto", lg: "unset" }}
           me='auto'
           mb={{ base: "20px", md: "auto" }}>
-             <Button
+          <Button
             fontSize='sm'
             me='0px'
             mb='26px'
@@ -89,12 +113,12 @@ export default function SignUp() {
             h='50px'
             borderRadius='16px'
             bg={googleBg}
-          color={googleText}
-          fontWeight='500'
-          _hover={googleHover}
-          _active={googleActive}
-          _focus={googleActive}>
-          <Icon as={FcGoogle} w='20px' h='20px' me='10px' />
+            color={googleText}
+            fontWeight='500'
+            _hover={googleHover}
+            _active={googleActive}
+            _focus={googleActive}>
+            <Icon as={FcGoogle} w='20px' h='20px' me='10px' />
             Sign up with Google
           </Button>
           <Flex align='center' mb='25px'>
@@ -115,26 +139,52 @@ export default function SignUp() {
               Email<Text color={brandStars}>*</Text>
             </FormLabel>
             <Input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               isRequired={true}
               variant='auth'
               fontSize='sm'
               ms={{ base: "0px", md: "0px" }}
               type='email'
-                placeholder='Enter your email'
-                mb='24px'
-                fontWeight='500'
-                size='lg'
-              />
-              <FormLabel
-                ms='4px'
-                fontSize='sm'
-                fontWeight='500'
-                color={textColor}
-                display='flex'>
-                Password<Text color={brandStars}>*</Text>
-              </FormLabel>
-              <InputGroup size='md'>
+              placeholder='Enter your email'
+              mb='24px'
+              fontWeight='500'
+              size='lg'
+            />
+            <FormLabel
+              display='flex'
+              ms='4px'
+              fontSize='sm'
+              fontWeight='500'
+              color={textColor}
+              mb='8px'>
+              Username<Text color={brandStars}>*</Text>
+            </FormLabel>
+            <Input
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              isRequired={true}
+              variant='auth'
+              fontSize='sm'
+              ms={{ base: "0px", md: "0px" }}
+              type='email'
+              placeholder='Enter your email'
+              mb='24px'
+              fontWeight='500'
+              size='lg'
+            />
+            <FormLabel
+              ms='4px'
+              fontSize='sm'
+              fontWeight='500'
+              color={textColor}
+              display='flex'>
+              Password<Text color={brandStars}>*</Text>
+            </FormLabel>
+            <InputGroup size='md'>
               <Input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 isRequired={true}
                 fontSize='sm'
                 placeholder='Min. 8 characters'
@@ -163,6 +213,8 @@ export default function SignUp() {
             </FormLabel>
             <InputGroup size='md'>
               <Input
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 isRequired={true}
                 fontSize='sm'
                 placeholder='Confirm your password'
@@ -198,6 +250,7 @@ export default function SignUp() {
               </FormControl>
             </Flex>
             <Button
+              onClick={handleAddUser}
               fontSize='sm'
               variant='brand'
               fontWeight='500'
