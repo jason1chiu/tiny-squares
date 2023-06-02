@@ -1,8 +1,8 @@
 import React from 'react';
-import { CartContext } from "./CartContext"
+import { CartContext } from "views/admin/store/js/CartContext"
 import { useContext } from 'react';
-import { getProductData } from './ProductsStore';
-import { Button, Text, Image } from '@chakra-ui/react'
+import { getProductData } from 'views/admin/store/js/ProductsStore';
+import { Button, Text, Image } from '@chakra-ui/react';
 
 function CartProduct(props) {
   const cart = useContext(CartContext);

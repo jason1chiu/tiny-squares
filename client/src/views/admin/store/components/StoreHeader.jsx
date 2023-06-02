@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Logo from "../../../../assets/img/Logo.png"
-import { CartContext } from "../js/CartContext"
-import CartProduct from '../js/CartProduct'
+import Logo from "assets/img/Logo.png"
+import { CartContext } from "views/admin/store/js/CartContext"
+import CartProduct from 'views/admin/store/js/CartProduct'
 import { Button, Flex, Text, Box, Grid, Image, GridItem,
   Modal,
   ModalOverlay,
@@ -11,7 +11,6 @@ import { Button, Flex, Text, Box, Grid, Image, GridItem,
   ModalBody,
   ModalCloseButton,
   useDisclosure } from '@chakra-ui/react'
-
 const StoreHeader = () => {
   const cart = useContext(CartContext)
 

@@ -1,5 +1,5 @@
 import React, { createContext, useState} from "react";
-import {productsArray, getProductData } from "./ProductsStore.js"
+import {productsArray, getProductData } from "views/admin/store/js/ProductsStore"
 
 export const CartContext = createContext({
     items: [],
@@ -47,7 +47,7 @@ export function CartProvider({children}) {
     function removeOneFromCart(id) {
         const quantity = getProductQuantity(id);
 
-        if(quantity == 1) {
+        if(quantity === 1) {
             deleteFromCart(id);
         } else {
             setCartProducts(
@@ -63,7 +63,7 @@ export function CartProvider({children}) {
         setCartProducts(
             cartProducts =>
             cartProducts.filter(currentProduct => {
-                return currentProduct.id != id;
+                return currentProduct.id !== id;
             })
         )
     }
