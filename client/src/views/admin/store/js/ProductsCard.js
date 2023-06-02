@@ -1,7 +1,7 @@
 import React from 'react';
 import { CartContext } from './CartContext'
 import { useContext } from 'react'
-import { Button, ButtonGroup } from '@chakra-ui/react'
+import { Button, ButtonGroup, Grid, GridItem } from '@chakra-ui/react'
 
 function ProductCard(props) {   //props.productt is the product we are selling
   const product = props.product;
@@ -14,11 +14,15 @@ function ProductCard(props) {   //props.productt is the product we are selling
       <section>
         <h2>{product.title}</h2>
         <h2>${product.price}</h2>
+        <img src={product.img} alt="product"></img>
 
         <Button onClick={() => { cart.addOneToCart(product.id); console.log('click') }}>Add To Cart</Button>
 
       </section>
+
     </div>
+
+    
   )
 }
 
