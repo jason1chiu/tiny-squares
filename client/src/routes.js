@@ -13,10 +13,11 @@ import {
 import Create from "views/admin/create";
 import Journals from "views/admin/journals";
 import Dashboard from "views/admin/dashboard";
+import Store from "views/admin/store";
 
 //auth views
 import SignIn from "views/auth/signIn/index.jsx"
-import SignUp from "./views/auth/signUp/index.jsx";
+import SignUp from "views/auth/signUp/index.jsx";
 // import Landing from "./views/admin/auth/Landing.js";
 
 const routes = [
@@ -40,6 +41,13 @@ const routes = [
       path: "/create",
       icon: <Icon as={MdLibraryAdd} width='20px' height='20px' color='inherit' />,
       component: Create,
+  },
+  {
+    name: "Store",
+    layout: "/admin",
+    path: "/store",
+    icon: <Icon as={MdLibraryAdd} width='20px' height='20px' color='inherit' />,
+    component: Store,
   },
   // {
   //     name: "Calendar",
