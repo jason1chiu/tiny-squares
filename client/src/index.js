@@ -8,11 +8,14 @@ import AdminLayout from "layouts/admin";
 import AuthLayout from "layouts/auth";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "theme/theme";
+import CartProvider from "./views/admin/store/js/CartContext"
+
 // import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
 
 // let user = localStorage.getItem("user");
 // user = JSON.parse(user);
 ReactDOM.render(
+  <CartProvider>
     <ChakraProvider theme={theme}>
       {/* <AuthProvider userData={user}> */}
       <React.StrictMode>
@@ -26,6 +29,7 @@ ReactDOM.render(
         </HashRouter>
       {/* </ThemeEditorProvider> */}
     </React.StrictMode>
-  </ChakraProvider>,
+  </ChakraProvider>
+  </CartProvider>,
   document.getElementById("root")
 );
