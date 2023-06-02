@@ -9,7 +9,7 @@ import {
 } from "react-icons/md";
 
 // Admin views
-//import Calendar from "./views/admin/calendar/Calendar.js";
+import Calendar from "views/admin/calendar";
 import Create from "views/admin/create";
 import Journals from "./views/admin/journals";
 import Dashboard from "views/admin/dashboard";
@@ -41,13 +41,13 @@ const routes = [
       icon: <Icon as={MdLibraryAdd} width='20px' height='20px' color='inherit' />,
       component: Create,
   },
-  // {
-  //     name: "Calendar",
-  //     layout: "/admin",
-  //     path: "/calendar",
-  //     icon: <Icon as={MdOutlineCalendarMonth} width='20px' height='20px' color='inherit' />,
-  //     component: Calendar,
-  // },
+  {
+      name: "Calendar",
+      layout: "/admin",
+      path: "/calendar",
+      icon: <Icon as={MdOutlineCalendarMonth} width='20px' height='20px' color='inherit' />,
+      component: Calendar,
+  },
   // {
   //     name: "Signin",
   //     layout: "/auth",
