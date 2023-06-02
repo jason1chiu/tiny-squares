@@ -3,7 +3,7 @@ import { Center, Box } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 import Confetti from 'react-confetti';
 
-function Success() {
+function SuccessPage() {
   return (
     <>
     <Confetti />
@@ -32,4 +32,4 @@ function Success() {
   );
 }
 
-export default Success;
+export default SuccessPage;
