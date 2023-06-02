@@ -1,4 +1,4 @@
-.cards {
+/* .cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -78,4 +78,4 @@ cursor: pointer;
   .card {
       flex: 0 1 calc(25% - 1em);
   }
-}
+} */

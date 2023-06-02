@@ -1,5 +1,6 @@
 import ProductivityPlanner from "../img/productivityplanner.webp"
 import WellnessJournal from "../img/wellness-journal.jpg"
+import purpleJournal from "../img/purple.jpg"
 
 const productsArray = [
   {
@@ -14,6 +15,12 @@ const productsArray = [
     price: 50.99,
     img: WellnessJournal
   },
+  {
+    id: "price_1NEFhgCS0MFKcelVl2CF3wRX",
+    title: "Additional Templates",
+    price: 50.99,
+    img: purpleJournal
+},
 ]
 
 function getProductData(id) {
