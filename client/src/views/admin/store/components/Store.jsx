@@ -4,7 +4,6 @@ import ProductCard from 'views/admin/store/js/ProductsCard'
 import { Text, Grid, GridItem, Center} from '@chakra-ui/react'
 import { productsArray } from 'views/admin/store/js/ProductsStore'
 
-import { Grid, GridItem, Text, Center } from '@chakra-ui/react'
 const Store = () => {
   return (
     <div className="parent">
