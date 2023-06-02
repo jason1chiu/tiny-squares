@@ -1,5 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { RiEyeCloseLine } from "react-icons/ri";
+
 // Chakra imports
 import {
   Box,
@@ -17,16 +21,14 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
+// Apollo imports
+import { useMutation } from "@apollo/client";
+
+// File imports
 import { HSeparator } from "components/seperator/Seperator";
 import DefaultAuth from "layouts/auth/Default";
 import illustration from "assets/img/Logo.png"
-
-import { FcGoogle } from "react-icons/fc";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { RiEyeCloseLine } from "react-icons/ri";
-
 import { ADD_USER } from "utils/mutations.js";
-import { useMutation } from "@apollo/client";
 
 export default function SignUp() {
   const textColor = useColorModeValue("navy.700", "white");
