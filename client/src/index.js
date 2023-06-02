@@ -10,6 +10,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import theme from "theme/theme";
 import CartProvider from "./views/admin/store/js/CartContext"
 import CancelPage from "./views/admin/cancelOrderPage/"
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 // import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
 
 // Create an Apollo Client and specify the connection to your GraphQL API
