@@ -1,7 +1,7 @@
 import React from 'react';
-import 'views/admin/store/css/store.css';
-import ProductCard from 'views/admin/store/js/ProductsCard'
 
+import ProductCard from 'views/admin/store/js/ProductsCard'
+import { Text, Grid, GridItem, Center} from '@chakra-ui/react'
 import { productsArray } from 'views/admin/store/js/ProductsStore'
 
 const Store = () => {
