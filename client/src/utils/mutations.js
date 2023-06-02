@@ -8,14 +8,9 @@ export const LOGIN_USER = gql`
         _id
         username
         email
-        bookCount
-        savedBooks {
-          bookId
-          authors
-          description
+        journals {
+          _id
           title
-          image
-          link
         }
       }
     }
@@ -30,53 +25,83 @@ export const ADD_USER = gql`
         _id
         username
         email
-        bookCount
-        savedBooks {
-          bookId
-          authors
-          description
+        journals {
+          _id
           title
-          image
-          link
         }
       }
     }
   }
 `;
 
-export const SAVE_BOOK = gql`
-  mutation saveBook($input: bookInput!) {
-    saveBook(input: $input) {
+export const ADD_JOURNAL = gql`
+  mutation addJournal($title: String!) {
+    addJournal(title: $title) {
       _id
       username
       email
-      bookCount
-      savedBooks {
-        bookId
-        authors
-        description
+      journals {
+        _id
         title
-        image
-        link
       }
     }
   }
 `;
 
-export const REMOVE_BOOK = gql`
-  mutation removeBook($bookId: String!) {
-    removeBook(bookId: $bookId) {
+export const REMOVE_JOURNAL = gql`
+  mutation removeJournal($journalId: ID!) {
+    removeJournal(journalId: $journalId) {
       _id
       username
       email
-      bookCount
-      savedBooks {
-        bookId
-        authors
-        description
+      journals {
+        _id
         title
-        image
-        link
+      }
+    }
+  }
+`;
+
+export const ADD_ENTRY = gql`
+  mutation addEntry($journalId: ID!, $description: String!, $date: String!, $status: String!) {
+    addEntry(journalId: $journalId, description: $description, date: $date, status: $status) {
+      _id
+      title
+      entries {
+        _id
+        description
+        date
+        status
+      }
+    }
+  }
+`;
+
+export const REMOVE_ENTRY = gql`
+  mutation removeEntry($journalId: ID!, $entryId: ID!) {
+    removeEntry(journalId: $journalId, entryId: $entryId) {
+      _id
+      title
+      entries {
+        _id
+        description
+        date
+        status
+      }
+    }
+  }
+`;
+
+export const UPDATE_ENTRY = gql`
+  mutation updateEntry($journalId: ID!, $entryId: ID!, $description: String, $date: String, $status: String) {
+    updateEntry(journalId: $journalId, entryId: $entryId, description: $description, date: $date, status: $status) {
+      _id
+      title
+      entries {
+        _id
+        description
+        date
+        status
       }
     }
   }
