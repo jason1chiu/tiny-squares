@@ -17,10 +17,10 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import { HSeparator } from "../../../components/seperator/Seperator";
+import { HSeparator } from "components/seperator/Seperator";
 // img
 import DefaultAuth from "layouts/auth/Default"
-import illustration from "assets/img/Logo.png"
+import imageAuth from "assets/img/authimage.png"
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
@@ -45,7 +45,7 @@ export default function SignIn() {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
   return (
-    <DefaultAuth illustrationBackground={illustration} image={illustration}>
+    <DefaultAuth imageBackground={imageAuth} image={imageAuth}>
       <Flex
         maxW={{ base: "100%", md: "max-content" }}
         w='100%'

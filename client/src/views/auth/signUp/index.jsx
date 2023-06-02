@@ -19,7 +19,7 @@ import {
 
 import { HSeparator } from "components/seperator/Seperator";
 import DefaultAuth from "layouts/auth/Default";
-import illustration from "assets/img/Logo.png"
+import imageAuth from "assets/img/authimage.png"
 
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
@@ -45,7 +45,7 @@ export default function SignUp() {
     const handleClick = () => setShow(!show);
 
     return (
-        <DefaultAuth illustrationBackground={illustration} image={illustration}>
+        <DefaultAuth imageBackground={imageAuth} image={imageAuth}>
           <Flex
             maxW={{ base: "100%", md: "max-content" }}
             w='100%'
