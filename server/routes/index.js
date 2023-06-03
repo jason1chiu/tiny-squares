@@ -1,24 +1,12 @@
 const router = require('express').Router();
-const {
-  getSingleUser,
-  createUser,
-  login,
-  addJournal,
-  removeJournal,
-} = require('../../controllers/user-controller');
+const path = require('path');
+const apiRoutes = require('./api');
 
-// run at /api/user
-router.route('/')
-  .post(createUser);
+router.use('/api', apiRoutes);
 
-// run at /api/user/login
-router.route('/login')
-  .post(login);
-
-// run at /api/user/:id or /api/user/me
-router.route('/:id')
-  .get(getSingleUser)
-  .post(addJournal)     // Adds a journal to a user
-  .delete(removeJournal); // Removes a journal from a user
+// serve up react front-end in production
+router.use((req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/build/index.html'));
+});
 
 module.exports = router;
