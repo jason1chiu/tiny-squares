@@ -1,6 +1,6 @@
 // React imports
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect } from "react";
+import { NavLink, useHistory } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
@@ -20,6 +20,10 @@ import {
   InputRightElement,
   Text,
   useColorModeValue,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription
 } from "@chakra-ui/react";
 
 // Apollo imports
@@ -32,6 +36,7 @@ import imageAuth from "assets/img/authimage.png"
 import { LOGIN_USER } from "utils/mutations.js";
 
 export default function SignIn() {
+  let history = useHistory();
   // Chakra color mode
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
@@ -50,10 +55,11 @@ export default function SignIn() {
   );
 
   const [show, setShow] = React.useState(false);
+  const [showError, setShowError] = React.useState(null);
   const [email, currentEmail] = React.useState("");
   const [password, currentPassword] = React.useState("");
 
-  const [login, {data, error}] = useMutation(LOGIN_USER)
+  const [login, { data, error }] = useMutation(LOGIN_USER)
 
   const handleClick = () => setShow(!show);
   const handleLogin = () => {
@@ -61,13 +67,22 @@ export default function SignIn() {
       email: email,
       password: password,
     }
-    // if (email && password) {
-      login({ variables: loginUser});
-      window.location.href = '/';
-    // } else {
-    //   alert("Incorrect email or password");
-    // }
+    if (email && password) {
+      login({ variables: loginUser });
+    } else {
+      alert("Some fields are missing!")
+    }
   }
+
+  useEffect(() => {
+    console.log(data);
+    if (data && data.login) {
+      setShowError(null);
+      history.push('/')
+    } else {
+      setShowError("Incorrect credentials")
+    }
+  }, [data])
 
   return (
     <DefaultAuth imageBackground={imageAuth} image={imageAuth}>
@@ -129,6 +144,13 @@ export default function SignIn() {
             </Text>
             <HSeparator />
           </Flex>
+          {showError && <Alert status='error'>
+            <AlertIcon />
+            <AlertTitle>{showError}!
+            </AlertTitle>
+            <AlertDescription>Try again!
+            </AlertDescription>
+          </Alert>}
           <FormControl>
             <FormLabel
               display='flex'
@@ -140,6 +162,10 @@ export default function SignIn() {
               Email<Text color={brandStars}>*</Text>
             </FormLabel>
             <Input
+              onChange={(e) => {
+                currentEmail(e.target.value)
+                setShowError(null);
+              }}
               isRequired={true}
               variant='auth'
               fontSize='sm'
@@ -160,6 +186,10 @@ export default function SignIn() {
             </FormLabel>
             <InputGroup size='md'>
               <Input
+                onChange={(e) => {
+                  currentPassword(e.target.value)
+                  setShowError(null);
+                }}
                 isRequired={true}
                 fontSize='sm'
                 placeholder='Min. 8 characters'
