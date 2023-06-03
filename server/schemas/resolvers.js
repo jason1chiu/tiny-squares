@@ -1,61 +1,62 @@
-const { User, Journal, Entry } = require('../models');
-const { AuthenticationError } = require('apollo-server-express');
-const { signToken } = require('../utils/auth');
+const { User, Journal, Entry } = require("../models");
+const { AuthenticationError } = require("apollo-server-express");
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
-          .select('-__v -password')
-          .populate('journals');
+          .select("-__v -password")
+          .populate("journals");
 
         return userData;
       }
 
-      throw new AuthenticationError('Not logged in');
+      throw new AuthenticationError("Not logged in");
     },
     journals: async (parent, args, context) => {
-      return Journal.find({}).populate('entries');
+      console.log({ Journal });
+      return Journal.find({}).populate("entries");
     },
     journal: async (parent, { _id }, context) => {
-      return Journal.findOne({ _id }).populate('entries');
-    }
+      return Journal.findOne({ _id }).populate("entries");
+    },
   },
 
   Mutation: {
     addUser: async (parent, { args }) => {
       let results = await User.create(args)
-        .then(user => {
+        .then((user) => {
           const token = signToken(user);
           return { token, user };
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
           return null;
-        })
-      return results
+        });
+      return results;
     },
 
     login: async (parent, { email, password }) => {
       let results = await User.findOne({ email })
-        .then(async user => {
+        .then(async (user) => {
           if (!user) {
-            console.log('Incorrect credentials');
+            console.log("Incorrect credentials");
             return null;
           }
           const correctPw = await user.isCorrectPassword(password);
           if (!correctPw) {
-            console.log('Incorrect credentials');
+            console.log("Incorrect credentials");
             return null;
           }
           const token = signToken(user);
           return { token, user };
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
           return null;
-        })
+        });
       return results;
     },
 
@@ -71,7 +72,7 @@ const resolvers = {
         return updatedUser;
       }
 
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
 
     removeJournal: async (parent, { journalId }, context) => {
@@ -87,7 +88,7 @@ const resolvers = {
         return updatedUser;
       }
 
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
 
     addEntry: async (parent, { journalId, input }, context) => {
@@ -111,8 +112,8 @@ const resolvers = {
       await Entry.findByIdAndDelete(entryId);
 
       return updatedJournal;
-    }
-  }
+    },
+  },
 };
 
 module.exports = resolvers;
