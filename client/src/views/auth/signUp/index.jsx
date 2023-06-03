@@ -52,7 +52,7 @@ export default function SignUp() {
   const [email, setEmail] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
 
-  const [addUser, {data, loading, error}] = useMutation(ADD_USER)
+  const [addUser, { data, error }] = useMutation(ADD_USER)
 
   const handleClick = () => setShow(!show);
   const handleAddUser = () => {
@@ -62,39 +62,38 @@ export default function SignUp() {
       password: password
     }
     if (password === confirmPassword && password && username && email) {
-      addUser({variables: newUser});
+      addUser({ variables: newUser });
+      window.location.href = '/';
     } else {
       alert("Passwords do not match or some fields are missing!");
-    }    
+    }
   }
 
-  React.useEffect(() => {console.log({data, loading, error})}, [data, error])
-
-    return (
-        <DefaultAuth imageBackground={imageAuth} image={imageAuth}>
-          <Flex
-            maxW={{ base: "100%", md: "max-content" }}
-            w='100%'
-            mx={{ base: "auto", lg: "0px" }}
-            me='auto'
-            h='100%'
-            alignItems='start'
-            justifyContent='center'
-            mb={{ base: "30px", md: "60px" }}
-            px={{ base: "25px", md: "0px" }}
-            mt={{ base: "40px", md: "14vh" }}
-            flexDirection='column'>
-            <Box me='auto'>
-              <Heading color={textColor} fontSize='36px' mb='10px'>
-                Sign Up
-              </Heading>
-              <Text
+  return (
+    <DefaultAuth imageBackground={imageAuth} image={imageAuth}>
+      <Flex
+        maxW={{ base: "100%", md: "max-content" }}
+        w='100%'
+        mx={{ base: "auto", lg: "0px" }}
+        me='auto'
+        h='100%'
+        alignItems='start'
+        justifyContent='center'
+        mb={{ base: "30px", md: "60px" }}
+        px={{ base: "25px", md: "0px" }}
+        mt={{ base: "40px", md: "14vh" }}
+        flexDirection='column'>
+        <Box me='auto'>
+          <Heading color={textColor} fontSize='36px' mb='10px'>
+            Sign Up
+          </Heading>
+          <Text
             mb='36px'
             ms='4px'
             color={textColorSecondary}
             fontWeight='400'
             fontSize='md'>
-               Enter your email and password to sign up!
+            Enter your email and password to sign up!
           </Text>
         </Box>
         <Flex
