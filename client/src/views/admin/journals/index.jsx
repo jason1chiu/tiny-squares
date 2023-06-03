@@ -65,8 +65,6 @@ export default function JournalPage() {
         </Flex>
         <Flex flexDirection='column'
           gridArea={{ xl: "1 / 3 / 2 / 4", "2xl": "1 / 2 / 2 / 3" }}>
-
-
         </Flex>
       </Grid>
     </Box>

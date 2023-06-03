@@ -29,8 +29,6 @@ import { useMutation } from "@apollo/client";
 import { HSeparator } from "components/seperator/Seperator";
 import DefaultAuth from "layouts/auth/Default"
 import imageAuth from "assets/img/authimage.png"
-
-
 import { LOGIN_USER } from "utils/mutations.js";
 
 export default function SignIn() {
