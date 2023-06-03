@@ -11,6 +11,7 @@ const Board = ({legends}) => {
     setCells(prev => ({ ...prev, [id]: { color, note } }));
   };
  
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
   return (
     <Card mt={4} mb={4} mx="auto" minh="80vh" w="auto">
@@ -18,7 +19,7 @@ const Board = ({legends}) => {
         <GridItem></GridItem>
         {Array.from({ length: 12 }, (_, index) => (
           <GridItem key={`month-${index}`} textAlign="center">
-            <Text fontSize="sm" fontWeight="bold">{`Month ${index + 1}`}</Text>
+            <Text fontSize="sm" fontWeight="bold">{months[index]}</Text>
           </GridItem>
         ))}
         {Array.from({ length: 31 }, (_, rowIndex) => (

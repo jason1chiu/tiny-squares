@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import "assets/css/index.css";
 
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
@@ -11,11 +10,10 @@ import CartProvider from "./views/admin/store/js/CartContext"
 import CancelPage from "./views/admin/cancelOrderPage/"
 import SuccessPage from "./views/admin/successOrderPage"
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-// import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
 
 // Create an Apollo Client and specify the connection to your GraphQL API
 const client = new ApolloClient({
-  uri: 'localhost:3001/graphql',
+  uri: 'http://localhost:3001/graphql',
   cache: new InMemoryCache(),
   headers: {
     authorization: localStorage.getItem('id_token') ? `Bearer ${localStorage.getItem('id_token')}` : "",

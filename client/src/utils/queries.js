@@ -50,11 +50,11 @@ export const GET_JOURNALS = gql`
   }
 `;
 
-export const GET_STATS = gql`
-  query getStats($userId: ID!) {
-    stats(userId: $userId) {
-      category
-      totalEntries
-    }
-  }
-`;
+// export const GET_STATS = gql`
+//   query getStats($userId: ID!) {
+//     stats(userId: $userId) {
+//       category
+//       totalEntries
+//     }
+//   }
+// `;
