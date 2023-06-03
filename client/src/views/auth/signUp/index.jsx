@@ -1,6 +1,6 @@
 // React imports
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect } from "react";
+import { NavLink, useHistory } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
@@ -20,6 +20,10 @@ import {
   InputRightElement,
   Text,
   useColorModeValue,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription
 } from "@chakra-ui/react";
 
 // Apollo imports
@@ -32,6 +36,7 @@ import imageAuth from "assets/img/authimage.png"
 import { ADD_USER } from "utils/mutations.js";
 
 export default function SignUp() {
+  let history = useHistory()
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
@@ -48,6 +53,7 @@ export default function SignUp() {
     { bg: "whiteAlpha.200" }
   );
   const [show, setShow] = React.useState(false);
+  const [showError, setShowError] = React.useState(null);
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -56,7 +62,8 @@ export default function SignUp() {
   const [addUser, { data, error }] = useMutation(ADD_USER)
 
   const handleClick = () => setShow(!show);
-  const handleAddUser = () => {
+  const handleAddUser = (event) => {
+    event.preventDefault();
     let newUser = {
       username: username,
       email: email,
@@ -64,11 +71,21 @@ export default function SignUp() {
     }
     if (password === confirmPassword && password && username && email) {
       addUser({ variables: newUser });
-      window.location.href = '/';
     } else {
       alert("Passwords do not match or some fields are missing!");
     }
   }
+
+  useEffect(() => {
+    console.log(data)
+    if (data && data.addUser) {
+      setShowError(null);
+      history.push('/');
+      // write cookies here
+    } else {
+      setShowError("User already exists!")
+    }
+  }, [data])
 
   return (
     <DefaultAuth imageBackground={imageAuth} image={imageAuth}>
@@ -130,6 +147,13 @@ export default function SignUp() {
             </Text>
             <HSeparator />
           </Flex>
+          {showError && <Alert status='error'>
+            <AlertIcon />
+            <AlertTitle>{showError}!
+            </AlertTitle>
+            <AlertDescription>Try to change email.
+            </AlertDescription>
+          </Alert>}
           <FormControl>
             <FormLabel
               display='flex'
@@ -142,7 +166,10 @@ export default function SignUp() {
             </FormLabel>
             <Input
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value)
+                setShowError(null);
+              }}
               isRequired={true}
               variant='auth'
               fontSize='sm'
@@ -164,7 +191,10 @@ export default function SignUp() {
             </FormLabel>
             <Input
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => {
+                setUsername(e.target.value)
+                setShowError(null);
+              }}
               isRequired={true}
               variant='auth'
               fontSize='sm'
@@ -186,7 +216,10 @@ export default function SignUp() {
             <InputGroup size='md'>
               <Input
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value)
+                  setShowError(null);
+                }}
                 isRequired={true}
                 fontSize='sm'
                 placeholder='Min. 8 characters'
