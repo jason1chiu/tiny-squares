@@ -19,15 +19,16 @@ export default function Overview() {
         }}
         gap={{ base: "20px", xl: "20px" }}
       >
+        <Legend 
+          legends={legends}
+          setLegends={setLegends}
+          gridArea={{ base: "1 / 1 / 2 / 2", lg: "1 / 1 / 2 / 2" }} 
+        />
         <Board 
           legends={legends} 
           gridArea={{ base: "1 / 1 / 2 / 2", lg: "1 / 1 / 2 / 2" }} 
         />
-        <Legend 
-          legends={legends}
-          setLegends={setLegends}
-          gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }} 
-        />
+        
       </Grid>
     </Box>
   );
