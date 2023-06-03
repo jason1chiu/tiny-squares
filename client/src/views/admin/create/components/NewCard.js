@@ -18,11 +18,23 @@ function NewCard() {
         setModalOpen(false);
     };
 
-    const handleAddJournal = (journalName) => {
-        // Add logic here to make API call to backend
-        // to create new journal using the given journalName.
-
-        closeModal();
+    const handleAddJournal = async (journalName) => {
+        const response = await fetch('/api/journal', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: journalName }),
+        });
+    
+        if (response.ok) {
+            const newJournal = await response.json();
+            // Here you could add newJournal to your component state,
+            // which will automatically re-render the component to show the new journal
+            closeModal();
+        } else {
+            console.error('Error:', response);
+        }
     };
 
     return (

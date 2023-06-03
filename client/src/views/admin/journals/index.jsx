@@ -1,24 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
-    Button,
     Flex,
     Grid,
-    Link,
     Text,
     useColorModeValue,
     SimpleGrid,
   } from "@chakra-ui/react";
 
   import Banner from "views/admin/create/components/Banner";
-  import Preview from "components/card/preview"
-  import Card from "components/card/card";
-  import P2 from "assets/img/purple.jpg"
+import YourJournalCard from "views/admin/journals/components/YourJournalCard";
+import P2 from "assets/img/purple.jpg";
 
   export default function JournalPage() {
     // Chakra Color Mode
     const textColor = useColorModeValue("secondaryGray.900", "white");
-    const textColorBrand = useColorModeValue("brand.500", "white");
+    const [journals, setJournals] = useState([]);
+    // const textColorBrand = useColorModeValue("brand.500", "white");
+    useEffect(() => {
+      // TODO: Fetch journals from API and set them to state
+      // This is placeholder data until you have actual data from your API
+      setJournals([
+        { name: 'Mood', author: 'By John Doe', image: P2 },
+        { name: 'Pain', author: 'By John Doe', image: P2 },
+        { name: 'Workouts', author: 'By John Doe', image: P2 },
+      ]);
+    }, []);
     return (
       <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
         {/* Main Fields */}
@@ -48,24 +55,7 @@ import {
             <SimpleGrid columns={{ base: 1, md: 3 }} gap='20px'>
 
 {/* ToDo: insert functionality to add new journals */}
-            <Preview
-                name='Mood'
-                author='By John Doe'
-                image={P2}
-
-              />
-              <Preview
-                name='Pain'
-                author='By John Doe'
-                image={P2}
-
-              />
-              <Preview
-                name='Workouts'
-                author='By John Doe'
-                image={P2}
-
-              />
+            <YourJournalCard />
             </SimpleGrid>
 
             
