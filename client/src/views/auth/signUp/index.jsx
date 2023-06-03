@@ -36,7 +36,7 @@ import imageAuth from "assets/img/authimage.png"
 import { ADD_USER } from "utils/mutations.js";
 
 export default function SignUp() {
-  let history = useHistory()
+  let history = useHistory();
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
@@ -151,7 +151,7 @@ export default function SignUp() {
             <AlertIcon />
             <AlertTitle>{showError}!
             </AlertTitle>
-            <AlertDescription>Try to change email.
+            <AlertDescription>Try again!
             </AlertDescription>
           </Alert>}
           <FormControl>

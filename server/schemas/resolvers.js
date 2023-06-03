@@ -24,8 +24,7 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, args) => {
-      console.log(args);
+    addUser: async (parent, { args }) => {
       let results = await User.create(args)
         .then(user => {
           const token = signToken(user);
@@ -39,20 +38,25 @@ const resolvers = {
     },
 
     login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
-
-      if (!user) {
-        throw new AuthenticationError('Incorrect credentials');
-      }
-
-      const correctPw = await user.isCorrectPassword(password);
-
-      if (!correctPw) {
-        throw new AuthenticationError('Incorrect credentials');
-      }
-
-      const token = signToken(user);
-      return { token, user };
+      let results = await User.findOne({ email })
+        .then(async user => {
+          if (!user) {
+            console.log('Incorrect credentials');
+            return null;
+          }
+          const correctPw = await user.isCorrectPassword(password);
+          if (!correctPw) {
+            console.log('Incorrect credentials');
+            return null;
+          }
+          const token = signToken(user);
+          return { token, user };
+        })
+        .catch(error => {
+          console.log(error);
+          return null;
+        })
+      return results;
     },
 
     addJournal: async (parent, { input }, context) => {
