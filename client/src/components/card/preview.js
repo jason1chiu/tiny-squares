@@ -1,12 +1,9 @@
 import {
-    AvatarGroup,
-    Avatar,
     Box,
     Button,
     Flex,
     Icon,
     Image,
-    Link,
     Text,
     useColorModeValue,
   } from "@chakra-ui/react";

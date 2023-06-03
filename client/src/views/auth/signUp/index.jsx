@@ -27,8 +27,11 @@ import { useMutation } from "@apollo/client";
 // File imports
 import { HSeparator } from "components/seperator/Seperator";
 import DefaultAuth from "layouts/auth/Default";
-import illustration from "assets/img/Logo.png"
+import imageAuth from "assets/img/authimage.png"
 import { ADD_USER } from "utils/mutations.js";
+// import { FcGoogle } from "react-icons/fc";
+// import { MdOutlineRemoveRedEye } from "react-icons/md";
+// import { RiEyeCloseLine } from "react-icons/ri";
 
 export default function SignUp() {
   const textColor = useColorModeValue("navy.700", "white");
@@ -70,31 +73,31 @@ export default function SignUp() {
 
   React.useEffect(() => {console.log({data, loading, error})}, [data, error])
 
-  return (
-    <DefaultAuth illustrationBackground={illustration} image={illustration}>
-      <Flex
-        maxW={{ base: "100%", md: "max-content" }}
-        w='100%'
-        mx={{ base: "auto", lg: "0px" }}
-        me='auto'
-        h='100%'
-        alignItems='start'
-        justifyContent='center'
-        mb={{ base: "30px", md: "60px" }}
-        px={{ base: "25px", md: "0px" }}
-        mt={{ base: "40px", md: "14vh" }}
-        flexDirection='column'>
-        <Box me='auto'>
-          <Heading color={textColor} fontSize='36px' mb='10px'>
-            Sign Up
-          </Heading>
-          <Text
+    return (
+        <DefaultAuth imageBackground={imageAuth} image={imageAuth}>
+          <Flex
+            maxW={{ base: "100%", md: "max-content" }}
+            w='100%'
+            mx={{ base: "auto", lg: "0px" }}
+            me='auto'
+            h='100%'
+            alignItems='start'
+            justifyContent='center'
+            mb={{ base: "30px", md: "60px" }}
+            px={{ base: "25px", md: "0px" }}
+            mt={{ base: "40px", md: "14vh" }}
+            flexDirection='column'>
+            <Box me='auto'>
+              <Heading color={textColor} fontSize='36px' mb='10px'>
+                Sign Up
+              </Heading>
+              <Text
             mb='36px'
             ms='4px'
             color={textColorSecondary}
             fontWeight='400'
             fontSize='md'>
-            Enter your email and password to sign up!
+               Enter your email and password to sign up!
           </Text>
         </Box>
         <Flex

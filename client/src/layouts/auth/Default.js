@@ -2,7 +2,6 @@ import { Box, Flex, Icon, Text } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 import React from "react";
 import Footer from "components/footer/FooterAuth";
-
 import FixedPlugin from "components/fixedPlugin/FixedPlugin";
 
 import { NavLink } from "react-router-dom";
@@ -12,7 +11,7 @@ import { FaChevronLeft } from "react-icons/fa";
 function AuthImage(props) {
     const { children, imageBackground } = props;
     return (
-        <Flex position='relative' h='max-content'>
+        <Flex position='relative' h='max-content' >
           <Flex
             h={{
               sm: "initial",
