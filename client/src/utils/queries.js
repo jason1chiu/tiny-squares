@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_ME = gql`
   query me {
@@ -24,7 +24,7 @@ export const GET_JOURNAL = gql`
   query getJournal($id: ID!) {
     journal(id: $id) {
       _id
-      title
+      name
       entries {
         _id
         description
@@ -39,13 +39,20 @@ export const GET_JOURNALS = gql`
   query getJournals {
     journals {
       _id
-      title
+      name
       entries {
         _id
-        description
+        note
         date
-        status
       }
+    }
+  }
+`;
+export const GET_JOURNALS_DASHBOARD = gql`
+  query getJournals {
+    journals {
+      _id
+      name
     }
   }
 `;
