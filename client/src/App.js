@@ -6,9 +6,9 @@ import AdminLayout from "layouts/admin";
 import AuthLayout from "layouts/auth";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "theme/theme";
-import CartProvider from "./views/admin/store/js/CartContext"
-import CancelPage from "./views/admin/cancelOrderPage/"
-import SuccessPage from "./views/admin/successOrderPage"
+import CartProvider from "views/admin/store/js/CartContext"
+import CancelPage from "views/admin/cancelOrderPage/"
+import SuccessPage from "views/admin/successOrderPage"
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
 // Create an Apollo Client and specify the connection to your GraphQL API
