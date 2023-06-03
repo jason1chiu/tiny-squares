@@ -63,7 +63,7 @@ export default function SignUp() {
     }
     if (password === confirmPassword && password && username && email) {
       addUser({ variables: newUser });
-      console.log(newUser);
+      window.location.href = '/';
     } else {
       alert("Passwords do not match or some fields are missing!");
     }
