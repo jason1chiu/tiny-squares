@@ -13,9 +13,9 @@ function NewJournalModal({ isOpen, onClose, onSubmit }) {
     };
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} isCentered >
             <ModalOverlay />
-            <ModalContent>
+            <ModalContent width="100vw">
                 <ModalHeader>Create a new journal</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>

@@ -13,7 +13,7 @@ import {
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 
 export default function Preview(props) {
-    const { image, name, author } = props;
+    const { image, name, author, onViewClick  } = props;
     const [like, setLike] = useState(false);
     const textColor = useColorModeValue("navy.700", "white");
     const textColorBid = useColorModeValue("brand.500", "white");
@@ -95,9 +95,11 @@ export default function Preview(props) {
                 fontWeight='500'
                 borderRadius='70px'
                 px='24px'
-                py='5px'>
+                py='5px'
+                onClick={onViewClick} 
+            >
                 VIEW
-              </Button>
+            </Button>
           </Flex>
         </Flex>
       </Flex>
