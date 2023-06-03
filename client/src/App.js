@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import "assets/css/index.css";
 
-import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import AdminLayout from "layouts/admin";
 import AuthLayout from "layouts/auth";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -28,7 +28,7 @@ export default function App() {
     <CartProvider>
       <ChakraProvider theme={theme}>
         <React.StrictMode>
-          <HashRouter>
+          <BrowserRouter>
             <Switch>
               <Route path={`/auth`} component={AuthLayout} />
               <Route path={`/admin`} component={AdminLayout} />
@@ -36,7 +36,7 @@ export default function App() {
               <Route path={`/success`} component={SuccessPage} />
               <Redirect from='/' to='/admin/dashboard' />
             </Switch>
-          </HashRouter>
+          </BrowserRouter>
         </React.StrictMode>
       </ChakraProvider>
     </CartProvider>
