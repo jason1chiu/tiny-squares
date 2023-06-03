@@ -1,14 +1,19 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const entrySchema = new Schema({
   date: {
     type: Date,
     required: true,
   },
-  color: {
+  note: {
     type: String,
-    required: true,
-  }
+  },
+  legend: {
+    type: Schema.Types.ObjectId,
+    ref: "Legend",
+  },
 });
 
-module.exports = entrySchema;
+const Entry = model("Entry", entrySchema);
+
+module.exports = Entry;

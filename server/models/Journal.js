@@ -1,8 +1,4 @@
-const { Schema } = require('mongoose');
-
-// Import related schemas
-const entrySchema = require('./Entry');
-const legendSchema = require('./Legend');
+const { Schema, model } = require("mongoose");
 
 const journalSchema = new Schema({
   name: {
@@ -13,10 +9,22 @@ const journalSchema = new Schema({
     type: String,
     required: true,
   },
-  entries: [entrySchema],
-  legends: [legendSchema],
+  entries: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Entry",
+    },
+  ],
+  legends: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Legend",
+    },
+  ],
   createdAt: Date,
   updatedAt: Date,
 });
 
-module.exports = journalSchema;
+const Journal = model("Journal", journalSchema);
+
+module.exports = { Journal, journalSchema };

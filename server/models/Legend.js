@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const legendSchema = new Schema({
   name: {
@@ -8,7 +8,9 @@ const legendSchema = new Schema({
   color: {
     type: String,
     required: true,
-  }
+  },
 });
 
-module.exports = legendSchema;
+const Legend = model("Legend", legendSchema);
+
+module.exports = Legend;

@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
@@ -9,6 +9,7 @@ const typeDefs = gql`
   }
 
   type Journal {
+    _id: ID
     name: String
     category: String
     entries: [Entry]
@@ -19,7 +20,8 @@ const typeDefs = gql`
 
   type Entry {
     date: String
-    color: String
+    note: String
+    legend: Legend
   }
 
   type Auth {
