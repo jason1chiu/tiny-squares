@@ -55,21 +55,18 @@ import P2 from "assets/img/purple.jpg";
             <SimpleGrid columns={{ base: 1, md: 3 }} gap='20px'>
 
 {/* ToDo: insert functionality to add new journals */}
-            <YourJournalCard />
+{/* <YourJournalCard journal={yourJournalObject} /> */}
+{journals.map((journal) => (
+  <YourJournalCard journal={journal} />
+))}
             </SimpleGrid>
 
-            
-
-            
-
-            
             </Flex>
         </Flex>
         <Flex flexDirection='column'
           gridArea={{ xl: "1 / 3 / 2 / 4", "2xl": "1 / 2 / 2 / 3" }}>
 
 
-          
         </Flex>
       </Grid>
       </Box>
