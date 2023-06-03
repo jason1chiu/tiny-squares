@@ -1,5 +1,10 @@
+// React imports
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { RiEyeCloseLine } from "react-icons/ri";
+
 // Chakra imports
 import {
   Box,
@@ -17,13 +22,16 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
+// Apollo imports
+import { useMutation } from "@apollo/client";
+
+// File imports
 import { HSeparator } from "components/seperator/Seperator";
-// img
 import DefaultAuth from "layouts/auth/Default"
 import imageAuth from "assets/img/authimage.png"
-import { FcGoogle } from "react-icons/fc";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { RiEyeCloseLine } from "react-icons/ri";
+
+
+import { LOGIN_USER } from "utils/mutations.js";
 
 export default function SignIn() {
   // Chakra color mode
@@ -42,8 +50,27 @@ export default function SignIn() {
     { bg: "secondaryGray.300" },
     { bg: "whiteAlpha.200" }
   );
+
   const [show, setShow] = React.useState(false);
+  const [email, currentEmail] = React.useState("");
+  const [password, currentPassword] = React.useState("");
+
+  const [login, {data, error}] = useMutation(LOGIN_USER)
+
   const handleClick = () => setShow(!show);
+  const handleLogin = () => {
+    let loginUser = {
+      email: email,
+      password: password,
+    }
+    // if (email && password) {
+      login({ variables: loginUser});
+      window.location.href = '/';
+    // } else {
+    //   alert("Incorrect email or password");
+    // }
+  }
+
   return (
     <DefaultAuth imageBackground={imageAuth} image={imageAuth}>
       <Flex
@@ -170,6 +197,7 @@ export default function SignIn() {
               </FormControl>
             </Flex>
             <Button
+              onClick={handleLogin}
               fontSize='sm'
               variant='brand'
               fontWeight='500'

@@ -3,14 +3,14 @@ import { Grid, GridItem, Box, Text } from "@chakra-ui/react";
 import Card from "components/card/card";
 import Cell from "views/admin/calendar/components/board/Cell";
 
-const Board = ({legends}) => {
+const Board = ({ legends }) => {
   // Create a state that stores the cell data
   const [cells, setCells] = useState({});
 
   const handleSave = (id, color, note) => {
     setCells(prev => ({ ...prev, [id]: { color, note } }));
   };
- 
+
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
   return (
@@ -33,13 +33,13 @@ const Board = ({legends}) => {
               return (
                 <GridItem key={id}>
                   <Box h="100%">
-                    <Cell 
-                      day={rowIndex + 1} 
-                      month={colIndex + 1} 
-                      color={cell.color} 
-                      note={cell.note} 
-                      legends={legends} 
-                      onSave={(color, note) => handleSave(id, color, note)} 
+                    <Cell
+                      day={rowIndex + 1}
+                      month={colIndex + 1}
+                      color={cell.color}
+                      note={cell.note}
+                      legends={legends}
+                      onSave={(color, note) => handleSave(id, color, note)}
                     />
                   </Box>
                 </GridItem>

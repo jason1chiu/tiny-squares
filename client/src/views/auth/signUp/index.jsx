@@ -1,3 +1,4 @@
+// React imports
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
