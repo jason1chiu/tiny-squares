@@ -29,9 +29,6 @@ import { HSeparator } from "components/seperator/Seperator";
 import DefaultAuth from "layouts/auth/Default";
 import imageAuth from "assets/img/authimage.png"
 import { ADD_USER } from "utils/mutations.js";
-// import { FcGoogle } from "react-icons/fc";
-// import { MdOutlineRemoveRedEye } from "react-icons/md";
-// import { RiEyeCloseLine } from "react-icons/ri";
 
 export default function SignUp() {
   const textColor = useColorModeValue("navy.700", "white");
