@@ -1,4 +1,4 @@
-
+const router = require('express').Router();
 
 app.post("/admin/store/checkout", async (req, res) => {
 
@@ -25,3 +25,5 @@ app.post("/admin/store/checkout", async (req, res) => {
     url: session.url
   }))
 })
+
+module.exports = router;
