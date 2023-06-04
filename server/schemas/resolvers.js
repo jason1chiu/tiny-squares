@@ -10,7 +10,6 @@ const resolvers = {
           .select("-__v -password")
           .populate("journals")
       
-          console.log(userData);
         return userData;
       }
 
@@ -70,7 +69,6 @@ const resolvers = {
     addJournal: async (parent, { name, category }, context) => {
       if (context.user) {
         const journal = await Journal.create({ name, category });
-        console.log(journal);
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { journals: journal._id } },

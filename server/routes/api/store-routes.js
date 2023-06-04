@@ -2,7 +2,6 @@ const router = require('express').Router();
 
 app.post("/admin/store/checkout", async (req, res) => {
 
-  console.log(req.body);
   const items = req.body.items;
   let lineItems = [];
   items.forEach((item) => {

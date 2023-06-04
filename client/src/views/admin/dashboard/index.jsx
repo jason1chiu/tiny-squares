@@ -50,13 +50,6 @@ export default function Overview() {
         }}
         gap={{ base: "20px", xl: "20px" }}>
         {journals &&
-          // <Profile
-          //   banner={profile}
-          //   avatar={avatar}
-          //   name={user.user.username}
-          //   entries={journals.length && journals.reduce((sum, journal) => sum + journal.entries.length, 0)}
-          //   journals={journals.length}
-          // />
           <Profile
           banner={profile}
           avatar={avatar}
