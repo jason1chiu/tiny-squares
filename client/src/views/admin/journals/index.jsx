@@ -11,21 +11,32 @@ import {
 import Banner from "views/admin/create/components/Banner";
 import YourJournalCard from "views/admin/journals/components/YourJournalCard";
 import P2 from "assets/img/purple.jpg";
+import { useAuth } from "contexts/auth.context";
+import { useLazyQuery } from "@apollo/client";
+import { GET_ME } from "utils/queries";
 
 export default function JournalPage() {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const [journals, setJournals] = useState([]);
-  // const textColorBrand = useColorModeValue("brand.500", "white");
+  // const [journals, setJournals] = useState([]);
+  let { user, journals, setJournals } = useAuth();
+  let [me, { data, loading }] = useLazyQuery(GET_ME);
+
   useEffect(() => {
-    // TODO: Fetch journals from API and set them to state
-    // This is placeholder data until you have actual data from your API
-    setJournals([
-      { name: 'Mood', author: 'By John Doe', image: P2 },
-      { name: 'Pain', author: 'By John Doe', image: P2 },
-      { name: 'Workouts', author: 'By John Doe', image: P2 },
-    ]);
-  }, []);
+    me().then(data => {
+      setJournals(data.data.me.journals);
+    })
+  }, [])
+  // const textColorBrand = useColorModeValue("brand.500", "white");
+  // useEffect(() => {
+  //   // TODO: Fetch journals from API and set them to state
+  //   // This is placeholder data until you have actual data from your API
+  //   setJournals([
+  //     { name: 'Mood', author: 'By John Doe', image: P2 },
+  //     { name: 'Pain', author: 'By John Doe', image: P2 },
+  //     { name: 'Workouts', author: 'By John Doe', image: P2 },
+  //   ]);
+  // }, []);
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
       {/* Main Fields */}
@@ -57,7 +68,7 @@ export default function JournalPage() {
               {/* ToDo: insert functionality to add new journals */}
               {/* <YourJournalCard journal={yourJournalObject} /> */}
               {journals.map((journal) => (
-                <YourJournalCard journal={journal} />
+                <YourJournalCard journal={{...journal, image: P2}} />
               ))}
             </SimpleGrid>
 
