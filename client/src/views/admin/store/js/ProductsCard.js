@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {CartContext} from 'views/admin/store/js/CartContext'
 import { useContext } from 'react'
 import { Button, ButtonGroup, Grid, GridItem, Image, Center, Stack } from '@chakra-ui/react'
 
-function ProductCard(props) {   //props.productt is the product we are selling
+function ProductCard(props) {   
   const product = props.product;
   const cart = useContext(CartContext);
-  // const productQuantity = cart.getProductQuantity(product.id);
-  console.log(cart.items)
+  const [adding, setAdding] = useState(false);
+
+  const handleAddToCart = async () => {
+    setAdding(true);
+
+    // Simulate an asynchronous operation, e.g., making an API call
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    cart.addOneToCart(product.id);
+    setAdding(false);
+  };
 
   return (
     <div>
@@ -23,7 +32,7 @@ function ProductCard(props) {   //props.productt is the product we are selling
         </Center>
 
           <Center>
-            <Button onClick={() => cart.addOneToCart(product.id)}>Add To Cart</Button>
+            <Button onClick={handleAddToCart}>{adding ? 'Adding...' : "Add To Cart"}</Button>
           </Center>
         </Stack>
       </section>
