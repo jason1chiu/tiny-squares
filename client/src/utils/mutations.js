@@ -26,13 +26,21 @@ export const ADD_USER = gql`
   }
 `;
 
+export const LOGOUT_USER = gql`
+  mutation Logout($email: String!) {
+    logout(email: $email) {
+      email
+    }
+  }
+`;
+
 export const ADD_JOURNAL = gql`
-  mutation addJournal($title: String!) {
-    addJournal(title: $title) {
-      _id
+  mutation addJournal($name: String!, $category: String!) {
+    addJournal(name: $name, category: $category) {
       journals {
         _id
-        title
+        name
+        category
       }
     }
   }

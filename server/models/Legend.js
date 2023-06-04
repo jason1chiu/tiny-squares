@@ -13,4 +13,4 @@ const legendSchema = new Schema({
 
 const Legend = model("Legend", legendSchema);
 
-module.exports = Legend;
+module.exports = { Legend, legendSchema };

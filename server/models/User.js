@@ -21,7 +21,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    journals: [journalSchema],
+    journals: [{type: Schema.Types.ObjectId, ref: "Journal"}],
   },
   {
     toJSON: {
