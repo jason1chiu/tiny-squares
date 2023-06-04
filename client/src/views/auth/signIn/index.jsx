@@ -128,7 +128,7 @@ export default function SignIn() {
           mx={{ base: "auto", lg: "unset" }}
           me='auto'
           mb={{ base: "20px", md: "auto" }}>
-          <Button
+          {/* <Button
             fontSize='sm'
             me='0px'
             mb='26px'
@@ -143,12 +143,12 @@ export default function SignIn() {
             _focus={googleActive}>
             <Icon as={FcGoogle} w='20px' h='20px' me='10px' />
             Sign in with Google
-          </Button>
+          </Button> */}
           <Flex align='center' mb='25px'>
             <HSeparator />
-            <Text color='gray.400' mx='14px'>
+            {/* <Text color='gray.400' mx='14px'>
               or
-            </Text>
+            </Text> */}
             <HSeparator />
           </Flex>
           {showError && <Alert status='error'>

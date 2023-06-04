@@ -16,12 +16,17 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { FiUpload } from "react-icons/fi";
+// import axios from 'axios';
+// import { useAuth } from "contexts/auth.context";
+// import { useMutation } from "@apollo/client";
+// import { UPDATE_USER } from "utils/mutations.js";
+// import { useAuth } from "contexts/auth.context";
 
 function EditProfileModal() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [username, setUsername] = useState("");
     const [file, setFile] = useState(null);
-  
+    // const [updateUser, { error }] = useMutation(UPDATE_USER);
     const handleFileChange = (e) => {
       setFile(e.target.files[0]);
     };
@@ -30,12 +35,20 @@ function EditProfileModal() {
         setUsername(e.target.value);
       };
     
-      const handleSave = () => {
-        // Save the changes here
-        // upload file and update username
-        console.log(file, username);
-        onClose();
-      };
+    //   const handleSave = async () => {
+    //     try {
+    //       const { data } = await updateUser({
+    //         variables: {
+    //           username: username,
+    //         },
+    //       });
+    //       console.log(data);
+    
+    //       onClose();
+    //     } catch (error) {
+    //       console.error(error);
+    //     }
+    //   };
 
       return (
         <>
@@ -80,7 +93,7 @@ function EditProfileModal() {
             </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="brand" mr={3} onClick={handleSave}>
+            <Button colorScheme="brand" mr={3} onClick={onClose}>
               Save
             </Button>
             <Button variant="ghost" onClick={onClose}>
