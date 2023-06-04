@@ -1,8 +1,9 @@
 // React imports
 import React from "react";
-import { MdNotificationsNone, MdInfoOutline } from "react-icons/md";
+import { MdNotificationsNone, MdInfoOutline, MdEdit } from "react-icons/md";
 import { FaEthereum } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
+import EditProfileModal from "components/modal/EditProfileModal";
 
 // Chakra imports
 import {
@@ -18,6 +19,7 @@ import {
   MenuList,
   Text,
   useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 
@@ -39,10 +41,10 @@ export default function HeaderLinks(props) {
 
   const [logout] = useMutation(LOGOUT_USER);
   const history = useHistory();
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const handleLogout = async () => {
     try {
-      await logout({variables: {email}});
+      await logout({ variables: { email } });
       setUser(null);
       history.push("/auth/sign-in"); // assuming this is your sign-in route
     } catch (error) {
@@ -97,7 +99,7 @@ export default function HeaderLinks(props) {
         >
           <Icon color={ethColor} w="9px" h="14px" as={FaEthereum} />
         </Flex>
-        <Text
+        {/* <Text
           w="max-content"
           color={ethColor}
           fontSize="sm"
@@ -109,11 +111,11 @@ export default function HeaderLinks(props) {
             {" "}
             ETH
           </Text>
-        </Text>
+        </Text> */}
       </Flex>
       <SidebarResponsive routes={routes} />
       <Menu>
-        <MenuButton p="0px">
+        {/* <MenuButton p="0px">
           <Icon
             mt="6px"
             as={MdNotificationsNone}
@@ -122,7 +124,7 @@ export default function HeaderLinks(props) {
             h="18px"
             me="10px"
           />
-        </MenuButton>
+        </MenuButton> */}
         <MenuList
           boxShadow={shadow}
           p="20px"
@@ -157,7 +159,7 @@ export default function HeaderLinks(props) {
         </MenuList>
       </Menu>
       <Menu>
-        <MenuButton p="0px">
+        {/* <MenuButton p="0px">
           <Icon
             mt="6px"
             as={MdInfoOutline}
@@ -166,7 +168,7 @@ export default function HeaderLinks(props) {
             h="18px"
             me="10px"
           />
-        </MenuButton>
+        </MenuButton> */}
         <MenuList
           boxShadow={shadow}
           p="20px"
@@ -179,7 +181,7 @@ export default function HeaderLinks(props) {
           maxW={{ base: "360px", md: "unset" }}
         >
           <Image src={navImage} borderRadius="16px" mb="28px" />
-          <Flex flexDirection="column">
+          {/* <Flex flexDirection="column">
             <Link w="100%" href="#">
               <Button w="100%" h="44px" mb="10px" variant="brand">
                 bRAND
@@ -208,7 +210,7 @@ export default function HeaderLinks(props) {
                 BRAND
               </Button>
             </Link>
-          </Flex>
+          </Flex> */}
         </MenuList>
       </Menu>
 
@@ -248,7 +250,20 @@ export default function HeaderLinks(props) {
               {/* TODO: insert {userData.username} instead of NAME */}
             </Text>
           </Flex>
+
           <Flex flexDirection="column" p="10px">
+
+            <MenuItem
+              _hover={{ bg: 'none' }}
+              _focus={{ bg: 'none' }}
+              borderRadius="8px"
+              px="14px"
+              onClick={onOpen} // open the modal when this item is clicked
+            >
+              <Icon as={MdEdit} w={5} h={5} mr={2} />
+              <EditProfileModal isOpen={isOpen} onClose={onClose} />
+            </MenuItem>
+            
             <MenuItem
               _hover={{ bg: "none" }}
               _focus={{ bg: "none" }}
@@ -265,13 +280,15 @@ export default function HeaderLinks(props) {
                   bg="transparent"
                   onClick={handleLogout}
                 >
-                Sign Out
+                  Sign Out
                 </Button>
               </Link>
             </MenuItem>
           </Flex>
         </MenuList>
+        
       </Menu>
+     
     </Flex>
   );
 }
