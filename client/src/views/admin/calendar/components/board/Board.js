@@ -23,7 +23,7 @@ const Board = ({ legends }) => {
           </GridItem>
         ))}
         {Array.from({ length: 31 }, (_, rowIndex) => (
-          <>
+           <React.Fragment key={`day-row-${rowIndex}`}>
             <GridItem key={`day-label-${rowIndex}`} textAlign="center">
               <Text fontSize="sm" fontWeight="bold">{`${rowIndex + 1}`}</Text>
             </GridItem>
@@ -45,7 +45,7 @@ const Board = ({ legends }) => {
                 </GridItem>
               )
             })}
-          </>
+          </React.Fragment>
         ))}
       </Grid>
     </Card>

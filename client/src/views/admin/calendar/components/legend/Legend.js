@@ -7,6 +7,11 @@ const Legend = ({ legends, setLegends }) => {
   const [label, setLabel] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(null);
 
+  // Initialized the first item in legend array as something blank
+  useState(() => {
+    setLegends([{ label: "Add Your Selection" }]);
+  });
+
   const handleAddLegend = () => {
     if (selectedIndex !== null) {
       // update
@@ -44,10 +49,14 @@ const Legend = ({ legends, setLegends }) => {
       </HStack>
       {legends.map((legend, index) => (
         <HStack key={index} spacing={1}>
-          <Box boxSize="1em" bgColor={legend.color} border="1px solid" borderColor="gray.200" />
-          <Text fontSize="sm">{legend.label}</Text>
-          <Button size="xs" onClick={() => handleEditLegend(index)}>Edit</Button>
-          <Button size="xs" onClick={() => handleDeleteLegend(index)}>Delete</Button>
+          {index !== 0 && (
+            <>
+              <Box boxSize="1em" bgColor={legend.color} border="1px solid" borderColor="gray.200" />
+              <Text fontSize="sm">{legend.label}</Text>
+              <Button size="xs" onClick={() => handleEditLegend(index)}>Edit</Button>
+              <Button size="xs" onClick={() => handleDeleteLegend(index)}>Delete</Button>
+            </>
+          )}
         </HStack>
       ))}
     </VStack>
