@@ -79,7 +79,7 @@ export default function SignIn() {
     if (data && data.login) {
       setShowError(null);
       history.push('/')
-    } else {
+    } else if (data && data.login === null) {
       setShowError("Incorrect credentials")
     }
   }, [data])
