@@ -49,6 +49,8 @@ const Legend = ({ legends, setLegends }) => {
       </HStack>
       {legends.map((legend, index) => (
         <HStack key={index} spacing={1}>
+
+          {/* Hide the first legend item, if index > 0, render the legend items that are iterations > 0 */}
           {index !== 0 && (
             <>
               <Box boxSize="1em" bgColor={legend.color} border="1px solid" borderColor="gray.200" />
