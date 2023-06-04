@@ -82,7 +82,7 @@ export default function SignUp() {
       setShowError(null);
       history.push('/');
       // write cookies here
-    } else {
+    } else if (data && data.addUser === null) {
       setShowError("User already exists!")
     }
   }, [data])
