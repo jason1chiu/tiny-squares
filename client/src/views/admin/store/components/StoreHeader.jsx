@@ -19,6 +19,7 @@ const StoreHeader = () => {
   const productsCount = cart.items.reduce((sum, product) => sum + product.quantity, 0);
 
   const checkout = async () => {
+    // *** When deploying to heroku, change url to https://your-app-name.herokuapp.com/admin/store/checkout
     await fetch("http://localhost:3001/admin/store/checkout", {
       method: "POST",
       headers: {
