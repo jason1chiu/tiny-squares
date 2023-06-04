@@ -15,7 +15,7 @@ export function SidebarBrand() {
             <Text align='center' color={textColor} fontSize='2xl' ms='24px' fontWeight='700'>
             TinySquares
               </Text>
-            <HSeparator mb='20px' mt='20px' />
+            <HSeparator mb='20px' mt='20px' /> 
             </Flex>
     );
 }

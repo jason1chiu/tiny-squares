@@ -30,6 +30,12 @@ export default function Overview() {
       setJournals(data.data.me.journals);
     })
   }, [])
+  const entries =
+    journals && journals.length
+      ? journals.reduce((sum, journal) => sum + (journal.entries?.length || 0), 0)
+      : 0;
+
+  const journalsLength = journals ? journals.length : 0;
 
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
@@ -44,13 +50,20 @@ export default function Overview() {
         }}
         gap={{ base: "20px", xl: "20px" }}>
         {journals &&
+          // <Profile
+          //   banner={profile}
+          //   avatar={avatar}
+          //   name={user.user.username}
+          //   entries={journals.length && journals.reduce((sum, journal) => sum + journal.entries.length, 0)}
+          //   journals={journals.length}
+          // />
           <Profile
-            banner={profile}
-            avatar={avatar}
-            name={user.user.username}
-            entries={journals.length && journals.reduce((sum, journal) => sum + journal.entries.length, 0)}
-            journals={journals.length}
-          />
+          banner={profile}
+          avatar={avatar}
+          name={user.user.username}
+          entries={entries}
+          journals={journalsLength}
+        />
         }
         <PieChart
           gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }}
