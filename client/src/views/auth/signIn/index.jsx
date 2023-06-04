@@ -34,8 +34,10 @@ import { HSeparator } from "components/seperator/Seperator";
 import DefaultAuth from "layouts/auth/Default"
 import imageAuth from "assets/img/authimage.png"
 import { LOGIN_USER } from "utils/mutations.js";
+import { useAuth } from "contexts/auth.context";
 
 export default function SignIn() {
+  let { setUser } = useAuth();
   let history = useHistory();
   // Chakra color mode
   const textColor = useColorModeValue("navy.700", "white");
@@ -68,9 +70,13 @@ export default function SignIn() {
       password: password,
     }
     if (email && password) {
-      login({ variables: loginUser });
+      try {
+        login({ variables: loginUser });
+      } catch (error) {
+        console.error("Erroring logging in", error);
+      }
     } else {
-      alert("Some fields are missing!")
+      setShowError("Some fields are missing!")
     }
   }
 
@@ -78,6 +84,7 @@ export default function SignIn() {
     console.log(data);
     if (data && data.login) {
       setShowError(null);
+      setUser(data.login);
       history.push('/')
     } else if (data && data.login === null) {
       setShowError("Incorrect credentials")

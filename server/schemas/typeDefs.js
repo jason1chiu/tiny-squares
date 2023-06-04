@@ -19,6 +19,7 @@ const typeDefs = gql`
   }
 
   type Entry {
+    _id: ID
     date: String
     note: String
     legend: Legend
@@ -58,8 +59,9 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
+    logout(email: String!): User
     purchaseProduct: PayLoad
-    addJournal(input: JournalInput): User
+    addJournal(name: String!, category: String!): User
     removeJournal(journalId: ID!): User
     addEntry(journalId: ID!, input: EntryInput): Journal
     removeEntry(journalId: ID!, entryId: ID!): Journal

@@ -9,7 +9,7 @@ import {
   // useColorModeValue,
 } from "@chakra-ui/react";
 
-import React from "react";
+import React, { useEffect } from "react";
 import PieChart from "views/admin/dashboard/components/PieChart";
 import Profile from "views/admin/dashboard/components/Profile";
 import Journals from "views/admin/dashboard/components/Journals";
@@ -17,8 +17,20 @@ import ColumnsTable from "views/admin/dashboard/components/ColumnsTable";
 
 import profile from "assets/img/purple.jpg";
 import avatar from "assets/img/purple.jpg";
+import { useAuth } from "contexts/auth.context";
+import { GET_ME } from "utils/queries";
+import { useLazyQuery } from "@apollo/client";
 
 export default function Overview() {
+  let { user, journals, setJournals } = useAuth();
+  let [me, { data, loading }] = useLazyQuery(GET_ME);
+
+  useEffect(() => {
+    me().then(data => {
+      setJournals(data.data.me.journals);
+    })
+  }, [])
+
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       <Grid
@@ -31,15 +43,15 @@ export default function Overview() {
           lg: "1fr",
         }}
         gap={{ base: "20px", xl: "20px" }}>
-
-        <Profile
-          banner={profile}
-          avatar={avatar}
-          name="John Doe"
-          entries="3"
-          journals="2"
-        />
-
+        {journals &&
+          <Profile
+            banner={profile}
+            avatar={avatar}
+            name={user.user.username}
+            entries={journals.length && journals.reduce((sum, journal) => sum + journal.entries.length, 0)}
+            journals={journals.length}
+          />
+        }
         <PieChart
           gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }}
         />
@@ -47,7 +59,6 @@ export default function Overview() {
         <ColumnsTable
           gridArea={{ base: "3 / 1 / 4 / 2", lg: "1 / 3 / 2 / 4" }}
         />
-
       </Grid>
       <Grid
         mb='20px'
@@ -68,6 +79,7 @@ export default function Overview() {
           pe='20px'
         />
       </Grid>
+
     </Box>
   );
 }

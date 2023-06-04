@@ -1,5 +1,9 @@
 const { Schema, model } = require("mongoose");
 
+// Import entrySchema
+const { entrySchema } = require("./Entry");
+const { legendSchema } = require("./Legend")
+
 const journalSchema = new Schema({
   name: {
     type: String,
@@ -9,18 +13,8 @@ const journalSchema = new Schema({
     type: String,
     required: true,
   },
-  entries: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Entry",
-    },
-  ],
-  legends: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Legend",
-    },
-  ],
+  entries: [ entrySchema ],
+  legends: [ legendSchema ],
   createdAt: Date,
   updatedAt: Date,
 });

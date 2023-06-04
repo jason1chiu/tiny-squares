@@ -6,12 +6,14 @@ import Journal3 from "assets/img/purple.jpg";
 import Card from "components/card/card.js";
 import React from "react";
 
-import { GET_JOURNALS_DASHBOARD } from "utils/queries";
-import { useQuery } from "@apollo/client";
+import { useAuth } from "contexts/auth.context";
+
+// import { GET_JOURNALS_DASHBOARD } from "utils/queries";
+// import { useQuery } from "@apollo/client";
 
 export default function Journals(props) {
-  const { data } = useQuery(GET_JOURNALS_DASHBOARD);
-  console.log(data);
+  // const { data } = useQuery(GET_JOURNALS_DASHBOARD);
+  const { journals } = useAuth();
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "gray.400";
   const cardShadow = useColorModeValue(
@@ -32,15 +34,17 @@ export default function Journals(props) {
       <Text color={textColorSecondary} fontSize="md" me="26px" mb="40px">
         Make edits or changes
       </Text>
+      {journals.map((journal, index) => 
       <Journal
         boxShadow={cardShadow}
         mb="20px"
         image={Journal1}
         link="#"
-        ranking="1"
-        title="Journal 1"
+        ranking={index + 1}
+        title={journal.name}
       />
-      <Journal
+      )}
+      {/* <Journal
         boxShadow={cardShadow}
         mb="20px"
         image={Journal2}
@@ -55,7 +59,7 @@ export default function Journals(props) {
         link="#"
         ranking="3"
         title="Journal 3"
-      />
+      /> */}
     </Card>
   );
 }

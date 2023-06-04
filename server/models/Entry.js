@@ -16,4 +16,4 @@ const entrySchema = new Schema({
 
 const Entry = model("Entry", entrySchema);
 
-module.exports = Entry;
+module.exports = { Entry, entrySchema };

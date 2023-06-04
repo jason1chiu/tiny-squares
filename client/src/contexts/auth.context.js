@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 
 const AuthContext = React.createContext(null);
 
-export const AuthProvider = ({ userData, children }) => {
-  let [user, setUser] = React.useState(userData);
-  user = typeof user === "string" ? JSON.parse(user) : user;
+export const AuthProvider = ({ children }) => {
+  let [user, setUser] = React.useState(null);
+  let [journals, setJournals] = React.useState([]);
+  const categories = ["Mood", "Health", "Habit"];
 
-  return <AuthContext.Provider value={{ user, setUser }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ user, setUser, categories, journals, setJournals }}>{children}</AuthContext.Provider>;
 };
 
 AuthProvider.propTypes = {
-  userData: PropTypes.any,
   children: PropTypes.any,
 };
 

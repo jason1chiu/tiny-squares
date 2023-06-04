@@ -8,12 +8,16 @@ export const GET_ME = gql`
       email
       journals {
         _id
-        title
+        name
+        category
         entries {
           _id
-          description
+          note
           date
-          status
+          legend {
+            name
+            color
+          }
         }
       }
     }
@@ -40,6 +44,7 @@ export const GET_JOURNALS = gql`
     journals {
       _id
       name
+      category
       entries {
         _id
         note
@@ -48,6 +53,7 @@ export const GET_JOURNALS = gql`
     }
   }
 `;
+
 export const GET_JOURNALS_DASHBOARD = gql`
   query getJournals {
     journals {

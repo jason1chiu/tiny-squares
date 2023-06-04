@@ -8,19 +8,21 @@ const resolvers = {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
-          .populate("journals");
-
+          .populate("journals")
+      
+          console.log(userData);
         return userData;
       }
 
       throw new AuthenticationError("Not logged in");
     },
     journals: async (parent, args, context) => {
-      console.log({ Journal });
-      return Journal.find({}).populate("entries");
+      return Journal.find({})
+        .populate("entries");
     },
     journal: async (parent, { _id }, context) => {
-      return Journal.findOne({ _id }).populate("entries");
+      return Journal.findOne({ _id })
+        .populate("entries");
     },
   },
 
@@ -38,7 +40,7 @@ const resolvers = {
       return results;
     },
 
-    login: async (parent, { email, password }) => {
+    login: async (parent, { email, password }, context) => {
       let results = await User.findOne({ email })
         .then(async (user) => {
           if (!user) {
@@ -60,9 +62,15 @@ const resolvers = {
       return results;
     },
 
-    addJournal: async (parent, { input }, context) => {
+    logout: async (parent, { email }) => {
+      // expire token manually
+      return { email };
+    },
+
+    addJournal: async (parent, { name, category }, context) => {
       if (context.user) {
-        const journal = await Journal.create(input);
+        const journal = await Journal.create({ name, category });
+        console.log(journal);
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { journals: journal._id } },

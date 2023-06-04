@@ -1,3 +1,10 @@
+// React imports
+import React from "react";
+import { MdNotificationsNone, MdInfoOutline } from "react-icons/md";
+import { FaEthereum } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
+
+// Chakra imports
 import {
   Avatar,
   Button,
@@ -13,22 +20,37 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import PropTypes from "prop-types";
-import React from "react";
-import { MdNotificationsNone, MdInfoOutline } from "react-icons/md";
+
+// Apollow imports
+import { useMutation } from "@apollo/client"
+
+// File imports
 import routes from "routes";
 import navImage from "assets/img/purple.jpg";
 import { ItemContent } from "components/menu/ItemContent";
 import { SidebarResponsive } from "components/sidebar/Sidebar";
-import { FaEthereum } from "react-icons/fa";
-// TODO: use these to pass in username
-// import { useQuery } from "@apollo/client";
-// import { GET_ME } from "../utils/queries";
+import { LOGOUT_USER } from "utils/mutations";
+import { useAuth } from "contexts/auth.context";
 
 export default function HeaderLinks(props) {
+
+  let { user, setUser } = useAuth();
+  let email = user.user.email;
+
+  const [logout] = useMutation(LOGOUT_USER);
+  const history = useHistory();
+
+  const handleLogout = async () => {
+    try {
+      await logout({variables: {email}});
+      setUser(null);
+      history.push("/auth/sign-in"); // assuming this is your sign-in route
+    } catch (error) {
+      console.error("Error logging out", error);
+    }
+  };
+
   const { secondary } = props;
-  // TODO: use to pass username
-  // const { data } = useQuery(GET_ME);
-  // const userData = data?.me;
 
   // Chakra Color Mode
   const navbarIcon = useColorModeValue("gray.400", "white");
@@ -222,7 +244,7 @@ export default function HeaderLinks(props) {
               fontWeight="700"
               color={textColor}
             >
-              👋&nbsp; Hey, NAME
+              👋&nbsp; Hey, {user.user.username}
               {/* TODO: insert {userData.username} instead of NAME */}
             </Text>
           </Flex>
@@ -234,7 +256,18 @@ export default function HeaderLinks(props) {
               borderRadius="8px"
               px="14px"
             >
-              <Text fontSize="sm">Log out</Text>
+              <Link w="100%" href="#">
+                <Button
+                  w="100%"
+                  h="44px"
+                  variant="no-hover"
+                  color={textColor}
+                  bg="transparent"
+                  onClick={handleLogout}
+                >
+                Sign Out
+                </Button>
+              </Link>
             </MenuItem>
           </Flex>
         </MenuList>

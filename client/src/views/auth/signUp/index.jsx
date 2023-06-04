@@ -34,8 +34,10 @@ import { HSeparator } from "components/seperator/Seperator";
 import DefaultAuth from "layouts/auth/Default";
 import imageAuth from "assets/img/authimage.png"
 import { ADD_USER } from "utils/mutations.js";
+import { useAuth } from "contexts/auth.context";
 
 export default function SignUp() {
+  let { setUser } = useAuth();
   let history = useHistory();
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
@@ -62,7 +64,7 @@ export default function SignUp() {
   const [addUser, { data, error }] = useMutation(ADD_USER)
 
   const handleClick = () => setShow(!show);
-  const handleAddUser = (event) => {
+  const handleAddUser = async (event) => {
     event.preventDefault();
     let newUser = {
       username: username,
@@ -70,9 +72,13 @@ export default function SignUp() {
       password: password
     }
     if (password === confirmPassword && password && username && email) {
-      addUser({ variables: newUser });
+      try {
+        await addUser({ variables: newUser });
+      } catch (error) {
+        console.error("Error signing up", error);
+      }
     } else {
-      alert("Passwords do not match or some fields are missing!");
+      setShowError("Passwords do not match or some fields are missing!");
     }
   }
 
@@ -80,6 +86,7 @@ export default function SignUp() {
     console.log(data)
     if (data && data.addUser) {
       setShowError(null);
+      setUser(data.addUser)
       history.push('/');
       // write cookies here
     } else if (data && data.addUser === null) {
