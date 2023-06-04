@@ -5,6 +5,7 @@ import { FaEthereum } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import EditProfileModal from "components/modal/EditProfileModal";
 
+
 // Chakra imports
 import {
   Avatar,
@@ -28,19 +29,20 @@ import { useMutation } from "@apollo/client"
 
 // File imports
 import routes from "routes";
-import navImage from "assets/img/purple.jpg";
 import { ItemContent } from "components/menu/ItemContent";
 import { SidebarResponsive } from "components/sidebar/Sidebar";
-import { LOGOUT_USER } from "utils/mutations";
+import { LOGOUT_USER, UPDATE_USER } from "utils/mutations";
 import { useAuth } from "contexts/auth.context";
-
+import defaultAvatar from "assets/img/purple.jpg";
 export default function HeaderLinks(props) {
-
+  // const { user } = props;
+  
   let { user, setUser } = useAuth();
   let email = user.user.email;
-
+  const avatar = user.avatar;
   const [logout] = useMutation(LOGOUT_USER);
   const history = useHistory();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleLogout = async () => {
     try {
@@ -180,7 +182,7 @@ export default function HeaderLinks(props) {
           minW={{ base: "unset" }}
           maxW={{ base: "360px", md: "unset" }}
         >
-          <Image src={navImage} borderRadius="16px" mb="28px" />
+          <Image src={avatar ? `/users/${avatar}` : defaultAvatar}/>
           {/* <Flex flexDirection="column">
             <Link w="100%" href="#">
               <Button w="100%" h="44px" mb="10px" variant="brand">

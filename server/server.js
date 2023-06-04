@@ -22,7 +22,7 @@ const server = new ApolloServer({
 
 // integrate apollo server with express app as middleware
 server.applyMiddleware({ app });
-
+app.use('/uploads', express.static('uploads'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

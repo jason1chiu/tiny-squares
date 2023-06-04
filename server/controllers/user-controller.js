@@ -14,6 +14,18 @@ module.exports = {
     res.json(foundUser);
   },
 
+  async updateUser({ user, body }, res) {
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: user._id },
+      { avatar: body.avatar, username: body.username },
+      { new: true }
+    );
+    if (!updatedUser) {
+      return res.status(404).json({ message: "Couldn't find user with this id!" });
+    }
+    return res.json(updatedUser);
+  },
+  
   async createUser({ body }, res) {
     console.log(body);
     const user = await User.create(body);

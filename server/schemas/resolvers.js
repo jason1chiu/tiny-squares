@@ -39,7 +39,25 @@ const resolvers = {
         });
       return results;
     },
+    updateUser: async (parent, { username, avatar }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $set: { username: username, avatar: avatar } }, // <-- add avatar here
+          { new: true, runValidators: true }
+        );
+    
+        if (!updatedUser) {
+          throw new AuthenticationError("Couldn't find user with this id!");
+        }
+    
+        return updatedUser;
+      }
+    
+      throw new AuthenticationError('You need to be logged in!');
+    },
 
+  
     login: async (parent, { email, password }, context) => {
       let results = await User.findOne({ email })
         .then(async (user) => {

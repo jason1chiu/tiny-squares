@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 
 // Import journalSchema
 const { journalSchema } = require("./Journal");
+const { AddArgumentsAsVariables } = require("apollo-server-express");
 
 const userSchema = new Schema(
   {
@@ -23,6 +24,9 @@ const userSchema = new Schema(
     },
     journals: [{type: Schema.Types.ObjectId, ref: "Journal"}],
   },
+  // avatar: {
+  //   type: String,
+  // },
   {
     toJSON: {
       virtuals: true,

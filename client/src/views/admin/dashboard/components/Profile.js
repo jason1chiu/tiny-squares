@@ -2,10 +2,12 @@ import { Avatar, Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import Card from "components/card/card.js";
 import React from "react";
 import profile from "assets/img/bannercover.png";
+import { useAuth } from "contexts/auth.context";
+import defaultAvatar from "assets/img/purple.jpg";
 
 export default function Profile(props) {
   const { banner, avatar, name, entries, journals } = props;
-
+const { user } = useAuth();
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "gray.400";
   const borderColor = useColorModeValue(
@@ -23,7 +25,7 @@ export default function Profile(props) {
       />
       <Avatar
         mx='auto'
-        src={avatar}
+        src={avatar ? `/uploads/${avatar}` : defaultAvatar}
         h='87px'
         w='87px'
         mt='-43px'

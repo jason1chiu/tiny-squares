@@ -16,24 +16,49 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { FiUpload } from "react-icons/fi";
-// import axios from 'axios';
-// import { useAuth } from "contexts/auth.context";
-// import { useMutation } from "@apollo/client";
-// import { UPDATE_USER } from "utils/mutations.js";
+import axios from 'axios';
+import { useAuth } from "contexts/auth.context";
+import { useMutation } from "@apollo/client";
+import { UPDATE_USER } from "utils/mutations.js";
 // import { useAuth } from "contexts/auth.context";
 
 function EditProfileModal() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [username, setUsername] = useState("");
     const [file, setFile] = useState(null);
+    const [updateUser, { error }] = useMutation(UPDATE_USER);
     // const [updateUser, { error }] = useMutation(UPDATE_USER);
     const handleFileChange = (e) => {
       setFile(e.target.files[0]);
     };
-
     const handleUsernameChange = (e) => {
         setUsername(e.target.value);
       };
+const handleSave = async () => {
+  try {
+    const formData = new FormData();
+    formData.append('image', file);
+  
+    const response = await axios.post('/api/users/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    const { data } = await updateUser({
+      variables: {
+        avatar: response.data.file.filename,
+        username: username,
+      },
+    });
+  
+    console.log(data);
+    onClose();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
     
     //   const handleSave = async () => {
     //     try {
@@ -93,7 +118,7 @@ function EditProfileModal() {
             </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="brand" mr={3} onClick={onClose}>
+            <Button colorScheme="brand" mr={3} onClick={handleSave}>
               Save
             </Button>
             <Button variant="ghost" onClick={onClose}>

@@ -6,6 +6,7 @@ const typeDefs = gql`
     username: String
     email: String
     journals: [Journal]
+    avatar: String
   }
 
   type Journal {
@@ -65,6 +66,7 @@ const typeDefs = gql`
     removeJournal(journalId: ID!): User
     addEntry(journalId: ID!, input: EntryInput): Journal
     removeEntry(journalId: ID!, entryId: ID!): Journal
+    updateUser(username: String!, avatar: $avatar): User
   }
 `;
 

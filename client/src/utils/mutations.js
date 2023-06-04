@@ -124,3 +124,13 @@ export const UPDATE_ENTRY = gql`
     }
   }
 `;
+
+export const UPDATE_USER = gql`
+  mutation updateUser($username: String!, $avatar: String!) {
+    updateUser(username: $username, avatar: $avatar) {
+      _id
+      username
+      avatar
+    }
+  }
+`;
