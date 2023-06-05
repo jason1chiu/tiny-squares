@@ -5,21 +5,24 @@ import purpleJournal from "assets/img/store/purple.jpg"
 const productsArray = [
   {
     id: "price_1NEFh8CS0MFKcelVyFPWVLV9",
-    title: "Productivity Planner",
-    price: 40.99,
-    img: ProductivityPlanner
+    title: "Basic Package",
+    price: 5.99,
+    img: ProductivityPlanner,
+    benefits: ["1 Journal"]
   },
   {
     id: "price_1NEFi4CS0MFKcelVmTJbQNca",
-    title: "Wellness Journal",
-    price: 50.99,
-    img: WellnessJournal
+    title: "Standard Package",
+    price: 10.99,
+    img: WellnessJournal,
+    benefits: ["3 Journals"]
   },
   {
     id: "price_1NEFhgCS0MFKcelVl2CF3wRX",
-    title: "Additional Templates",
-    price: 50.99,
-    img: purpleJournal
+    title: "Premium Package",
+    price: 20.99,
+    img: purpleJournal,
+    benefits: ["7 Journals"]
 },
 ]
 
