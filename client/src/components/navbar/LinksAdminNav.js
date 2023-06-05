@@ -4,9 +4,9 @@ import { MdShoppingCart, MdEdit } from "react-icons/md";
 import { FaEthereum } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import EditProfileModal from "components/modal/EditProfileModal";
-import { CartContext } from 'views/admin/store/js/CartContext'
+import { CartContext } from 'components/shared/store/js/CartContext'
 import { useContext } from 'react'
-import { CartModal } from 'components/modal/CartModal'
+import { CartModal } from 'components/shared/store/components/CartModal'
 
 // Chakra imports
 import { Avatar, Button, Flex, Icon, Link, Menu, MenuButton, MenuItem, MenuList, Text,  Badge,  useColorModeValue,  useDisclosure, IconButton, Box } from "@chakra-ui/react";

@@ -2,23 +2,23 @@ import React from "react";
 import { Icon } from "@chakra-ui/react";
 import {
   MdHome,
-  MdLibraryAdd,
-  MdLock,
-  MdOutlineCalendarMonth,
+  // MdLibraryAdd,
+  // MdLock,
+  // MdOutlineCalendarMonth,
   MdMenuBook
 } from "react-icons/md";
 
 // Admin views
-import Calendar from "views/admin/calendar";
-import Create from "views/admin/create";
+// import Calendar from "views/admin/calendar";
+// import Create from "views/admin/create";
 import Journals from "views/admin/journals";
 import Dashboard from "views/admin/dashboard";
-import Store from "views/admin/store";
+// import Store from "views/admin/store";
 
 // import CancelPage from "views/admin/cancelOrderPage";
 // Auth views
-import SignIn from "views/auth/signIn/index.jsx"
-import SignUp from "views/auth/signUp/index.jsx";
+// import SignIn from "views/auth/signIn/index.jsx"
+// import SignUp from "views/auth/signUp/index.jsx";
 // import Landing from "./views/admin/auth/Landing.js";
 
 const routes = [
@@ -36,20 +36,20 @@ const routes = [
     icon: <Icon as={MdMenuBook} width='20px' height='20px' color='inherit' />,
     component: Journals,
   },
-  {
-    name: "Create",
-    layout: "/admin",
-    path: "/create",
-    icon: <Icon as={MdLibraryAdd} width='20px' height='20px' color='inherit' />,
-    component: Create,
-  },
-  {
-    name: "Store",
-    layout: "/admin",
-    path: "/store",
-    icon: <Icon as={MdLibraryAdd} width='20px' height='20px' color='inherit' />,
-    component: Store,
-  },
+  // {
+  //   name: "Create",
+  //   layout: "/admin",
+  //   path: "/create",
+  //   icon: <Icon as={MdLibraryAdd} width='20px' height='20px' color='inherit' />,
+  //   component: Create,
+  // },
+  // {
+  //   name: "Store",
+  //   layout: "/admin",
+  //   path: "/store",
+  //   icon: <Icon as={MdLibraryAdd} width='20px' height='20px' color='inherit' />,
+  //   component: Store,
+  // },
   // {
   //   name: "CancelOrderPage",
   //   layout: "/admin",
@@ -57,27 +57,27 @@ const routes = [
   //   icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
   //   component: CancelPage,
   // },
-  {
-    name: "Calendar",
-    layout: "/admin",
-    path: "/calendar",
-    icon: <Icon as={MdOutlineCalendarMonth} width='20px' height='20px' color='inherit' />,
-    component: Calendar,
-  },
-  {
-    name: "Sign In",
-    layout: "/auth",
-    path: "/sign-in",
-    icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
-    component: SignIn,
-  },
-  {
-    name: "Sign Up",
-    layout: "/auth",
-    path: "/sign-up",
-    icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
-    component: SignUp,
-  },
+  // {
+  //   name: "Calendar",
+  //   layout: "/admin",
+  //   path: "/calendar",
+  //   icon: <Icon as={MdOutlineCalendarMonth} width='20px' height='20px' color='inherit' />,
+  //   component: Calendar,
+  // },
+  // {
+  //   name: "Sign In",
+  //   layout: "/auth",
+  //   path: "/sign-in",
+  //   icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
+  //   component: SignIn,
+  // },
+  // {
+  //   name: "Sign Up",
+  //   layout: "/auth",
+  //   path: "/sign-up",
+  //   icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
+  //   component: SignUp,
+  // },
 ];
 
 export default routes;

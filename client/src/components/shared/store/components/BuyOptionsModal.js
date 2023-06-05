@@ -1,8 +1,8 @@
 import React from "react";
 import { Button, Flex, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, useColorModeValue, Image, Box, useToast } from "@chakra-ui/react";
-import { productsArray } from "views/admin/store/js/ProductsStore";
+import { productsArray } from "components/shared/store/js/ProductsStore";
 import Card from "components/card/card";
-import {CartContext} from 'views/admin/store/js/CartContext'
+import {CartContext} from 'components/shared/store/js/CartContext'
 import { useContext } from 'react'
 
 

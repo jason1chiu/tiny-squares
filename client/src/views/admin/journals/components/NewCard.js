@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Box, Center, useColorModeValue } from '@chakra-ui/react';
 import { MdAddCircle } from 'react-icons/md';
 import Card from "components/card/card";
-import NewJournalModal from "views/admin/create/components/NewJournalModal";
+import NewJournalModal from "views/admin/journals/components/NewJournalModal";
 import { useMutation } from '@apollo/client';
 import { ADD_JOURNAL } from 'utils/mutations';
 import { useAuth } from 'contexts/auth.context';
-import BuyOptionsModal from 'components/modal/BuyOptionsModal';
+import BuyOptionsModal from 'components/shared/store/components/BuyOptionsModal';
 
 export default function NewCard() {
   let [addJournal, { data, error }] = useMutation(ADD_JOURNAL);

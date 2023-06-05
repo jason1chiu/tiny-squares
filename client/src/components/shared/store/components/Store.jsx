@@ -1,8 +1,8 @@
 import React from 'react';
 
-import ProductCard from 'views/admin/store/js/ProductsCard'
+import ProductCard from 'components/shared/store/js/ProductsCard'
 import { Text, Grid, GridItem, Center} from '@chakra-ui/react'
-import { productsArray } from 'views/admin/store/js/ProductsStore'
+import { productsArray } from 'components/shared/store/js/ProductsStore'
 
 const Store = () => {
   return (

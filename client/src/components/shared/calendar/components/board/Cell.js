@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, useDisclosure } from "@chakra-ui/react";
-import CellModal from "views/admin/calendar/components/modal/modal";
+import CellModal from "components/shared/calendar/components/modal/modal";
 
 const Cell = ({ day, month, color, note, onSave, legends }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
