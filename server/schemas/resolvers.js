@@ -1,4 +1,5 @@
 const { User, Journal, Entry } = require("../models");
+const { Legend } = require("../models/Legend");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 
@@ -151,6 +152,30 @@ const resolvers = {
       await Entry.findByIdAndDelete(entryId);
 
       return updatedJournal;
+    },
+
+    createLegend: async (parent, { label, color }, context) => {
+      const { userId } = context;
+      const legend = await Legend.create({ label, color });
+    
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: userId },
+        { $addToSet: { legends: legend._id } },
+        { new: true }
+      ).populate('legends'); // Populate the 'legends' field in the updatedUser
+    
+      return legend; // Return the created legend instead of the updated user
+    },
+    
+    
+    updateLegend: async(parent, {id, label, color}) => {
+      const legend = await Legend.findByIdAndUpdate(id, { label, color }, { new: true });
+      return legend;
+    },
+
+    deleteLegend: async (_, { id }) => {
+      await Legend.findByIdAndDelete(id);
+      return true;
     },
   },
 };

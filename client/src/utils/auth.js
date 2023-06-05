@@ -3,6 +3,11 @@ import decode from 'jwt-decode';
 
 // create a new class to instantiate for a user
 class AuthService {
+
+  getUserId() {
+    const profile = this.getProfile();
+    return profile ? profile.userId : null;
+  }
   // get user data
   getProfile() {
     return decode(this.getToken());
@@ -32,10 +37,12 @@ class AuthService {
     return localStorage.getItem('id_token');
   }
 
-  login(idToken) {
+  login(idToken, userId) {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
-    window.location.assign('/');
+    localStorage.setItem('user_id', userId);
+    // no need to reload page here as we do it in index.js
+    // window.location.assign('/');
   }
 
   logout() {
