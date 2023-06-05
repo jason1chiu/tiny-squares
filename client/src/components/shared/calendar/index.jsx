@@ -8,17 +8,7 @@ export default function Overview() {
 
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
-      <Grid
-        templateColumns={{
-          base: "1fr",
-          lg: "1fr 1fr",
-        }}
-        templateRows={{
-          base: "repeat(2, 1fr)",
-          lg: "1fr",
-        }}
-        gap={{ base: "20px", xl: "20px" }}
-      >
+      <Grid>
         <Legend
           legends={legends}
           setLegends={setLegends}

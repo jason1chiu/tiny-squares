@@ -2,9 +2,9 @@ import React from "react";
 import { Icon } from "@chakra-ui/react";
 import {
   MdHome,
-  MdLibraryAdd,
-  MdLock,
-  MdOutlineCalendarMonth,
+  // MdLibraryAdd,
+  // MdLock,
+  // MdOutlineCalendarMonth,
   MdMenuBook
 } from "react-icons/md";
 
