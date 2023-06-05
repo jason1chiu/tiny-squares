@@ -10,7 +10,7 @@ import {
 
 // Admin views
 // import Calendar from "views/admin/calendar";
-import Create from "views/admin/create";
+// import Create from "views/admin/create";
 import Journals from "views/admin/journals";
 import Dashboard from "views/admin/dashboard";
 // import Store from "views/admin/store";
@@ -36,13 +36,13 @@ const routes = [
     icon: <Icon as={MdMenuBook} width='20px' height='20px' color='inherit' />,
     component: Journals,
   },
-  {
-    name: "Create",
-    layout: "/admin",
-    path: "/create",
-    icon: <Icon as={MdLibraryAdd} width='20px' height='20px' color='inherit' />,
-    component: Create,
-  },
+  // {
+  //   name: "Create",
+  //   layout: "/admin",
+  //   path: "/create",
+  //   icon: <Icon as={MdLibraryAdd} width='20px' height='20px' color='inherit' />,
+  //   component: Create,
+  // },
   // {
   //   name: "Store",
   //   layout: "/admin",
