@@ -1,4 +1,5 @@
-const { User, Journal, Entry } = require("../models");
+const { User, Journal, Entry} = require("../models");
+const { Legend } = require("../models/Legend");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 
@@ -23,6 +24,7 @@ const resolvers = {
       return Journal.findOne({ _id })
         .populate("entries");
     },
+    legends: () => legend.find(),
   },
 
   Mutation: {
@@ -118,6 +120,27 @@ const resolvers = {
       await Entry.findByIdAndDelete(entryId);
 
       return updatedJournal;
+    },
+
+    createLegend: async(parent, { name, color }, context) => {
+      const legend = await Legend.create({ name, color });
+    
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $addToSet: { legends: legend._id } },
+        { new: true }
+      );
+    
+      return updatedUser;
+    },
+    
+    updateLegend: async(parent, {id, name, color}) => {
+      const legend = await Legend.findByIdAndUpdate(id, { name, color }, { new: true });
+      return legend;
+    },
+    deleteLegend: async (_, { id }) => {
+      await Legend.findByIdAndDelete(id);
+      return true;
     },
   },
 };

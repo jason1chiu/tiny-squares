@@ -124,3 +124,31 @@ export const UPDATE_ENTRY = gql`
     }
   }
 `;
+
+export const CREATE_LEGEND = gql`
+  mutation CreateLegend($name: String!, $color: String!) {
+    createLegend(name: $name, color: $color) {
+      id
+      name
+      color
+    }
+  }
+`;
+
+export const UPDATE_LEGEND = gql`
+  mutation UpdateLegend($id: ID!, $name: String!, $color: String!) {
+    updateLegend(id: $id, name: $name, color: $color) {
+      id
+      name
+      color
+    }
+  }
+`;
+
+export const DELETE_LEGEND = gql`
+  mutation DeleteLegend($id: ID!) {
+    deleteLegend(id: $id) {
+      id
+    }
+  }
+`;

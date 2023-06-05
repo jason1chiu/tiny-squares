@@ -71,3 +71,13 @@ export const GET_STATS = gql`
     }
   }
 `;
+
+export const GET_LEGENDS = gql`
+  query GetLegends {
+    legends {
+      id
+      name
+      color
+    }
+  }
+`;

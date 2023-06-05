@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useQuery, useMutation } from "@apollo/client";
+import { GET_LEGENDS } from "utils/queries";
+import { CREATE_LEGEND, UPDATE_LEGEND, DELETE_LEGEND } from "utils/mutations"
 import { Box, Input, Button, VStack, HStack, Text, Heading } from "@chakra-ui/react";
 import Card from "components/card/card";
 
@@ -6,21 +9,43 @@ const Legend = ({ legends, setLegends }) => {
   const [color, setColor] = useState("#000000");
   const [label, setLabel] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(null);
+  
+
+  const [createLegend] = useMutation(CREATE_LEGEND);
+const [updateLegend] = useMutation(UPDATE_LEGEND);
+const [deleteLegend] = useMutation(DELETE_LEGEND);
 
   // Initialized the first item in legend array as something blank
   useState(() => {
     setLegends([{ label: "Add Your Selection" }]);
   });
 
-  const handleAddLegend = () => {
+  const handleAddLegend = async () => {
+    console.log(selectedIndex);
     if (selectedIndex !== null) {
       // update
       const newLegends = [...legends];
-      newLegends[selectedIndex] = { color, label };
+      newLegends[selectedIndex] = { id: legends[selectedIndex].id, color, label };
       setLegends(newLegends);
+      console.log(newLegends);
+      await updateLegend({
+        variables: {
+          id: legends[selectedIndex].id,
+          color,
+          label,
+        }
+      });
     } else if (legends.length < 10) {
       // add
-      setLegends([...legends, { color, label }]);
+      const response = await createLegend({
+        variables: {
+          name: label,
+          color,
+        },
+      });
+  
+      const newLegend = response.data.createLegend;
+      setLegends([...legends, { id: newLegend._id, color, label }]);
     }
     // reset
     setColor("#000000");
@@ -28,8 +53,14 @@ const Legend = ({ legends, setLegends }) => {
     setSelectedIndex(null);
   };
 
-  const handleDeleteLegend = (index) => {
+  const handleDeleteLegend = async (index) => {
     setLegends(legends.filter((_, i) => i !== index));
+
+    await deleteLegend({
+      variables: {
+        id: legends[index].id,
+      }
+    })
   };
 
   const handleEditLegend = (index) => {
