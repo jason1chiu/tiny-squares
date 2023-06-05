@@ -19,7 +19,8 @@ router.route('/login')
   .post(login);
 
 router.route('/me')
-  .get(authMiddleware, getSingleUser);
+  .get(authMiddleware, getSingleUser)
+  .put(authMiddleware, updateUser)
 
 router.route('/journals/:journalId')
   .put(authMiddleware, addJournal)
