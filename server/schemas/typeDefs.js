@@ -35,7 +35,7 @@ const typeDefs = gql`
     me: User
     journals: [Journal]
     journal(_id: ID!): Journal
-    legends(id: ID!): [Legend]
+    legends: [Legend]
   }
 
   type Legend {

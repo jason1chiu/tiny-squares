@@ -10,10 +10,6 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
           .populate("journals")
-          .populate({
-            path: "legends",
-            model: "Legend"
-          });
       
         return userData;
       }
@@ -27,12 +23,6 @@ const resolvers = {
     journal: async (parent, { _id }, context) => {
       return Journal.findOne({ _id })
         .populate("entries");
-    },
-
-    legends: async (parent, { id }, context) => {
-      // Fetch legends for the user with the provided ID
-      const legends = await Legend.find({ userId: id }).populate('userId');
-      return legends;
     },
   },
 
@@ -164,9 +154,9 @@ const resolvers = {
       return updatedJournal;
     },
 
-    createLegend: async (parent, { label, color, userId }, context) => {
-     
-      const legend = await Legend.create({ label, color, userId });
+    createLegend: async (parent, { label, color }, context) => {
+      const { userId } = context;
+      const legend = await Legend.create({ label, color });
     
       const updatedUser = await User.findOneAndUpdate(
         { _id: userId },
