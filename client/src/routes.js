@@ -17,8 +17,8 @@ import Dashboard from "views/admin/dashboard";
 
 // import CancelPage from "views/admin/cancelOrderPage";
 // Auth views
-import SignIn from "views/auth/signIn/index.jsx"
-import SignUp from "views/auth/signUp/index.jsx";
+// import SignIn from "views/auth/signIn/index.jsx"
+// import SignUp from "views/auth/signUp/index.jsx";
 // import Landing from "./views/admin/auth/Landing.js";
 
 const routes = [
@@ -64,20 +64,20 @@ const routes = [
   //   icon: <Icon as={MdOutlineCalendarMonth} width='20px' height='20px' color='inherit' />,
   //   component: Calendar,
   // },
-  {
-    name: "Sign In",
-    layout: "/auth",
-    path: "/sign-in",
-    icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
-    component: SignIn,
-  },
-  {
-    name: "Sign Up",
-    layout: "/auth",
-    path: "/sign-up",
-    icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
-    component: SignUp,
-  },
+  // {
+  //   name: "Sign In",
+  //   layout: "/auth",
+  //   path: "/sign-in",
+  //   icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
+  //   component: SignIn,
+  // },
+  // {
+  //   name: "Sign Up",
+  //   layout: "/auth",
+  //   path: "/sign-up",
+  //   icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
+  //   component: SignUp,
+  // },
 ];
 
 export default routes;
