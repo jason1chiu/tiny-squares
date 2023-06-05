@@ -68,12 +68,7 @@ export const REMOVE_JOURNAL = gql`
 `;
 
 export const ADD_ENTRY = gql`
-  mutation addEntry(
-    $journalId: ID!
-    $description: String!
-    $date: String!
-    $status: String!
-  ) {
+  mutation addEntry( $journalId: ID!, $description: String!, $date: String!, $status: String!) {
     addEntry(
       journalId: $journalId
       description: $description

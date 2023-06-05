@@ -14,7 +14,6 @@ import { useAuth } from 'contexts/auth.context';
 
 // Create an Apollo Client and specify the connection to your GraphQL API
 
-
 export default function App() {
 
   let { user } = useAuth();
