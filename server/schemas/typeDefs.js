@@ -6,6 +6,7 @@ const typeDefs = gql`
     username: String
     email: String
     journals: [Journal]
+    legends: [Legend]
   }
 
   type Journal {
@@ -34,10 +35,12 @@ const typeDefs = gql`
     me: User
     journals: [Journal]
     journal(_id: ID!): Journal
+    legends: [Legend]
   }
 
   type Legend {
-    name: String
+    id: ID!
+    label: String
     color: String
   }
 
@@ -66,6 +69,9 @@ const typeDefs = gql`
     removeJournal(journalId: ID!): User
     addEntry(journalId: ID!, input: EntryInput): Journal
     removeEntry(journalId: ID!, entryId: ID!): Journal
+    createLegend(label: String!, color: String!, userId: ID!): Legend!
+    updateLegend(id: ID!, label: String!, color: String!): Legend!
+    deleteLegend(id: ID!): Boolean!
   }
 `;
 

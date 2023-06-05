@@ -15,7 +15,7 @@ export const GET_ME = gql`
           note
           date
           legend {
-            name
+            label
             color
           }
         }
@@ -34,7 +34,7 @@ export const GET_JOURNAL = gql`
         note
         date
         legend {
-          name
+          label
           color
         }
       }
@@ -53,7 +53,7 @@ export const GET_JOURNALS = gql`
         note
         date
         legend {
-          name
+          label
           color
         }
       }
@@ -75,6 +75,16 @@ export const GET_STATS = gql`
     stats(userId: $userId) {
       category
       totalEntries
+    }
+  }
+`;
+
+export const GET_LEGENDS = gql`
+  query {
+    legends {
+      id
+      label
+      color
     }
   }
 `;

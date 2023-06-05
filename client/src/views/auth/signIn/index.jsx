@@ -35,6 +35,7 @@ import DefaultAuth from "layouts/auth/Default"
 import imageAuth from "assets/img/authimage.png"
 import { LOGIN_USER } from "utils/mutations.js";
 import { useAuth } from "contexts/auth.context";
+import Auth from "utils/auth"
 
 export default function SignIn() {
   let { setUser } = useAuth();
@@ -64,14 +65,17 @@ export default function SignIn() {
   const [login, { data, error }] = useMutation(LOGIN_USER)
 
   const handleClick = () => setShow(!show);
-  const handleLogin = () => {
+  const handleLogin = async () => {
     let loginUser = {
       email: email,
       password: password,
     }
     if (email && password) {
       try {
-        login({ variables: loginUser });
+        const {data} = await login({ variables: {...loginUser}})
+        const { token, user } = data.login;
+        const userId = user._id;
+        Auth.login(token, userId);
       } catch (error) {
         console.error("Erroring logging in", error);
       }
