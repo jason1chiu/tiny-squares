@@ -24,6 +24,7 @@
     "react-icons": "^4.9.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "concurrently": "^5.2.0"
   }
 }
