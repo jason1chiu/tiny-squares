@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Flex, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, useColorModeValue, Image, Box } from "@chakra-ui/react";
+import { Button, Flex, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, useColorModeValue, Image, Box, useToast } from "@chakra-ui/react";
 import { productsArray } from "views/admin/store/js/ProductsStore";
 import Card from "components/card/card";
 import {CartContext} from 'views/admin/store/js/CartContext'
@@ -7,9 +7,23 @@ import { useContext } from 'react'
 
 
 
+
 export default function BuyOptionsModal({ isOpen, onClose }) {
     const textColor = useColorModeValue("navy.700", "white");
     const cart = useContext(CartContext);
+    const toast = useToast();
+
+    const addToCart = (productId) => {
+      cart.addOneToCart(productId);
+      toast({
+        title: "Successfully added to cart",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+        backgroundColor: "purple.500",
+      });
+    }
 
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
@@ -48,7 +62,8 @@ export default function BuyOptionsModal({ isOpen, onClose }) {
                         borderRadius="70px"
                         px="24px"
                         py="5px"
-                        onClick={() => cart.addOneToCart(product.id)}
+                        // onClick={() => cart.addOneToCart(product.id)}
+                        onClick={() => addToCart(product.id)}
                       >
                         ADD TO CART
                       </Button>
