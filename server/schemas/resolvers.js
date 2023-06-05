@@ -61,6 +61,19 @@ const resolvers = {
       return results;
     },
 
+    updateUser: async (parent, { username }, context) => {
+      // console.log(context);
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id},
+          { $set: {username: username}},
+          { new: true }
+        );
+
+        return updatedUser;
+      }
+    },
+
     logout: async (parent, { email }) => {
       // expire token manually
       return { email };
