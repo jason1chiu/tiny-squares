@@ -17,7 +17,7 @@
     <!-- <a href="https://github.com/utgroup3/Nomad-Nebula"> -->
     <a href="https://github.com/jason1chiu/tiny-squares">
     <!--  <img src="./public/ts.png" alt="Logo" height="200"> -->
-    <img src="./public.ts.png" alt="Logo">
+    <img src="./public.ts.png" alt="Logo" height="200">
    </a>
     <p align="center">
       Your Life, One Pixel at a Time
