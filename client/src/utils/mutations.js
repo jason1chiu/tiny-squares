@@ -151,8 +151,6 @@ export const UPDATE_LEGEND = gql`
 
 export const DELETE_LEGEND = gql`
   mutation DeleteLegend($id: ID!) {
-    deleteLegend(id: $id) {
-      id
-    }
+    deleteLegend(id: $id)
   }
 `;

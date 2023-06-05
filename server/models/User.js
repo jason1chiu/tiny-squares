@@ -26,6 +26,12 @@ const userSchema = new Schema({
       ref: 'Journal',
     },
   ],
+  legends: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Legend',
+    },
+  ],
   journalsCount: {
     type: Number,
     default: 0,
