@@ -9,7 +9,7 @@ import {
   Link
 } from "@chakra-ui/react";
 
-import Banner from "views/admin/create/components/Banner";
+import Banner from "views/admin/journals/components/Banner";
 import YourJournalCard from "views/admin/journals/components/YourJournalCard";
 import P2 from "assets/img/purple.jpg";
 import { useAuth } from "contexts/auth.context";
