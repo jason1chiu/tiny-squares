@@ -1,6 +1,6 @@
-import ProductivityPlanner from "assets/img/store/productivityplanner.webp"
-import WellnessJournal from "assets/img/store/wellness-journal.jpg"
-import purpleJournal from "assets/img/store/purple.jpg"
+import ProductivityPlanner from "assets/img/store/1.png"
+import WellnessJournal from "assets/img/store/2.png"
+import purpleJournal from "assets/img/store/3.png"
 
 const productsArray = [
   {

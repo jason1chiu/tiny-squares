@@ -1,7 +1,7 @@
 import { Box, Grid } from "@chakra-ui/react";
 import React, { useState } from "react";
-import Board from "views/admin/calendar/components/board/Board";
-import Legend from "views/admin/calendar/components/legend/Legend";
+import Board from "components/shared/calendar/components/board/Board";
+import Legend from "components/shared/calendar/components/legend/Legend";
 
 export default function Overview() {
   const [legends, setLegends] = useState([]);

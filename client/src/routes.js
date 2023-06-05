@@ -9,11 +9,11 @@ import {
 } from "react-icons/md";
 
 // Admin views
-import Calendar from "views/admin/calendar";
+// import Calendar from "views/admin/calendar";
 import Create from "views/admin/create";
 import Journals from "views/admin/journals";
 import Dashboard from "views/admin/dashboard";
-import Store from "views/admin/store";
+// import Store from "views/admin/store";
 
 // import CancelPage from "views/admin/cancelOrderPage";
 // Auth views
@@ -43,13 +43,13 @@ const routes = [
     icon: <Icon as={MdLibraryAdd} width='20px' height='20px' color='inherit' />,
     component: Create,
   },
-  {
-    name: "Store",
-    layout: "/admin",
-    path: "/store",
-    icon: <Icon as={MdLibraryAdd} width='20px' height='20px' color='inherit' />,
-    component: Store,
-  },
+  // {
+  //   name: "Store",
+  //   layout: "/admin",
+  //   path: "/store",
+  //   icon: <Icon as={MdLibraryAdd} width='20px' height='20px' color='inherit' />,
+  //   component: Store,
+  // },
   // {
   //   name: "CancelOrderPage",
   //   layout: "/admin",
@@ -57,13 +57,13 @@ const routes = [
   //   icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
   //   component: CancelPage,
   // },
-  {
-    name: "Calendar",
-    layout: "/admin",
-    path: "/calendar",
-    icon: <Icon as={MdOutlineCalendarMonth} width='20px' height='20px' color='inherit' />,
-    component: Calendar,
-  },
+  // {
+  //   name: "Calendar",
+  //   layout: "/admin",
+  //   path: "/calendar",
+  //   icon: <Icon as={MdOutlineCalendarMonth} width='20px' height='20px' color='inherit' />,
+  //   component: Calendar,
+  // },
   {
     name: "Sign In",
     layout: "/auth",

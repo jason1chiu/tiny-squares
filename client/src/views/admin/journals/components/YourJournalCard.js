@@ -5,7 +5,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import PreviewModal from "views/admin/journals/components/PreviewModal";
 import { useAuth } from "contexts/auth.context";
 import { GET_ME } from "utils/queries";
-import { useLazyQuery } from "@apollo/client";
+// import { useLazyQuery } from "@apollo/client";
 
 export default function YourJournalCard({ journal }) {
   const { isOpen, onOpen, onClose } = useDisclosure();

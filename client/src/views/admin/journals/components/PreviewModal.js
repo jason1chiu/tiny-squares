@@ -3,7 +3,7 @@
 import React from "react";
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button } from "@chakra-ui/react";
 // Import the Calendar and Legend components
-import Overview from "views/admin/calendar/index";
+import Overview from "components/shared/calendar/index";
 
 const Overlay = () => (
   <ModalOverlay
