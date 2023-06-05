@@ -23,7 +23,8 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
-  AlertDescription
+  AlertDescription,
+  useToast
 } from "@chakra-ui/react";
 
 // Apollo imports
@@ -38,6 +39,7 @@ import { useAuth } from "contexts/auth.context";
 import Auth from "utils/auth"
 
 export default function SignIn() {
+  const toast = useToast();
   let { setUser } = useAuth();
   let history = useHistory();
   // Chakra color mode
@@ -46,21 +48,12 @@ export default function SignIn() {
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
   const textColorBrand = useColorModeValue("brand.500", "white");
   const brandStars = useColorModeValue("brand.500", "brand.400");
-  const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
-  const googleText = useColorModeValue("navy.700", "white");
-  const googleHover = useColorModeValue(
-    { bg: "gray.200" },
-    { bg: "whiteAlpha.300" }
-  );
-  const googleActive = useColorModeValue(
-    { bg: "secondaryGray.300" },
-    { bg: "whiteAlpha.200" }
-  );
-
+ 
   const [show, setShow] = React.useState(false);
   const [showError, setShowError] = React.useState(null);
   const [email, currentEmail] = React.useState("");
   const [password, currentPassword] = React.useState("");
+
 
   const [login, { data, error }] = useMutation(LOGIN_USER)
 
@@ -70,19 +63,42 @@ export default function SignIn() {
       email: email,
       password: password,
     }
+
     if (email && password) {
       try {
         const {data} = await login({ variables: {...loginUser}})
         const { token, user } = data.login;
         const userId = user._id;
         Auth.login(token, userId);
+
+        toast({
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          position: "top",
+          render: () => (
+            <Box color='white' p={3} bg='purple.500' borderRadius="8px">
+              Welcome back!
+            </Box>
+          ),
+        });
+
       } catch (error) {
         console.error("Erroring logging in", error);
-      }
-    } else {
-      setShowError("Some fields are missing!")
+     toast({
+        title: "Error logging in",
+        description: error.message, // Display the error message
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+        backgroundColor: "red.500",
+      });
     }
+  } else {
+    setShowError("Some fields are missing!")
   }
+}
 
   useEffect(() => {
     console.log(data);

@@ -23,7 +23,8 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
-  AlertDescription
+  AlertDescription,
+  useToast
 } from "@chakra-ui/react";
 
 // Apollo imports
@@ -39,21 +40,13 @@ import { useAuth } from "contexts/auth.context";
 export default function SignUp() {
   let { setUser } = useAuth();
   let history = useHistory();
+  const toast = useToast();
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
   const textColorBrand = useColorModeValue("brand.500", "white");
   const brandStars = useColorModeValue("brand.500", "brand.400");
-  const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
-  const googleText = useColorModeValue("navy.700", "white");
-  const googleHover = useColorModeValue(
-    { bg: "gray.200" },
-    { bg: "whiteAlpha.300" }
-  );
-  const googleActive = useColorModeValue(
-    { bg: "secondaryGray.300" },
-    { bg: "whiteAlpha.200" }
-  );
+
   const [show, setShow] = React.useState(false);
   const [showError, setShowError] = React.useState(null);
   const [username, setUsername] = React.useState("");
@@ -74,8 +67,29 @@ export default function SignUp() {
     if (password === confirmPassword && password && username && email) {
       try {
         await addUser({ variables: newUser });
+
+        toast({
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          position: "top",
+          render: () => (
+            <Box color='white' p={3} bg='purple.500' borderRadius="8px">
+              Account Created!
+            </Box>
+          ),
+        });
       } catch (error) {
         console.error("Error signing up", error);
+        toast({
+          title: "Error logging in",
+          description: error.message, // Display the error message
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+          backgroundColor: "red.500",
+        });
       }
     } else {
       setShowError("Passwords do not match or some fields are missing!");
