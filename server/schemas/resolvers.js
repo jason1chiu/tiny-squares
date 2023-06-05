@@ -1,5 +1,4 @@
-const {  Journal, Entry } = require("../models");
-const User = require("../models/User");
+const { User, Journal, Entry } = require("../models");
 const { Legend } = require("../models/Legend");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
@@ -11,7 +10,10 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
           .populate("journals")
-          .populate("legends");
+          .populate({
+            path: "legends",
+            model: "Legend"
+          });
       
         return userData;
       }
@@ -27,14 +29,10 @@ const resolvers = {
         .populate("entries");
     },
 
-    legends: async (parent, { userId }, context) => {
-      try {
-        const user = await User.findById(userId).populate("legends");
-        return user.legends;
-      } catch (error) {
-        console.error(error);
-        throw new Error("Failed to fetch legends");
-      }
+    legends: async (parent, { id }, context) => {
+      // Fetch legends for the user with the provided ID
+      const legends = await Legend.find({ userId: id }).populate('userId');
+      return legends;
     },
   },
 
@@ -186,13 +184,8 @@ const resolvers = {
     },
 
     deleteLegend: async (_, { id }) => {
-      try {
-        await Legend.findByIdAndDelete(id);
-        return id; // Return the ID of the deleted legend
-      } catch (error) {
-        console.error(error);
-        throw new Error("Failed to delete legend");
-      }
+      await Legend.findByIdAndDelete(id);
+      return true;
     },
   },
 };
