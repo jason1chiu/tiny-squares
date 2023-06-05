@@ -1,6 +1,6 @@
-import ProductivityPlanner from "assets/img/store/productivityplanner.webp"
-import WellnessJournal from "assets/img/store/wellness-journal.jpg"
-import purpleJournal from "assets/img/store/purple.jpg"
+import ProductivityPlanner from "assets/img/store/1.png"
+import WellnessJournal from "assets/img/store/2.png"
+import purpleJournal from "assets/img/store/3.png"
 
 const productsArray = [
   {
@@ -13,7 +13,7 @@ const productsArray = [
   {
     id: "price_1NEFi4CS0MFKcelVmTJbQNca",
     title: "Standard Package",
-    price: 10.99,
+    price: 11.99,
     img: WellnessJournal,
     benefits: ["3 Journals"]
   },
@@ -22,7 +22,7 @@ const productsArray = [
     title: "Premium Package",
     price: 20.99,
     img: purpleJournal,
-    benefits: ["7 Journals"]
+    benefits: ["Unlimited Journals"]
 },
 ]
 

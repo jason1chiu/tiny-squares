@@ -1,11 +1,37 @@
 import React, { useContext } from 'react';
 import { CartContext } from "views/admin/store/js/CartContext";
 import { getProductData } from 'views/admin/store/js/ProductsStore';
-import { Button, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Box, VStack, useToast  } from '@chakra-ui/react';
+import { Button, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Box, VStack } from '@chakra-ui/react';
 
 export function CartModal(props) {
-    const cart = useContext(CartContext);
+  const cart = useContext(CartContext);
+  const productsCount = cart && cart.items ? cart.items.reduce((sum, product) => sum + product.quantity, 0) : 0;
 
+  const checkout = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/admin/store/checkout", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ items: cart.cart })
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+
+        if (result.url) {
+          window.location.assign(result.url); //Forwarding user to stripe
+        } else {
+          console.error('Checkout session creation failed on server');
+        }
+      } else {
+        console.error('Checkout request failed');
+      }
+    } catch (error) {
+      console.error('Error during checkout:', error);
+    }
+  }
     return (
         <Modal isOpen={props.isOpen} onClose={props.onClose}>
           <ModalOverlay />
@@ -33,7 +59,7 @@ export function CartModal(props) {
               <Button variant="ghost" mr={3} onClick={props.onClose}>
                 Close
               </Button>
-              <Button colorScheme="blue">Checkout</Button>
+              <Button colorScheme="purple" onClick={checkout}>Checkout</Button>
             </ModalFooter>
           </ModalContent>
         </Modal>

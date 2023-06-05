@@ -18,10 +18,9 @@ export default function BuyOptionsModal({ isOpen, onClose }) {
       toast({
         title: "Successfully added to cart",
         status: "success",
-        duration: 5000,
+        duration: 3000,
         isClosable: true,
         position: "top",
-        backgroundColor: "purple.500",
       });
     }
 
@@ -29,7 +28,7 @@ export default function BuyOptionsModal({ isOpen, onClose }) {
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Buy More Journals</ModalHeader>
+            <ModalHeader>Upgrade to Premium!</ModalHeader>
             <ModalBody>
               {productsArray.map((product, index) => (
                 <Card key={index} p="20px">

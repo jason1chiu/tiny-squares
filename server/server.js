@@ -31,24 +31,50 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-app.post("/admin/store/checkout", async (req, res) => {
+// app.post("/admin/store/checkout", async (req, res) => {
 
+//   console.log(req.body);
+//   const items = req.body.items;
+//   let lineItems = [];
+//   items.forEach((item) => {
+//     lineItems.push(
+//       {
+//         price: item.id,
+//         quantity: item.quantity
+//       }
+//     )
+//   });
+
+//   const session = await stripe.checkout.sessions.create({
+//     line_items: lineItems,
+//     mode: 'payment',
+//     // *** When deploying to heroku, change url to https://your-app-name.herokuapp.com/success
+//     success_url: "http://localhost:3000/success",
+//     cancel_url: "http://localhost:3000/cancel"
+//   });
+app.post("/admin/store/checkout", async (req, res) => {
   console.log(req.body);
   const items = req.body.items;
   let lineItems = [];
   items.forEach((item) => {
     lineItems.push(
       {
-        price: item.id,
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: item.title,  // Assuming the item object has a 'title' property
+          },
+          unit_amount: item.price * 100, // Stripe expects amount in cents
+        },
         quantity: item.quantity
       }
     )
   });
 
   const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],  // Add this line
     line_items: lineItems,
     mode: 'payment',
-    // *** When deploying to heroku, change url to https://your-app-name.herokuapp.com/success
     success_url: "http://localhost:3000/success",
     cancel_url: "http://localhost:3000/cancel"
   });
@@ -57,6 +83,7 @@ app.post("/admin/store/checkout", async (req, res) => {
     url: session.url
   }))
 })
+
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));

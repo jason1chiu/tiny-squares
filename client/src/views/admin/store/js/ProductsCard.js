@@ -28,7 +28,7 @@ function ProductCard(props) {
         <Center>${product.price}</Center>
        
         <Center>
-          <Image src={product.img} alt="product" borderRadius='30'  objectFit='cover' boxSize="20rem"></Image>
+          <Image src={product.img} alt="product" borderRadius='30'  objectFit='cover' boxSize="20rem" ></Image>
         </Center>
 
           <Center>
