@@ -7,6 +7,7 @@ export const GET_ME = gql`
       username
       email
       legends {
+        id
         label
         color
       }
@@ -74,8 +75,8 @@ export const GET_STATS = gql`
 `;
 
 export const GET_LEGENDS = gql`
-query GetLegends($userId: ID!) {
-  legends(userId: $userId) {
+query GetLegends($id: ID!) {
+  legends(userId: $id) {
     id
     label
     color

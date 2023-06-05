@@ -187,8 +187,8 @@ const resolvers = {
 
     deleteLegend: async (_, { id }) => {
       try {
-        await Legend.findByIdAndDelete(id);
-        return id; // Return the ID of the deleted legend
+        const deletedLegend = await Legend.findByIdAndDelete(id);
+        return deletedLegend; // Return the deleted legend itself
       } catch (error) {
         console.error(error);
         throw new Error("Failed to delete legend");

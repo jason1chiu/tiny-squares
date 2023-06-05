@@ -29,7 +29,7 @@ const Legend = ({ legends, setLegends }) => {
 
         // Fetch existing legends
         const { loading, error, data } = useQuery(GET_LEGENDS, {
-          variables: { userId },
+          variables: { id: userId },
         });
         const existingLegends = data ? data.legends : null;
       
@@ -63,6 +63,8 @@ const Legend = ({ legends, setLegends }) => {
           update: (cache, { data }) => {
             // Update the cache after the mutation
             const existingLegends = cache.readQuery({ query: GET_LEGENDS, variables: { userId } });
+
+            
 
             if (existingLegends && existingLegends.legends) {
               const legendsMap = existingLegends.legends.map(legend => ({
@@ -120,6 +122,11 @@ const Legend = ({ legends, setLegends }) => {
         // Update the cache after successful deletion
         const cachedData = cache.readQuery({ query: GET_LEGENDS });
         const updatedLegends = cachedData.legends.filter((legend) => legend.id !== legendId);
+
+          // Handle case when cachedData is null or undefined
+      if (!cachedData || !cachedData.legends) {
+        return;
+      }
 
         console.log('Updated Legends:', updatedLegends);
         cache.writeQuery({
