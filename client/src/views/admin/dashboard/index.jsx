@@ -1,25 +1,21 @@
-import {
-  // Avatar,
-  Box,
-  // Flex,
-  // FormLabel,
-  // Icon,
-  // Select,
-  Grid,
-  // useColorModeValue,
-} from "@chakra-ui/react";
-
+// React imports
 import React, { useEffect } from "react";
+
+// Chakra imports
+import { Box, Grid } from "@chakra-ui/react";
+
+// Apollo imports
+import { useLazyQuery } from "@apollo/client";
+
+// File imports
 import PieChart from "views/admin/dashboard/components/PieChart";
 import Profile from "views/admin/dashboard/components/Profile";
 import Journals from "views/admin/dashboard/components/Journals";
 import ColumnsTable from "views/admin/dashboard/components/ColumnsTable";
-
 import profile from "assets/img/purple.jpg";
 import avatar from "assets/img/purple.jpg";
 import { useAuth } from "contexts/auth.context";
 import { GET_ME } from "utils/queries";
-import { useLazyQuery } from "@apollo/client";
 
 export default function Overview() {
   let { user, journals, setJournals } = useAuth();
@@ -30,6 +26,7 @@ export default function Overview() {
       setJournals(data.data.me.journals);
     })
   }, [])
+  
   const entries =
     journals && journals.length
       ? journals.reduce((sum, journal) => sum + (journal.entries?.length || 0), 0)

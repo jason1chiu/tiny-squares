@@ -1,4 +1,7 @@
+// React import
 import React, { useEffect, useState } from "react";
+
+// Chakra import
 import {
   Box,
   Flex,
@@ -9,11 +12,14 @@ import {
   Link
 } from "@chakra-ui/react";
 
-import Banner from "views/admin/create/components/Banner";
+// Apollo import
+import { useLazyQuery } from "@apollo/client";
+
+// File import
+import Banner from "views/admin/journals/components/Banner";
 import YourJournalCard from "views/admin/journals/components/YourJournalCard";
 import P2 from "assets/img/purple.jpg";
 import { useAuth } from "contexts/auth.context";
-import { useLazyQuery } from "@apollo/client";
 import { GET_ME } from "utils/queries";
 import NewCard from "views/admin/journals/components/NewCard";
 
@@ -47,7 +53,7 @@ export default function JournalPage() {
           <Banner />
 
           <Flex direction='column'>
-          <Flex
+            <Flex
               mt='45px'
               mb='20px'
               justifyContent='space-between'
@@ -71,12 +77,12 @@ export default function JournalPage() {
                   </Link>
                 )}
               </Flex>
-            </Flex> 
+            </Flex>
             <SimpleGrid columns={{ base: 1, md: 3 }} gap='20px'>
 
-<NewCard />
+              <NewCard />
 
-</SimpleGrid>
+            </SimpleGrid>
 
             <Flex
               mt='45px'
