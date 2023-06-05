@@ -6,18 +6,31 @@ import NewJournalModal from "views/admin/create/components/NewJournalModal";
 import { useMutation } from '@apollo/client';
 import { ADD_JOURNAL } from 'utils/mutations';
 import { useAuth } from 'contexts/auth.context';
+import BuyOptionsModal from 'components/modal/BuyOptionsModal';
 
 export default function NewCard() {
   let [addJournal, { data, error }] = useMutation(ADD_JOURNAL);
   let { user, setJournals, journals } = useAuth();
+  const [isBuyOptionsModalOpen, setBuyOptionsModalOpen] = useState(false);
 
+  const openBuyOptionsModal = () => {
+    setBuyOptionsModalOpen(true);
+  };
+
+  const closeBuyOptionsModal = () => {
+    setBuyOptionsModalOpen(false);
+  };
   const [isModalOpen, setModalOpen] = useState(false);
   const [hover, setHover] = useState(false);
   const iconColor = useColorModeValue('secondaryGray.600', 'secondaryGray.600');
   const iconHoverColor = useColorModeValue('brand.500', 'white');
 
   const openModal = () => {
-    setModalOpen(true);
+    if (user.journalsCount >= 3) {
+      openBuyOptionsModal();
+    } else {
+      setModalOpen(true);
+    }
   };
 
   const closeModal = () => {
@@ -25,16 +38,17 @@ export default function NewCard() {
   };
 
   const handleAddJournal = async (journal) => {
- 
-    let results = await addJournal({ variables: journal});
-    if (results.data.addJournal.journals) {
-      setJournals(results.data.addJournal.journals)
-      //     const newJournal = await response.json();
-      // Here you could add newJournal to your component state,
-      // which will automatically re-render the component to show the new journal
-      closeModal();
+    if (journals.length >= 3) {
+      // If the user already has 3 journals, open the buy options modal
+      setBuyOptionsModalOpen(true);
     } else {
-      console.error('Error:', error);
+      let results = await addJournal({ variables: journal });
+      if (results.data.addJournal.journals) {
+        setJournals(results.data.addJournal.journals)
+        closeModal();
+      } else {
+        console.error('Error:', error);
+      }
     }
   };
 
@@ -63,6 +77,7 @@ export default function NewCard() {
         </Center>
       </Box>
       <NewJournalModal isOpen={isModalOpen} onClose={closeModal} onSubmit={handleAddJournal} />
+      <BuyOptionsModal isOpen={isBuyOptionsModalOpen} onClose={() => setBuyOptionsModalOpen(false)} />
     </Card>
   );
 }

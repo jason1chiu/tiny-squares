@@ -66,18 +66,38 @@ const resolvers = {
       return { email };
     },
 
+    // addJournal: async (parent, { name, category }, context) => {
+    //   if (context.user) {
+    //     const journal = await Journal.create({ name, category });
+    //     const updatedUser = await User.findOneAndUpdate(
+    //       { _id: context.user._id },
+    //       { $addToSet: { journals: journal._id } },
+    //       { new: true }
+    //     );
+
+    //     return updatedUser;
+    //   }
+
+    //   throw new AuthenticationError("You need to be logged in!");
+    // },
     addJournal: async (parent, { name, category }, context) => {
       if (context.user) {
+        const currentUser = await User.findById(context.user._id);
+        if (currentUser.journalsCount >= 3) {
+          throw new Error("You have reached the maximum number of free journals. Please subscribe to create more.");
+        }
+    
         const journal = await Journal.create({ name, category });
+    
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { journals: journal._id } },
+          { $addToSet: { journals: journal._id }, $inc: { journalsCount: 1 } },
           { new: true }
         );
-
+    
         return updatedUser;
       }
-
+    
       throw new AuthenticationError("You need to be logged in!");
     },
 
