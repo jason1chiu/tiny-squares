@@ -26,6 +26,15 @@ export const ADD_USER = gql`
   }
 `;
 
+export const UPDATE_USER = gql`
+  mutation updateUser($username: String!) {
+    updateUser(username: $username) {
+      _id
+      username
+    }
+  }
+`;
+
 export const LOGOUT_USER = gql`
   mutation Logout($email: String!) {
     logout(email: $email) {
