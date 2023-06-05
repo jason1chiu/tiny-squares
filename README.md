@@ -15,7 +15,8 @@
  <div align="center">
  <h1 align="center">TinySquares</h1>
     <a href="https://github.com/utgroup3/Nomad-Nebula">
-     <img src="./public/img/transparentwhite.png" alt="Logo" height="200">
+     <!-- <img src="./public/img/transparentwhite.png" alt="Logo" height="200"> -->
+     <imr src='./public/ts.png' alt='Logo' height='200'>
    </a>
     <p align="center">
       Your Life, One Pixel at a Time
