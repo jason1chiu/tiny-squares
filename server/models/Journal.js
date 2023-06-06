@@ -17,6 +17,12 @@ const journalSchema = new Schema({
   legends: [ legendSchema ],
   createdAt: Date,
   updatedAt: Date,
+  legends: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Legend",
+    },
+  ],
 });
 
 const Journal = model("Journal", journalSchema);
