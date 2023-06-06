@@ -7,9 +7,10 @@ import EditProfileModal from "components/modal/EditProfileModal";
 import { CartContext } from 'components/shared/store/js/CartContext'
 import { useContext } from 'react'
 import { CartModal } from 'components/shared/store/components/CartModal'
+import { motion } from 'framer-motion';
 
 // Chakra imports
-import { Avatar, Button, Flex, Icon, Link, Menu, MenuButton, MenuItem, MenuList, Text,  Badge,  useColorModeValue,  useDisclosure, IconButton, Box } from "@chakra-ui/react";
+import { Avatar, Button, Flex, Icon, Link, Menu, MenuButton, MenuItem, MenuList, Text, Badge, useColorModeValue, useDisclosure, IconButton, Box } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 
 // Apollow imports
@@ -29,7 +30,21 @@ export default function HeaderLinks(props) {
   const [logout] = useMutation(LOGOUT_USER);
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
+  const MotionMenuList = motion(MenuList);
+  const MotionMenuItem = motion(MenuItem);
+  const menuVariants = {
+    open: {
+      transition: { staggerChildren: 0.07, delayChildren: 0.2 }
+    },
+    closed: {
+      transition: { staggerChildren: 0.05, staggerDirection: -1 }
+    },
+  };
+
+  const menuItemVariants = {
+    open: { y: 0, opacity: 1, scale: 1 },
+    closed: { y: 50, opacity: 0, scale: 0.3 },
+  };
   const handleLogout = async () => {
     try {
       await logout({ variables: { email } });
@@ -130,20 +145,20 @@ export default function HeaderLinks(props) {
         </MenuList>
       </Menu>
       <Menu>
-      <IconButton
-      icon={(
-        <Box position="relative">
-          <MdShoppingCart size="24" tm="100px"/>
-          <Badge colorScheme="purple" boxShadow='md' position="absolute" boxSize="20px" borderRadius="full" display="flex" alignItems="center" justifyContent="center" top="-18px" right="-10px" fontSize='.7em'>
-            {totalQuantity}
-          </Badge>
-        </Box>
-      )}
-      color={navbarIcon}
-      _hover={{ color: "secondaryGray.900" }} // replace "yourColor" with the color you want when hovering
-      onClick={openCartModal}
-    />
-    <CartModal isOpen={cartModalIsOpen} onClose={closeCartModal} />
+        <IconButton
+          icon={(
+            <Box position="relative">
+              <MdShoppingCart size="24" tm="100px" />
+              <Badge colorScheme="purple" boxShadow='md' position="absolute" boxSize="20px" borderRadius="full" display="flex" alignItems="center" justifyContent="center" top="-18px" right="-10px" fontSize='.7em'>
+                {totalQuantity}
+              </Badge>
+            </Box>
+          )}
+          color={navbarIcon}
+          _hover={{ color: "secondaryGray.900" }} // replace "yourColor" with the color you want when hovering
+          onClick={openCartModal}
+        />
+        <CartModal isOpen={cartModalIsOpen} onClose={closeCartModal} />
       </Menu>
 
       <Menu>
@@ -158,13 +173,16 @@ export default function HeaderLinks(props) {
             h="40px"
           />
         </MenuButton>
-        <MenuList
+        <MotionMenuList
           boxShadow={shadow}
           p="0px"
           mt="10px"
           borderRadius="20px"
           bg={menuBg}
           border="none"
+          variants={menuVariants}
+          initial="closed"
+          animate={isOpen ? "open" : "closed"}
         >
           <Flex w="100%" mb="0px">
             <Text
@@ -184,40 +202,44 @@ export default function HeaderLinks(props) {
 
           <Flex flexDirection="column" p="10px">
 
-            <MenuItem
-              _hover={{ bg: 'none' }}
-              _focus={{ bg: 'none' }}
-              color={textColor}
-              borderRadius="8px"
-              px="14px"
-              onClick={onOpen} // open the modal when this item is clicked
-            >
-              <Icon as={MdEdit} w={5} h={5} mr={2} />
-              <EditProfileModal isOpen={isOpen} onClose={onClose} />
-            </MenuItem>
+            <Flex flexDirection="column" p="10px">
+              <MotionMenuItem
+                _hover={{ bg: 'none' }}
+                _focus={{ bg: 'none' }}
+                color={textColor}
+                borderRadius="8px"
+                px="14px"
+                onClick={onOpen} // open the modal when this item is clicked
+                variants={menuItemVariants}
+              >
+                <Icon as={MdEdit} w={5} h={5} mr={2} />
+                <EditProfileModal isOpen={isOpen} onClose={onClose} />
+              </MotionMenuItem>
 
-            <MenuItem
-              _hover={{ bg: "none" }}
-              _focus={{ bg: "none" }}
-              color="red.400"
-              borderRadius="8px"
-              px="14px"
-            >
-              <Link w="100%" href="#">
-                <Button
-                  w="100%"
-                  h="44px"
-                  variant="no-hover"
-                  color={textColor}
-                  bg="transparent"
-                  onClick={handleLogout}
-                >
-                  Sign Out
-                </Button>
-              </Link>
-            </MenuItem>
+              <MenuItem
+                _hover={{ bg: "none" }}
+                _focus={{ bg: "none" }}
+                color="red.400"
+                borderRadius="8px"
+                px="14px"
+              >
+                <Link w="100%" href="#">
+                  <Button
+                    w="100%"
+                    h="44px"
+                    variant="no-hover"
+                    color={textColor}
+                    bg="transparent"
+                    onClick={handleLogout}
+                  >
+                    Sign Out
+                  </Button>
+                </Link>
+              </MenuItem>
+            </Flex>
           </Flex>
-        </MenuList>
+        </MotionMenuList>
+
 
       </Menu>
 
