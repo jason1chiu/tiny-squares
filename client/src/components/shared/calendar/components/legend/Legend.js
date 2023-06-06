@@ -3,29 +3,30 @@ import { useQuery, useMutation } from "@apollo/client";
 import { Box, Input, Button, VStack, HStack, Text, Heading } from "@chakra-ui/react";
 import Card from "components/card/card";
 
-import { GET_LEGENDS, GET_ME } from "utils/queries";
+import { GET_JOURNAL, GET_ME } from "utils/queries";
 import { CREATE_LEGEND, UPDATE_LEGEND, DELETE_LEGEND } from "utils/mutations"
 
-const Legend = () => {
+const Legend = ({ journalId, legends, setLegends }) => {
   const [color, setColor] = useState("#000000");
   const [label, setLabel] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(null);
   const userId = localStorage.getItem("user_id");
 
-  const [legends, setLegends] = useState([]);
   const [createLegend] = useMutation(CREATE_LEGEND);
   const [updateLegend] = useMutation(UPDATE_LEGEND);
   const [deleteLegend] = useMutation(DELETE_LEGEND);
 
-  const { loading, error, data } = useQuery(GET_LEGENDS, {
-    variables: { id: userId },
+  const { loading, error, data, refetch } = useQuery(GET_JOURNAL, {
+    variables: { id: journalId },
   });
 
   useEffect(() => {
-    if (data && data.legends) {
-      setLegends(data.legends);
+    if (data && data.journal) {
+      setLegends([...data.journal.legends]);
     }
   }, [data]);
+
+  useEffect(() => {refetch()}, [])
 
   const handleAddLegend = async () => {
     try {
@@ -35,11 +36,11 @@ const Legend = () => {
       }
 
       const { data } = await createLegend({
-        variables: { label, color, userId },
+        variables: { label, color, journalId },
       });
 
-      const createdLegend = data.createLegend;
-      setLegends((prevLegends) => [...prevLegends, createdLegend]);
+      const legends = data.createLegend.legends;
+      setLegends(legends);
 
       console.log("Created Legend: ", data.createLegend);
     } catch (error) {
@@ -54,10 +55,10 @@ const Legend = () => {
         return;
       }
 
-      const legendId = legends[selectedIndex].id;
+      const legendId = legends[selectedIndex]._id;
 
       const { data } = await updateLegend({
-        variables: { id: legendId, label, color },
+        variables: { legendId, label, color, journalId },
       });
 
       const updatedLegend = data.updateLegend;
@@ -78,19 +79,9 @@ const Legend = () => {
     console.log("Legend ID:", legendId);
     try {
       await deleteLegend({
-        variables: { id: legendId },
-        update: (cache) => {
-          cache.modify({
-            fields: {
-              legends(existingLegends, { readField }) {
-                return existingLegends.filter(
-                  (legendRef) => legendId !== readField("id", legendRef)
-                );
-              },
-            },
-          });
-        },
+        variables: { legendId, journalId },
       });
+      refetch();
       console.log("Legend deleted:", legendId);
     } catch (error) {
       console.error("Failed to delete legend:", error);
@@ -154,38 +145,36 @@ const Legend = () => {
       </HStack>
 
       {legends.map((legend, index) => (
-        <HStack key={index} spacing={1}>
-          {index !== 0 && (
-            <>
-              <Box
-                boxSize="1em"
-                bgColor={legend.color}
-                border="1px solid"
-                borderColor="gray.200"
-              />
-              <Text fontSize="sm">{legend.label}</Text>
-              {selectedIndex === index ? (
-                <Button size="xs" onClick={() => handleEditLegend(index)}>
+        <HStack key={legend._id} spacing={1}>
+          <>
+            <Box
+              boxSize="1em"
+              bgColor={legend.color}
+              border="1px solid"
+              borderColor="gray.200"
+            />
+            <Text fontSize="sm">{legend.label}</Text>
+            {selectedIndex === index ? (
+              <Button size="xs" onClick={() => handleEditLegend(index)}>
+                Edit
+              </Button>
+            ) : (
+              <>
+                <Button
+                  size="xs"
+                  onClick={() => handleEditLegend(index)}
+                >
                   Edit
                 </Button>
-              ) : (
-                <>
-                  <Button
-                    size="xs"
-                    onClick={() => handleEditLegend(index)}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    size="xs"
-                    onClick={() => handleDeleteLegend(legend.id)}
-                  >
-                    Delete
-                  </Button>
-                </>
-              )}
-            </>
-          )}
+                <Button
+                  size="xs"
+                  onClick={() => handleDeleteLegend(legend._id)}
+                >
+                  Delete
+                </Button>
+              </>
+            )}
+          </>
         </HStack>
       ))}
     </VStack>
