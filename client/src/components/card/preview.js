@@ -66,16 +66,17 @@ import {
               </Text>
             </Flex>
             <VStack position="absolute" right={8} top={8} spacing={2}>
+            <Tooltip hasArrow label="Delete" fontSize="sm">
+            <Button size="xs" colorScheme="purple">
+              <Icon as={MdClose} />
+            </Button>
+          </Tooltip>
           <Tooltip hasArrow label="Edit" fontSize="sm">
             <Button size="xs" colorScheme="purple" >
               <Icon as={MdEdit} />
             </Button>
           </Tooltip>
-          <Tooltip hasArrow label="Delete" fontSize="sm">
-            <Button size="xs" colorScheme="purple">
-              <Icon as={MdClose} />
-            </Button>
-          </Tooltip>
+          
         </VStack>
             <Button
                 variant='darkBrand'
