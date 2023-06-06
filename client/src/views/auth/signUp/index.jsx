@@ -65,7 +65,7 @@ export default function SignUp() {
 
   const handleClick = () => setShow(!show);
   const handleAddUser = async (event) => {
-    event.preventDefault();
+   
     let newUser = {
       username: username,
       email: email,
@@ -222,8 +222,8 @@ export default function SignUp() {
                   variant='auth'
                   fontSize='sm'
                   ms={{ base: "0px", md: "0px" }}
-                  type='email'
-                  placeholder='Enter your email'
+                  type='text'
+                  placeholder='Enter a username'
                   mb='24px'
                   fontWeight='500'
                   size='lg'
