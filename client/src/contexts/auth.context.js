@@ -17,8 +17,6 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
-
-
   return <AuthContext.Provider value={{ user, setUser, editUser, categories, journals, setJournals }}>{children}</AuthContext.Provider>;
 };
 

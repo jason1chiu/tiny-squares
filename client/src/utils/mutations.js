@@ -158,4 +158,3 @@ export const DELETE_LEGEND = gql`
     }
   }
 `;
-
