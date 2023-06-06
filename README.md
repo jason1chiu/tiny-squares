@@ -55,7 +55,7 @@
   <img src="assets\Capture.JPG"/>
 </p>
 
-Welcome to TechTapas, a CMS-style blog site where developers can publish their thoughts and opinions on technical concepts, recent advancements, and new technologies. This site is built using the MVC paradigm in its architectural structure, using Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication.
+Introducing TinySquares: Your ultimate destination for personalized lifestyle journals. Track sports, health, and mindfulness effortlessly. Our visually appealing pixel calendar design gives a clear year-long overview of your progress. Dive deeper with statistics and pie charts for insightful data representation. Join us and unlock your full potential today!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
