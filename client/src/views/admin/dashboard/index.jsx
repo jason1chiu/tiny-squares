@@ -1,13 +1,4 @@
-import {
-  // Avatar,
-  Box,
-  // Flex,
-  // FormLabel,
-  // Icon,
-  // Select,
-  Grid,
-  // useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, Grid } from "@chakra-ui/react";
 
 import React, { useEffect } from "react";
 import PieChart from "views/admin/dashboard/components/PieChart";
@@ -23,20 +14,13 @@ import { useLazyQuery } from "@apollo/client";
 
 export default function Overview() {
   let { user, journals, setJournals } = useAuth();
-  let [me, { data, loading, error }] = useLazyQuery(GET_ME);
+  let [me] = useLazyQuery(GET_ME);
 
   useEffect(() => {
-    if (user && user.token) { // ensure user and token exist before calling me()
-      me({ variables: { token: user.token } })
-        .then(response => {
-          if (response && response.data && response.data.me) {
-            setJournals(response.data.me.journals);
-          }
-        })
-        .catch(err => console.error(err));
-    }
-  }, [user, me, setJournals]);
-  
+    me().then(data => {
+      setJournals(data.data.me.journals);
+    })
+  }, [])
   const entries =
     journals && journals.length
       ? journals.reduce((sum, journal) => sum + (journal.entries?.length || 0), 0)
@@ -60,7 +44,7 @@ export default function Overview() {
           <Profile
           banner={profile}
           avatar={avatar}
-          name={user && user.user ? user.user.username : 'Default Name'}
+          name={user.user.username}
           entries={entries}
           journals={journalsLength}
         />
