@@ -19,13 +19,13 @@ const Board = ({ legends }) => {
         <GridItem></GridItem>
         {Array.from({ length: 12 }, (_, index) => (
           <GridItem key={`month-${index}`} textAlign="center">
-            <Text fontSize="sm" fontWeight="bold">{months[index]}</Text>
+            <Text fontSize="m">{months[index]}</Text>
           </GridItem>
         ))}
         {Array.from({ length: 31 }, (_, rowIndex) => (
            <React.Fragment key={`day-row-${rowIndex}`}>
             <GridItem key={`day-label-${rowIndex}`} textAlign="center">
-              <Text fontSize="sm" fontWeight="bold">{`${rowIndex + 1}`}</Text>
+              <Text fontSize="lg" >{`${rowIndex + 1}`}</Text>
             </GridItem>
             {Array.from({ length: 12 }, (_, colIndex) => {
               const id = `cell-${rowIndex}-${colIndex}`; // create unique id

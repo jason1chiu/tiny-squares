@@ -15,8 +15,8 @@ import Overview from "components/shared/calendar/index";
 
 const Overlay = () => (
   <ModalOverlay
-    bg="blackAlpha.300"
-    backdropFilter="blur(10px) hue-rotate(90deg)"
+    bg="blackAlpha.700"
+
   />
 );
 
