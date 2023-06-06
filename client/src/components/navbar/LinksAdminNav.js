@@ -155,7 +155,7 @@ export default function HeaderLinks(props) {
             </Box>
           )}
           color={navbarIcon}
-          _hover={{ color: "secondaryGray.900" }} // replace "yourColor" with the color you want when hovering
+          _hover={{ color: "secondaryGray.900" }} 
           onClick={openCartModal}
         />
         <CartModal isOpen={cartModalIsOpen} onClose={closeCartModal} />
