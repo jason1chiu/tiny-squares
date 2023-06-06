@@ -14,6 +14,7 @@ import {
   FormControl,
   FormLabel,
   useDisclosure,
+  useToast
 } from "@chakra-ui/react";
 import { FiUpload } from "react-icons/fi";
 import axios from 'axios';
@@ -27,6 +28,7 @@ function EditProfileModal() {
   const [file, setFile] = useState(null);
   const [updateUser, { error }] = useMutation(UPDATE_USER);
   const { editUser } = useAuth();
+  const toast = useToast();
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -43,9 +45,16 @@ function EditProfileModal() {
           username: username,
         },
       });
-      console.log(data);
       editUser(data.updateUser);
       onClose();
+      toast({
+        title: "Profile successfully updated",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+        backgroundColor: "purple.500",
+      });
     } catch (error) {
       console.error(error);
     }

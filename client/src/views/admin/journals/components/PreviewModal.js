@@ -1,23 +1,29 @@
-// JournalModal.js
-
 import React from "react";
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button } from "@chakra-ui/react";
-// Import the Calendar and Legend components
-import Overview from "views/admin/calendar/index";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+} from "@chakra-ui/react";
+import Overview from "components/shared/calendar/index";
 
 const Overlay = () => (
   <ModalOverlay
-    bg='blackAlpha.300'
-    backdropFilter='blur(10px) hue-rotate(90deg)'
-  />
-)
+    bg="blackAlpha.700"
 
-export default function JournalModal({ isOpen, onClose }) {
+  />
+);
+
+export default function JournalModal({ isOpen, onClose, journal }) {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered size="xl" scrollBehavior='inside'>
+    <Modal isOpen={isOpen} onClose={onClose} isCentered size="xl" scrollBehavior="inside">
       <Overlay />
       <ModalContent>
-        <ModalHeader>Journal Details</ModalHeader>
+        <ModalHeader>{journal.name}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Overview />

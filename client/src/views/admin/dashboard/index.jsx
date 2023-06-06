@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import PieChart from "views/admin/dashboard/components/PieChart";
 import Profile from "views/admin/dashboard/components/Profile";
 import Journals from "views/admin/dashboard/components/Journals";
@@ -24,10 +25,15 @@ import { useLazyQuery } from "@apollo/client";
 export default function Overview() {
   let { user, journals, setJournals } = useAuth();
   let [me, { data, loading }] = useLazyQuery(GET_ME);
+  // const history = useHistory();
 
   useEffect(() => {
     me().then(data => {
-      setJournals(data.data.me.journals);
+      // if (data.data) {
+        setJournals(data.data.me.journals);
+      // } else {
+      //   history.push('/')
+      // }
     })
   }, [])
   const entries =

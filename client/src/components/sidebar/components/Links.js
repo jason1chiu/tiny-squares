@@ -23,7 +23,6 @@ export function SidebarLinks(props) {
       const createLinks = (routes) => {
         return routes.map((route, index) => {
           if (route.category) {
-    
             return (
               <>
                 <Text
@@ -43,11 +42,8 @@ export function SidebarLinks(props) {
                 {createLinks(route.items)}
               </>
             );
-        } else if (
-            route.layout === "/admin" ||
-            route.layout === "/auth" 
-            ) {
-                return (
+          } else if (route.layout === "/admin") {
+            return (
                   <NavLink key={index} to={route.layout + route.path}>
                     {route.icon ? (
                       <Box>

@@ -33,8 +33,7 @@ if (process.env.NODE_ENV === 'production') {
 
 app.post("/admin/store/checkout", async (req, res) => {
 
-  console.log(req.body);
-  const items = req.body.items;
+  const items = req.body.cart;
   let lineItems = [];
   items.forEach((item) => {
     lineItems.push(

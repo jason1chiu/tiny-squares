@@ -23,11 +23,14 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
-  AlertDescription
+  AlertDescription,
+  useToast
 } from "@chakra-ui/react";
 
 // Apollo imports
 import { useMutation } from "@apollo/client";
+
+import { motion } from "framer-motion";
 
 // File imports
 import { HSeparator } from "components/seperator/Seperator";
@@ -39,21 +42,16 @@ import { useAuth } from "contexts/auth.context";
 export default function SignUp() {
   let { setUser } = useAuth();
   let history = useHistory();
+  const toast = useToast();
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
   const textColorBrand = useColorModeValue("brand.500", "white");
   const brandStars = useColorModeValue("brand.500", "brand.400");
-  const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
-  const googleText = useColorModeValue("navy.700", "white");
-  const googleHover = useColorModeValue(
-    { bg: "gray.200" },
-    { bg: "whiteAlpha.300" }
-  );
-  const googleActive = useColorModeValue(
-    { bg: "secondaryGray.300" },
-    { bg: "whiteAlpha.200" }
-  );
+  const MotionButton = motion(Button);
+  const MotionBox = motion(Box);
+  const MotionFlex = motion(Flex);
+  const MotionHeading = motion(Heading);
   const [show, setShow] = React.useState(false);
   const [showError, setShowError] = React.useState(null);
   const [username, setUsername] = React.useState("");
@@ -74,8 +72,29 @@ export default function SignUp() {
     if (password === confirmPassword && password && username && email) {
       try {
         await addUser({ variables: newUser });
+
+        toast({
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          position: "top",
+          render: () => (
+            <Box color='white' p={3} bg='purple.500' borderRadius="8px">
+              Account Created!
+            </Box>
+          ),
+        });
       } catch (error) {
         console.error("Error signing up", error);
+        toast({
+          title: "Error logging in",
+          description: error.message, // Display the error message
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+          backgroundColor: "red.500",
+        });
       }
     } else {
       setShowError("Passwords do not match or some fields are missing!");
@@ -109,9 +128,16 @@ export default function SignUp() {
         mt={{ base: "40px", md: "14vh" }}
         flexDirection='column'>
         <Box me='auto'>
-          <Heading color={textColor} fontSize='36px' mb='10px'>
+        <MotionHeading
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            color={textColor}
+            fontSize='36px'
+            mb='10px'
+          >
             Sign Up
-          </Heading>
+          </MotionHeading>
           <Text
             mb='36px'
             ms='4px'
@@ -131,22 +157,7 @@ export default function SignUp() {
           mx={{ base: "auto", lg: "unset" }}
           me='auto'
           mb={{ base: "20px", md: "auto" }}>
-          {/* <Button
-            fontSize='sm'
-            me='0px'
-            mb='26px'
-            py='15px'
-            h='50px'
-            borderRadius='16px'
-            bg={googleBg}
-            color={googleText}
-            fontWeight='500'
-            _hover={googleHover}
-            _active={googleActive}
-            _focus={googleActive}>
-            <Icon as={FcGoogle} w='20px' h='20px' me='10px' />
-            Sign up with Google
-          </Button> */}
+     
           <Flex align='center' mb='25px'>
             <HSeparator />
             {/* <Text color='gray.400' mx='14px'>
@@ -291,16 +302,19 @@ export default function SignUp() {
                 </FormLabel>
               </FormControl>
             </Flex>
-            <Button
+            <MotionButton
               onClick={handleAddUser}
               fontSize='sm'
               variant='brand'
               fontWeight='500'
               w='100%'
               h='50'
-              mb='24px'>
+              mb='24px'
+              whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.9 }}
+  transition={{ type: "spring", stiffness: 400, damping: 17 }}>
               Sign Up
-            </Button>
+            </MotionButton>
           </FormControl>
           <Flex
             flexDirection='column'

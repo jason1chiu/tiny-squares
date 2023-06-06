@@ -68,12 +68,7 @@ export const REMOVE_JOURNAL = gql`
 `;
 
 export const ADD_ENTRY = gql`
-  mutation addEntry(
-    $journalId: ID!
-    $description: String!
-    $date: String!
-    $status: String!
-  ) {
+  mutation addEntry( $journalId: ID!, $description: String!, $date: String!, $status: String!) {
     addEntry(
       journalId: $journalId
       description: $description
@@ -131,5 +126,31 @@ export const UPDATE_ENTRY = gql`
         status
       }
     }
+  }
+`;
+
+export const CREATE_LEGEND = gql`
+  mutation CreateLegend($label: String!, $color: String!, $userId: ID!) {
+    createLegend(label: $label, color: $color, userId: $userId) {
+      id
+      label
+      color
+    }
+  }
+`;
+
+export const UPDATE_LEGEND = gql`
+  mutation UpdateLegend($id: ID!, $label: String!, $color: String!) {
+    updateLegend(id: $id, label: $label, color: $color) {
+      id
+      label
+      color
+    }
+  }
+`;
+
+export const DELETE_LEGEND = gql`
+  mutation DeleteLegend($id: ID!) {
+    deleteLegend(id: $id)
   }
 `;

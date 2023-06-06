@@ -1,11 +1,13 @@
 import { Portal, Box, useDisclosure } from "@chakra-ui/react";
-import routes from "../../routes.js";
+import routes, { sidebarRoutes } from "routes.js";
 import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import Footer from "../../components/footer/FooterAdmin.js";
-import Navbar from "../../components/navbar/AdminNav.js";
-import Sidebar from "../../components/sidebar/Sidebar.js";
-import { SidebarContext } from "../../contexts/SidebarContext.js";
+import Footer from "components/footer/FooterAdmin.js";
+import Navbar from "components/navbar/AdminNav.js";
+import Sidebar from "components/sidebar/Sidebar.js";
+import { SidebarContext } from "contexts/SidebarContext.js";
+import SignIn from "views/auth/signIn";
+import SignUp from "views/auth/signUp";
 
 export default function Dashboard(props) {
   const { ...rest } = props;
@@ -118,7 +120,7 @@ export default function Dashboard(props) {
           toggleSidebar,
           setToggleSidebar,
         }}>
-        <Sidebar routes={routes} display='none' {...rest} />
+        <Sidebar routes={sidebarRoutes} display='none' {...rest} />
         <Box
           float='right'
           minHeight='100vh'
@@ -153,7 +155,9 @@ export default function Dashboard(props) {
               minH='100vh'
               pt='50px'>
               <Switch>
-                {getRoutes(routes)}
+                {getRoutes(sidebarRoutes)}
+                <Route path='/auth/sign-in' component={SignIn} />
+                <Route path='/auth/sign-up' component={SignUp} />
                 <Redirect from='/' to='/admin/dashboard' />
               </Switch>
             </Box>

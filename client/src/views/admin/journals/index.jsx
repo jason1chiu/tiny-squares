@@ -6,37 +6,32 @@ import {
   Text,
   useColorModeValue,
   SimpleGrid,
+  Link
 } from "@chakra-ui/react";
 
-import Banner from "views/admin/create/components/Banner";
+import Banner from "views/admin/journals/components/Banner";
 import YourJournalCard from "views/admin/journals/components/YourJournalCard";
 import P2 from "assets/img/purple.jpg";
 import { useAuth } from "contexts/auth.context";
 import { useLazyQuery } from "@apollo/client";
 import { GET_ME } from "utils/queries";
+import NewCard from "views/admin/journals/components/NewCard";
 
 export default function JournalPage() {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  // const [journals, setJournals] = useState([]);
+  const textColorBrand = useColorModeValue("brand.500", "white");
+  
   let { user, journals, setJournals } = useAuth();
   let [me, { data, loading }] = useLazyQuery(GET_ME);
+  let { categories } = useAuth();
 
   useEffect(() => {
     me().then(data => {
       setJournals(data.data.me.journals);
     })
   }, [])
-  // const textColorBrand = useColorModeValue("brand.500", "white");
-  // useEffect(() => {
-  //   // TODO: Fetch journals from API and set them to state
-  //   // This is placeholder data until you have actual data from your API
-  //   setJournals([
-  //     { name: 'Mood', author: 'By John Doe', image: P2 },
-  //     { name: 'Pain', author: 'By John Doe', image: P2 },
-  //     { name: 'Workouts', author: 'By John Doe', image: P2 },
-  //   ]);
-  // }, []);
+
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
       {/* Main Fields */}
@@ -59,16 +54,45 @@ export default function JournalPage() {
               direction={{ base: "column", md: "row" }}
               align={{ base: "start", md: "center" }}>
               <Text color={textColor} fontSize='2xl' ms='24px' fontWeight='700'>
-                Your Journals
+                Create New
               </Text>
-
+              <Flex
+                align='center'
+                me='20px'
+                ms={{ base: "24px", md: "0px" }}
+                mt={{ base: "20px", md: "0px" }}>
+                {categories.map(category =>
+                  <Link
+                    color={textColorBrand}
+                    fontWeight='500'
+                    me={{ base: "34px", md: "44px" }}
+                    to='#'>
+                    {category}
+                  </Link>
+                )}
+              </Flex>
             </Flex>
             <SimpleGrid columns={{ base: 1, md: 3 }} gap='20px'>
 
-              {/* ToDo: insert functionality to add new journals */}
-              {/* <YourJournalCard journal={yourJournalObject} /> */}
+              <NewCard />
+
+            </SimpleGrid>
+
+            <Flex
+              mt='45px'
+              mb='20px'
+              justifyContent='space-between'
+              direction={{ base: "column", md: "row" }}
+              align={{ base: "start", md: "center" }}>
+
+              <Text color={textColor} fontSize='2xl' ms='24px' fontWeight='700'>
+                Your Journals
+              </Text>
+            </Flex>
+
+            <SimpleGrid columns={{ base: 1, md: 3 }} gap='20px'>
               {journals.map((journal) => (
-                <YourJournalCard journal={{...journal, image: P2}} />
+                <YourJournalCard journal={{ ...journal, image: P2 }} />
               ))}
             </SimpleGrid>
 

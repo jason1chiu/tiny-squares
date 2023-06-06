@@ -5,9 +5,9 @@ import { useDisclosure } from "@chakra-ui/react";
 import PreviewModal from "views/admin/journals/components/PreviewModal";
 import { useAuth } from "contexts/auth.context";
 import { GET_ME } from "utils/queries";
-import { useLazyQuery } from "@apollo/client";
 
 export default function YourJournalCard({ journal }) {
+  console.log(journal);
   const { isOpen, onOpen, onClose } = useDisclosure();
   let { user } = useAuth();
   return (
@@ -18,7 +18,7 @@ export default function YourJournalCard({ journal }) {
         image={journal.image}
         onViewClick={onOpen}
       />
-      <PreviewModal isOpen={isOpen} onClose={onClose} />
+      <PreviewModal isOpen={isOpen} onClose={onClose} journal={journal} />
     </>
   );
 }

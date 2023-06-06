@@ -6,50 +6,27 @@ import {
     Image,
     Text,
     useColorModeValue,
+    Tooltip,
+  VStack,
   } from "@chakra-ui/react";
-
+  import { MdClose, MdEdit } from "react-icons/md";
   import Card from "components/card/card";
   import React, { useState } from "react";
-import { IoHeart, IoHeartOutline } from "react-icons/io5";
 
-export default function Preview(props) {
-    const { image, name, author, onViewClick  } = props;
-    const [like, setLike] = useState(false);
+
+  export default function Preview(props) {
+    const { image, name, author, onViewClick } = props;
     const textColor = useColorModeValue("navy.700", "white");
-    const textColorBid = useColorModeValue("brand.500", "white");
     return (
-        <Card p='20px'>
-          <Flex direction={{ base: "column" }} justify='center'>
-            <Box mb={{ base: "20px", "2xl": "20px" }} position='relative'>
-              <Image
-                src={image}
-                w={{ base: "100%", "3xl": "100%" }}
-                h={{ base: "100%", "3xl": "100%" }}
-                borderRadius='20px'
-              />
-              <Button
-            position='absolute'
-            bg='white'
-            _hover={{ bg: "whiteAlpha.900" }}
-            _active={{ bg: "white" }}
-            _focus={{ bg: "white" }}
-            p='0px !important'
-            top='14px'
-            right='14px'
-            borderRadius='50%'
-            minW='36px'
-            h='36px'
-            onClick={() => {
-              setLike(!like);
-            }}>
-            <Icon
-              transition='0.2s linear'
-              w='20px'
-              h='20px'
-              as={like ? IoHeart : IoHeartOutline}
-              color='brand.500'
+      <Card p='20px'>
+        <Flex direction={{ base: "column" }} justify='center'>
+          <Box mb={{ base: "20px", "2xl": "20px" }} position='relative'>
+            <Image
+              src={image}
+              w={{ base: "100%", "3xl": "100%" }}
+              h={{ base: "100%", "3xl": "100%" }}
+              borderRadius='20px'
             />
-          </Button>
         </Box>
         <Flex flexDirection='column' justify='space-between' h='100%'>
           <Flex
@@ -88,6 +65,19 @@ export default function Preview(props) {
                 {author}
               </Text>
             </Flex>
+            <VStack position="absolute" right={8} top={8} spacing={2}>
+            <Tooltip hasArrow label="Delete" fontSize="sm">
+            <Button size="xs" colorScheme="purple">
+              <Icon as={MdClose} />
+            </Button>
+          </Tooltip>
+          <Tooltip hasArrow label="Edit" fontSize="sm">
+            <Button size="xs" colorScheme="purple" >
+              <Icon as={MdEdit} />
+            </Button>
+          </Tooltip>
+          
+        </VStack>
             <Button
                 variant='darkBrand'
                 color='white'
@@ -96,12 +86,12 @@ export default function Preview(props) {
                 borderRadius='70px'
                 px='24px'
                 py='5px'
-                onClick={onViewClick} 
-            >
+                onClick={onViewClick}>
                 VIEW
             </Button>
           </Flex>
         </Flex>
+        
       </Flex>
     </Card>
   );
