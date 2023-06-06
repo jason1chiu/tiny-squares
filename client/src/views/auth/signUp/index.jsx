@@ -37,6 +37,7 @@ import DefaultAuth from "layouts/auth/Default";
 import imageAuth from "assets/img/authimage.png"
 import { ADD_USER } from "utils/mutations.js";
 import { useAuth } from "contexts/auth.context";
+import Auth from "utils/auth"
 
 export default function SignUp() {
   let { setUser } = useAuth();
@@ -73,7 +74,12 @@ export default function SignUp() {
     }
     if (password === confirmPassword && password && username && email) {
       try {
-        await addUser({ variables: newUser });
+
+        const { data } = await addUser({ variables: newUser });
+        const { token, user } = data.addUser;
+        const userId = user._id;
+        
+        Auth.login(token, userId, user); 
 
         toast({
           status: "success",
@@ -86,6 +92,7 @@ export default function SignUp() {
             </Box>
           ),
         });
+        
       } catch (error) {
         console.error("Error signing up", error);
         toast({
