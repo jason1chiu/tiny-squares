@@ -9,6 +9,11 @@ const legendSchema = new Schema({
     type: String,
     required: true,
   },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User', 
+    required: true,
+  },
 });
 
 const Legend = model("Legend", legendSchema);

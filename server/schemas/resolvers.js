@@ -10,6 +10,7 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
           .populate("journals")
+          .populate("legends");
       
         return userData;
       }
@@ -23,6 +24,16 @@ const resolvers = {
     journal: async (parent, { _id }, context) => {
       return Journal.findOne({ _id })
         .populate("entries");
+    },
+
+    legends: async (parent, { userId }, context) => {
+      try {
+        const user = await User.findById(userId).populate("legends");
+        return user.legends;
+      } catch (error) {
+        console.error(error);
+        throw new Error("Failed to fetch legends");
+      }
     },
   },
 
@@ -154,9 +165,9 @@ const resolvers = {
       return updatedJournal;
     },
 
-    createLegend: async (parent, { label, color }, context) => {
-      const { userId } = context;
-      const legend = await Legend.create({ label, color });
+    createLegend: async (parent, { label, color, userId }, context) => {
+
+      const legend = await Legend.create({ label, color, userId });
     
       const updatedUser = await User.findOneAndUpdate(
         { _id: userId },
@@ -174,8 +185,13 @@ const resolvers = {
     },
 
     deleteLegend: async (_, { id }) => {
-      await Legend.findByIdAndDelete(id);
-      return true;
+      try {
+        await Legend.findByIdAndDelete(id);
+        return "Legend deleted successfully";
+      } catch (error) {
+        console.error(error);
+        throw new Error("Failed to delete legend");
+      }
     },
   },
 };
