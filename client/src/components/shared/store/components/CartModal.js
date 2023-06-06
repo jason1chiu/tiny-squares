@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { CartContext } from "components/shared/store/js/CartContext";
 import { getProductData } from 'components/shared/store/js/ProductsStore';
-import { Button, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Box, VStack, useToast  } from '@chakra-ui/react';
+import { Button, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Box, VStack, useToast, Flex  } from '@chakra-ui/react';
 
 export function CartModal(props) {
     const cart = useContext(CartContext);
@@ -24,31 +24,39 @@ export function CartModal(props) {
     }
 
     return (
-        <Modal isOpen={props.isOpen} onClose={props.onClose}>
+        <Modal isOpen={props.isOpen} onClose={props.onClose} >
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Your Shopping Cart</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <VStack spacing={4}>
-                {cart.cart.map(({ id, quantity }) => {
-                  const productData = getProductData(id);
-                  return (
-                    <Box key={id} p={5} shadow="md" borderWidth="1px"
-                    borderRadius="10px" w="100%">
-                      <h3>{productData.title}</h3>
-                      <Image src={productData.img} alt="product" boxSize='150px' objectFit='cover'></Image>
-                      <Text>Quantity: {cart.getProductQuantity(id)}</Text>
-                      <Text>Subtotal: ${(quantity * productData.price).toFixed(2)}</Text>
-                      <Button variant='brand'
+            <VStack spacing={4}>
+        {cart.cart.map(({ id, quantity }) => {
+          const productData = getProductData(id);
+          return (
+            <Flex key={id} p={5} shadow="md" borderWidth="1px" borderRadius="10px" w="100%">
+              <Box flex="1">
+                <h3>{productData.title}</h3>
+                <Image src={productData.img} alt="product" boxSize='150px' objectFit='cover'></Image>
+              </Box>
+              <Box flex="1">
+                <Text>Quantity: {cart.getProductQuantity(id)}</Text>
+                <Text>Subtotal: ${(quantity * productData.price).toFixed(2)}</Text>
+              </Box>
+              <Button
+                variant='brand'
                 color='white'
                 fontSize='sm'
                 fontWeight='500'
-                borderRadius='70px'onClick={() => cart.deleteFromCart(id)}><Text fontSize='xs'>Remove</Text></Button>
-                    </Box>
-                  );
-                })}
-              </VStack>
+                borderRadius='70px'
+                onClick={() => cart.deleteFromCart(id)}
+              >
+                <Text fontSize='xs'>Remove</Text>
+              </Button>
+            </Flex>
+          );
+        })}
+      </VStack>
             </ModalBody>
     
             <ModalFooter>
