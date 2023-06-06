@@ -1,6 +1,6 @@
 import React from 'react';
-import Store from 'components/shared/store/components/Store'
-import StoreHeader from 'components/shared/store/components/StoreHeader'
+import Store from 'views/admin/store/components/Store'
+import StoreHeader from 'views/admin/store/components/StoreHeader'
 import { Box, Flex, Grid } from '@chakra-ui/react'
 
 export default function Overview() {

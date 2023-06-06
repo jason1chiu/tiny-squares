@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {CartContext} from 'components/shared/store/js/CartContext'
+import {CartContext} from 'views/admin/store/js/CartContext'
 import { useContext } from 'react'
 import { Button, ButtonGroup, Grid, GridItem, Image, Center, Stack } from '@chakra-ui/react'
 

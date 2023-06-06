@@ -1,15 +1,26 @@
 // React imports
 import React from "react";
-import { MdShoppingCart, MdEdit } from "react-icons/md";
+import { MdNotificationsNone, MdInfoOutline, MdEdit } from "react-icons/md";
 import { FaEthereum } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import EditProfileModal from "components/modal/EditProfileModal";
-import { CartContext } from 'components/shared/store/js/CartContext'
-import { useContext } from 'react'
-import { CartModal } from 'components/shared/store/components/CartModal'
 
 // Chakra imports
-import { Avatar, Button, Flex, Icon, Link, Menu, MenuButton, MenuItem, MenuList, Text,  Badge,  useColorModeValue,  useDisclosure, IconButton, Box } from "@chakra-ui/react";
+import {
+  Avatar,
+  Button,
+  Flex,
+  Icon,
+  Image,
+  Link,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+  useColorModeValue,
+  useDisclosure,
+} from "@chakra-ui/react";
 import PropTypes from "prop-types";
 
 // Apollow imports
@@ -17,19 +28,20 @@ import { useMutation } from "@apollo/client"
 
 // File imports
 import routes from "routes";
-
+import navImage from "assets/img/purple.jpg";
 import { ItemContent } from "components/menu/ItemContent";
 import { SidebarResponsive } from "components/sidebar/Sidebar";
 import { LOGOUT_USER } from "utils/mutations";
 import { useAuth } from "contexts/auth.context";
 
 export default function HeaderLinks(props) {
+
   let { user, setUser } = useAuth();
   let email = user.user.email;
+
   const [logout] = useMutation(LOGOUT_USER);
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
   const handleLogout = async () => {
     try {
       await logout({ variables: { email } });
@@ -46,7 +58,7 @@ export default function HeaderLinks(props) {
   const navbarIcon = useColorModeValue("gray.400", "white");
   let menuBg = useColorModeValue("white", "navy.800");
   const textColor = useColorModeValue("secondaryGray.900", "white");
-
+  const textColorBrand = useColorModeValue("brand.700", "brand.400");
   const ethColor = useColorModeValue("gray.700", "white");
   const borderColor = useColorModeValue("#E6ECFA", "rgba(135, 140, 189, 0.3)");
   const ethBg = useColorModeValue("secondaryGray.300", "navy.900");
@@ -55,11 +67,7 @@ export default function HeaderLinks(props) {
     "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
     "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
   );
-
-
-  const cart = useContext(CartContext);
-  const totalQuantity = cart.getTotalQuantity();
-  const { isOpen: cartModalIsOpen, onOpen: openCartModal, onClose: closeCartModal } = useDisclosure();
+  const borderButton = useColorModeValue("secondaryGray.500", "whiteAlpha.200");
   return (
     <Flex
       w={{ sm: "100%", md: "auto" }}
@@ -91,11 +99,32 @@ export default function HeaderLinks(props) {
         >
           <Icon color={ethColor} w="9px" h="14px" as={FaEthereum} />
         </Flex>
-
+        {/* <Text
+          w="max-content"
+          color={ethColor}
+          fontSize="sm"
+          fontWeight="700"
+          me="6px"
+        >
+          1,924
+          <Text as="span" display={{ base: "none", md: "unset" }}>
+            {" "}
+            ETH
+          </Text>
+        </Text> */}
       </Flex>
       <SidebarResponsive routes={routes} />
       <Menu>
-
+        {/* <MenuButton p="0px">
+          <Icon
+            mt="6px"
+            as={MdNotificationsNone}
+            color={navbarIcon}
+            w="18px"
+            h="18px"
+            me="10px"
+          />
+        </MenuButton> */}
         <MenuList
           boxShadow={shadow}
           p="20px"
@@ -130,20 +159,59 @@ export default function HeaderLinks(props) {
         </MenuList>
       </Menu>
       <Menu>
-      <IconButton
-      icon={(
-        <Box position="relative">
-          <MdShoppingCart size="24" tm="100px"/>
-          <Badge colorScheme="purple" boxShadow='md' position="absolute" boxSize="20px" borderRadius="full" display="flex" alignItems="center" justifyContent="center" top="-18px" right="-10px" fontSize='.7em'>
-            {totalQuantity}
-          </Badge>
-        </Box>
-      )}
-      color={navbarIcon}
-      _hover={{ color: "secondaryGray.900" }} // replace "yourColor" with the color you want when hovering
-      onClick={openCartModal}
-    />
-    <CartModal isOpen={cartModalIsOpen} onClose={closeCartModal} />
+        {/* <MenuButton p="0px">
+          <Icon
+            mt="6px"
+            as={MdInfoOutline}
+            color={navbarIcon}
+            w="18px"
+            h="18px"
+            me="10px"
+          />
+        </MenuButton> */}
+        <MenuList
+          boxShadow={shadow}
+          p="20px"
+          me={{ base: "30px", md: "unset" }}
+          borderRadius="20px"
+          bg={menuBg}
+          border="none"
+          mt="22px"
+          minW={{ base: "unset" }}
+          maxW={{ base: "360px", md: "unset" }}
+        >
+          <Image src={navImage} borderRadius="16px" mb="28px" />
+          {/* <Flex flexDirection="column">
+            <Link w="100%" href="#">
+              <Button w="100%" h="44px" mb="10px" variant="brand">
+                bRAND
+              </Button>
+            </Link>
+            <Link w="100%" href="#">
+              <Button
+                w="100%"
+                h="44px"
+                mb="10px"
+                border="1px solid"
+                bg="transparent"
+                borderColor={borderButton}
+              >
+                BRAND
+              </Button>
+            </Link>
+            <Link w="100%" href="#">
+              <Button
+                w="100%"
+                h="44px"
+                variant="no-hover"
+                color={textColor}
+                bg="transparent"
+              >
+                BRAND
+              </Button>
+            </Link>
+          </Flex> */}
+        </MenuList>
       </Menu>
 
       <Menu>
@@ -151,7 +219,7 @@ export default function HeaderLinks(props) {
           <Avatar
             _hover={{ cursor: "pointer" }}
             color="white"
-            name={user.user.username}
+            name="NAME"
             bg="#11047A"
             size="sm"
             w="40px"
@@ -179,6 +247,7 @@ export default function HeaderLinks(props) {
               color={textColor}
             >
               👋&nbsp; Hey, {user.user.username}
+              {/* TODO: insert {userData.username} instead of NAME */}
             </Text>
           </Flex>
 
@@ -195,7 +264,7 @@ export default function HeaderLinks(props) {
               <Icon as={MdEdit} w={5} h={5} mr={2} />
               <EditProfileModal isOpen={isOpen} onClose={onClose} />
             </MenuItem>
-
+            
             <MenuItem
               _hover={{ bg: "none" }}
               _focus={{ bg: "none" }}
@@ -218,9 +287,9 @@ export default function HeaderLinks(props) {
             </MenuItem>
           </Flex>
         </MenuList>
-
+        
       </Menu>
-
+     
     </Flex>
   );
 }

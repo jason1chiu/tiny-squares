@@ -8,10 +8,18 @@ import {
   MdMenuBook
 } from "react-icons/md";
 
+// Admin views
+import Calendar from "views/admin/calendar";
+import Create from "views/admin/create";
 import Journals from "views/admin/journals";
 import Dashboard from "views/admin/dashboard";
-import SignIn from "views/auth/signIn";
-import SignUp from "views/auth/signUp";
+import Store from "views/admin/store";
+
+// import CancelPage from "views/admin/cancelOrderPage";
+// Auth views
+import SignIn from "views/auth/signIn/index.jsx"
+import SignUp from "views/auth/signUp/index.jsx";
+// import Landing from "./views/admin/auth/Landing.js";
 
 const routes = [
   {
@@ -29,6 +37,34 @@ const routes = [
     component: Journals,
   },
   {
+    name: "Create",
+    layout: "/admin",
+    path: "/create",
+    icon: <Icon as={MdLibraryAdd} width='20px' height='20px' color='inherit' />,
+    component: Create,
+  },
+  {
+    name: "Store",
+    layout: "/admin",
+    path: "/store",
+    icon: <Icon as={MdLibraryAdd} width='20px' height='20px' color='inherit' />,
+    component: Store,
+  },
+  // {
+  //   name: "CancelOrderPage",
+  //   layout: "/admin",
+  //   path: "/store/cancel",
+  //   icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+  //   component: CancelPage,
+  // },
+  {
+    name: "Calendar",
+    layout: "/admin",
+    path: "/calendar",
+    icon: <Icon as={MdOutlineCalendarMonth} width='20px' height='20px' color='inherit' />,
+    component: Calendar,
+  },
+  {
     name: "Sign In",
     layout: "/auth",
     path: "/sign-in",
@@ -44,7 +80,4 @@ const routes = [
   },
 ];
 
-const sidebarRoutes = routes.filter(route => route.name !== "Sign In" && route.name !== "Sign Up");
-
 export default routes;
-export { sidebarRoutes };

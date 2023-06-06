@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 const legendSchema = new Schema({
-  label: {
+  name: {
     type: String,
     required: true,
   },

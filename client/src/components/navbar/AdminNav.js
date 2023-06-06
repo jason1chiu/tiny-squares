@@ -11,7 +11,7 @@ import {
   import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import LinksAdminNav from "components/navbar/LinksAdminNav";
-
+// import routes from "routes.js";
 
 export default function AdminNavbar(props) {
     const [scrolled, setScrolled] = useState(false);

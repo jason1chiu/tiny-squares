@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, Input, Select, useToast } from "@chakra-ui/react";
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, Input, Select } from "@chakra-ui/react";
 
 import { useAuth } from "contexts/auth.context";
 
@@ -7,7 +7,6 @@ function NewJournalModal({ isOpen, onClose, onSubmit }) {
   const [journalName, setJournalName] = useState("");
   const [journalCategory, setJournalCategory] = useState("");
   let { categories } = useAuth();
-  const toast = useToast();
 
   const handleInputChange = (event) => {
     setJournalName(event.target.value);
@@ -19,15 +18,6 @@ function NewJournalModal({ isOpen, onClose, onSubmit }) {
 
   const handleSubmit = () => {
     onSubmit({name: journalName, category: journalCategory});
-    toast({
-      title: "Journal created.",
-      description: "Your journal was successfully created!",
-      status: "success",
-      duration: 5000,
-      isClosable: true,
-      position: "top",
-      colorScheme: "purple"
-    });
   };
 
   return (

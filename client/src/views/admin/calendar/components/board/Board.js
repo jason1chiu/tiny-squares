@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Grid, GridItem, Box, Text } from "@chakra-ui/react";
 import Card from "components/card/card";
-import Cell from "components/shared/calendar/components/board/Cell";
+import Cell from "views/admin/calendar/components/board/Cell";
 
 const Board = ({ legends }) => {
   // Create a state that stores the cell data

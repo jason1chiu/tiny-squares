@@ -4,33 +4,31 @@ const bcrypt = require("bcrypt");
 // Import journalSchema
 const { journalSchema } = require("./Journal");
 
-const userSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    match: [/.+@.+\..+/, 'Must match an email address!'],
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  journals: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Journal',
+const userSchema = new Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
     },
-  ],
-  journalsCount: {
-    type: Number,
-    default: 0,
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      match: [/.+@.+\..+/, "Must use a valid email address"],
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    journals: [{type: Schema.Types.ObjectId, ref: "Journal"}],
   },
-});
+  {
+    toJSON: {
+      virtuals: true,
+    },
+  }
+);
 
 // hash user password
 userSchema.pre("save", async function (next) {

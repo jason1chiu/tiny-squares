@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Logo from "assets/img/Logo.png"
-import { CartContext } from "components/shared/store/js/CartContext"
-import CartProduct from 'components/shared/store/js/CartProduct'
+import { CartContext } from "views/admin/store/js/CartContext"
+import CartProduct from 'views/admin/store/js/CartProduct'
 import { Button, Flex, Text, Box, Grid, Image, GridItem,
   Modal,
   ModalOverlay,

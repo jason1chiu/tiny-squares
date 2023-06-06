@@ -10,7 +10,7 @@ import {
 
   import Card from "components/card/card";
   import React, { useState } from "react";
-
+import { IoHeart, IoHeartOutline } from "react-icons/io5";
 
 export default function Preview(props) {
     const { image, name, author, onViewClick  } = props;
@@ -27,7 +27,29 @@ export default function Preview(props) {
                 h={{ base: "100%", "3xl": "100%" }}
                 borderRadius='20px'
               />
-              
+              <Button
+            position='absolute'
+            bg='white'
+            _hover={{ bg: "whiteAlpha.900" }}
+            _active={{ bg: "white" }}
+            _focus={{ bg: "white" }}
+            p='0px !important'
+            top='14px'
+            right='14px'
+            borderRadius='50%'
+            minW='36px'
+            h='36px'
+            onClick={() => {
+              setLike(!like);
+            }}>
+            <Icon
+              transition='0.2s linear'
+              w='20px'
+              h='20px'
+              as={like ? IoHeart : IoHeartOutline}
+              color='brand.500'
+            />
+          </Button>
         </Box>
         <Flex flexDirection='column' justify='space-between' h='100%'>
           <Flex
