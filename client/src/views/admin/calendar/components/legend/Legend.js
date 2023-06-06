@@ -16,13 +16,19 @@ const Legend = ({ legends, setLegends }) => {
   const [deleteLegend] = useMutation(DELETE_LEGEND);
 
   
-    
+  // Initialized the first item in legend array as something blank
+  // useState(() => {
+  //   setLegends([{ label: "Add Your Selection" }]);
+  // });
+
     useEffect(() => {
       // Add initial legend
       if (legends.length === 0) {
         setLegends([{ label: "Add Your Selection" }]);
       }
     }, []);
+
+    console.log(legends);
   
         // Get the user ID from localStorage
         const userId = localStorage.getItem("user_id");
@@ -36,10 +42,6 @@ const Legend = ({ legends, setLegends }) => {
         if (loading) return <p>Loading...</p>;
         if (error) return <p>Error fetching existing legends.</p>;
 
-  // Initialized the first item in legend array as something blank
-  // useState(() => {
-  //   setLegends([{ label: "Add Your Selection" }]);
-  // });
 
   const handleAddLegend = async () => {
     if (selectedIndex !== null) {
@@ -47,11 +49,8 @@ const Legend = ({ legends, setLegends }) => {
       const newLegends = [...legends];
       newLegends[selectedIndex] = { color, label };
       setLegends(newLegends);
-    } else if (legends.length < 10) {
+    } else if (legends.length < 10 && label !== "Add Your Selection") {
       // Add
-  
-      // Get the user ID from localStorage
-      // const userId = localStorage.getItem("user_id");
   
       try {
         const response = await createLegend({
@@ -60,21 +59,12 @@ const Legend = ({ legends, setLegends }) => {
             color,
             userId: userId, // Pass the user ID to the mutation
           },
+          
           update: (cache, { data }) => {
             // Update the cache after the mutation
             const existingLegends = cache.readQuery({ query: GET_LEGENDS, variables: { userId } });
 
-            
-
-            if (existingLegends && existingLegends.legends) {
-              const legendsMap = existingLegends.legends.map(legend => ({
-                id: legend.id,
-                label: legend.label,
-                color: legend.color
-              }));
-              
-              console.log(legendsMap);
-            }
+          
   
             const newLegend = data.createLegend;
   
@@ -97,14 +87,13 @@ const Legend = ({ legends, setLegends }) => {
         });
   
         const newLegend = response.data.createLegend;
-  
+        console.log(newLegend); // Log the response object here
         setLegends([...legends, { id: newLegend.id, color, label }]);
         console.log(newLegend);
       } catch (error) {
         console.error("Error adding legend:", error);
       }
     }
-  
     // Reset
     setColor("#000000");
     setLabel("");
@@ -113,28 +102,31 @@ const Legend = ({ legends, setLegends }) => {
 
 
   
-  const handleDeleteLegend = (legendId) => {
+  const handleDeleteLegend = (legend) => {
+    const legendId = legend.id; // Assuming the ID field is named 'id' in the 'legend' object
     deleteLegend({
       variables: { id: legendId },
       update(cache) {
-        console.log(cache);
-
         // Update the cache after successful deletion
         const cachedData = cache.readQuery({ query: GET_LEGENDS });
-        const updatedLegends = cachedData.legends.filter((legend) => legend.id !== legendId);
-
-          // Handle case when cachedData is null or undefined
-      if (!cachedData || !cachedData.legends) {
-        return;
-      }
-
-        console.log('Updated Legends:', updatedLegends);
+        const updatedLegends = cachedData.legends.filter(
+          (legend) => legend.id !== legendId
+        );
+  
         cache.writeQuery({
           query: GET_LEGENDS,
           data: { legends: updatedLegends },
         });
       },
-    });
+    })
+      .then((response) => {
+        // Handle successful deletion
+        console.log("Legend deleted:", response);
+      })
+      .catch((error) => {
+        // Handle error
+        console.error("Failed to delete legend:", error);
+      });
   };
 
   const handleEditLegend = (index) => {
@@ -155,17 +147,16 @@ const Legend = ({ legends, setLegends }) => {
         <Button size="xs" onClick={handleAddLegend}>{selectedIndex === null ? "Add" : "Update"}</Button>
       </HStack>
       
-      {existingLegends && existingLegends.map((legend, index) => (
-    
-        <HStack key={index} spacing={1}>
-          <React.Fragment key={index}>
+      {legends.concat(existingLegends).map((legend, index) => (
+        index !== 0 && (
+          <HStack key={index} spacing={1}>
             <Box boxSize="1em" bgColor={legend.color} border="1px solid" borderColor="gray.200" />
             <Text fontSize="sm">{legend.label}</Text>
             <Button size="xs" onClick={() => handleEditLegend(index)}>Edit</Button>
             <Button size="xs" onClick={() => handleDeleteLegend(legend.id)}>Delete</Button>
-          </React.Fragment>
           </HStack>
-        ))}
+        )
+      ))}
       {/* {legends.map((legend, index) => (
         <HStack key={index} spacing={1}> */}
 
