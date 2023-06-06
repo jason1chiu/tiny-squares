@@ -1,7 +1,6 @@
 import React from 'react';
 import "assets/css/index.css";
 
-
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import AdminLayout from "layouts/admin";
 import AuthLayout from "layouts/auth";
