@@ -1,5 +1,4 @@
-const { User, Journal, Entry } = require("../models");
-const { Legend } = require("../models/Legend");
+const { User, Journal, Entry, Legend } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 
@@ -10,8 +9,7 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
           .populate("journals")
-          .populate("legends");
-      
+
         return userData;
       }
 
@@ -21,14 +19,17 @@ const resolvers = {
       return Journal.find({})
         .populate("entries");
     },
-    journal: async (parent, { _id }, context) => {
-      return Journal.findOne({ _id })
-        .populate("entries");
+    journal: async (parent, { id }, context) => {
+      let results = await Journal.findById(id)
+        .populate("entries")
+        .populate("legends");
+        console.log(results);
+        return results;
     },
-
-    legends: async (parent, { userId }, context) => {
+    legends: async (parent, { id }, context) => {
       try {
-        const user = await User.findById(userId).populate("legends");
+        const user = await User.findById(id).populate("journals").populate("legends");
+        console.log({user: user.journals[0]});
         return user.legends;
       } catch (error) {
         console.error(error);
@@ -77,8 +78,8 @@ const resolvers = {
       // console.log(context);
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id},
-          { $set: {username: username}},
+          { _id: context.user._id },
+          { $set: { username: username } },
           { new: true }
         );
 
@@ -91,38 +92,20 @@ const resolvers = {
       return { email };
     },
 
-    // addJournal: async (parent, { name, category }, context) => {
-    //   if (context.user) {
-    //     const journal = await Journal.create({ name, category });
-    //     const updatedUser = await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $addToSet: { journals: journal._id } },
-    //       { new: true }
-    //     );
-
-    //     return updatedUser;
-    //   }
-
-    //   throw new AuthenticationError("You need to be logged in!");
-    // },
     addJournal: async (parent, { name, category }, context) => {
       if (context.user) {
-        const currentUser = await User.findById(context.user._id);
-        if (currentUser.journalsCount >= 3) {
-          throw new Error("You have reached the maximum number of free journals. Please subscribe to create more.");
-        }
-    
         const journal = await Journal.create({ name, category });
-    
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { journals: journal._id }, $inc: { journalsCount: 1 } },
+          { $addToSet: { journals: journal._id } },
           { new: true }
-        );
-    
+        )
+          .populate("journals")
+
+        console.log(updatedUser);
         return updatedUser;
       }
-    
+
       throw new AuthenticationError("You need to be logged in!");
     },
 
@@ -140,6 +123,44 @@ const resolvers = {
       }
 
       throw new AuthenticationError("You need to be logged in!");
+    },
+
+    createLegend: async (parent, { journalId, label, color }, context) => {
+      const legend = await Legend.create({ label, color });
+      const updatedJournal = await Journal.findOneAndUpdate(
+        { _id: journalId },
+        { $addToSet: { legends: legend._id } },
+        { new: true }
+      )
+      .populate("legends")
+
+      return updatedJournal;
+    },
+
+    updateLegend: async (parent, { journalId, legendId, label, color }, context) => {
+      const updatedLegend = await Legend.findByIdAndUpdate(
+        legendId,
+        { label, color },
+        { new: true }
+      );
+
+      if (!updatedLegend) {
+        throw new Error('Failed to update legend');
+      }
+
+      return updatedLegend
+    },
+
+    deleteLegend: async (parent, { journalId, legendId }, context) => {
+      const updatedJournal = await Journal.findOneAndUpdate(
+        { _id: journalId },
+        { $pull: { legends: legendId } },
+        { new: true }
+      );
+
+      await Legend.findByIdAndDelete(legendId);
+
+      return updatedJournal;
     },
 
     addEntry: async (parent, { journalId, input }, context) => {
@@ -163,35 +184,6 @@ const resolvers = {
       await Entry.findByIdAndDelete(entryId);
 
       return updatedJournal;
-    },
-
-    createLegend: async (parent, { label, color, userId }, context) => {
-
-      const legend = await Legend.create({ label, color, userId });
-    
-      const updatedUser = await User.findOneAndUpdate(
-        { _id: userId },
-        { $addToSet: { legends: legend._id } },
-        { new: true }
-      ).populate('legends'); // Populate the 'legends' field in the updatedUser
-    
-      return legend; // Return the created legend instead of the updated user
-    },
-    
-    
-    updateLegend: async(parent, {id, label, color}) => {
-      const legend = await Legend.findByIdAndUpdate(id, { label, color }, { new: true });
-      return legend;
-    },
-
-    deleteLegend: async (_, { id }) => {
-      try {
-        await Legend.findByIdAndDelete(id);
-        return "Legend deleted successfully";
-      } catch (error) {
-        console.error(error);
-        throw new Error("Failed to delete legend");
-      }
     },
   },
 };

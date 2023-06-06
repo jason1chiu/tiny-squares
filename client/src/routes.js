@@ -24,7 +24,7 @@ const routes = [
   {
     name: "Journals",
     layout: "/admin",
-    path: "/admin/journals",
+    path: "/journals",
     icon: <Icon as={MdMenuBook} width='20px' height='20px' color='inherit' />,
     component: Journals,
   },

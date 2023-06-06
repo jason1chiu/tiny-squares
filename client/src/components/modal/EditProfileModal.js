@@ -45,7 +45,6 @@ function EditProfileModal() {
           username: username,
         },
       });
-      console.log(data);
       editUser(data.updateUser);
       onClose();
       toast({

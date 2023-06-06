@@ -3,7 +3,7 @@ import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody,
 
 import { useAuth } from "contexts/auth.context";
 
-function NewJournalModal({ isOpen, onClose, onSubmit }) {
+export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
   const [journalName, setJournalName] = useState("");
   const [journalCategory, setJournalCategory] = useState("");
   let { categories } = useAuth();
@@ -54,5 +54,3 @@ function NewJournalModal({ isOpen, onClose, onSubmit }) {
     </Modal>
   );
 }
-
-export default NewJournalModal;

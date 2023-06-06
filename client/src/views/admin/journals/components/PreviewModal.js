@@ -1,5 +1,3 @@
-// JournalModal.js
-
 import React from "react";
 import {
   Modal,
@@ -28,7 +26,7 @@ export default function JournalModal({ isOpen, onClose, journal }) {
         <ModalHeader>{journal.name}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Overview />
+          <Overview journal_id={journal._id}/>
         </ModalBody>
         <ModalFooter>
           <Button onClick={onClose}>Close</Button>
