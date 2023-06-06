@@ -6,8 +6,10 @@ import { useHistory } from "react-router-dom";
 import EditProfileModal from "components/modal/EditProfileModal";
 import { CartContext } from 'components/shared/store/js/CartContext'
 import { useContext } from 'react'
+import { BsShop } from "react-icons/bs";
 import { CartModal } from 'components/shared/store/components/CartModal'
 import { motion } from 'framer-motion';
+import BuyOptionsModal from 'components/shared/store/components/BuyOptionsModal'
 
 // Chakra imports
 import { Avatar, Button, Flex, Icon, Link, Menu, MenuButton, MenuItem, MenuList, Text, Badge, useColorModeValue, useDisclosure, IconButton, Box } from "@chakra-ui/react";
@@ -75,6 +77,7 @@ export default function HeaderLinks(props) {
 
   const cart = useContext(CartContext);
   const totalQuantity = cart.getTotalQuantity();
+  const { isOpen: buyOptionsModalIsOpen, onOpen: openBuyOptionsModal, onClose: closeBuyOptionsModal } = useDisclosure();
   const { isOpen: cartModalIsOpen, onOpen: openCartModal, onClose: closeCartModal } = useDisclosure();
   return (
     <Flex
@@ -160,6 +163,20 @@ export default function HeaderLinks(props) {
           onClick={openCartModal}
         />
         <CartModal isOpen={cartModalIsOpen} onClose={closeCartModal} />
+      </Menu>
+      <Menu>
+        <IconButton
+          icon={(
+            <Box position="relative">
+              <BsShop size="24" tm="100px" />
+          
+            </Box>
+          )}
+          color={navbarIcon}
+          _hover={{ color: "secondaryGray.900" }} 
+          onClick={openBuyOptionsModal}
+        />
+        <BuyOptionsModal isOpen={buyOptionsModalIsOpen} onClose={closeBuyOptionsModal} />
       </Menu>
 
       <Menu>
