@@ -67,8 +67,8 @@ import {
             </Flex>
             <VStack position="absolute" right={8} top={8} spacing={2}>
             <Tooltip hasArrow label="Delete" fontSize="sm">
-            <Button size="xs" colorScheme="purple">
-              <Icon as={MdClose} />
+            <Button size="xs" colorScheme="purple" >
+              <Icon as={MdClose} onClick={() => console.log('click')}/>
             </Button>
           </Tooltip>
           <Tooltip hasArrow label="Edit" fontSize="sm">
