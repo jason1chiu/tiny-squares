@@ -130,19 +130,21 @@ export const UPDATE_ENTRY = gql`
 `;
 
 export const CREATE_LEGEND = gql`
-  mutation CreateLegend($label: String!, $color: String!, $userId: ID!) {
-    createLegend(label: $label, color: $color, userId: $userId) {
-      id
+  mutation createLegend($label: String!, $color: String!, $journalId: ID!) {
+    createLegend(label: $label, color: $color, journalId: $journalId) {
+      legends{
+        _id
       label
       color
+      }
     }
   }
 `;
 
 export const UPDATE_LEGEND = gql`
-  mutation UpdateLegend($id: ID!, $label: String!, $color: String!) {
-    updateLegend(id: $id, label: $label, color: $color) {
-      id
+  mutation updateLegend($legendId: ID!, $label: String!, $color: String!, $journalId: ID!) {
+    updateLegend(legendId: $legendId, label: $label, color: $color, journalId: $journalId) {
+      _id
       label
       color
     }
@@ -150,7 +152,10 @@ export const UPDATE_LEGEND = gql`
 `;
 
 export const DELETE_LEGEND = gql`
-  mutation DeleteLegend($id: ID!) {
-    deleteLegend(id: $id)
+  mutation deleteLegend($legendId: ID!, $journalId: ID!) {
+    deleteLegend(legendId: $legendId, journalId: $journalId) {
+      _id
+    }
   }
 `;
+

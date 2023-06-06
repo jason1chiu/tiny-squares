@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { CartContext } from "components/shared/store/js/CartContext";
 import { getProductData } from 'components/shared/store/js/ProductsStore';
-import { Button, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Box, VStack  } from '@chakra-ui/react';
+import { Button, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Box, VStack, useToast  } from '@chakra-ui/react';
 
 export function CartModal(props) {
     const cart = useContext(CartContext);

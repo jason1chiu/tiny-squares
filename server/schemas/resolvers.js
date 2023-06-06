@@ -19,9 +19,22 @@ const resolvers = {
       return Journal.find({})
         .populate("entries");
     },
-    journal: async (parent, { _id }, context) => {
-      return Journal.findOne({ _id })
-        .populate("entries");
+    journal: async (parent, { id }, context) => {
+      let results = await Journal.findById(id)
+        .populate("entries")
+        .populate("legends");
+        console.log(results);
+        return results;
+    },
+    legends: async (parent, { id }, context) => {
+      try {
+        const user = await User.findById(id).populate("journals").populate("legends");
+        console.log({user: user.journals[0]});
+        return user.legends;
+      } catch (error) {
+        console.error(error);
+        throw new Error("Failed to fetch legends");
+      }
     },
   },
 
@@ -86,8 +99,10 @@ const resolvers = {
           { _id: context.user._id },
           { $addToSet: { journals: journal._id } },
           { new: true }
-        );
+        )
+          .populate("journals")
 
+        console.log(updatedUser);
         return updatedUser;
       }
 
@@ -110,21 +125,22 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    addLegend: async (parent, { journalId, name, color }, context) => {
-      const legend = await Legend.create({ name, color });
+    createLegend: async (parent, { journalId, label, color }, context) => {
+      const legend = await Legend.create({ label, color });
       const updatedJournal = await Journal.findOneAndUpdate(
         { _id: journalId },
         { $addToSet: { legends: legend._id } },
         { new: true }
-      );
+      )
+      .populate("legends")
 
       return updatedJournal;
     },
 
-    updateLegend: async (parent, { journalId, legendId, name, color }, context) => {
+    updateLegend: async (parent, { journalId, legendId, label, color }, context) => {
       const updatedLegend = await Legend.findByIdAndUpdate(
         legendId,
-        { name, color },
+        { label, color },
         { new: true }
       );
 
@@ -132,10 +148,10 @@ const resolvers = {
         throw new Error('Failed to update legend');
       }
 
-      return Journal.findById(journalId);
+      return updatedLegend
     },
 
-    removeLegend: async (parent, { journalId, legendId }, context) => {
+    deleteLegend: async (parent, { journalId, legendId }, context) => {
       const updatedJournal = await Journal.findOneAndUpdate(
         { _id: journalId },
         { $pull: { legends: legendId } },

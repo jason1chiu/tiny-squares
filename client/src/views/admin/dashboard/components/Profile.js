@@ -4,7 +4,7 @@ import React from "react";
 import profile from "assets/img/bannercover.png";
 
 export default function Profile(props) {
-  const { avatar, name, entries, journals } = props;
+  const { banner, avatar, name, entries, journals } = props;
 
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "gray.400";

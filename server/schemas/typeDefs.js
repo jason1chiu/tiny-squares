@@ -19,7 +19,8 @@ const typeDefs = gql`
   }
 
   type Legend {
-    name: String
+    _id: ID
+    label: String
     color: String
   }
 
@@ -38,7 +39,8 @@ const typeDefs = gql`
   type Query {
     me: User
     journals: [Journal]
-    journal(_id: ID!): Journal
+    journal(id: ID!): Journal
+    legends(id: ID!): [Legend]
   }
 
   input JournalInput {
@@ -61,9 +63,9 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     updateUser(username: String!): User
     logout(email: String!): User
-    addLegend(id: ID!, name: String!, color: String!): Journal
-    updateLegend(id: ID!, name: String!, color: String!): Journal
-    removeLegend(id: ID!, legendId: ID!): Journal
+    createLegend(journalId: ID!, label: String!, color: String!): Journal
+    updateLegend(journalId: ID!, label: String!, color: String!, legendId: ID!): Legend
+    deleteLegend(journalId: ID!, legendId: ID!): Journal
     purchaseProduct: PayLoad
     addJournal(name: String!, category: String!): User
     removeJournal(journalId: ID!): User

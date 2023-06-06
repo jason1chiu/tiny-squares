@@ -26,10 +26,11 @@ import { LOGOUT_USER, UPDATE_USER } from "utils/mutations";
 import { useAuth } from "contexts/auth.context";
 
 export default function HeaderLinks(props) {
-  let [ removeCookie ] = useCookies();
+  let [ cookies, setCookie, removeCookie ] = useCookies();
   let { user, setUser } = useAuth();
   let email = user.user.email;
   const [logout] = useMutation(LOGOUT_USER);
+  const [updatedUser] = useMutation(UPDATE_USER);
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const MotionMenuList = motion(MenuList);

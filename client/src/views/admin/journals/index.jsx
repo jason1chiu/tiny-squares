@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Flex,
@@ -22,8 +22,8 @@ export default function JournalPage() {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorBrand = useColorModeValue("brand.500", "white");
   
-  let { journals, setJournals } = useAuth();
-  let [me] = useLazyQuery(GET_ME);
+  let { user, journals, setJournals } = useAuth();
+  let [me, { data, loading }] = useLazyQuery(GET_ME);
   let { categories } = useAuth();
 
   useEffect(() => {
@@ -92,7 +92,7 @@ export default function JournalPage() {
 
             <SimpleGrid columns={{ base: 1, md: 3 }} gap='20px'>
               {journals.map((journal) => (
-                <YourJournalCard journal={{ ...journal, image: P2 }} />
+                <YourJournalCard key={journal._id} journal={{ ...journal, image: P2 }} />
               ))}
             </SimpleGrid>
 

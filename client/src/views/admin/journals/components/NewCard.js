@@ -9,7 +9,7 @@ import { useAuth } from 'contexts/auth.context';
 import BuyOptionsModal from 'components/shared/store/components/BuyOptionsModal';
 
 export default function NewCard() {
-  let [addJournal, { error }] = useMutation(ADD_JOURNAL);
+  let [addJournal, { data, error }] = useMutation(ADD_JOURNAL);
   let { user, setJournals, journals } = useAuth();
   const [isBuyOptionsModalOpen, setBuyOptionsModalOpen] = useState(false);
 
@@ -17,6 +17,9 @@ export default function NewCard() {
     setBuyOptionsModalOpen(true);
   };
 
+  const closeBuyOptionsModal = () => {
+    setBuyOptionsModalOpen(false);
+  };
   const [isModalOpen, setModalOpen] = useState(false);
   const [hover, setHover] = useState(false);
   const iconColor = useColorModeValue('secondaryGray.600', 'secondaryGray.600');

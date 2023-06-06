@@ -21,16 +21,16 @@ export default function App() {
 
   let { user } = useAuth();
   let [ cookies ] = useCookies();
-  function getToken(){
+  function getToken(user, cookies){  
     let token = (user && user.token) || cookies.token;
     return token ? `Bearer ${token}` : ""
   }
 
   const client = new ApolloClient({
     uri: 'http://localhost:3001/graphql',
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({query: true, data: false}),
     headers: {
-      authorization: getToken(),
+      authorization: getToken(user, cookies),
     },
   });
 

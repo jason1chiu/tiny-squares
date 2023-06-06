@@ -17,6 +17,7 @@ import {
   useToast
 } from "@chakra-ui/react";
 import { FiUpload } from "react-icons/fi";
+import axios from 'axios';
 import { useAuth } from "contexts/auth.context";
 import { useMutation } from "@apollo/client";
 import { UPDATE_USER } from "utils/mutations.js";
@@ -25,7 +26,7 @@ function EditProfileModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [username, setUsername] = useState("");
   const [file, setFile] = useState(null);
-  const [updateUser] = useMutation(UPDATE_USER);
+  const [updateUser, { error }] = useMutation(UPDATE_USER);
   const { editUser } = useAuth();
   const toast = useToast();
 

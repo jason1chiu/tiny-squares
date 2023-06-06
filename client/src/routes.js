@@ -1,11 +1,13 @@
-// React imports
 import React from "react";
-import { MdHome, MdLock, MdMenuBook } from "react-icons/md";
-
-// Chakra imports
 import { Icon } from "@chakra-ui/react";
+import {
+  MdHome,
+  MdLibraryAdd,
+  MdLock,
+  MdOutlineCalendarMonth,
+  MdMenuBook
+} from "react-icons/md";
 
-// File imports
 import Journals from "views/admin/journals";
 import Dashboard from "views/admin/dashboard";
 import SignIn from "views/auth/signIn";
