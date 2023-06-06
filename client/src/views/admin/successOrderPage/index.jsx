@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Center, Box } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 import Confetti from 'react-confetti';

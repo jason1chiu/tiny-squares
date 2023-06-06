@@ -26,11 +26,10 @@ import { LOGOUT_USER, UPDATE_USER } from "utils/mutations";
 import { useAuth } from "contexts/auth.context";
 
 export default function HeaderLinks(props) {
-  let [ cookies, setCookie, removeCookie ] = useCookies();
+  let [ removeCookie ] = useCookies();
   let { user, setUser } = useAuth();
   let email = user.user.email;
   const [logout] = useMutation(LOGOUT_USER);
-  const [updatedUser] = useMutation(UPDATE_USER);
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const MotionMenuList = motion(MenuList);
@@ -54,7 +53,7 @@ export default function HeaderLinks(props) {
       await logout({ variables: { email } });
       setUser(null);
       removeCookie('token');
-      window.open("/auth/sign-in", "_self"); // assuming this is your sign-in route
+      history.push("/auth/sign-in"); // assuming this is your sign-in route
     } catch (error) {
       console.error("Error logging out", error);
     }

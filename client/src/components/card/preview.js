@@ -1,32 +1,35 @@
+// React imports
+import { MdClose, MdEdit } from "react-icons/md";
+
+// Chakra imports
 import {
-    Box,
-    Button,
-    Flex,
-    Icon,
-    Image,
-    Text,
-    useColorModeValue,
-    Tooltip,
+  Box,
+  Button,
+  Flex,
+  Icon,
+  Image,
+  Text,
+  useColorModeValue,
+  Tooltip,
   VStack,
-  } from "@chakra-ui/react";
-  import { MdClose, MdEdit } from "react-icons/md";
-  import Card from "components/card/card";
-  import React, { useState } from "react";
+} from "@chakra-ui/react";
 
+// File imports
+import Card from "components/card/card";
 
-  export default function Preview(props) {
-    const { image, name, author, onViewClick } = props;
-    const textColor = useColorModeValue("navy.700", "white");
-    return (
-      <Card p='20px'>
-        <Flex direction={{ base: "column" }} justify='center'>
-          <Box mb={{ base: "20px", "2xl": "20px" }} position='relative'>
-            <Image
-              src={image}
-              w={{ base: "100%", "3xl": "100%" }}
-              h={{ base: "100%", "3xl": "100%" }}
-              borderRadius='20px'
-            />
+export default function Preview(props) {
+  const { image, name, author, onViewClick } = props;
+  const textColor = useColorModeValue("navy.700", "white");
+  return (
+    <Card p='20px'>
+      <Flex direction={{ base: "column" }} justify='center'>
+        <Box mb={{ base: "20px", "2xl": "20px" }} position='relative'>
+          <Image
+            src={image}
+            w={{ base: "100%", "3xl": "100%" }}
+            h={{ base: "100%", "3xl": "100%" }}
+            borderRadius='20px'
+          />
         </Box>
         <Flex flexDirection='column' justify='space-between' h='100%'>
           <Flex
@@ -66,32 +69,32 @@ import {
               </Text>
             </Flex>
             <VStack position="absolute" right={8} top={8} spacing={2}>
-            <Tooltip hasArrow label="Delete" fontSize="sm">
-            <Button size="xs" colorScheme="purple">
-              <Icon as={MdClose} />
-            </Button>
-          </Tooltip>
-          <Tooltip hasArrow label="Edit" fontSize="sm">
-            <Button size="xs" colorScheme="purple" >
-              <Icon as={MdEdit} />
-            </Button>
-          </Tooltip>
-          
-        </VStack>
+              <Tooltip hasArrow label="Delete" fontSize="sm">
+                <Button size="xs" colorScheme="purple">
+                  <Icon as={MdClose} />
+                </Button>
+              </Tooltip>
+              <Tooltip hasArrow label="Edit" fontSize="sm">
+                <Button size="xs" colorScheme="purple" >
+                  <Icon as={MdEdit} />
+                </Button>
+              </Tooltip>
+
+            </VStack>
             <Button
-                variant='darkBrand'
-                color='white'
-                fontSize='sm'
-                fontWeight='500'
-                borderRadius='70px'
-                px='24px'
-                py='5px'
-                onClick={onViewClick}>
-                VIEW
+              variant='darkBrand'
+              color='white'
+              fontSize='sm'
+              fontWeight='500'
+              borderRadius='70px'
+              px='24px'
+              py='5px'
+              onClick={onViewClick}>
+              VIEW
             </Button>
           </Flex>
         </Flex>
-        
+
       </Flex>
     </Card>
   );

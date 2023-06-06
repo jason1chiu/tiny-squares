@@ -1,11 +1,10 @@
 // React imports
-import React, { useEffect } from "react";
+import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { motion } from "framer-motion";
 import { useCookies } from "react-cookie";
-import { GET_ME } from "utils/queries";
 
 // Chakra imports
 import {
@@ -30,7 +29,7 @@ import {
 } from "@chakra-ui/react";
 
 // Apollo imports
-import { useMutation, useLazyQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 
 // File imports
 import { HSeparator } from "components/seperator/Seperator";
@@ -41,9 +40,9 @@ import { useAuth } from "contexts/auth.context";
 import Auth from "utils/auth"
 
 export default function SignIn() {
-  let [cookies, setCookie] = useCookies();
+  let [, setCookie] = useCookies();
   const toast = useToast();
-  let { user, setUser, setJournals } = useAuth();
+  let { setUser } = useAuth();
   let history = useHistory();
   // Chakra color mode
   const textColor = useColorModeValue("navy.700", "white");
@@ -56,24 +55,7 @@ export default function SignIn() {
   const [showError, setShowError] = React.useState(null);
   const [email, currentEmail] = React.useState("");
   const [password, currentPassword] = React.useState("");
-
-  let [me] = useLazyQuery(GET_ME);
-
-  useEffect(() => {
-    if (cookies.token && !user) {
-      me().then(data => {
-        setUser({ user: data.data.me });
-        setJournals(data.data.me.journals);
-        history.push('/admin/dashboard')
-      })
-    } else if (user && user.token) {
-      me().then(data => {
-        setJournals(data.data.me.journals);
-      })
-    }
-  }, [user, cookies])
-
-  const [login, { data, error }] = useMutation(LOGIN_USER)
+  const [login] = useMutation(LOGIN_USER)
 
   const handleClick = () => setShow(!show);
   const handleLogin = async () => {
@@ -85,22 +67,29 @@ export default function SignIn() {
     if (email && password) {
       try {
         const { data } = await login({ variables: { ...loginUser } })
-        const { token, user } = data.login;
-        setCookie('token', token, { maxAge: 7200 });
-        const userId = user._id;
-        Auth.login(token, userId);
-
-        toast({
-          status: "success",
-          duration: 2000,
-          isClosable: true,
-          position: "top",
-          render: () => (
-            <Box color='white' p={3} bg='purple.500' borderRadius="8px">
-              Welcome back!
-            </Box>
-          ),
-        });
+        if (data && data.login) {
+          setShowError(null);
+          setUser(data.login);
+          history.push('/')
+          const { token, user } = data.login;
+          setCookie('token', token, { maxAge: 7200 });
+          const userId = user._id;
+          Auth.login(token, userId);
+  
+          toast({
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+            position: "top",
+            render: () => (
+              <Box color='white' p={3} bg='purple.500' borderRadius="8px">
+                Welcome back!
+              </Box>
+            ),
+          });
+        } else if (data && data.login === null) {
+          setShowError("Incorrect credentials")
+        }
 
       } catch (error) {
         console.error("Erroring logging in", error);
@@ -118,16 +107,6 @@ export default function SignIn() {
       setShowError("Some fields are missing!")
     }
   }
-
-  useEffect(() => {
-    if (data && data.login) {
-      setShowError(null);
-      setUser(data.login);
-      history.push('/')
-    } else if (data && data.login === null) {
-      setShowError("Incorrect credentials")
-    }
-  }, [data])
 
   return (
     <DefaultAuth imageBackground={imageAuth} image={imageAuth}>

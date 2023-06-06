@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import { productsArray, getProductData } from "components/shared/store/js/ProductsStore"
+import { getProductData } from "components/shared/store/js/ProductsStore"
 import { cartReducer } from "components/shared/store/js/CartReducer";
 
 export const CartContext = createContext();
