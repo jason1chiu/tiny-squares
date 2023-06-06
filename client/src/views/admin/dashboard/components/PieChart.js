@@ -16,7 +16,7 @@ export default function Conversion(props) {
     "unset"
   );
   return (
-    <Card align='center' direction='column' {...rest}>
+    <Card p='20px' align='center' direction='column' w='100%' {...rest}>
       <Flex
         px={{ base: "0px", "2xl": "10px" }}
         justifyContent='space-between'
@@ -87,4 +87,3 @@ export default function Conversion(props) {
     </Card>
   );
 }
-
