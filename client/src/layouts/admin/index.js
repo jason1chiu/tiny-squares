@@ -18,7 +18,7 @@ export default function Dashboard(props) {
   const getRoute = (routes) => {
     return window.location.pathname !== "/admin/full-screen-maps"
   };
- 
+
   const getActiveRoute = (routes) => {
     let activeRoute = "Dashboard";
     for (let i = 0; i < routes.length; i++) {
@@ -155,10 +155,10 @@ export default function Dashboard(props) {
               minH='100vh'
               pt='50px'>
               <Switch>
-              {getRoutes(sidebarRoutes)}
-    <Route path='/auth/sign-in' component={SignIn} />
-    <Route path='/auth/sign-up' component={SignUp} />
-    <Redirect from='/' to='/admin/dashboard' />
+                {getRoutes(sidebarRoutes)}
+                <Route path='/auth/sign-in' component={SignIn} />
+                <Route path='/auth/sign-up' component={SignUp} />
+                <Redirect from='/' to='/admin/dashboard' />
               </Switch>
             </Box>
           ) : null}
