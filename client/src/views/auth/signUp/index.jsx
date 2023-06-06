@@ -6,7 +6,6 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { useCookies } from "react-cookie";
 
-
 // Chakra imports
 import {
   Box,

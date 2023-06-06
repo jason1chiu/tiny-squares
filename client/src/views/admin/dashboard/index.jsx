@@ -1,13 +1,4 @@
-import {
-  // Avatar,
-  Box,
-  // Flex,
-  // FormLabel,
-  // Icon,
-  // Select,
-  Grid,
-  // useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, Grid } from "@chakra-ui/react";
 
 import React, { useEffect } from "react";
 import PieChart from "views/admin/dashboard/components/PieChart";

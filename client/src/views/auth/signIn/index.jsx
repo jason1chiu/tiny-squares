@@ -44,6 +44,7 @@ export default function SignIn() {
   const toast = useToast();
   let { setUser } = useAuth();
   let history = useHistory();
+  
   // Chakra color mode
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
