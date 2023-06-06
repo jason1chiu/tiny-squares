@@ -1,7 +1,6 @@
 // React imports
 import React, { useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { motion } from "framer-motion";
@@ -53,7 +52,10 @@ export default function SignIn() {
   const [showError, setShowError] = React.useState(null);
   const [email, currentEmail] = React.useState("");
   const [password, currentPassword] = React.useState("");
-
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    handleLogin();
+  }
 
   const [login, { data, error }] = useMutation(LOGIN_USER)
 
@@ -112,6 +114,8 @@ export default function SignIn() {
   }, [data])
 
   return (
+    <form onSubmit={handleSubmit}>
+    <FormControl>
     <DefaultAuth imageBackground={imageAuth} image={imageAuth}>
       <Flex
         maxW={{ base: "100%", md: "max-content" }}
@@ -218,7 +222,7 @@ export default function SignIn() {
               </InputRightElement>
             </InputGroup>
             <Flex justifyContent='space-between' align='center' mb='24px'>
-              <FormControl display='flex' alignItems='center'>
+              {/* <FormControl display='flex' alignItems='center'>
                 <Checkbox
                   id='remember-login'
                   colorScheme='brandScheme'
@@ -232,7 +236,7 @@ export default function SignIn() {
                   fontSize='sm'>
                   Keep me logged in
                 </FormLabel>
-              </FormControl>
+              </FormControl> */}
             </Flex>
             <MotionButton
               onClick={handleLogin}
@@ -270,5 +274,7 @@ export default function SignIn() {
         </Flex>
       </Flex>
     </DefaultAuth>
+    </FormControl>
+    </form>
   );
 }
