@@ -6,8 +6,10 @@ import { useHistory } from "react-router-dom";
 import EditProfileModal from "components/modal/EditProfileModal";
 import { CartContext } from 'components/shared/store/js/CartContext'
 import { useContext } from 'react'
+import { BsShop } from "react-icons/bs";
 import { CartModal } from 'components/shared/store/components/CartModal'
 import { motion } from 'framer-motion';
+import BuyOptionsModal from 'components/shared/store/components/BuyOptionsModal'
 
 // Chakra imports
 import { Avatar, Button, Flex, Icon, Link, Menu, MenuButton, MenuItem, MenuList, Text, Badge, useColorModeValue, useDisclosure, IconButton, Box } from "@chakra-ui/react";
@@ -26,7 +28,8 @@ import { useAuth } from "contexts/auth.context";
 
 export default function HeaderLinks(props) {
   let { user, setUser } = useAuth();
-  let email = user.user.email;
+ 
+  let email = user && user.user ? user.user.email : 'Default Email';
   const [logout] = useMutation(LOGOUT_USER);
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -74,6 +77,7 @@ export default function HeaderLinks(props) {
 
   const cart = useContext(CartContext);
   const totalQuantity = cart.getTotalQuantity();
+  const { isOpen: buyOptionsModalIsOpen, onOpen: openBuyOptionsModal, onClose: closeBuyOptionsModal } = useDisclosure();
   const { isOpen: cartModalIsOpen, onOpen: openCartModal, onClose: closeCartModal } = useDisclosure();
   return (
     <Flex
@@ -160,13 +164,27 @@ export default function HeaderLinks(props) {
         />
         <CartModal isOpen={cartModalIsOpen} onClose={closeCartModal} />
       </Menu>
+      <Menu>
+        <IconButton
+          icon={(
+            <Box position="relative">
+              <BsShop size="24" tm="100px" />
+          
+            </Box>
+          )}
+          color={navbarIcon}
+          _hover={{ color: "secondaryGray.900" }} 
+          onClick={openBuyOptionsModal}
+        />
+        <BuyOptionsModal isOpen={buyOptionsModalIsOpen} onClose={closeBuyOptionsModal} />
+      </Menu>
 
       <Menu>
         <MenuButton p="0px">
           <Avatar
             _hover={{ cursor: "pointer" }}
             color="white"
-            name={user.user.username}
+            name={user && user.user ? user.user.username : 'Default Name'}
             bg="#11047A"
             size="sm"
             w="40px"
@@ -196,7 +214,7 @@ export default function HeaderLinks(props) {
               fontWeight="700"
               color={textColor}
             >
-              👋&nbsp; Hey, {user.user.username}
+              👋&nbsp; Hey, {user && user.user ? user.user.username : 'Default Name'}
             </Text>
           </Flex>
 

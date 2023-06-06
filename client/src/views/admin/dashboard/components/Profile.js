@@ -28,7 +28,7 @@ export default function Profile(props) {
         mt='-43px'
         border='4px solid'
         borderColor={borderColor}
-        name={user.user.username}
+        name={user && user.user ? user.user.username : 'Default Name'}
       />
       <Text color={textColorPrimary} fontWeight='bold' fontSize='xl' mt='10px'>
         {name}

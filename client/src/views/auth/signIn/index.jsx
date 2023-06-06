@@ -71,7 +71,7 @@ export default function SignIn() {
         const {data} = await login({ variables: {...loginUser}})
         const { token, user } = data.login;
         const userId = user._id;
-        Auth.login(token, userId);
+        Auth.login(token, userId, user);
 
         toast({
           status: "success",
