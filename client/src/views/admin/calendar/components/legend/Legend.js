@@ -15,12 +15,6 @@ const Legend = ({ legends, setLegends }) => {
   const [updateLegend] = useMutation(UPDATE_LEGEND);
   const [deleteLegend] = useMutation(DELETE_LEGEND);
 
-  
-  // Initialized the first item in legend array as something blank
-  // useState(() => {
-  //   setLegends([{ label: "Add Your Selection" }]);
-  // });
-
     useEffect(() => {
       // Add initial legend
       if (legends.length === 0) {
@@ -37,6 +31,7 @@ const Legend = ({ legends, setLegends }) => {
         const { loading, error, data } = useQuery(GET_LEGENDS, {
           variables: { id: userId },
         });
+
         const existingLegends = data ? data.legends : null;
       
         if (loading) return <p>Loading...</p>;
@@ -64,8 +59,6 @@ const Legend = ({ legends, setLegends }) => {
             // Update the cache after the mutation
             const existingLegends = cache.readQuery({ query: GET_LEGENDS, variables: { userId } });
 
-          
-  
             const newLegend = data.createLegend;
   
             if (existingLegends && existingLegends.legends) {
@@ -129,16 +122,17 @@ const Legend = ({ legends, setLegends }) => {
       });
   };
 
-  const handleEditLegend = (index) => {
-    setColor(legends[index].color);
-    setLabel(legends[index].label);
-    setSelectedIndex(index);
-  };
+
+const handleEditLegend = (index) => {
+  setColor(legends[index].color);
+  setLabel(legends[index].label);
+  setSelectedIndex(index);
+};
+
 
 
 
   return (
-    // <Card mt={4} mb={6} mx="auto" p={4} w="auto">
     <VStack spacing={2}>
       <Heading size="sm" mb={2}>Legend</Heading>
       <HStack spacing={1}>
@@ -157,23 +151,9 @@ const Legend = ({ legends, setLegends }) => {
           </HStack>
         )
       ))}
-      {/* {legends.map((legend, index) => (
-        <HStack key={index} spacing={1}> */}
-
-          {/* Hide the first legend item, if index > 0, render the legend items that are iterations > 0 */}
-          {/* {index !== 0 && (
-            <>
-              <Box boxSize="1em" bgColor={legend.color} border="1px solid" borderColor="gray.200" />
-              <Text fontSize="sm">{legend.label}</Text>
-              <Button size="xs" onClick={() => handleEditLegend(index)}>Edit</Button>
-              <Button size="xs" onClick={() => handleDeleteLegend(index)}>Delete</Button>
-            </>
-          )}
-        </HStack>
-      ))} */}
      
     </VStack>
-    // </Card>
+
   );
 };
 
