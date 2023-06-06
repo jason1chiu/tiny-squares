@@ -80,17 +80,6 @@ const Legend = ({ journalId, legends, setLegends }) => {
     try {
       await deleteLegend({
         variables: { legendId, journalId },
-        // update: (cache) => {
-        //   cache.modify({
-        //     fields: {
-        //       legends(existingLegends, { readField }) {
-        //         return existingLegends.filter(
-        //           (legendRef) => legendId !== readField("id", legendRef)
-        //         );
-        //       },
-        //     },
-        //   });
-        // },
       });
       refetch();
       console.log("Legend deleted:", legendId);
