@@ -52,7 +52,7 @@
 ## :rocket: About The Project
 
 <p align="center">
-  <img src="assets\Capture.JPG"/>
+  <!-- <img src="assets\Capture.JPG"/> -->
 </p>
 
 Introducing TinySquares: Your ultimate destination for personalized lifestyle journals. Track sports, health, and mindfulness effortlessly. Our visually appealing pixel calendar design gives a clear year-long overview of your progress. Dive deeper with statistics and pie charts for insightful data representation. Join us and unlock your full potential today!
@@ -93,7 +93,7 @@ cd tiny-squares
 npm i
 ```
 
-4. Create a .env file in the root directory and add your MySQL username, password, and database name in the following format:
+<!-- 4. Create a .env file in the root directory and add your MySQL username, password, and database name in the following format:
 
 ```bash
 DB_NAME='your_database_name'
@@ -110,10 +110,10 @@ DB_PW='your_mysql_password'
 6. Start the server
 
 ```bash
-\Nomad-Nebula> npm start
+\Nomad-Nebula> npm start -->
 ```
 
-5.  to _http://localhost:3001_ in your browser to access the site
+4.  to _http://localhost:3000_ in your browser to access the site
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
