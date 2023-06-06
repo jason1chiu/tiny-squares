@@ -26,7 +26,8 @@ import { useAuth } from "contexts/auth.context";
 
 export default function HeaderLinks(props) {
   let { user, setUser } = useAuth();
-  let email = user.user.email;
+ 
+  let email = user && user.user ? user.user.email : 'Default Email';
   const [logout] = useMutation(LOGOUT_USER);
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -166,7 +167,7 @@ export default function HeaderLinks(props) {
           <Avatar
             _hover={{ cursor: "pointer" }}
             color="white"
-            name={user.user.username}
+            name={user && user.user ? user.user.username : 'Default Name'}
             bg="#11047A"
             size="sm"
             w="40px"
@@ -196,7 +197,7 @@ export default function HeaderLinks(props) {
               fontWeight="700"
               color={textColor}
             >
-              👋&nbsp; Hey, {user.user.username}
+              👋&nbsp; Hey, {user && user.user ? user.user.username : 'Default Name'}
             </Text>
           </Flex>
 
