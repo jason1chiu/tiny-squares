@@ -34,12 +34,17 @@ export function CartModal(props) {
                 {cart.cart.map(({ id, quantity }) => {
                   const productData = getProductData(id);
                   return (
-                    <Box key={id} p={5} shadow="md" borderWidth="1px">
+                    <Box key={id} p={5} shadow="md" borderWidth="1px"
+                    borderRadius="10px" w="100%">
                       <h3>{productData.title}</h3>
                       <Image src={productData.img} alt="product" boxSize='150px' objectFit='cover'></Image>
                       <Text>Quantity: {cart.getProductQuantity(id)}</Text>
                       <Text>Subtotal: ${(quantity * productData.price).toFixed(2)}</Text>
-                      <Button colorScheme='red' onClick={() => cart.deleteFromCart(id)}><Text fontSize='xs'>Remove</Text></Button>
+                      <Button variant='brand'
+                color='white'
+                fontSize='sm'
+                fontWeight='500'
+                borderRadius='70px'onClick={() => cart.deleteFromCart(id)}><Text fontSize='xs'>Remove</Text></Button>
                     </Box>
                   );
                 })}
@@ -50,7 +55,11 @@ export function CartModal(props) {
               <Button variant="ghost" mr={3} onClick={props.onClose}>
                 Close
               </Button>
-              <Button colorScheme="blue" onClick={(checkout)}>Checkout</Button>
+              <Button variant='darkBrand'
+                color='white'
+                fontSize='sm'
+                fontWeight='500'
+                borderRadius='70px' onClick={(checkout)}>Checkout</Button>
             </ModalFooter>
           </ModalContent>
         </Modal>

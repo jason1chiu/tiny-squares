@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { Box, Input, Button, VStack, HStack, Text, Heading } from "@chakra-ui/react";
+import { Box, Input, Button, VStack, HStack, Text, Heading, useColorModeValue } from "@chakra-ui/react";
 import Card from "components/card/card";
 
 import { GET_LEGENDS, GET_ME } from "utils/queries";
@@ -17,6 +17,8 @@ const Legend = () => {
   const [updateLegend] = useMutation(UPDATE_LEGEND);
   const [deleteLegend] = useMutation(DELETE_LEGEND);
 
+  const textColor = useColorModeValue("secondaryGray.500", "white");
+  const titleColor = useColorModeValue("navy.700", "white");
   const { loading, error, data } = useQuery(GET_LEGENDS, {
     variables: { id: userId },
   });
@@ -119,34 +121,62 @@ const Legend = () => {
   }
 
   return (
-    <VStack spacing={2}>
-      <Heading size="sm" mb={2}>
+    <VStack spacing={4}>
+      <Heading color={titleColor} size="sm" mb={2}>
         Legend
       </Heading>
-      <HStack spacing={1}>
+      <HStack spacing={2}>
         <Input
           size="sm"
           type="color"
           value={color}
           onChange={(e) => setColor(e.target.value)}
+          borderColor="secondaryGray.500"
+          borderRadius="md"
+          color="secondaryGray.500"
+          w="60px"
         />
         <Input
+          borderRadius="md"
           size="sm"
           type="text"
-          placeholder="Label"
+          placeholder="Happy"
           value={label}
           onChange={(e) => setLabel(e.target.value)}
+          borderColor={textColor}
+          color="secondaryGray.500"
         />
         {selectedIndex === null ? (
-          <Button size="xs" onClick={handleAddLegend}>
+          <Button
+          variant='darkBrand'
+          color='white'
+          fontSize='sm'
+          fontWeight='500'
+          borderRadius='70px'
+            onClick={handleAddLegend}
+            
+          >
             Add
           </Button>
         ) : (
           <>
-            <Button size="xs" onClick={handleUpdateLegend}>
+            <Button
+              variant='darkBrand'
+              color='white'
+              fontSize='sm'
+              fontWeight='500'
+              borderRadius='70px'
+              onClick={handleUpdateLegend}
+            
+            >
               Update
             </Button>
-            <Button size="xs" onClick={handleCancelEdit}>
+            <Button
+              size="sm"
+              colorScheme="purple"
+              onClick={handleCancelEdit}
+              borderRadius="md"
+            >
               Cancel
             </Button>
           </>
@@ -154,30 +184,50 @@ const Legend = () => {
       </HStack>
 
       {legends.map((legend, index) => (
-        <HStack key={index} spacing={1}>
+        <HStack key={index}
+          spacing={2}
+          alignItems="center"
+          justifyContent="space-between">
           {index !== 0 && (
             <>
               <Box
-                boxSize="1em"
+                boxSize={6}
                 bgColor={legend.color}
                 border="1px solid"
-                borderColor="gray.200"
+                borderColor="secondaryGray.500"
+                borderRadius="md"
               />
-              <Text fontSize="sm">{legend.label}</Text>
+              <Text fontSize="sm" color="secondaryGray.500">
+                {legend.label}
+              </Text>
               {selectedIndex === index ? (
-                <Button size="xs" onClick={() => handleEditLegend(index)}>
+                <Button
+                  size="sm"
+                  borderRadius="md"
+                  colorScheme="purple"
+                  onClick={() => handleEditLegend(index)}
+                >
                   Edit
                 </Button>
               ) : (
                 <>
                   <Button
-                    size="xs"
+                    variant='darkBrand'
+                    color='white'
+                    fontSize='sm'
+                    fontWeight='500'
+                    borderRadius='70px'
                     onClick={() => handleEditLegend(index)}
                   >
                     Edit
                   </Button>
                   <Button
-                    size="xs"
+                   variant='darkBrand'
+                   color='white'
+                   fontSize='sm'
+                   fontWeight='500'
+                   borderRadius='70px'
+
                     onClick={() => handleDeleteLegend(legend.id)}
                   >
                     Delete

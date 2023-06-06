@@ -38,7 +38,11 @@ const CellModal = ({ isOpen, onClose, onSave, initialColor, initialNote, legends
           <Textarea value={selectedNote} onChange={handleNoteChange} placeholder="Add a note..." />
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={handleSave}>
+          <Button variant='darkBrand'
+                color='white'
+                fontSize='sm'
+                fontWeight='500'
+                borderRadius='70px' mr={3} onClick={handleSave}>
             Save
           </Button>
           <Button onClick={onClose}>Cancel</Button>
