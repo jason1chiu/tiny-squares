@@ -4,7 +4,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
-
+import { motion } from "framer-motion";
 // Chakra imports
 import {
   Box,
@@ -48,7 +48,7 @@ export default function SignIn() {
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
   const textColorBrand = useColorModeValue("brand.500", "white");
   const brandStars = useColorModeValue("brand.500", "brand.400");
- 
+  const MotionButton = motion(Button);
   const [show, setShow] = React.useState(false);
   const [showError, setShowError] = React.useState(null);
   const [email, currentEmail] = React.useState("");
@@ -148,27 +148,10 @@ export default function SignIn() {
           mx={{ base: "auto", lg: "unset" }}
           me='auto'
           mb={{ base: "20px", md: "auto" }}>
-          {/* <Button
-            fontSize='sm'
-            me='0px'
-            mb='26px'
-            py='15px'
-            h='50px'
-            borderRadius='16px'
-            bg={googleBg}
-            color={googleText}
-            fontWeight='500'
-            _hover={googleHover}
-            _active={googleActive}
-            _focus={googleActive}>
-            <Icon as={FcGoogle} w='20px' h='20px' me='10px' />
-            Sign in with Google
-          </Button> */}
+       
           <Flex align='center' mb='25px'>
             <HSeparator />
-            {/* <Text color='gray.400' mx='14px'>
-              or
-            </Text> */}
+
             <HSeparator />
           </Flex>
           {showError && <Alert status='error'>
@@ -251,16 +234,19 @@ export default function SignIn() {
                 </FormLabel>
               </FormControl>
             </Flex>
-            <Button
+            <MotionButton
               onClick={handleLogin}
               fontSize='sm'
               variant='brand'
               fontWeight='500'
               w='100%'
               h='50'
-              mb='24px'>
+              mb='24px'
+              whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.9 }}
+  transition={{ type: "spring", stiffness: 400, damping: 17 }}>
               Sign In
-            </Button>
+            </MotionButton>
           </FormControl>
           <Flex
             flexDirection='column'
