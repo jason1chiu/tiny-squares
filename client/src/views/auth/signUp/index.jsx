@@ -1,9 +1,10 @@
 // React imports
-import React, { useEffect } from "react";
+import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
+import { useCookies } from "react-cookie";
+
 
 // Chakra imports
 import {
@@ -41,6 +42,7 @@ import { useAuth } from "contexts/auth.context";
 
 export default function SignUp() {
   let { setUser } = useAuth();
+  let [, setCookie] = useCookies();
   let history = useHistory();
   const toast = useToast();
   const textColor = useColorModeValue("navy.700", "white");
@@ -49,8 +51,6 @@ export default function SignUp() {
   const textColorBrand = useColorModeValue("brand.500", "white");
   const brandStars = useColorModeValue("brand.500", "brand.400");
   const MotionButton = motion(Button);
-  const MotionBox = motion(Box);
-  const MotionFlex = motion(Flex);
   const MotionHeading = motion(Heading);
   const [show, setShow] = React.useState(false);
   const [showError, setShowError] = React.useState(null);
@@ -59,7 +59,7 @@ export default function SignUp() {
   const [email, setEmail] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
 
-  const [addUser, { data, error }] = useMutation(ADD_USER)
+  const [addUser] = useMutation(ADD_USER)
 
   const handleClick = () => setShow(!show);
   const handleAddUser = async (event) => {
@@ -71,8 +71,16 @@ export default function SignUp() {
     }
     if (password === confirmPassword && password && username && email) {
       try {
-        await addUser({ variables: newUser });
-
+        let { data } = await addUser({ variables: newUser });
+        if (data && data.addUser) {
+          setShowError(null);
+          setUser(data.addUser)
+          history.push('/');
+          const { token } = data.addUser;
+          setCookie('token', token, { maxAge: 7200 });
+        } else if (data && data.addUser === null) {
+          setShowError("User already exists!")
+        }
         toast({
           status: "success",
           duration: 2000,
@@ -101,18 +109,6 @@ export default function SignUp() {
     }
   }
 
-  useEffect(() => {
-    console.log(data)
-    if (data && data.addUser) {
-      setShowError(null);
-      setUser(data.addUser)
-      history.push('/');
-      // write cookies here
-    } else if (data && data.addUser === null) {
-      setShowError("User already exists!")
-    }
-  }, [data])
-
   return (
     <DefaultAuth imageBackground={imageAuth} image={imageAuth}>
       <Flex
@@ -128,7 +124,7 @@ export default function SignUp() {
         mt={{ base: "40px", md: "14vh" }}
         flexDirection='column'>
         <Box me='auto'>
-        <MotionHeading
+          <MotionHeading
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
@@ -157,7 +153,7 @@ export default function SignUp() {
           mx={{ base: "auto", lg: "unset" }}
           me='auto'
           mb={{ base: "20px", md: "auto" }}>
-     
+
           <Flex align='center' mb='25px'>
             <HSeparator />
             {/* <Text color='gray.400' mx='14px'>
@@ -311,8 +307,8 @@ export default function SignUp() {
               h='50'
               mb='24px'
               whileHover={{ scale: 1.1 }}
-  whileTap={{ scale: 0.9 }}
-  transition={{ type: "spring", stiffness: 400, damping: 17 }}>
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}>
               Sign Up
             </MotionButton>
           </FormControl>

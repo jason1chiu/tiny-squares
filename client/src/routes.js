@@ -1,13 +1,11 @@
+// React imports
 import React from "react";
-import { Icon } from "@chakra-ui/react";
-import {
-  MdHome,
-  MdLibraryAdd,
-  MdLock,
-  MdOutlineCalendarMonth,
-  MdMenuBook
-} from "react-icons/md";
+import { MdHome, MdLock, MdMenuBook } from "react-icons/md";
 
+// Chakra imports
+import { Icon } from "@chakra-ui/react";
+
+// File imports
 import Journals from "views/admin/journals";
 import Dashboard from "views/admin/dashboard";
 import SignIn from "views/auth/signIn";
@@ -24,7 +22,7 @@ const routes = [
   {
     name: "Journals",
     layout: "/admin",
-    path: "/admin/journals",
+    path: "/journals",
     icon: <Icon as={MdMenuBook} width='20px' height='20px' color='inherit' />,
     component: Journals,
   },

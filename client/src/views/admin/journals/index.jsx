@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Flex,
@@ -22,8 +22,8 @@ export default function JournalPage() {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorBrand = useColorModeValue("brand.500", "white");
   
-  let { user, journals, setJournals } = useAuth();
-  let [me, { data, loading }] = useLazyQuery(GET_ME);
+  let { journals, setJournals } = useAuth();
+  let [me] = useLazyQuery(GET_ME);
   let { categories } = useAuth();
 
   useEffect(() => {
