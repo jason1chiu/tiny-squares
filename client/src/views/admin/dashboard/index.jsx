@@ -23,13 +23,20 @@ import { useLazyQuery } from "@apollo/client";
 
 export default function Overview() {
   let { user, journals, setJournals } = useAuth();
-  let [me, { data, loading }] = useLazyQuery(GET_ME);
+  let [me, { data, loading, error }] = useLazyQuery(GET_ME);
 
   useEffect(() => {
-    me().then(data => {
-      setJournals(data.data.me.journals);
-    })
-  }, [])
+    if (user && user.token) { // ensure user and token exist before calling me()
+      me({ variables: { token: user.token } })
+        .then(response => {
+          if (response && response.data && response.data.me) {
+            setJournals(response.data.me.journals);
+          }
+        })
+        .catch(err => console.error(err));
+    }
+  }, [user, me, setJournals]);
+  
   const entries =
     journals && journals.length
       ? journals.reduce((sum, journal) => sum + (journal.entries?.length || 0), 0)
@@ -53,7 +60,7 @@ export default function Overview() {
           <Profile
           banner={profile}
           avatar={avatar}
-          name={user.user.username}
+          name={user && user.user ? user.user.username : 'Default Name'}
           entries={entries}
           journals={journalsLength}
         />
