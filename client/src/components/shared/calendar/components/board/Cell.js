@@ -10,7 +10,7 @@ const Cell = ({ day, month, color, note, onSave, legends }) => {
   const legendsQuery = useQuery(GET_LEGENDS, {
     variables: {id: userId}
   });
-  console.log("Legends data:", legendsQuery.data);
+  
   const handleCellClick = () => {
     onOpen();
   };
