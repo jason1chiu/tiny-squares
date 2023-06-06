@@ -93,7 +93,7 @@ cd tiny-squares
 npm i
 ```
 
-4. Create a .env file in the root directory and add your MySQL username, password, and database name in the following format:
+<!-- 4. Create a .env file in the root directory and add your MySQL username, password, and database name in the following format:
 
 ```bash
 DB_NAME='your_database_name'
@@ -111,9 +111,9 @@ DB_PW='your_mysql_password'
 
 ```bash
 \Nomad-Nebula> npm start
-```
+``` -->
 
-5.  to _http://localhost:3001_ in your browser to access the site
+4.  to _http://localhost:3001_ in your browser to access the site
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
