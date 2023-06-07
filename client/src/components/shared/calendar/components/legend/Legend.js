@@ -11,25 +11,16 @@ const Legend = ({ journalId, legends, setLegends }) => {
   const [label, setLabel] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(null);
   const userId = localStorage.getItem("user_id");
-  console.log(legends);
- 
 
   const [createLegend] = useMutation(CREATE_LEGEND);
   const [updateLegend] = useMutation(UPDATE_LEGEND);
   const [deleteLegend] = useMutation(DELETE_LEGEND);
 
   const { loading, error, data, refetch } = useQuery(GET_JOURNAL, {
-    variables: { id: journalId }, 
+    variables: { id: journalId },
   });
   const textColor = useColorModeValue("secondaryGray.500", "white");
   const titleColor = useColorModeValue("navy.700", "white");
-
-  const initialLegend = {
-    _id: null,
-    label: null,
-    color: null,
-  };
-  
 
   useEffect(() => {
     if (data && data.journal) {
@@ -37,7 +28,7 @@ const Legend = ({ journalId, legends, setLegends }) => {
     }
   }, [data]);
 
-  useEffect(() => {refetch()}, [])
+  useEffect(() => { refetch() }, [])
 
   const handleAddLegend = async () => {
     try {
@@ -50,7 +41,7 @@ const Legend = ({ journalId, legends, setLegends }) => {
         variables: { label, color, journalId },
       });
 
-      const legends = [initialLegend, ...data.createLegend.legends];
+      const legends = data.createLegend.legends;
       setLegends(legends);
 
       console.log("Created Legend: ", data.createLegend);
@@ -148,13 +139,13 @@ const Legend = ({ journalId, legends, setLegends }) => {
         />
         {selectedIndex === null ? (
           <Button
-          variant='darkBrand'
-          color='white'
-          fontSize='sm'
-          fontWeight='500'
-          borderRadius='70px'
+            variant='darkBrand'
+            color='white'
+            fontSize='sm'
+            fontWeight='500'
+            borderRadius='70px'
             onClick={handleAddLegend}
-            
+
           >
             Add
           </Button>
@@ -167,7 +158,7 @@ const Legend = ({ journalId, legends, setLegends }) => {
               fontWeight='500'
               borderRadius='70px'
               onClick={handleUpdateLegend}
-            
+
             >
               Update
             </Button>
@@ -224,11 +215,11 @@ const Legend = ({ journalId, legends, setLegends }) => {
                     Edit
                   </Button>
                   <Button
-                   variant='darkBrand'
-                   color='white'
-                   fontSize='sm'
-                   fontWeight='500'
-                   borderRadius='70px'
+                    variant='darkBrand'
+                    color='white'
+                    fontSize='sm'
+                    fontWeight='500'
+                    borderRadius='70px'
 
                     onClick={() => handleDeleteLegend(legend._id)}
                   >
