@@ -57,13 +57,7 @@ export const ADD_JOURNAL = gql`
 
 export const REMOVE_JOURNAL = gql`
   mutation removeJournal($journalId: ID!) {
-    removeJournal(journalId: $journalId) {
-      _id
-      journals {
-        _id
-        title
-      }
-    }
+    removeJournal(journalId: $journalId) 
   }
 `;
 
