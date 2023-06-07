@@ -17,7 +17,7 @@
     <!-- <a href="https://github.com/utgroup3/Nomad-Nebula"> -->
     <a href="https://github.com/jason1chiu/tiny-squares">
     <!--  <img src="./public/ts.png" alt="Logo" height="200"> -->
-    <img src="./public.ts.png" alt="Logo" height="200">
+    <img src="./public/ts.png" alt="Logo" height="200">
    </a>
     <p align="center">
       Your Life, One Pixel at a Time
@@ -126,7 +126,7 @@ DB_PW='your_mysql_password'
    </div>
    <br />
    <p align="center"> The deployed site can be found on
-   <a href="https://drive.google.com/file/d/1oZJElx4QXzcGZlfQwMoUEVd9D6Ld_YKO/view?usp=sharing">Heroku</a>
+   <!-- <a href="https://drive.google.com/file/d/1oZJElx4QXzcGZlfQwMoUEVd9D6Ld_YKO/view?usp=sharing">Heroku</a> -->
    </p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
