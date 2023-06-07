@@ -17,6 +17,8 @@ import { useAuth } from "contexts/auth.context";
 
 export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
   const [journalName, setJournalName] = useState("");
+  let { journals } = useAuth();
+
   const [journalCategory, setJournalCategory] = useState("");
   let { categories } = useAuth();
   const toast = useToast();
@@ -40,6 +42,20 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
       position: "top",
       colorScheme: "purple",
     });
+    if (journals.length >= 3) {
+      onSubmit({ name: journalName, category: journalCategory });
+    } else {
+      onSubmit({ name: journalName, category: journalCategory });
+      toast({
+        title: "Journal created.",
+        description: "Your journal was successfully created!",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+        colorScheme: "purple",
+      });
+    }
   };
 
   return (
