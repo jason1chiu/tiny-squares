@@ -1,7 +1,7 @@
 import { Portal, Box, useDisclosure } from "@chakra-ui/react";
 import routes, { sidebarRoutes } from "routes.js";
 import React, { useState } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import Footer from "components/footer/FooterAdmin.js";
 import Navbar from "components/navbar/AdminNav.js";
 import Sidebar from "components/sidebar/Sidebar.js";
@@ -10,13 +10,14 @@ import SignIn from "views/auth/signIn";
 import SignUp from "views/auth/signUp";
 
 export default function Dashboard(props) {
+  const location = useLocation();
   const { ...rest } = props;
 
   const [fixed] = useState(false);
   const [toggleSidebar, setToggleSidebar] = useState(false);
 
   const getRoute = (routes) => {
-    return window.location.pathname !== "/admin/full-screen-maps";
+    return location.pathname !== "/admin/full-screen-maps";
   };
 
   const getActiveRoute = (routes) => {
