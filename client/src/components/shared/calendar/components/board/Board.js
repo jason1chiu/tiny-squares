@@ -8,8 +8,8 @@ const Board = ({ legends, journalId }) => {
   const [cells, setCells] = useState({});
   const textColor = useColorModeValue("secondaryGray.400", "white");
 
-  const handleSave = (id, color, note) => {
-    setCells((prev) => ({ ...prev, [id]: { color, note } }));
+  const handleSave = (id, legend, note) => {
+    setCells((prev) => ({ ...prev, [id]: { color: legend?.color, note } }));
   };
 
   const months = [
@@ -56,7 +56,7 @@ const Board = ({ legends, journalId }) => {
                       color={cell.color}
                       note={cell.note}
                       legends={legends}
-                      onSave={(color, note) => handleSave(id, color, note)}
+                      onSave={(legend, note) => handleSave(id, legend, note)}
                     />
                   </Box>
                 </GridItem>

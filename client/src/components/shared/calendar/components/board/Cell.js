@@ -14,8 +14,8 @@ const Cell = ({ day, month, color, note, onSave, legends, journalId }) => {
     onOpen();
   };
 
-  const handleSave = (color, note) => {
-    onSave(color, note);
+  const handleSave = (legend, note) => {
+    onSave(legend, note);
     onClose();
   };
 

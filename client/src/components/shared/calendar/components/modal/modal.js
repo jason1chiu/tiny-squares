@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
+  Box,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -21,17 +22,19 @@ const CellModal = ({
   initialNote,
   legends,
 }) => {
-  const [selectedColor, setSelectedColor] = useState(initialColor || "");
+  const [selecteLegend, setSelectedLegend] = useState(legends?.[0]);
   const [selectedNote, setSelectedNote] = useState(initialNote || "");
 
   // Update state when color or note props change
   useEffect(() => {
-    setSelectedColor(initialColor || "");
+    setSelectedLegend(legends?.[0]);
     setSelectedNote(initialNote || "");
-  }, [initialColor, initialNote]);
+  }, [initialColor, initialNote, legends]);
 
   const handleColorChange = (e) => {
-    setSelectedColor(e.target.value);
+    setSelectedLegend(
+      (legends ?? []).find((legend) => legend._id === e.target.value)
+    );
   };
 
   const handleNoteChange = (e) => {
@@ -39,7 +42,8 @@ const CellModal = ({
   };
 
   const handleSave = () => {
-    onSave(selectedColor, selectedNote);
+    console.log({ selecteLegend, selectedNote });
+    onSave(selecteLegend, selectedNote);
   };
 
   return (
@@ -49,10 +53,14 @@ const CellModal = ({
         <ModalHeader>Select Color and Add Note</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Select value={selectedColor} onChange={handleColorChange} mb={4}>
+          <Select
+            value={selecteLegend?._id}
+            onChange={handleColorChange}
+            mb={4}
+          >
             {(legends ?? []).map((legend, index) => (
-              <option key={index} value={legend.color}>
-                {legend.label}
+              <option key={index} value={legend._id}>
+                {legend.color} {legend.label}
               </option>
             ))}
           </Select>
@@ -63,11 +71,15 @@ const CellModal = ({
           />
         </ModalBody>
         <ModalFooter>
-          <Button variant='darkBrand'
-                color='white'
-                fontSize='sm'
-                fontWeight='500'
-                borderRadius='70px' mr={3} onClick={handleSave}>
+          <Button
+            variant="darkBrand"
+            color="white"
+            fontSize="sm"
+            fontWeight="500"
+            borderRadius="70px"
+            mr={3}
+            onClick={handleSave}
+          >
             Save
           </Button>
           <Button onClick={onClose}>Cancel</Button>
