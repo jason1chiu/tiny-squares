@@ -16,16 +16,16 @@ const Legend = ({ journalId, legends, setLegends }) => {
   const [updateLegend] = useMutation(UPDATE_LEGEND);
   const [deleteLegend] = useMutation(DELETE_LEGEND);
 
-
+  const { loading, error, data, refetch } = useQuery(GET_JOURNAL, {
+    variables: { id: journalId }, 
+  });
   const textColor = useColorModeValue("secondaryGray.500", "white");
   const titleColor = useColorModeValue("navy.700", "white");
-  const { loading, error, data } = useQuery(GET_LEGENDS, {
-    variables: { id: userId },
+ 
+  
+  // (GET_LEGENDS, {
+  //   variables: { id: userId },
 
-  const { loading, error, data, refetch } = useQuery(GET_JOURNAL, {
-    variables: { id: journalId },
-
-  });
 
   useEffect(() => {
     if (data && data.journal) {
