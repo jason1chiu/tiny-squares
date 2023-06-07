@@ -22,11 +22,6 @@ const Legend = ({ journalId, legends, setLegends }) => {
   const textColor = useColorModeValue("secondaryGray.500", "white");
   const titleColor = useColorModeValue("navy.700", "white");
  
-  
-  // (GET_LEGENDS, {
-  //   variables: { id: userId },
-
-
   useEffect(() => {
     if (data && data.journal) {
       setLegends([...data.journal.legends]);
