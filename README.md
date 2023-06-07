@@ -52,7 +52,8 @@
 ## :rocket: About The Project
 
 <p align="center">
-  <img src="assets\Capture.JPG"/>
+  <!-- <img src="assets\Capture.JPG"/> -->
+  <img src='./client/public/TS-home.png' alt='home'>
 </p>
 
 Introducing TinySquares: Your ultimate destination for personalized lifestyle journals. Track sports, health, and mindfulness effortlessly. Our visually appealing pixel calendar design gives a clear year-long overview of your progress. Dive deeper with statistics and pie charts for insightful data representation. Join us and unlock your full potential 
