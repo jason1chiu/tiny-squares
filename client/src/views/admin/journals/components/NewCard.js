@@ -19,19 +19,23 @@ export default function NewCard() {
   const [isBuyOptionsModalOpen, setBuyOptionsModalOpen] = useState(false);
 
   const openBuyOptionsModal = () => {
-    setBuyOptionsModalOpen(true);
+    // Check if the user has the unlimited package
+    if (!user.hasUnlimitedPackage) {
+      setBuyOptionsModalOpen(true);
+    }
   };
 
   const closeBuyOptionsModal = () => {
     setBuyOptionsModalOpen(false);
   };
+
   const [isModalOpen, setModalOpen] = useState(false);
   const [hover, setHover] = useState(false);
   const iconColor = useColorModeValue("secondaryGray.600", "secondaryGray.600");
   const iconHoverColor = useColorModeValue("brand.500", "white");
 
   const openModal = () => {
-    if (user.journalsCount >= 3) {
+    if (user.journalsCount >= 3 && !user.hasUnlimitedPackage) {
       openBuyOptionsModal();
     } else {
       setModalOpen(true);
@@ -43,7 +47,7 @@ export default function NewCard() {
   };
 
   const handleAddJournal = async (journal) => {
-    if (data?.journals?.length >= 3) {
+    if (data?.journals?.length >= 1 && !user.hasUnlimitedPackage) {
       // If the user already has 3 journals, open the buy options modal
       setBuyOptionsModalOpen(true);
     } else {
@@ -53,7 +57,7 @@ export default function NewCard() {
         refetch();
         closeModal();
       } catch (error) {
-        console.error("Error creating jornal: ", error);
+        console.error("Error creating journal: ", error);
       }
     }
   };

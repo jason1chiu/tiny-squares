@@ -5,6 +5,7 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { motion } from "framer-motion";
 import { useCookies } from "react-cookie";
+import AuthService from "utils/auth";
 
 // Chakra imports
 import {
@@ -63,19 +64,19 @@ export default function SignIn() {
     let loginUser = {
       email: email,
       password: password,
-    }
-
+    };
+  
     if (email && password) {
       try {
-        const { data } = await login({ variables: { ...loginUser } })
+        const { data } = await login({ variables: { ...loginUser } });
         if (data && data.login) {
           setShowError(null);
           setUser(data.login);
-          history.push('/')
+          history.push('/');
           const { token, user } = data.login;
-          setCookie('token', token, { maxAge: 7200 });
-          const userId = user._id;
-          Auth.login(token, userId);
+          const stripeCustomerId = user.stripeCustomerId;
+          // use AuthService to handle login
+          Auth.login(token, user._id, user, stripeCustomerId);
   
           toast({
             status: "success",
@@ -91,7 +92,7 @@ export default function SignIn() {
         } else if (data && data.login === null) {
           setShowError("Incorrect credentials")
         }
-
+  
       } catch (error) {
         console.error("Erroring logging in", error);
         toast({

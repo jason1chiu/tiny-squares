@@ -23,7 +23,8 @@ const StoreHeader = () => {
     await fetch("http://localhost:3001/admin/store/checkout", {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('id_token')}`
       },
       body: JSON.stringify({ items: cart.items })
     }).then((response) => {

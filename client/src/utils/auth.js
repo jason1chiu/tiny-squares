@@ -39,11 +39,12 @@ class AuthService {
     return localStorage.getItem('id_token');
   }
 
-  login(idToken, userId, user) {
+  login(idToken, userId, user, stripeCustomerId) {
     localStorage.setItem('id_token', idToken);
     localStorage.setItem('user_id', userId);
     localStorage.setItem('user_info', JSON.stringify(user));
     localStorage.setItem('stripeCustomerId', user.stripeCustomerId);
+    // window.location.assign('/dashboard');
   }
 
   logout() {

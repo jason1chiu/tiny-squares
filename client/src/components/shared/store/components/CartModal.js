@@ -11,9 +11,10 @@ export function CartModal(props) {
       await fetch("http://localhost:3001/admin/store/checkout", {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('id_token')}`
         },
-        body: JSON.stringify({ cart: cart.cart })
+        body: JSON.stringify({ productIds: cart.cart.map((item) => item._id) })
       }).then((response) => {
         return response.json();
       }).then((response) => {
