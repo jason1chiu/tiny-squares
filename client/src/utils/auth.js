@@ -43,6 +43,7 @@ class AuthService {
     localStorage.setItem('id_token', idToken);
     localStorage.setItem('user_id', userId);
     localStorage.setItem('user_info', JSON.stringify(user));
+    localStorage.setItem('stripeCustomerId', user.stripeCustomerId);
   }
 
   logout() {

@@ -22,6 +22,8 @@ const userSchema = new Schema(
       required: true,
     },
     journals: [{type: Schema.Types.ObjectId, ref: "Journal"}],
+    hasUnlimitedPackage: { type: Boolean, default: false },
+    stripeCustomerId: { type: String },
   },
   {
     toJSON: {

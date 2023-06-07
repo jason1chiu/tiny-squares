@@ -13,8 +13,8 @@ const resolvers = {
 
         console.log("TEST", { userData });
 
-        return userData;
-      }
+        return { ...userData._doc, hasUnlimitedPackage: userData.hasUnlimitedPackage, stripeCustomerId: userData.stripeCustomerId };
+  }
 
       throw new AuthenticationError("Not logged in");
     },

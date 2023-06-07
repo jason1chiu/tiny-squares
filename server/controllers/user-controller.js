@@ -11,7 +11,7 @@ module.exports = {
       return res.status(400).json({ message: 'Cannot find a user with this id!' });
     }
 
-    res.json(foundUser);
+    res.json({ ...foundUser._doc, hasUnlimitedPackage: foundUser.hasUnlimitedPackage, stripeCustomerId: foundUser.stripeCustomerId });
   },
 
   async createUser({ body }, res) {

@@ -6,6 +6,8 @@ const typeDefs = gql`
     username: String
     email: String
     journals: [Journal]
+    hasUnlimitedPackage: Boolean
+    stripeCustomerId: String
   }
 
   type Journal {
