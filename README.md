@@ -119,7 +119,7 @@ DB_PW='your_mysql_password'
 \Nomad-Nebula> npm start
 ``` -->
 
-4.  to _http://localhost:3001_ in your browser to access the site
+4.  to _http://localhost:3000_ in your browser to access the site
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
