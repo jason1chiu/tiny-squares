@@ -3,6 +3,26 @@ import Card from "components/card/card.js";
 import React from "react";
 import profile from "assets/img/bannercover.png";
 import { useAuth } from "contexts/auth.context";
+import { useEffect, useState } from "react";
+import bImage from 'assets/img/rand/b.jpg';
+import cImage from 'assets/img/rand/c.jpg';
+import dImage from 'assets/img/rand/d.jpg';
+import eImage from 'assets/img/rand/e.jpg';
+import { motion } from 'framer-motion';
+
+const images = [
+  bImage,
+  cImage,
+  dImage,
+  eImage
+];
+
+function getRandomImage() {
+  const randomIndex = Math.floor(Math.random() * images.length);
+  return images[randomIndex];
+}
+const MotionBox = motion(Box);
+
 export default function Profile(props) {
   const { banner, avatar, name, entries, journals } = props;
   let { user, setUser } = useAuth();
@@ -12,14 +32,31 @@ export default function Profile(props) {
     "white !important",
     "#111C44 !important"
   );
+  
+  
+  const [bgImage, setBgImage] = useState(getRandomImage());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBgImage(getRandomImage());
+    }, 15000); 
+
+    return () => clearInterval(interval); 
+  }, []);
+  
   return (
     <Card mb={{ base: "0px", lg: "20px" }} align='center'>
-      <Box
-        bgImage={profile}
+      <MotionBox
+        bgImage={`url(${bgImage})`}
         bgSize='cover'
         borderRadius='16px'
         h='131px'
         w='100%'
+        key={bgImage} 
+        initial={{ opacity: 0 }} 
+        animate={{ opacity: 1 }} 
+        exit={{ opacity: 0 }} 
+        transition={{ duration: 0.5 }} 
       />
       <Avatar
         mx='auto'
