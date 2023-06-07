@@ -12,6 +12,7 @@ import {
   Select,
   Textarea,
   useDisclosure,
+  HStack,
 } from "@chakra-ui/react";
 
 const CellModal = ({
@@ -22,7 +23,7 @@ const CellModal = ({
   initialNote,
   legends,
 }) => {
-  const [selecteLegend, setSelectedLegend] = useState(legends?.[0]);
+  const [selectedLegend, setSelectedLegend] = useState(legends?.[0]);
   const [selectedNote, setSelectedNote] = useState(initialNote || "");
 
   // Update state when color or note props change
@@ -42,7 +43,7 @@ const CellModal = ({
   };
 
   const handleSave = () => {
-    onSave(selecteLegend, selectedNote);
+    onSave(selectedLegend, selectedNote);
   };
 
   return (
@@ -53,16 +54,20 @@ const CellModal = ({
         <ModalCloseButton />
         <ModalBody>
           <Select
-            value={selecteLegend?._id}
+            value={selectedLegend?._id}
             onChange={handleColorChange}
             mb={4}
           >
             {(legends ?? []).map((legend, index) => (
               <option key={index} value={legend._id}>
-                {legend.color} {legend.label}
+                {legend.label}
               </option>
             ))}
           </Select>
+          <HStack>
+            <Box p={4} mb={2} bg={selectedLegend?.color}></Box>
+            <Box p={4} mb={2}>{selectedLegend?.label}</Box>
+          </HStack>
           <Textarea
             value={selectedNote}
             onChange={handleNoteChange}
