@@ -42,7 +42,7 @@ export default function Journal(props) {
             <Link
               fontWeight="500"
               color={brandColor}
-              href="/admin/admin/journals"
+              href="/admin/journals"
               fontSize="sm"
             >
               See journal details
