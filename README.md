@@ -56,7 +56,7 @@
   <img src='./client/public/TS-home.png' alt='home'>
 </p>
 
-<h1 align="center"> Introducing TinySquares: </h1>
+<h3 align="center"> Introducing TinySquares: </h3>
 
 Your ultimate destination for personalized lifestyle journals. Track sports, health, and mindfulness effortlessly. Our visually appealing pixel calendar design gives a clear year-long overview of your progress. Dive deeper with statistics and pie charts for insightful data representation. Join us and unlock your full potential 
 
