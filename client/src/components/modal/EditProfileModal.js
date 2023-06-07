@@ -78,29 +78,6 @@ function EditProfileModal() {
                 placeholder="Username"
               />
             </FormControl>
-            <FormControl mt={4}>
-              <FormLabel>Profile Picture</FormLabel>
-              <Box d="flex" alignItems="center">
-                <Input
-                  type="file"
-                  onChange={handleFileChange}
-                  hidden
-                  id="upload-file"
-                />
-                <FormLabel htmlFor="upload-file">
-                  <IconButton
-                    colorScheme="brand"
-                    aria-label="Upload image"
-                    icon={<FiUpload />}
-                    isRound
-                    size="lg"
-                  />
-                </FormLabel>
-                <Box ml={4}>
-                  {file ? file.name : "No file chosen"}
-                </Box>
-              </Box>
-            </FormControl>
           </ModalBody>
           <ModalFooter>
             <Button colorScheme="brand" mr={3} onClick={handleSaveProfile}>
