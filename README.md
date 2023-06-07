@@ -62,7 +62,7 @@ Your ultimate destination for personalized lifestyle journals. Track sports, hea
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<a name="features"></a>
+<!-- <a name="features"></a>
 
 ## :star: Added Features
 
@@ -72,7 +72,7 @@ Your ultimate destination for personalized lifestyle journals. Track sports, hea
 - Cancel option that sends you to main page
 - .env file that protects password
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 <a name="installation"></a>
 
@@ -92,7 +92,7 @@ cd tiny-squares
 
 <!-- 3. Install [`sequelize`](https://www.npmjs.com/package/inquirer), [`figlet`](https://www.npmjs.com/search?q=figlet), [`dotenv`](https://www.npmjs.com/package/dotenv), [`mysql2`](https://www.npmjs.com/package/mysql2), [`handlebars`](https://www.npmjs.com/package/handlebars) and [`express`](https://www.npmjs.com/package/console.table) [`chakra`](https://chakra-ui.com/)
  -->
-3. Install [`chakra`](https://www.npmjs.com/package/@chakra-ui/react), [`react`](https://www.npmjs.com/package/react), [`apollo-server-express`](https://www.apollographql.com/docs/apollo-server/previous-versions/), [`bcrypt`](https://www.npmjs.com/package/bcrypt), [`express`](https://www.npmjs.com/package/console.table), [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken), [`mongoose`](https://www.npmjs.com/package/mongoose), [`dotenv`](https://www.npmjs.com/package/dotenv), [`stripe`](https://www.npmjs.com/package/stripe), [`cors`](https://www.npmjs.com/package/cors)
+3. Install [`chakra`](https://www.npmjs.com/package/@chakra-ui/react), [`react`](https://www.npmjs.com/package/react), [`apollo-server-express`](https://www.apollographql.com/docs/apollo-server/previous-versions/), [`bcrypt`](https://www.npmjs.com/package/bcrypt), [`express`](https://www.npmjs.com/package/console.table), [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken), [`mongoose`](https://www.npmjs.com/package/mongoose), [`dotenv`](https://www.npmjs.com/package/dotenv), [`stripe`](https://www.npmjs.com/package/stripe), and [`cors`](https://www.npmjs.com/package/cors)
 
 
 ```bash
