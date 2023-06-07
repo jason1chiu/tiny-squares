@@ -63,7 +63,11 @@ const CellModal = ({
           />
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={handleSave}>
+          <Button variant='darkBrand'
+                color='white'
+                fontSize='sm'
+                fontWeight='500'
+                borderRadius='70px' mr={3} onClick={handleSave}>
             Save
           </Button>
           <Button onClick={onClose}>Cancel</Button>

@@ -24,10 +24,10 @@ export default function Journals(props) {
         mt="10px"
         mb="4px"
       >
-        All Journals
+       Journals
       </Text>
       <Text color={textColorSecondary} fontSize="md" me="26px" mb="40px">
-        Make edits or changes
+        Update your journals daily
       </Text>
       {journals.map((journal, index) =>
         <Journal

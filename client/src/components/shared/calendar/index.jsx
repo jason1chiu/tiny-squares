@@ -17,10 +17,12 @@ export default function Overview({journal_id}) {
           journalId={journal_id}
           setLegends={setLegends}
           gridArea={{ base: "1 / 1 / 2 / 2", lg: "1 / 1 / 2 / 2" }}
+          height="100%"
         />
         <Board
           legends={legends}
           gridArea={{ base: "1 / 1 / 2 / 2", lg: "1 / 1 / 2 / 2" }}
+          height="100%"
         />
 
       </Grid>

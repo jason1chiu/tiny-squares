@@ -73,6 +73,7 @@ export default function SignUp() {
     }
     if (password === confirmPassword && password && username && email) {
       try {
+
         let {data} = await addUser({ variables: newUser });
         if (data && data.addUser) {
           setShowError(null);
@@ -83,6 +84,7 @@ export default function SignUp() {
         } else if (data && data.addUser === null) {
           setShowError("User already exists!")
         }
+
         toast({
           status: "success",
           duration: 2000,
