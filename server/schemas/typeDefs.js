@@ -66,7 +66,7 @@ const typeDefs = gql`
     logout(email: String!): User
     purchaseProduct: PayLoad
     addJournal(name: String!, category: String!): User
-    removeJournal(journalId: ID!): User
+    removeJournal(journalId: ID!): String!
     addEntry(journalId: ID!, input: EntryInput): Journal
     removeEntry(journalId: ID!, entryId: ID!): Journal
     createLegend(label: String!, color: String!, userId: ID!): Legend!

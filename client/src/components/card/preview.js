@@ -14,9 +14,12 @@ import {
   import React, { useState } from "react";
 
 
+
   export default function Preview(props) {
-    const { image, name, author, onViewClick } = props;
+    const { image, name, author, onViewClick, onDeleteClick } = props;
     const textColor = useColorModeValue("navy.700", "white");
+    
+
     return (
       <Card p='20px'>
         <Flex direction={{ base: "column" }} justify='center'>
@@ -68,7 +71,7 @@ import {
             <VStack position="absolute" right={8} top={8} spacing={2}>
             <Tooltip hasArrow label="Delete" fontSize="sm">
             <Button size="xs" colorScheme="purple" >
-              <Icon as={MdClose} onClick={() => console.log('click')}/>
+              <Icon as={MdClose} onClick={onDeleteClick}/>
             </Button>
           </Tooltip>
           <Tooltip hasArrow label="Edit" fontSize="sm">

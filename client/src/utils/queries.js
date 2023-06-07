@@ -25,9 +25,10 @@ export const GET_ME = gql`
   }
 `;
 
+
 export const GET_JOURNAL = gql`
-  query getJournal($id: ID!) {
-    journal(id: $id) {
+  query getJournal($_id: ID!) {
+    journal(_id: $_id) {
       _id
       name
       entries {

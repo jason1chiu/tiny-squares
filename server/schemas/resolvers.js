@@ -108,9 +108,9 @@ const resolvers = {
     addJournal: async (parent, { name, category }, context) => {
       if (context.user) {
         const currentUser = await User.findById(context.user._id);
-        if (currentUser.journalsCount >= 3) {
-          throw new Error("You have reached the maximum number of free journals. Please subscribe to create more.");
-        }
+        // if (currentUser.journalsCount >= 3) {
+        //   throw new Error("You have reached the maximum number of free journals. Please subscribe to create more.");
+        // }
     
         const journal = await Journal.create({ name, category });
     
@@ -136,7 +136,7 @@ const resolvers = {
 
         await Journal.findByIdAndDelete(journalId);
 
-        return updatedUser;
+        return "Journal Deleted";
       }
 
       throw new AuthenticationError("You need to be logged in!");
