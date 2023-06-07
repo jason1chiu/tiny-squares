@@ -68,7 +68,7 @@ const typeDefs = gql`
     deleteLegend(journalId: ID!, legendId: ID!): Journal
     purchaseProduct: PayLoad
     addJournal(name: String!, category: String!): User
-    removeJournal(journalId: ID!): String!
+    removeJournal(journalId: ID!): User
     addEntry(journalId: ID!, input: EntryInput): Journal
     removeEntry(journalId: ID!, entryId: ID!): Journal
   }

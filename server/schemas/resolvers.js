@@ -119,7 +119,7 @@ const resolvers = {
 
         await Journal.findByIdAndDelete(journalId);
 
-        return "Journal Deleted";
+        return updatedUser;
       }
 
       throw new AuthenticationError("You need to be logged in!");
