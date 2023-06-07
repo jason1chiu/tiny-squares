@@ -131,6 +131,7 @@ DB_PW='your_mysql_password'
      <img src="assets\app.gif">
    </div>
    <br />
+   
    <p align="center"> The deployed site can be found on
    <!-- <a href="https://drive.google.com/file/d/1oZJElx4QXzcGZlfQwMoUEVd9D6Ld_YKO/view?usp=sharing">Heroku</a> -->
    <img src='./client/public/TS-dash.png' alt='dashboard pic'>
