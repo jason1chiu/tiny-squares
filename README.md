@@ -90,7 +90,10 @@ git clone https://github.com/jason1chiu/tiny-squares
 cd tiny-squares
 ```
 
-3. Install [`sequelize`](https://www.npmjs.com/package/inquirer), [`figlet`](https://www.npmjs.com/search?q=figlet), [`dotenv`](https://www.npmjs.com/package/dotenv), [`mysql2`](https://www.npmjs.com/package/mysql2), [`handlebars`](https://www.npmjs.com/package/handlebars) and [`express`](https://www.npmjs.com/package/console.table)
+<!-- 3. Install [`sequelize`](https://www.npmjs.com/package/inquirer), [`figlet`](https://www.npmjs.com/search?q=figlet), [`dotenv`](https://www.npmjs.com/package/dotenv), [`mysql2`](https://www.npmjs.com/package/mysql2), [`handlebars`](https://www.npmjs.com/package/handlebars) and [`express`](https://www.npmjs.com/package/console.table) [`chakra`](https://chakra-ui.com/)
+ -->
+3. Install [`chakra`](https://www.npmjs.com/package/@chakra-ui/react), [`react`](https://www.npmjs.com/package/react), [`apollo-server-express`](https://www.apollographql.com/docs/apollo-server/previous-versions/), [`bcrypt`](https://www.npmjs.com/package/bcrypt), [`express`](https://www.npmjs.com/package/console.table), [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken), [`mongoose`](https://www.npmjs.com/package/mongoose), [`dotenv`](https://www.npmjs.com/package/dotenv), [`stripe`](), [`cors`]()
+
 
 ```bash
 npm i
