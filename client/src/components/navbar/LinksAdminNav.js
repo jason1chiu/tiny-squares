@@ -1,5 +1,4 @@
-// React imports
-import React, { useContext } from "react";
+// React imports from "react";
 import { MdShoppingCart, MdEdit } from "react-icons/md";
 import { FaEthereum } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
@@ -24,9 +23,6 @@ import { useMutation } from "@apollo/client"
 
 // File imports
 import routes from "routes";
-import { CartModal } from 'components/shared/store/components/CartModal'
-import EditProfileModal from "components/modal/EditProfileModal";
-import { CartContext } from 'components/shared/store/js/CartContext'
 import { ItemContent } from "components/menu/ItemContent";
 import { SidebarResponsive } from "components/sidebar/Sidebar";
 import { LOGOUT_USER, UPDATE_USER } from "utils/mutations";
