@@ -8,7 +8,10 @@ const resolvers = {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
-          .populate("journals");
+          .populate("journals")
+          .populate("entries");
+
+        console.log("TEST", { userData });
 
         return userData;
       }
@@ -132,13 +135,17 @@ const resolvers = {
         userId: context.user._id,
       });
 
+      console.log({ legend });
+
       const updatedJournal = await Journal.findOneAndUpdate(
         { _id: journalId },
         { $addToSet: { legends: legend._id } },
         { new: true }
       ).populate("legends");
 
-      return updatedJournal;
+      console.log({ updatedJournal });
+
+      return updatedJournal.legends;
     },
 
     updateLegend: async (
@@ -172,12 +179,29 @@ const resolvers = {
     },
 
     addEntry: async (parent, { journalId, input }, context) => {
-      const entry = await Entry.create(input);
+      const entry = await Entry.create({
+        date: input.date,
+        note: input.note,
+        legend: input.legendId,
+      });
+
       const updatedJournal = await Journal.findOneAndUpdate(
         { _id: journalId },
         { $addToSet: { entries: entry._id } },
         { new: true }
-      );
+      )
+        .populate("legends")
+        .populate("entries");
+
+      console.log({ updatedJournal });
+
+      const dateTest = updatedJournal?.entries?.[0];
+
+      console.log({
+        dateTest,
+        testTwo: new Date(1701406800000),
+        testThree: new Date("1691121600000"),
+      });
 
       return updatedJournal;
     },

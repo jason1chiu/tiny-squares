@@ -42,7 +42,6 @@ const CellModal = ({
   };
 
   const handleSave = () => {
-    console.log({ selecteLegend, selectedNote });
     onSave(selecteLegend, selectedNote);
   };
 

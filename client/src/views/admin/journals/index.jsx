@@ -6,7 +6,7 @@ import {
   Text,
   useColorModeValue,
   SimpleGrid,
-  Link
+  Link,
 } from "@chakra-ui/react";
 
 import Banner from "views/admin/journals/components/Banner";
@@ -21,86 +21,92 @@ export default function JournalPage() {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorBrand = useColorModeValue("brand.500", "white");
-  
+
   let { user, journals, setJournals } = useAuth();
   let [me, { data, loading }] = useLazyQuery(GET_ME);
   let { categories } = useAuth();
 
   useEffect(() => {
-    me().then(data => {
+    me().then((data) => {
       setJournals(data.data.me.journals);
-    })
-  }, [])
+    });
+  }, []);
 
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
       {/* Main Fields */}
       <Grid
-        mb='20px'
+        mb="20px"
         gridTemplateColumns={{ xl: "repeat(3, 1fr)", "2xl": "1fr 0.46fr" }}
         gap={{ base: "20px", xl: "20px" }}
-        display={{ base: "block", xl: "grid" }}>
+        display={{ base: "block", xl: "grid" }}
+      >
         <Flex
-          flexDirection='column'
-          gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}>
-
+          flexDirection="column"
+          gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}
+        >
           <Banner />
 
-          <Flex direction='column'>
+          <Flex direction="column">
             <Flex
-              mt='45px'
-              mb='20px'
-              justifyContent='space-between'
+              mt="45px"
+              mb="20px"
+              justifyContent="space-between"
               direction={{ base: "column", md: "row" }}
-              align={{ base: "start", md: "center" }}>
-              <Text color={textColor} fontSize='2xl' ms='24px' fontWeight='700'>
+              align={{ base: "start", md: "center" }}
+            >
+              <Text color={textColor} fontSize="2xl" ms="24px" fontWeight="700">
                 Create New
               </Text>
               <Flex
-                align='center'
-                me='20px'
+                align="center"
+                me="20px"
                 ms={{ base: "24px", md: "0px" }}
-                mt={{ base: "20px", md: "0px" }}>
-                {categories.map(category =>
+                mt={{ base: "20px", md: "0px" }}
+              >
+                {categories.map((category) => (
                   <Link
+                    key={category}
                     color={textColorBrand}
-                    fontWeight='500'
+                    fontWeight="500"
                     me={{ base: "34px", md: "44px" }}
-                    to='#'>
+                    to="#"
+                  >
                     {category}
                   </Link>
-                )}
+                ))}
               </Flex>
             </Flex>
-            <SimpleGrid columns={{ base: 1, md: 3 }} gap='20px'>
-
+            <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px">
               <NewCard />
-
             </SimpleGrid>
 
             <Flex
-              mt='45px'
-              mb='20px'
-              justifyContent='space-between'
+              mt="45px"
+              mb="20px"
+              justifyContent="space-between"
               direction={{ base: "column", md: "row" }}
-              align={{ base: "start", md: "center" }}>
-
-              <Text color={textColor} fontSize='2xl' ms='24px' fontWeight='700'>
+              align={{ base: "start", md: "center" }}
+            >
+              <Text color={textColor} fontSize="2xl" ms="24px" fontWeight="700">
                 Your Journals
               </Text>
             </Flex>
 
-            <SimpleGrid columns={{ base: 1, md: 3 }} gap='20px'>
+            <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px">
               {journals.map((journal) => (
-                <YourJournalCard key={journal._id} journal={{ ...journal, image: P2 }} />
+                <YourJournalCard
+                  key={journal._id}
+                  journal={{ ...journal, image: P2 }}
+                />
               ))}
             </SimpleGrid>
-
           </Flex>
         </Flex>
-        <Flex flexDirection='column'
-          gridArea={{ xl: "1 / 3 / 2 / 4", "2xl": "1 / 2 / 2 / 3" }}>
-        </Flex>
+        <Flex
+          flexDirection="column"
+          gridArea={{ xl: "1 / 3 / 2 / 4", "2xl": "1 / 2 / 2 / 3" }}
+        ></Flex>
       </Grid>
     </Box>
   );

@@ -11,6 +11,7 @@ const entrySchema = new Schema({
   legend: {
     type: Schema.Types.ObjectId,
     ref: "Legend",
+    required: true,
   },
 });
 

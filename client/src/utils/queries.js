@@ -79,11 +79,11 @@ export const GET_STATS = gql`
 `;
 
 export const GET_LEGENDS = gql`
-query legends($id: ID!) {
-  legends(id: $id) {
-    _id
-    label
-    color
+  query legends($id: ID!) {
+    legends(id: $id) {
+      _id
+      label
+      color
+    }
   }
-}
 `;
