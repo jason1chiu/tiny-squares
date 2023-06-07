@@ -30,6 +30,9 @@ export function CartModal(props) {
             <ModalHeader>Your Shopping Cart</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
+            {cart.cart.length === 0 ? (
+            <Text>There's nothing in here!</Text>
+          ) : (
             <VStack spacing={4}>
         {cart.cart.map(({ id, quantity }) => {
           const productData = getProductData(id);
@@ -57,17 +60,20 @@ export function CartModal(props) {
           );
         })}
       </VStack>
+      )}
             </ModalBody>
     
             <ModalFooter>
               <Button variant="ghost" mr={3} onClick={props.onClose}>
                 Close
               </Button>
+              {cart.cart.length !== 0 && (
               <Button variant='darkBrand'
                 color='white'
                 fontSize='sm'
                 fontWeight='500'
                 borderRadius='70px' onClick={(checkout)}>Checkout</Button>
+                )}
             </ModalFooter>
           </ModalContent>
         </Modal>
