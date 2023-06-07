@@ -15,7 +15,7 @@ export const GET_ME = gql`
           note
           date
           legend {
-            id
+            _id
             label
             color
           }
@@ -36,10 +36,15 @@ export const GET_JOURNAL = gql`
         note
         date
         legend {
-          id
+          _id
           label
           color
         }
+      }
+      legends {
+        _id
+        label
+        color
       }
     }
   }
@@ -65,15 +70,6 @@ export const GET_JOURNALS = gql`
   }
 `;
 
-export const GET_JOURNALS_DASHBOARD = gql`
-  query getJournals {
-    journals {
-      _id
-      name
-    }
-  }
-`;
-
 export const GET_STATS = gql`
   query getStats($userId: ID!) {
     stats(userId: $userId) {
@@ -84,9 +80,9 @@ export const GET_STATS = gql`
 `;
 
 export const GET_LEGENDS = gql`
-query GetLegends($id: ID!) {
-  legends(userId: $id) {
-    id
+query legends($id: ID!) {
+  legends(id: $id) {
+    _id
     label
     color
   }

@@ -21,7 +21,7 @@ export default function JournalPage() {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorBrand = useColorModeValue("brand.500", "white");
-  // const [journals, setJournals] = useState([]);
+  
   let { user, journals, setJournals } = useAuth();
   let [me, { data, loading }] = useLazyQuery(GET_ME);
   let { categories } = useAuth();
@@ -47,7 +47,7 @@ export default function JournalPage() {
           <Banner />
 
           <Flex direction='column'>
-          <Flex
+            <Flex
               mt='45px'
               mb='20px'
               justifyContent='space-between'
@@ -71,12 +71,12 @@ export default function JournalPage() {
                   </Link>
                 )}
               </Flex>
-            </Flex> 
+            </Flex>
             <SimpleGrid columns={{ base: 1, md: 3 }} gap='20px'>
 
-<NewCard />
+              <NewCard />
 
-</SimpleGrid>
+            </SimpleGrid>
 
             <Flex
               mt='45px'
@@ -92,7 +92,7 @@ export default function JournalPage() {
 
             <SimpleGrid columns={{ base: 1, md: 3 }} gap='20px'>
               {journals.map((journal) => (
-                <YourJournalCard journal={{ ...journal, image: P2 }} />
+                <YourJournalCard key={journal._id} journal={{ ...journal, image: P2 }} />
               ))}
             </SimpleGrid>
 

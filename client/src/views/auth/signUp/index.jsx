@@ -1,8 +1,10 @@
 // React imports
-import React, { useEffect } from "react";
+import React  from "react";
 import { NavLink, useHistory } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
+import { useCookies } from "react-cookie";
 
 // Chakra imports
 import {
@@ -40,6 +42,7 @@ import { useAuth } from "contexts/auth.context";
 
 export default function SignUp() {
   let { setUser } = useAuth();
+  let [, setCookie] = useCookies();
   let history = useHistory();
   const toast = useToast();
   const textColor = useColorModeValue("navy.700", "white");
@@ -57,15 +60,12 @@ export default function SignUp() {
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    handleAddUser();
-  }
-  const [addUser, { data, error }] = useMutation(ADD_USER)
+
+  const [addUser] = useMutation(ADD_USER)
 
   const handleClick = () => setShow(!show);
   const handleAddUser = async (event) => {
-   
+    event.preventDefault();
     let newUser = {
       username: username,
       email: email,
@@ -73,7 +73,17 @@ export default function SignUp() {
     }
     if (password === confirmPassword && password && username && email) {
       try {
-        await addUser({ variables: newUser });
+
+        let {data} = await addUser({ variables: newUser });
+        if (data && data.addUser) {
+          setShowError(null);
+          setUser(data.addUser)
+          history.push('/');
+          const { token } = data.addUser;
+          setCookie('token', token, { maxAge: 7200 });
+        } else if (data && data.addUser === null) {
+          setShowError("User already exists!")
+        }
 
         toast({
           status: "success",
@@ -103,195 +113,180 @@ export default function SignUp() {
     }
   }
 
-  useEffect(() => {
-    console.log(data)
-    if (data && data.addUser) {
-      setShowError(null);
-      setUser(data.addUser)
-      history.push('/');
-      // write cookies here
-    } else if (data && data.addUser === null) {
-      setShowError("User already exists!")
-    }
-  }, [data])
-
   return (
-    <form onSubmit={handleSubmit}>
-      <FormControl>
-        <DefaultAuth imageBackground={imageAuth} image={imageAuth}>
-          <Flex
-            maxW={{ base: "100%", md: "max-content" }}
-            w='100%'
-            mx={{ base: "auto", lg: "0px" }}
-            me='auto'
-            h='100%'
-            alignItems='start'
-            justifyContent='center'
-            mb={{ base: "30px", md: "60px" }}
-            px={{ base: "25px", md: "0px" }}
-            mt={{ base: "40px", md: "14vh" }}
-            flexDirection='column'>
-            <Box me='auto'>
-              <MotionHeading
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1 }}
-                color={textColor}
-                fontSize='36px'
-                mb='10px'
-              >
-                Sign Up
-              </MotionHeading>
-              <Text
-                mb='36px'
-                ms='4px'
-                color={textColorSecondary}
-                fontWeight='400'
-                fontSize='md'>
-                Enter your email and password to sign up!
-              </Text>
-            </Box>
-            <Flex
-              zIndex='2'
-              direction='column'
-              w={{ base: "100%", md: "420px" }}
-              maxW='100%'
-              background='transparent'
-              borderRadius='15px'
-              mx={{ base: "auto", lg: "unset" }}
-              me='auto'
-              mb={{ base: "20px", md: "auto" }}>
-
-              <Flex align='center' mb='25px'>
-                <HSeparator />
-                {/* <Text color='gray.400' mx='14px'>
+    <DefaultAuth imageBackground={imageAuth} image={imageAuth}>
+      <Flex
+        maxW={{ base: "100%", md: "max-content" }}
+        w='100%'
+        mx={{ base: "auto", lg: "0px" }}
+        me='auto'
+        h='100%'
+        alignItems='start'
+        justifyContent='center'
+        mb={{ base: "30px", md: "60px" }}
+        px={{ base: "25px", md: "0px" }}
+        mt={{ base: "40px", md: "14vh" }}
+        flexDirection='column'>
+        <Box me='auto'>
+        <MotionHeading
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            color={textColor}
+            fontSize='36px'
+            mb='10px'
+          >
+            Sign Up
+          </MotionHeading>
+          <Text
+            mb='36px'
+            ms='4px'
+            color={textColorSecondary}
+            fontWeight='400'
+            fontSize='md'>
+            Enter your email and password to sign up!
+          </Text>
+        </Box>
+        <Flex
+          zIndex='2'
+          direction='column'
+          w={{ base: "100%", md: "420px" }}
+          maxW='100%'
+          background='transparent'
+          borderRadius='15px'
+          mx={{ base: "auto", lg: "unset" }}
+          me='auto'
+          mb={{ base: "20px", md: "auto" }}>
+     
+          <Flex align='center' mb='25px'>
+            <HSeparator />
+            {/* <Text color='gray.400' mx='14px'>
               or
             </Text> */}
-                <HSeparator />
-              </Flex>
-              {showError && <Alert status='error'>
-                <AlertIcon />
-                <AlertTitle>{showError}!
-                </AlertTitle>
-                <AlertDescription>Try again!
-                </AlertDescription>
-              </Alert>}
-
-              <FormControl >
-                <FormLabel
-                  display='flex'
-                  ms='4px'
-                  fontSize='sm'
-                  fontWeight='500'
-                  color={textColor}
-                  mb='8px'>
-                  Email<Text color={brandStars}>*</Text>
-                </FormLabel>
-                <Input
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value)
-                    setShowError(null);
-                  }}
-                  isRequired={true}
-                  variant='auth'
-                  fontSize='sm'
-                  ms={{ base: "0px", md: "0px" }}
-                  type='email'
-                  placeholder='Enter your email'
-                  mb='24px'
-                  fontWeight='500'
-                  size='lg'
+            <HSeparator />
+          </Flex>
+          {showError && <Alert status='error'>
+            <AlertIcon />
+            <AlertTitle>{showError}!
+            </AlertTitle>
+            <AlertDescription>Try again!
+            </AlertDescription>
+          </Alert>}
+          <FormControl>
+            <FormLabel
+              display='flex'
+              ms='4px'
+              fontSize='sm'
+              fontWeight='500'
+              color={textColor}
+              mb='8px'>
+              Email<Text color={brandStars}>*</Text>
+            </FormLabel>
+            <Input
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value)
+                setShowError(null);
+              }}
+              isRequired={true}
+              variant='auth'
+              fontSize='sm'
+              ms={{ base: "0px", md: "0px" }}
+              type='email'
+              placeholder='Enter your email'
+              mb='24px'
+              fontWeight='500'
+              size='lg'
+            />
+            <FormLabel
+              display='flex'
+              ms='4px'
+              fontSize='sm'
+              fontWeight='500'
+              color={textColor}
+              mb='8px'>
+              Username<Text color={brandStars}>*</Text>
+            </FormLabel>
+            <Input
+              value={username}
+              onChange={(e) => {
+                setUsername(e.target.value)
+                setShowError(null);
+              }}
+              isRequired={true}
+              variant='auth'
+              fontSize='sm'
+              ms={{ base: "0px", md: "0px" }}
+              type='email'
+              placeholder='Enter your email'
+              mb='24px'
+              fontWeight='500'
+              size='lg'
+            />
+            <FormLabel
+              ms='4px'
+              fontSize='sm'
+              fontWeight='500'
+              color={textColor}
+              display='flex'>
+              Password<Text color={brandStars}>*</Text>
+            </FormLabel>
+            <InputGroup size='md'>
+              <Input
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value)
+                  setShowError(null);
+                }}
+                isRequired={true}
+                fontSize='sm'
+                placeholder='Min. 8 characters'
+                mb='12px'
+                size='lg'
+                type={show ? "text" : "password"}
+                variant='auth'
+              />
+              <InputRightElement display='flex' alignItems='center' mt='4px'>
+                <Icon
+                  color={textColorSecondary}
+                  _hover={{ cursor: "pointer" }}
+                  as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
+                  onClick={handleClick}
                 />
-                <FormLabel
-                  display='flex'
-                  ms='4px'
-                  fontSize='sm'
-                  fontWeight='500'
-                  color={textColor}
-                  mb='8px'>
-                  Username<Text color={brandStars}>*</Text>
-                </FormLabel>
-                <Input
-                  value={username}
-                  onChange={(e) => {
-                    setUsername(e.target.value)
-                    setShowError(null);
-                  }}
-                  isRequired={true}
-                  variant='auth'
-                  fontSize='sm'
-                  ms={{ base: "0px", md: "0px" }}
-                  type='text'
-                  placeholder='Enter a username'
-                  mb='24px'
-                  fontWeight='500'
-                  size='lg'
-                />
-                <FormLabel
-                  ms='4px'
-                  fontSize='sm'
-                  fontWeight='500'
-                  color={textColor}
-                  display='flex'>
-                  Password<Text color={brandStars}>*</Text>
-                </FormLabel>
-                <InputGroup size='md'>
-                  <Input
-                    value={password}
-                    onChange={(e) => {
-                      setPassword(e.target.value)
-                      setShowError(null);
-                    }}
-                    isRequired={true}
-                    fontSize='sm'
-                    placeholder='Min. 8 characters'
-                    mb='12px'
-                    size='lg'
-                    type={show ? "text" : "password"}
-                    variant='auth'
-                  />
-                  <InputRightElement display='flex' alignItems='center' mt='4px'>
-                    <Icon
-                      color={textColorSecondary}
-                      _hover={{ cursor: "pointer" }}
-                      as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
-                      onClick={handleClick}
-                    />
-                  </InputRightElement>
-                </InputGroup>
+              </InputRightElement>
+            </InputGroup>
 
-                <FormLabel
-                  ms='4px'
-                  fontSize='sm'
-                  fontWeight='500'
-                  color={textColor}
-                  display='flex'>
-                  Confirm Password<Text color={brandStars}>*</Text>
-                </FormLabel>
-                <InputGroup size='md'>
-                  <Input
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    isRequired={true}
-                    fontSize='sm'
-                    placeholder='Confirm your password'
-                    mb='24px'
-                    size='lg'
-                    type={show ? "text" : "password"}
-                    variant='auth'
-                  />
-                  <InputRightElement display='flex' alignItems='center' mt='4px'>
-                    <Icon
-                      color={textColorSecondary}
-                      _hover={{ cursor: "pointer" }}
-                      as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
-                      onClick={handleClick}
-                    />
-                  </InputRightElement>
-                </InputGroup>
-                <Flex justifyContent='space-between' align='center' mb='24px'>
-                  {/* <FormControl display='flex' alignItems='center'>
+            <FormLabel
+              ms='4px'
+              fontSize='sm'
+              fontWeight='500'
+              color={textColor}
+              display='flex'>
+              Confirm Password<Text color={brandStars}>*</Text>
+            </FormLabel>
+            <InputGroup size='md'>
+              <Input
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                isRequired={true}
+                fontSize='sm'
+                placeholder='Confirm your password'
+                mb='24px'
+                size='lg'
+                type={show ? "text" : "password"}
+                variant='auth'
+              />
+              <InputRightElement display='flex' alignItems='center' mt='4px'>
+                <Icon
+                  color={textColorSecondary}
+                  _hover={{ cursor: "pointer" }}
+                  as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
+                  onClick={handleClick}
+                />
+              </InputRightElement>
+            </InputGroup>
+            <Flex justifyContent='space-between' align='center' mb='24px'>
+              <FormControl display='flex' alignItems='center'>
                 <Checkbox
                   id='remember-login'
                   colorScheme='brandScheme'
@@ -305,45 +300,43 @@ export default function SignUp() {
                   fontSize='sm'>
                   Keep me logged in
                 </FormLabel>
-              </FormControl> */}
-                </Flex>
-                <MotionButton
-                  type="submit" // add the type="submit" prop so this button will trigger form submission when clicked or when Enter is pressed
-                  fontSize='sm'
-                  variant='brand'
-                  fontWeight='500'
-                  w='100%'
-                  h='50'
-                  mb='24px'
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}>
-                  Sign Up
-                </MotionButton>
               </FormControl>
-              <Flex
-                flexDirection='column'
-                justifyContent='center'
-                alignItems='start'
-                maxW='100%'
-                mt='0px'>
-                <Text color={textColorDetails} fontWeight='400' fontSize='14px'>
-                  Already have an account?
-                  <NavLink to='/auth/sign-in'>
-                    <Text
-                      color={textColorBrand}
-                      as='span'
-                      ms='5px'
-                      fontWeight='500'>
-                      Sign In
-                    </Text>
-                  </NavLink>
-                </Text>
-              </Flex>
             </Flex>
+            <MotionButton
+              onClick={handleAddUser}
+              fontSize='sm'
+              variant='brand'
+              fontWeight='500'
+              w='100%'
+              h='50'
+              mb='24px'
+              whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.9 }}
+  transition={{ type: "spring", stiffness: 400, damping: 17 }}>
+              Sign Up
+            </MotionButton>
+          </FormControl>
+          <Flex
+            flexDirection='column'
+            justifyContent='center'
+            alignItems='start'
+            maxW='100%'
+            mt='0px'>
+            <Text color={textColorDetails} fontWeight='400' fontSize='14px'>
+              Already have an account?
+              <NavLink to='/auth/sign-in'>
+                <Text
+                  color={textColorBrand}
+                  as='span'
+                  ms='5px'
+                  fontWeight='500'>
+                  Sign In
+                </Text>
+              </NavLink>
+            </Text>
           </Flex>
-        </DefaultAuth>
-      </FormControl>
-    </form>
+        </Flex>
+      </Flex>
+    </DefaultAuth>
   );
 }

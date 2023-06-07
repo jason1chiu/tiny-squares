@@ -1,9 +1,11 @@
 // React imports
-import React, { useEffect } from "react";
+import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { motion } from "framer-motion";
+import { useCookies } from "react-cookie";
+
 // Chakra imports
 import {
   Box,
@@ -38,9 +40,11 @@ import { useAuth } from "contexts/auth.context";
 import Auth from "utils/auth"
 
 export default function SignIn() {
+  let [, setCookie] = useCookies();
   const toast = useToast();
   let { setUser } = useAuth();
   let history = useHistory();
+  
   // Chakra color mode
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
@@ -52,12 +56,7 @@ export default function SignIn() {
   const [showError, setShowError] = React.useState(null);
   const [email, currentEmail] = React.useState("");
   const [password, currentPassword] = React.useState("");
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    handleLogin();
-  }
-
-  const [login, { data, error }] = useMutation(LOGIN_USER)
+  const [login] = useMutation(LOGIN_USER)
 
   const handleClick = () => setShow(!show);
   const handleLogin = async () => {
@@ -68,54 +67,49 @@ export default function SignIn() {
 
     if (email && password) {
       try {
-        const {data} = await login({ variables: {...loginUser}})
-        const { token, user } = data.login;
-        const userId = user._id;
-        Auth.login(token, userId, user);
-
-        toast({
-          status: "success",
-          duration: 2000,
-          isClosable: true,
-          position: "top",
-          render: () => (
-            <Box color='white' p={3} bg='purple.500' borderRadius="8px">
-              Welcome back!
-            </Box>
-          ),
-        });
+        const { data } = await login({ variables: { ...loginUser } })
+        if (data && data.login) {
+          setShowError(null);
+          setUser(data.login);
+          history.push('/')
+          const { token, user } = data.login;
+          setCookie('token', token, { maxAge: 7200 });
+          const userId = user._id;
+          Auth.login(token, userId);
+  
+          toast({
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+            position: "top",
+            render: () => (
+              <Box color='white' p={3} bg='purple.500' borderRadius="8px">
+                Welcome back!
+              </Box>
+            ),
+          });
+        } else if (data && data.login === null) {
+          setShowError("Incorrect credentials")
+        }
 
       } catch (error) {
         console.error("Erroring logging in", error);
-     toast({
-        title: "Error logging in",
-        description: error.message, // Display the error message
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "top",
-        backgroundColor: "red.500",
-      });
+        toast({
+          title: "Error logging in",
+          description: error.message, // Display the error message
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+          backgroundColor: "red.500",
+        });
+      }
+    } else {
+      setShowError("Some fields are missing!")
     }
-  } else {
-    setShowError("Some fields are missing!")
   }
-}
-
-  useEffect(() => {
-    console.log(data);
-    if (data && data.login) {
-      setShowError(null);
-      setUser(data.login);
-      history.push('/')
-    } else if (data && data.login === null) {
-      setShowError("Incorrect credentials")
-    }
-  }, [data])
 
   return (
-    <form onSubmit={handleSubmit}>
-    <FormControl>
     <DefaultAuth imageBackground={imageAuth} image={imageAuth}>
       <Flex
         maxW={{ base: "100%", md: "max-content" }}
@@ -152,7 +146,7 @@ export default function SignIn() {
           mx={{ base: "auto", lg: "unset" }}
           me='auto'
           mb={{ base: "20px", md: "auto" }}>
-       
+
           <Flex align='center' mb='25px'>
             <HSeparator />
 
@@ -222,7 +216,7 @@ export default function SignIn() {
               </InputRightElement>
             </InputGroup>
             <Flex justifyContent='space-between' align='center' mb='24px'>
-              {/* <FormControl display='flex' alignItems='center'>
+              <FormControl display='flex' alignItems='center'>
                 <Checkbox
                   id='remember-login'
                   colorScheme='brandScheme'
@@ -236,7 +230,7 @@ export default function SignIn() {
                   fontSize='sm'>
                   Keep me logged in
                 </FormLabel>
-              </FormControl> */}
+              </FormControl>
             </Flex>
             <MotionButton
               onClick={handleLogin}
@@ -247,8 +241,8 @@ export default function SignIn() {
               h='50'
               mb='24px'
               whileHover={{ scale: 1.1 }}
-  whileTap={{ scale: 0.9 }}
-  transition={{ type: "spring", stiffness: 400, damping: 17 }}>
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}>
               Sign In
             </MotionButton>
           </FormControl>
@@ -274,7 +268,5 @@ export default function SignIn() {
         </Flex>
       </Flex>
     </DefaultAuth>
-    </FormControl>
-    </form>
   );
 }

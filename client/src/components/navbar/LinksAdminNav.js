@@ -1,5 +1,5 @@
 // React imports
-import React from "react";
+import React, { useContext } from "react";
 import { MdShoppingCart, MdEdit } from "react-icons/md";
 import { FaEthereum } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
@@ -8,11 +8,15 @@ import { CartContext } from 'components/shared/store/js/CartContext'
 import { useContext } from 'react'
 import { BsShop } from "react-icons/bs";
 import { CartModal } from 'components/shared/store/components/CartModal'
+import { useCookies } from "react-cookie";
+
+
 import { motion } from 'framer-motion';
 import BuyOptionsModal from 'components/shared/store/components/BuyOptionsModal'
 
 // Chakra imports
 import { Avatar, Button, Flex, Icon, Link, Menu, MenuButton, MenuItem, MenuList, Text, Badge, useColorModeValue, useDisclosure, IconButton, Box } from "@chakra-ui/react";
+
 import PropTypes from "prop-types";
 
 // Apollow imports
@@ -20,17 +24,20 @@ import { useMutation } from "@apollo/client"
 
 // File imports
 import routes from "routes";
-
+import { CartModal } from 'components/shared/store/components/CartModal'
+import EditProfileModal from "components/modal/EditProfileModal";
+import { CartContext } from 'components/shared/store/js/CartContext'
 import { ItemContent } from "components/menu/ItemContent";
 import { SidebarResponsive } from "components/sidebar/Sidebar";
-import { LOGOUT_USER } from "utils/mutations";
+import { LOGOUT_USER, UPDATE_USER } from "utils/mutations";
 import { useAuth } from "contexts/auth.context";
 
 export default function HeaderLinks(props) {
+  let [ cookies, setCookie, removeCookie ] = useCookies();
   let { user, setUser } = useAuth();
- 
-  let email = user && user.user ? user.user.email : 'Default Email';
+  let email = user.user.email;
   const [logout] = useMutation(LOGOUT_USER);
+  const [updatedUser] = useMutation(UPDATE_USER);
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const MotionMenuList = motion(MenuList);
@@ -48,10 +55,12 @@ export default function HeaderLinks(props) {
     open: { y: 0, opacity: 1, scale: 1 },
     closed: { y: 50, opacity: 0, scale: 0.3 },
   };
+
   const handleLogout = async () => {
     try {
       await logout({ variables: { email } });
       setUser(null);
+      removeCookie('token');
       history.push("/auth/sign-in"); // assuming this is your sign-in route
     } catch (error) {
       console.error("Error logging out", error);
@@ -73,7 +82,6 @@ export default function HeaderLinks(props) {
     "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
     "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
   );
-
 
   const cart = useContext(CartContext);
   const totalQuantity = cart.getTotalQuantity();
@@ -159,7 +167,7 @@ export default function HeaderLinks(props) {
             </Box>
           )}
           color={navbarIcon}
-          _hover={{ color: "secondaryGray.900" }} 
+          _hover={{ color: "secondaryGray.900" }} // replace "yourColor" with the color you want when hovering
           onClick={openCartModal}
         />
         <CartModal isOpen={cartModalIsOpen} onClose={closeCartModal} />
@@ -184,7 +192,7 @@ export default function HeaderLinks(props) {
           <Avatar
             _hover={{ cursor: "pointer" }}
             color="white"
-            name={user && user.user ? user.user.username : 'Default Name'}
+            name={user.user.username}
             bg="#11047A"
             size="sm"
             w="40px"
@@ -214,7 +222,7 @@ export default function HeaderLinks(props) {
               fontWeight="700"
               color={textColor}
             >
-              👋&nbsp; Hey, {user && user.user ? user.user.username : 'Default Name'}
+              👋&nbsp; Hey, {user.user.username}
             </Text>
           </Flex>
 
@@ -257,10 +265,7 @@ export default function HeaderLinks(props) {
             </Flex>
           </Flex>
         </MotionMenuList>
-
-
       </Menu>
-
     </Flex>
   );
 }
