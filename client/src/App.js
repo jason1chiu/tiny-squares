@@ -74,6 +74,7 @@ export default function App() {
                     </motion.div>
                   </Route>
                   {!user && <Redirect to="/auth/sign-in" />}
+                  {user && <>
                   <Route path={`/admin`}>
                     <motion.div
                       initial="initial"
@@ -108,6 +109,7 @@ export default function App() {
                     </motion.div>
                   </Route>
                   <Redirect from="/" to="/admin/dashboard" />
+                  </>}
                 </Switch>
               </AnimatePresence>
             </BrowserRouter>

@@ -25,15 +25,14 @@ import { useMutation } from "@apollo/client"
 import routes from "routes";
 import { ItemContent } from "components/menu/ItemContent";
 import { SidebarResponsive } from "components/sidebar/Sidebar";
-import { LOGOUT_USER, UPDATE_USER } from "utils/mutations";
+import { LOGOUT_USER } from "utils/mutations";
 import { useAuth } from "contexts/auth.context";
 
 export default function HeaderLinks(props) {
-  let [ cookies, setCookie, removeCookie ] = useCookies();
+  let [cookies, setCookie, removeCookie] = useCookies();
   let { user, setUser } = useAuth();
-  let email = user.user.email;
+  // let email = user.user.email;
   const [logout] = useMutation(LOGOUT_USER);
-  const [updatedUser] = useMutation(UPDATE_USER);
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const MotionMenuList = motion(MenuList);
@@ -54,10 +53,11 @@ export default function HeaderLinks(props) {
 
   const handleLogout = async () => {
     try {
+      let email = user.user.email;
       await logout({ variables: { email } });
-      setUser(null);
+      setUser(false);
       removeCookie('token');
-      history.push("/auth/sign-in"); // assuming this is your sign-in route
+      setTimeout(() => history.push("/auth/sign-in"), 100);
     } catch (error) {
       console.error("Error logging out", error);
     }
@@ -83,7 +83,9 @@ export default function HeaderLinks(props) {
   const totalQuantity = cart.getTotalQuantity();
   const { isOpen: buyOptionsModalIsOpen, onOpen: openBuyOptionsModal, onClose: closeBuyOptionsModal } = useDisclosure();
   const { isOpen: cartModalIsOpen, onOpen: openCartModal, onClose: closeCartModal } = useDisclosure();
+
   return (
+    user && user.user &&
     <Flex
       w={{ sm: "100%", md: "auto" }}
       alignItems="center"
@@ -116,9 +118,10 @@ export default function HeaderLinks(props) {
         </Flex>
 
       </Flex>
-      <SidebarResponsive routes={routes} />
-      <Menu>
 
+      <SidebarResponsive routes={routes} />
+
+      <Menu>
         <MenuList
           boxShadow={shadow}
           p="20px"
@@ -173,11 +176,11 @@ export default function HeaderLinks(props) {
           icon={(
             <Box position="relative">
               <BsShop size="24" tm="100px" />
-          
+
             </Box>
           )}
           color={navbarIcon}
-          _hover={{ color: "secondaryGray.900" }} 
+          _hover={{ color: "secondaryGray.900" }}
           onClick={openBuyOptionsModal}
         />
         <BuyOptionsModal isOpen={buyOptionsModalIsOpen} onClose={closeBuyOptionsModal} />
@@ -185,6 +188,7 @@ export default function HeaderLinks(props) {
 
       <Menu>
         <MenuButton p="0px">
+
           <Avatar
             _hover={{ cursor: "pointer" }}
             color="white"

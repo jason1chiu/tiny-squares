@@ -5,7 +5,6 @@ import { useCookies } from "react-cookie";
 const AuthContext = React.createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  let [cookies, setCookie, removeCookie] = useCookies();
   let [user, setUser] = React.useState(null);
 
   const categories = ["Mood", "Health", "Habit"];

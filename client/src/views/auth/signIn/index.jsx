@@ -1,10 +1,12 @@
 // React imports
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { motion } from "framer-motion";
 import { useCookies } from "react-cookie";
+import { useLazyQuery } from "@apollo/client";
+import { GET_ME } from "utils/queries";
 
 // Chakra imports
 import {
@@ -40,11 +42,11 @@ import { useAuth } from "contexts/auth.context";
 import Auth from "utils/auth"
 
 export default function SignIn() {
-  let [, setCookie] = useCookies();
+  let [cookies, setCookie] = useCookies();
   const toast = useToast();
-  let { setUser } = useAuth();
+  let { user, setUser } = useAuth();
   let history = useHistory();
-  
+
   // Chakra color mode
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
@@ -57,6 +59,17 @@ export default function SignIn() {
   const [email, currentEmail] = React.useState("");
   const [password, currentPassword] = React.useState("");
   const [login] = useMutation(LOGIN_USER)
+
+  let [me] = useLazyQuery(GET_ME);
+
+  useEffect(() => {
+    if (cookies.token && user === null) {
+      me().then(data => {
+        setUser({ user: data.data.me });
+        history.push('/admin/dashboard')
+      })
+    }
+  }, [user, cookies])
 
   const handleClick = () => setShow(!show);
   const handleLogin = async () => {
@@ -76,7 +89,7 @@ export default function SignIn() {
           setCookie('token', token, { maxAge: 7200 });
           const userId = user._id;
           Auth.login(token, userId);
-  
+
           toast({
             status: "success",
             duration: 2000,
