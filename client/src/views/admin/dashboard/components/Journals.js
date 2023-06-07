@@ -1,6 +1,9 @@
 import { Text, useColorModeValue } from "@chakra-ui/react";
 import Journal from "./Journal";
 import Journal1 from "assets/img/purple.jpg";
+import { GET_JOURNALS } from "utils/queries";
+
+import { useQuery } from "@apollo/client";
 
 import Card from "components/card/card.js";
 import React from "react";
@@ -8,7 +11,7 @@ import React from "react";
 import { useAuth } from "contexts/auth.context";
 
 export default function Journals(props) {
-  const { journals } = useAuth();
+  const { data } = useQuery(GET_JOURNALS);
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "gray.400";
   const cardShadow = useColorModeValue(
@@ -24,12 +27,12 @@ export default function Journals(props) {
         mt="10px"
         mb="4px"
       >
-       Journals
+        Journals
       </Text>
       <Text color={textColorSecondary} fontSize="md" me="26px" mb="40px">
         Update your journals daily
       </Text>
-      {journals.map((journal, index) =>
+      {(data?.journals ?? []).map((journal, index) => (
         <Journal
           key={journal._id}
           boxShadow={cardShadow}
@@ -39,7 +42,7 @@ export default function Journals(props) {
           ranking={index + 1}
           title={journal.name}
         />
-      )}
+      ))}
     </Card>
   );
 }

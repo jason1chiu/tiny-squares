@@ -50,7 +50,8 @@ const typeDefs = gql`
 
   input EntryInput {
     date: String
-    color: String
+    legendId: ID
+    note: String
   }
 
   type PayLoad {
@@ -63,8 +64,13 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     updateUser(username: String!): User
     logout(email: String!): User
-    createLegend(journalId: ID!, label: String!, color: String!): Journal
-    updateLegend(journalId: ID!, label: String!, color: String!, legendId: ID!): Legend
+    createLegend(journalId: ID!, label: String!, color: String!): [Legend]
+    updateLegend(
+      journalId: ID!
+      label: String!
+      color: String!
+      legendId: ID!
+    ): Legend
     deleteLegend(journalId: ID!, legendId: ID!): Journal
     purchaseProduct: PayLoad
     addJournal(name: String!, category: String!): User

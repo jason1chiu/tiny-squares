@@ -62,20 +62,24 @@ export const REMOVE_JOURNAL = gql`
 `;
 
 export const ADD_ENTRY = gql`
-  mutation addEntry( $journalId: ID!, $description: String!, $date: String!, $status: String!) {
-    addEntry(
-      journalId: $journalId
-      description: $description
-      date: $date
-      status: $status
-    ) {
+  mutation addEntry($journalId: ID!, $input: EntryInput!) {
+    addEntry(journalId: $journalId, input: $input) {
       _id
-      title
+      name
       entries {
         _id
-        description
+        note
         date
-        status
+        legend {
+          _id
+          label
+          color
+        }
+      }
+      legends {
+        _id
+        label
+        color
       }
     }
   }
@@ -85,7 +89,7 @@ export const REMOVE_ENTRY = gql`
   mutation removeEntry($journalId: ID!, $entryId: ID!) {
     removeEntry(journalId: $journalId, entryId: $entryId) {
       _id
-      title
+      name
       entries {
         _id
         description
@@ -126,18 +130,26 @@ export const UPDATE_ENTRY = gql`
 export const CREATE_LEGEND = gql`
   mutation createLegend($label: String!, $color: String!, $journalId: ID!) {
     createLegend(label: $label, color: $color, journalId: $journalId) {
-      legends{
-        _id
+      _id
       label
       color
-      }
     }
   }
 `;
 
 export const UPDATE_LEGEND = gql`
-  mutation updateLegend($legendId: ID!, $label: String!, $color: String!, $journalId: ID!) {
-    updateLegend(legendId: $legendId, label: $label, color: $color, journalId: $journalId) {
+  mutation updateLegend(
+    $legendId: ID!
+    $label: String!
+    $color: String!
+    $journalId: ID!
+  ) {
+    updateLegend(
+      legendId: $legendId
+      label: $label
+      color: $color
+      journalId: $journalId
+    ) {
       _id
       label
       color
