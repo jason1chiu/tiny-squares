@@ -1,7 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, Select, Textarea, useDisclosure } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  Select,
+  Textarea,
+  useDisclosure,
+} from "@chakra-ui/react";
 
-const CellModal = ({ isOpen, onClose, onSave, initialColor, initialNote, legends }) => {
+const CellModal = ({
+  isOpen,
+  onClose,
+  onSave,
+  initialColor,
+  initialNote,
+  legends,
+}) => {
   const [selectedColor, setSelectedColor] = useState(initialColor || "");
   const [selectedNote, setSelectedNote] = useState(initialNote || "");
 
@@ -31,11 +50,17 @@ const CellModal = ({ isOpen, onClose, onSave, initialColor, initialNote, legends
         <ModalCloseButton />
         <ModalBody>
           <Select value={selectedColor} onChange={handleColorChange} mb={4}>
-            {legends.map((legend, index) => (
-              <option key={index} value={legend.color}>{legend.label}</option>
+            {(legends ?? []).map((legend, index) => (
+              <option key={index} value={legend.color}>
+                {legend.label}
+              </option>
             ))}
           </Select>
-          <Textarea value={selectedNote} onChange={handleNoteChange} placeholder="Add a note..." />
+          <Textarea
+            value={selectedNote}
+            onChange={handleNoteChange}
+            placeholder="Add a note..."
+          />
         </ModalBody>
         <ModalFooter>
           <Button variant='darkBrand'
