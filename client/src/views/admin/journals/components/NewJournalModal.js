@@ -13,11 +13,16 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
+import { useQuery } from "@apollo/client";
+
+import { GET_JOURNALS } from "utils/queries";
+
 import { useAuth } from "contexts/auth.context";
 
 export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
   const [journalName, setJournalName] = useState("");
-  let { journals } = useAuth();
+
+  const { data } = useQuery(GET_JOURNALS);
 
   const [journalCategory, setJournalCategory] = useState("");
   let { categories } = useAuth();
@@ -32,17 +37,7 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
   };
 
   const handleSubmit = () => {
-    onSubmit({ name: journalName, category: journalCategory });
-    toast({
-      title: "Journal created.",
-      description: "Your journal was successfully created!",
-      status: "success",
-      duration: 5000,
-      isClosable: true,
-      position: "top",
-      colorScheme: "purple",
-    });
-    if (journals.length >= 3) {
+    if (data?.journals?.length >= 3) {
       onSubmit({ name: journalName, category: journalCategory });
     } else {
       onSubmit({ name: journalName, category: journalCategory });
@@ -56,6 +51,9 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
         colorScheme: "purple",
       });
     }
+
+    setJournalName("");
+    setJournalCategory("");
   };
 
   return (

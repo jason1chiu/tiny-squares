@@ -60,7 +60,7 @@ export const GET_JOURNALS = gql`
         note
         date
         legend {
-          id
+          _id
           label
           color
         }

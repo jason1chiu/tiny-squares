@@ -19,7 +19,12 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
     journals: async (parent, args, context) => {
-      return Journal.find({}).populate("entries");
+      const userData = await User.findOne({ _id: context.user._id })
+        .select("-__v -password")
+        .populate("journals")
+        .populate("entries");
+
+      return userData.journals;
     },
     journal: async (parent, { id }, context) => {
       let results = await Journal.findById(id)

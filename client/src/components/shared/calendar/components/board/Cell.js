@@ -21,7 +21,10 @@ const Cell = ({ journalEntriesMap, day, month, onSave, journalId }) => {
     onClose();
   };
 
-  const currentCellValue = journalEntriesMap[currentDate.getTime()];
+  const currentCellValue =
+    currentDate.getMonth() === month
+      ? journalEntriesMap[currentDate.getTime()]
+      : null;
 
   return (
     <>

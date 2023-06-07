@@ -13,8 +13,8 @@ import Banner from "views/admin/journals/components/Banner";
 import YourJournalCard from "views/admin/journals/components/YourJournalCard";
 import P2 from "assets/img/purple.jpg";
 import { useAuth } from "contexts/auth.context";
-import { useLazyQuery } from "@apollo/client";
-import { GET_ME } from "utils/queries";
+import { useQuery } from "@apollo/client";
+import { GET_JOURNALS } from "utils/queries";
 import NewCard from "views/admin/journals/components/NewCard";
 
 export default function JournalPage() {
@@ -22,15 +22,9 @@ export default function JournalPage() {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorBrand = useColorModeValue("brand.500", "white");
 
-  let { user, journals, setJournals } = useAuth();
-  let [me, { data, loading }] = useLazyQuery(GET_ME);
   let { categories } = useAuth();
 
-  useEffect(() => {
-    me().then((data) => {
-      setJournals(data.data.me.journals);
-    });
-  }, []);
+  const { data } = useQuery(GET_JOURNALS);
 
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
@@ -94,7 +88,7 @@ export default function JournalPage() {
             </Flex>
 
             <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px">
-              {journals.map((journal) => (
+              {(data?.journals ?? []).map((journal) => (
                 <YourJournalCard
                   key={journal._id}
                   journal={{ ...journal, image: P2 }}
