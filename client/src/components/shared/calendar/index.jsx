@@ -20,6 +20,7 @@ export default function Overview({journal_id}) {
           height="100%"
         />
         <Board
+          journalId={journal_id}
           legends={legends}
           gridArea={{ base: "1 / 1 / 2 / 2", lg: "1 / 1 / 2 / 2" }}
           height="100%"

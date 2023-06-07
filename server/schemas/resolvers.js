@@ -22,16 +22,16 @@ const resolvers = {
       let results = await Journal.findById(id)
         .populate("entries")
         .populate("legends");
-      console.log(results);
+
       return results;
     },
     legends: async (parent, { id }, context) => {
       try {
-        const user = await User.findById(id)
-          .populate("journals")
+        let results = await Journal.findById(id)
+          .populate("entries")
           .populate("legends");
-        console.log({ user: user.journals[0] });
-        return user.legends;
+
+        return results.legends;
       } catch (error) {
         console.error(error);
         throw new Error("Failed to fetch legends");

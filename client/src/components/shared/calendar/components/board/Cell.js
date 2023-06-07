@@ -4,13 +4,12 @@ import { Box, useDisclosure } from "@chakra-ui/react";
 import CellModal from "components/shared/calendar/components/modal/modal";
 import { GET_LEGENDS, GET_ME } from "utils/queries";
 
-const Cell = ({ day, month, color, note, onSave, legends }) => {
-  const userId = localStorage.getItem("user_id");
+const Cell = ({ day, month, color, note, onSave, legends, journalId }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const legendsQuery = useQuery(GET_LEGENDS, {
-    variables: {id: userId}
+    variables: { id: journalId },
   });
-  
+
   const handleCellClick = () => {
     onOpen();
   };
@@ -32,7 +31,14 @@ const Cell = ({ day, month, color, note, onSave, legends }) => {
         cursor="pointer"
         onClick={handleCellClick}
       ></Box>
-      <CellModal isOpen={isOpen} onClose={onClose} onSave={handleSave} initialColor={color} initialNote={note} legends={legendsQuery.data ? legendsQuery.data.legends : []} />
+      <CellModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onSave={handleSave}
+        initialColor={color}
+        initialNote={note}
+        legends={legendsQuery.data ? legendsQuery.data.legends : []}
+      />
     </>
   );
 };

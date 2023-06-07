@@ -3,16 +3,29 @@ import { Grid, GridItem, Box, Text, useColorModeValue } from "@chakra-ui/react";
 import Card from "components/card/card";
 import Cell from "components/shared/calendar/components/board/Cell";
 
-const Board = ({ legends }) => {
+const Board = ({ legends, journalId }) => {
   // Create a state that stores the cell data
   const [cells, setCells] = useState({});
   const textColor = useColorModeValue("secondaryGray.400", "white");
 
   const handleSave = (id, color, note) => {
-    setCells(prev => ({ ...prev, [id]: { color, note } }));
+    setCells((prev) => ({ ...prev, [id]: { color, note } }));
   };
 
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
 
   return (
     <Card mt={4} mb={4} mx="auto" minh="80vh" w="auto">
@@ -20,13 +33,15 @@ const Board = ({ legends }) => {
         <GridItem></GridItem>
         {Array.from({ length: 12 }, (_, index) => (
           <GridItem key={`month-${index}`} textAlign="center">
-            <Text color={textColor}fontSize="m">{months[index]}</Text>
+            <Text color={textColor} fontSize="m">
+              {months[index]}
+            </Text>
           </GridItem>
         ))}
         {Array.from({ length: 31 }, (_, rowIndex) => (
-           <React.Fragment key={`day-row-${rowIndex}`}>
+          <React.Fragment key={`day-row-${rowIndex}`}>
             <GridItem key={`day-label-${rowIndex}`} textAlign="center">
-              <Text color={textColor} fontSize="lg" >{`${rowIndex + 1}`}</Text>
+              <Text color={textColor} fontSize="lg">{`${rowIndex + 1}`}</Text>
             </GridItem>
             {Array.from({ length: 12 }, (_, colIndex) => {
               const id = `cell-${rowIndex}-${colIndex}`; // create unique id
@@ -35,6 +50,7 @@ const Board = ({ legends }) => {
                 <GridItem key={id}>
                   <Box h="100%">
                     <Cell
+                      journalId={journalId}
                       day={rowIndex + 1}
                       month={colIndex + 1}
                       color={cell.color}
@@ -44,7 +60,7 @@ const Board = ({ legends }) => {
                     />
                   </Box>
                 </GridItem>
-              )
+              );
             })}
           </React.Fragment>
         ))}
