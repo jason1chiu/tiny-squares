@@ -11,6 +11,8 @@ const Legend = ({ journalId, legends, setLegends }) => {
   const [label, setLabel] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(null);
   const userId = localStorage.getItem("user_id");
+  console.log(legends);
+ 
 
   const [createLegend] = useMutation(CREATE_LEGEND);
   const [updateLegend] = useMutation(UPDATE_LEGEND);
@@ -21,7 +23,14 @@ const Legend = ({ journalId, legends, setLegends }) => {
   });
   const textColor = useColorModeValue("secondaryGray.500", "white");
   const titleColor = useColorModeValue("navy.700", "white");
- 
+
+  const initialLegend = {
+    _id: null,
+    label: null,
+    color: null,
+  };
+  
+
   useEffect(() => {
     if (data && data.journal) {
       setLegends([...data.journal.legends]);
@@ -41,7 +50,7 @@ const Legend = ({ journalId, legends, setLegends }) => {
         variables: { label, color, journalId },
       });
 
-      const legends = data.createLegend.legends;
+      const legends = [initialLegend, ...data.createLegend.legends];
       setLegends(legends);
 
       console.log("Created Legend: ", data.createLegend);
