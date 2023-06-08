@@ -30,10 +30,6 @@ export default function YourJournalCard({ journal }) {
     }
   }
   
- 
-
-  
-
   return (
     <>
       <Preview

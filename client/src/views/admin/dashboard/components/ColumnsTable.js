@@ -10,10 +10,9 @@ import {
 import Card from "components/card/card.js";
 import React from "react";
 import BarChart from "components/charts/BarChart.js"
-import {
-  barChartDataConsumption,
-  barChartOptionsConsumption,
-} from "variables/charts.js";
+import { GET_LEGENDS } from "utils/queries";
+import { useQuery } from "@apollo/client";
+import { barChartDataConsumption, barChartOptionsConsumption} from "variables/charts.js";
 import { MdBarChart } from "react-icons/md";
 
 export default function JournalBars(props) {

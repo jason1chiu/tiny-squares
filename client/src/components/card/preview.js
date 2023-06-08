@@ -74,11 +74,6 @@ import {
               <Icon as={MdClose}/>
             </Button>
           </Tooltip>
-          <Tooltip hasArrow label="Edit" fontSize="sm">
-            <Button size="xs" colorScheme="purple" >
-              <Icon as={MdEdit} />
-            </Button>
-          </Tooltip>
           
         </VStack>
             <Button
