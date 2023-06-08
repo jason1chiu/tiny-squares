@@ -24,6 +24,7 @@ export const inputStyles = {
         }),
         auth: (props) => ({
           field: {
+            boxShadow: "sm",
             fontWeight: "500",
             color: mode("navy.700", "white")(props),
             bg: mode("transparent", "transparent")(props),
@@ -77,7 +78,7 @@ export const inputStyles = {
           field: {
             bg: "transparent",
             border: "1px solid",
-
+            boxShadow: "md",
             borderColor: "secondaryGray.100",
             borderRadius: "16px",
             _placeholder: { color: "secondaryGray.600" },
@@ -87,7 +88,7 @@ export const inputStyles = {
           field: {
             bg: "transparent",
             border: "1px solid",
-
+            
             borderColor: "secondaryGray.100",
             borderRadius: "16px",
             _placeholder: { color: "secondaryGray.600" },

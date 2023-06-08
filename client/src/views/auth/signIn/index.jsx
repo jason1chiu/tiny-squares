@@ -183,6 +183,7 @@ export default function SignIn() {
               Email<Text color={brandStars}>*</Text>
             </FormLabel>
             <Input
+            variant="auth"
               onChange={(e) => {
                 currentEmail(e.target.value)
                 setShowError(null);
@@ -207,6 +208,7 @@ export default function SignIn() {
             </FormLabel>
             <InputGroup size='md'>
               <Input
+              variant="auth"
                 onChange={(e) => {
                   currentPassword(e.target.value)
                   setShowError(null);

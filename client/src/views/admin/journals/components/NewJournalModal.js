@@ -11,6 +11,7 @@ import {
   Input,
   Select,
   useToast,
+  useColorModeValue
 } from "@chakra-ui/react";
 
 import { useQuery } from "@apollo/client";
@@ -21,7 +22,8 @@ import { useAuth } from "contexts/auth.context";
 
 export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
   const [journalName, setJournalName] = useState("");
-
+  const bColor = useColorModeValue("secondaryGray.600", "white");
+  const tColor = useColorModeValue("brand.800", "white");
   const { data } = useQuery(GET_JOURNALS);
 
   const [journalCategory, setJournalCategory] = useState("");
@@ -60,15 +62,18 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent width="100vw">
-        <ModalHeader>Create a new journal</ModalHeader>
+        <ModalHeader color={tColor}>Create a new journal</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Input
+          variant="auth"
             value={journalName}
             onChange={handleInputChange}
             placeholder="Journal name"
           />
           <Select
+          color = {bColor}
+          variant="auth"
             value={journalCategory}
             onChange={handleSelectChange}
             placeholder="Select option"
@@ -81,10 +86,10 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
           </Select>
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={handleSubmit}>
+          <Button colorScheme="purple" mr={3} onClick={handleSubmit}>
             Go
           </Button>
-          <Button variant="ghost" onClick={onClose}>
+          <Button color={tColor} variant="ghost" onClick={onClose}>
             Cancel
           </Button>
         </ModalFooter>

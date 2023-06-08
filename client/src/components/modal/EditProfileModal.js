@@ -8,6 +8,7 @@ import {
   ModalBody,
   ModalCloseButton,
   Input,
+  useColorModeValue,
   Button,
   IconButton,
   Box,
@@ -29,6 +30,9 @@ function EditProfileModal() {
   const [updateUser, { error }] = useMutation(UPDATE_USER);
   const { editUser } = useAuth();
   const toast = useToast();
+  const bColor = useColorModeValue("secondaryGray.300", "white");
+  const tColor = useColorModeValue ("brand.800", "white")
+  const pColor = useColorModeValue("brand.600", "white")
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -66,13 +70,13 @@ function EditProfileModal() {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Edit Profile</ModalHeader>
+        <ModalContent >
+          <ModalHeader color={tColor}>Edit Profile</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <FormControl>
-              <FormLabel>Username</FormLabel>
-              <Input
+              <FormLabel color={pColor}>Username</FormLabel>
+              <Input variant="auth"
                 value={username}
                 onChange={handleUsernameChange}
                 placeholder="Username"
@@ -83,7 +87,7 @@ function EditProfileModal() {
             <Button colorScheme="brand" mr={3} onClick={handleSaveProfile}>
               Save
             </Button>
-            <Button variant="ghost" onClick={onClose}>
+            <Button variant="ghost" onClick={onClose} color={tColor}>
               Cancel
             </Button>
           </ModalFooter>
