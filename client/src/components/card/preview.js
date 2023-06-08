@@ -98,7 +98,7 @@ import {
                     </AlertDialogHeader>
 
                     <AlertDialogBody>
-                      <Alert status="warning" variant="subtle" flexDirection="column" alignItems="center" justifyContent="center" textAlign="center" h="auto">
+                      <Alert status="warning" colorScheme="purple" variant="subtle" flexDirection="column" alignItems="center" justifyContent="center" textAlign="center" h="auto">
                         <AlertIcon boxSize="40px" mr={0} />
                         <AlertDescription mt={4} fontSize="md">
                           But you've been doing so well! Are you sure you want to delete?
@@ -108,7 +108,7 @@ import {
 
                     <AlertDialogFooter>
                       <Button onClick={onCloseClick}>Cancel</Button>
-                      <Button colorScheme="red" onClick={onDeleteConfirm} ml={3}>
+                      <Button colorScheme="purple" onClick={onDeleteConfirm} ml={3}>
                         Delete
                       </Button>
                     </AlertDialogFooter>
