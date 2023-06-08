@@ -11,7 +11,7 @@ import {
 
 import Banner from "views/admin/journals/components/Banner";
 import YourJournalCard from "views/admin/journals/components/YourJournalCard";
-import P2 from "assets/img/purple.jpg";
+import P2 from "assets/img/bannercover.png";
 import { useAuth } from "contexts/auth.context";
 import { useQuery } from "@apollo/client";
 import { GET_JOURNALS } from "utils/queries";

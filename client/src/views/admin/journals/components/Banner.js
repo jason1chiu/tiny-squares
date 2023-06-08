@@ -2,7 +2,7 @@ import React from "react";
 
 import { Flex, Link, Text } from "@chakra-ui/react";
 
-import banner from "assets/img/bannercover.png";
+import banner from "assets/img/banner7.png";
 
 export default function Banner() {
   return (
