@@ -6,7 +6,6 @@ import AdminLayout from "layouts/admin";
 import AuthLayout from "layouts/auth";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "theme/theme";
-import { AnimatePresence, motion } from "framer-motion";
 import CartProvider from "components/shared/store/js/CartContext";
 import CancelPage from "views/admin/cancelOrderPage/";
 import SuccessPage from "views/admin/successOrderPage";
@@ -33,86 +32,30 @@ export default function App() {
     },
   });
 
-  const pageVariants = {
-    initial: {
-      opacity: 0,
-      x: "-100vw",
-      scale: 0.8,
-    },
-    in: {
-      opacity: 1,
-      x: 0,
-      scale: 1,
-    },
-    out: {
-      opacity: 0,
-      x: "100vw",
-      scale: 1.2,
-    },
-  };
-  const pageTransition = {
-    type: "tween",
-    ease: "anticipate",
-    duration: 1,
-  };
   return (
     <ApolloProvider client={client}>
       <CartProvider>
         <ChakraProvider theme={theme}>
           <React.StrictMode>
             <BrowserRouter>
-              <AnimatePresence exitBeforeEnter>
-                <Switch>
-                  <Route path={`/auth`}>
-                    <motion.div
-                      initial="initial"
-                      animate="in"
-                      exit="out"
-                      variants={pageVariants}
-                      transition={pageTransition}
-                    >
-                      <AuthLayout />
-                    </motion.div>
-                  </Route>
-                  {!user && <Redirect to="/auth/sign-in" />}
-                  {user && <>
-                  <Route path={`/admin`}>
-                    <motion.div
-                      initial="initial"
-                      animate="in"
-                      exit="out"
-                      variants={pageVariants}
-                      transition={pageTransition}
-                    >
-                      <AdminLayout />
-                    </motion.div>
-                  </Route>
-                  <Route path={`/cancel`}>
-                    <motion.div
-                      initial="initial"
-                      animate="in"
-                      exit="out"
-                      variants={pageVariants}
-                      transition={pageTransition}
-                    >
-                      <CancelPage />
-                    </motion.div>
-                  </Route>
-                  <Route path={`/success`}>
-                    <motion.div
-                      initial="initial"
-                      animate="in"
-                      exit="out"
-                      variants={pageVariants}
-                      transition={pageTransition}
-                    >
-                      <SuccessPage />
-                    </motion.div>
-                  </Route>
-                  <Redirect from="/" to="/admin/dashboard" />
-                  </>}
-                </Switch>
-              </AnimatePresence>
+              <Switch>
+                <Route path={`/auth`}>
+                  <AuthLayout />
+                </Route>
+                {!user && <Redirect to="/auth/sign-in" />}
+                {user && <>
+                <Route path={`/admin`}>
+                  <AdminLayout />
+                </Route>
+                <Route path={`/cancel`}>
+                  <CancelPage />
+                </Route>
+                <Route path={`/success`}>
+                  <SuccessPage />
+                </Route>
+                <Redirect from="/" to="/admin/dashboard" />
+                </>}
+              </Switch>
             </BrowserRouter>
           </React.StrictMode>
         </ChakraProvider>

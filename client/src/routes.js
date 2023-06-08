@@ -11,6 +11,7 @@ import Dashboard from "views/admin/dashboard";
 import SignIn from "views/auth/signIn";
 import SignUp from "views/auth/signUp";
 
+
 const routes = [
   {
     name: "Dashboard",

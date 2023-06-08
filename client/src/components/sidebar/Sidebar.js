@@ -37,7 +37,7 @@ function Sidebar(props) {
     let sidebarMargins = "0px";
 
     return (
-        <Box display={{ sm: "none", xl: "block" }} position='fixed' minH='100%'>
+      <Box display={{ sm: "none", xl: "block" }} w="100%" position='fixed' minH='100%'>
           <Box
             bg={sidebarBg}
             transition={variantChange}
@@ -62,7 +62,7 @@ function Sidebar(props) {
     export function SidebarResponsive(props) {
         let sidebarBackgroundColor = useColorModeValue("white", "navy.800");
         let menuColor = useColorModeValue("gray.400", "white");
-        // // SIDEBAR
+        
         const { isOpen, onOpen, onClose } = useDisclosure();
         const btnRef = React.useRef();
       
@@ -84,7 +84,7 @@ function Sidebar(props) {
               <Drawer
                 isOpen={isOpen}
                 onClose={onClose}
-                placement={document.documentElement.dir === "rtl" ? "right" : "left"}
+                placement='left'
                 finalFocusRef={btnRef}>
                 <DrawerOverlay />
                 <DrawerContent w='285px' maxW='285px' bg={sidebarBackgroundColor}>

@@ -15,6 +15,8 @@ export default function Conversion({ selectedJournal, setSelectedJournal, journa
   // const { data: journalsData, refetch } = useQuery(GET_JOURNALS);
   const [journal] = useLazyQuery(GET_JOURNAL, {fetchPolicy: "network-only"})
 
+  const tColor = useColorModeValue("secondaryGray.500", "white");
+
   // useEffect(() => {
   //   if (journalsData && journalsData.journals.length) {
   //     setSelectedJournal(journalsData.journals[0]._id)
@@ -69,7 +71,7 @@ export default function Conversion({ selectedJournal, setSelectedJournal, journa
   );
 
   return (
-    <Card p='20px' align='center' direction='column' w='100%' {...rest}>
+    <Card Card mb={{ base: "0px", lg: "20px" }} align='center' >
       <Flex
         px={{ base: "0px", "2xl": "10px" }}
         justifyContent='space-between'
@@ -99,50 +101,9 @@ export default function Conversion({ selectedJournal, setSelectedJournal, journa
           w='100%'
           chartData={pieChartDataPrepared}
           chartOptions={pieChartOptionsPrepared}
-        /> : <Box>No Data</Box>
+        /> : <Box color={tColor} pt='50px'>Select a journal to view stats</Box>
       }
-      {/* <Card
-        bg={cardColor}
-        flexDirection='row'
-        boxShadow={cardShadow}
-        w='100%'
-        p='15px'
-        px='20px'
-        mt='15px'
-        mx='auto'>
-        <Flex direction='column' py='5px'>
-          <Flex align='center'>
-            <Box h='8px' w='8px' bg='brand.500' borderRadius='50%' me='4px' />
-            <Text
-              fontSize='xs'
-              color='secondaryGray.600'
-              fontWeight='700'
-              mb='5px'>
-              Happy
-            </Text>
-          </Flex>
-          <Text fontSize='lg' color={textColor} fontWeight='700'>
-            63%
-          </Text>
-        </Flex>
-        <VSeparator mx={{ base: "60px", xl: "60px", "2xl": "60px" }} />
-        <Flex direction='column' py='5px' me='10px'>
-          <Flex align='center'>
-            <Box h='8px' w='8px' bg='#6AD2FF' borderRadius='50%' me='4px' />
-            <Text
-              fontSize='xs'
-              color='secondaryGray.600'
-              fontWeight='700'
-              mb='5px'>
-              Sad
-              {journalsData.journals[0].entries[0].legend.label}
-            </Text>
-          </Flex>
-          <Text fontSize='lg' color={textColor} fontWeight='700'>
-            25%
-          </Text>
-        </Flex>
-      </Card> */}
+      
     </Card>
   );
 }
