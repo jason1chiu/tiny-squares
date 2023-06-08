@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import { CartContext } from "components/shared/store/js/CartContext";
 import { getProductData } from 'components/shared/store/js/ProductsStore';
-import { Button, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Box, VStack, useToast, Flex  } from '@chakra-ui/react';
+import { Button, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Box, VStack, useToast, Flex, useColorModeValue  } from '@chakra-ui/react';
 
 export function CartModal(props) {
     const cart = useContext(CartContext);
-
+    const bColor = useColorModeValue("secondaryGray.500", "white");
+    const tColor = useColorModeValue ("brand.800", "white")
     const checkout = async () => {
       // *** When deploying to heroku, change url to https://your-app-name.herokuapp.com/admin/store/checkout
       await fetch("http://localhost:3001/admin/store/checkout", {
@@ -27,27 +28,27 @@ export function CartModal(props) {
         <Modal isOpen={props.isOpen} onClose={props.onClose} >
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Your Shopping Cart</ModalHeader>
+            <ModalHeader color={tColor}>Your Shopping Cart</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
             {cart.cart.length === 0 ? (
-            <Text>There's nothing in here!</Text>
+            <Text color={bColor}>There's nothing in here!</Text>
           ) : (
             <VStack spacing={4}>
         {cart.cart.map(({ id, quantity }) => {
           const productData = getProductData(id);
           return (
             <Flex key={id} p={5} shadow="md" borderWidth="1px" borderRadius="10px" w="100%">
-              <Box flex="1">
-                <h3>{productData.title}</h3>
+              <Box color={tColor} as='b' flex="1">
+                <h3 >{productData.title}</h3>
                 <Image src={productData.img} alt="product" boxSize='150px' objectFit='cover'></Image>
               </Box>
               <Box flex="1">
-                <Text>Quantity: {cart.getProductQuantity(id)}</Text>
-                <Text>Subtotal: ${(quantity * productData.price).toFixed(2)}</Text>
+                <Text color={bColor}>Quantity: {cart.getProductQuantity(id)}</Text>
+                <Text color={bColor}>Subtotal: ${(quantity * productData.price).toFixed(2)}</Text>
               </Box>
               <Button
-                variant='brand'
+                variant='action'
                 color='white'
                 fontSize='sm'
                 fontWeight='500'
@@ -64,11 +65,11 @@ export function CartModal(props) {
             </ModalBody>
     
             <ModalFooter>
-              <Button variant="ghost" mr={3} onClick={props.onClose}>
+              <Button color={tColor}variant="ghost" mr={3} onClick={props.onClose}>
                 Close
               </Button>
               {cart.cart.length !== 0 && (
-              <Button variant='darkBrand'
+              <Button variant='brand'
                 color='white'
                 fontSize='sm'
                 fontWeight='500'
