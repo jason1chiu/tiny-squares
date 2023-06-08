@@ -4,6 +4,7 @@ const db = require('./config/connection');
 var cors = require('cors');
 require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_API_KEY);
+require("dotenv").config();
 
 const { ApolloServer } = require('apollo-server-express');
 const { typeDefs, resolvers } = require('./schemas');
