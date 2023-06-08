@@ -16,7 +16,7 @@ function SuccessPage() {
       >
       <p>Thank You For Your Order! 🎊 <br />
 
-        <Link to={"/"}>
+        <Link to={"/success"}>
             <Center fontSize="2rem" css={{
                 cursor: 'pointer',
                 transition: 'color 0.3s ease',
