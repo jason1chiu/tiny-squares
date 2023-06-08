@@ -38,7 +38,7 @@ export function CartModal(props) {
         {cart.cart.map(({ id, quantity }) => {
           const productData = getProductData(id);
           return (
-            <Flex key={id} p={5} shadow="md" borderWidth="1px" borderRadius="10px" w="100%">
+            <Flex key={id} p={5} shadow="md" borderWidth="1px" borderRadius="16px" w="100%">
               <Box color={tColor} as='b' flex="1">
                 <h3 >{productData.title}</h3>
                 <Image src={productData.img} alt="product" boxSize='150px' objectFit='cover'></Image>
