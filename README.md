@@ -14,15 +14,15 @@
 
  <div align="center">
  <h1 align="center">TinySquares</h1>
+
+  <a href="https://github.com/jason1chiu/tiny-squares">
   
-    <a href="https://github.com/jason1chiu/tiny-squares">
-    
-    <img src="./client/public/ts.png" alt="Logo" height="200">
-   </a>
-    <p align="center">
-      Your Life, One Pixel at a Time
-    </p>
-  
+  <img src="./client/public/ts.png" alt="Logo" height="200">
+  </a>
+  <p align="center">
+    Your Life, One Pixel at a Time
+  </p>
+
 <br />
 <details><summary>Table of Contents;</summary>
 
