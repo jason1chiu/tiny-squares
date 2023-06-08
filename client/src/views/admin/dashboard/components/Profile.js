@@ -1,7 +1,7 @@
 import { Avatar, Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import Card from "components/card/card.js";
 import React from "react";
-import profile from "assets/img/bannercover.png";
+import profile from "assets/img/jp.png";
 import { useAuth } from "contexts/auth.context";
 import { useEffect, useState } from "react";
 import bImage from 'assets/img/rand/b.jpg';
