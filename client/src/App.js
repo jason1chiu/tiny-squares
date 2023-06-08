@@ -25,7 +25,7 @@ export default function App() {
   }
 
   const client = new ApolloClient({
-    uri: "https://enigmatic-stream-88678.herokuapp.com/graphql"
+    uri: "https://enigmatic-stream-88678.herokuapp.com/graphql",
     // uri: "http://localhost:3001/graphql",
     cache: new InMemoryCache({ query: true, data: false }),
     headers: {
