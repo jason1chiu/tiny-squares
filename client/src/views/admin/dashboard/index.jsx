@@ -6,8 +6,8 @@ import Profile from "views/admin/dashboard/components/Profile";
 import Journals from "views/admin/dashboard/components/Journals";
 import ColumnsTable from "views/admin/dashboard/components/ColumnsTable";
 
-import profile from "assets/img/purple.jpg";
-import avatar from "assets/img/purple.jpg";
+import profile from "assets/img/bannercover.png";
+import avatar from "assets/img/bannercover.png";
 import { useAuth } from "contexts/auth.context";
 import { GET_JOURNALS } from "utils/queries";
 import { useQuery } from "@apollo/client";

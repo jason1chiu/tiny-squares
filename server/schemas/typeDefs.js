@@ -65,12 +65,7 @@ const typeDefs = gql`
     updateUser(username: String!): User
     logout(email: String!): User
     createLegend(journalId: ID!, label: String!, color: String!): [Legend]
-    updateLegend(
-      journalId: ID!
-      label: String!
-      color: String!
-      legendId: ID!
-    ): Legend
+    updateLegend(journalId: ID!, label: String!, color: String!, legendId: ID!): Legend
     deleteLegend(journalId: ID!, legendId: ID!): Journal
     purchaseProduct: PayLoad
     addJournal(name: String!, category: String!): User

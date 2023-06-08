@@ -11,7 +11,7 @@ import {
 
 import Banner from "views/admin/journals/components/Banner";
 import YourJournalCard from "views/admin/journals/components/YourJournalCard";
-import P2 from "assets/img/purple.jpg";
+import P2 from "assets/img/jp.png";
 import { useAuth } from "contexts/auth.context";
 import { useQuery } from "@apollo/client";
 import { GET_JOURNALS } from "utils/queries";
@@ -19,7 +19,8 @@ import NewCard from "views/admin/journals/components/NewCard";
 
 export default function JournalPage() {
   // Chakra Color Mode
-  const textColor = useColorModeValue("secondaryGray.900", "white");
+  const textColor = useColorModeValue("secondaryGray.500", "white");
+  const titleColor = useColorModeValue("brand.700", "white");
   const textColorBrand = useColorModeValue("brand.500", "white");
 
   let { categories } = useAuth();
@@ -49,7 +50,7 @@ export default function JournalPage() {
               direction={{ base: "column", md: "row" }}
               align={{ base: "start", md: "center" }}
             >
-              <Text color={textColor} fontSize="2xl" ms="24px" fontWeight="700">
+              <Text color={titleColor} fontSize="2xl" ms="24px" fontWeight="700">
                 Create New
               </Text>
               <Flex
@@ -58,17 +59,7 @@ export default function JournalPage() {
                 ms={{ base: "24px", md: "0px" }}
                 mt={{ base: "20px", md: "0px" }}
               >
-                {categories.map((category) => (
-                  <Link
-                    key={category}
-                    color={textColorBrand}
-                    fontWeight="500"
-                    me={{ base: "34px", md: "44px" }}
-                    to="#"
-                  >
-                    {category}
-                  </Link>
-                ))}
+                {/* Other components */}
               </Flex>
             </Flex>
             <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px">
@@ -82,19 +73,25 @@ export default function JournalPage() {
               direction={{ base: "column", md: "row" }}
               align={{ base: "start", md: "center" }}
             >
-              <Text color={textColor} fontSize="2xl" ms="24px" fontWeight="700">
+              <Text color={titleColor} fontSize="2xl" ms="24px" fontWeight="700">
                 Your Journals
               </Text>
             </Flex>
 
-            <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px">
-              {(data?.journals ?? []).map((journal) => (
-                <YourJournalCard
-                  key={journal._id}
-                  journal={{ ...journal, image: P2 }}
-                />
-              ))}
-            </SimpleGrid>
+            {data?.journals && data.journals.length > 0 ? (
+              <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px">
+                {data.journals.map((journal) => (
+                  <YourJournalCard
+                    key={journal._id}
+                    journal={{ ...journal, image: P2 }}
+                  />
+                ))}
+              </SimpleGrid>
+            ) : (
+              <Text color={textColor} fontSize="lg" ms="24px" mt="20px">
+                You have no journals yet!
+              </Text>
+            )}
           </Flex>
         </Flex>
         <Flex
@@ -105,3 +102,11 @@ export default function JournalPage() {
     </Box>
   );
 }
+
+
+
+
+
+
+
+
