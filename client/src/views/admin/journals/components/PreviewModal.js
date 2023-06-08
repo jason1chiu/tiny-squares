@@ -8,6 +8,7 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import Overview from "components/shared/calendar/index";
 
@@ -19,11 +20,12 @@ const Overlay = () => (
 );
 
 export default function JournalModal({ isOpen, onClose, journal }) {
+  const titleColor = useColorModeValue("navy.700", "white");
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered size="xl" scrollBehavior="inside">
+    <Modal  isOpen={isOpen} onClose={onClose} isCentered size="xl" scrollBehavior="inside">
       <Overlay />
       <ModalContent>
-        <ModalHeader>{journal.name}</ModalHeader>
+        <ModalHeader color={titleColor}>{journal.name}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Overview journal_id={journal._id}/>
