@@ -46,7 +46,7 @@ textarea {
 }
 
 .box {
-  border-style: dotted;
+  /* border-style: dotted; */
   margin: 0px 200px;
   padding: 50px 0px;
   
