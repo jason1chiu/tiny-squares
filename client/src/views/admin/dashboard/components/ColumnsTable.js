@@ -8,15 +8,43 @@ import {
 } from "@chakra-ui/react";
 
 import Card from "components/card/card.js";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import BarChart from "components/charts/BarChart.js"
-import { GET_LEGENDS } from "utils/queries";
-import { useQuery } from "@apollo/client";
-import { barChartDataConsumption, barChartOptionsConsumption} from "variables/charts.js";
+import { GET_JOURNAL } from "utils/queries";
+import { useLazyQuery } from "@apollo/client";
+import { barChartDataConsumption, barChartOptionsConsumption } from "variables/charts.js";
 import { MdBarChart } from "react-icons/md";
 
-export default function JournalBars(props) {
-  const { ...rest } = props;
+export default function JournalBars({ gridArea, journalsData }) {
+  // const { ...rest } = props;
+  const [journal] = useLazyQuery(GET_JOURNAL, { fetchPolicy: "network-only" })
+
+  let [barChartDataPrepared, setbarChartDataPrepared] = useState([])
+  let [barChartOptionsPrepared, setbarChartOptionsPrepared] = useState(barChartOptionsConsumption)
+
+  useEffect(() => {
+
+    if (journalsData) {
+      // setbarChartDataPrepared([])
+      Promise.all(journalsData.map(async (item, index) => {
+        return journal({ variables: { id: item._id } }).then(response => {
+          let row = {
+            name: response.data.journal.name,
+            data: response.data.journal.entries.reduce((months, entry) => {
+              let month = new Date(+entry.date).getMonth();
+              months[month] += 1
+              return months
+            }, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+          }
+          return row
+        })
+        // setbarChartDataPrepared([...preparedData.map(i => ({...i}))])
+        // setbarChartDataPrepared(JSON.parse(JSON.stringify(preparedData)))
+      })).then(data => {
+        setbarChartDataPrepared(data)
+      })
+    }
+  }, [journalsData])
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const iconColor = useColorModeValue("brand.500", "white");
@@ -30,8 +58,10 @@ export default function JournalBars(props) {
     { bg: "whiteAlpha.100" }
   );
 
+
+
   return (
-    <Card align='center' direction='column' w='100%' {...rest}>
+    <Card align='center' direction='column' w='100%' gridArea={gridArea}>
       <Flex align='center' w='100%' px='15px' py='10px'>
         <Text
           me='auto'
@@ -51,17 +81,18 @@ export default function JournalBars(props) {
           w='37px'
           h='37px'
           lineHeight='100%'
-          borderRadius='10px'
-          {...rest}>
+          borderRadius='10px'>
           <Icon as={MdBarChart} color={iconColor} w='24px' h='24px' />
         </Button>
       </Flex>
 
       <Box h='240px' mt='auto'>
-        <BarChart
-          chartData={barChartDataConsumption}
-          chartOptions={barChartOptionsConsumption}
-        />
+        {barChartDataPrepared.length &&
+          <BarChart
+            chartData={[...barChartDataPrepared]}
+            chartOptions={barChartOptionsPrepared}
+          />
+        }
       </Box>
     </Card>
   );

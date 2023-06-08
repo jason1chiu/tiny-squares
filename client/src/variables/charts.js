@@ -1,11 +1,10 @@
-// Pie
-
 export const pieChartOptions = {
-  labels: ["Happy", "Sad", "Angry", "Neutral", "Fearful", "Disgusted", "Surprised"],
-  colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
+  // labels: ["Happy", "Sad", "Angry", "Neutral", "Fearful", "Disgusted", "Surprised"],
+  // colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
   chart: {
     width: "50px",
   },
+  type: "pie",
   states: {
     hover: {
       filter: {
@@ -14,7 +13,7 @@ export const pieChartOptions = {
     },
   },
   legend: {
-    show: false,
+    show: true,
   },
   dataLabels: {
     enabled: false,
@@ -31,7 +30,7 @@ export const pieChartOptions = {
     },
   },
   fill: {
-    colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
+    // colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
   },
   tooltip: {
     enabled: true,
@@ -45,15 +44,15 @@ export const pieChartData = [63, 25, 12];
 export const barChartDataConsumption = [
   {
     name: "Journal 1",
-    data: [400, 370, 330, 390, 320, 350, 360, 320, 380],
+    data: [400, 370, 330, 390, 320, 350, 360, 320, 380, 300, 300, 300],
   },
   {
     name: "Journal 2",
-    data: [400, 370, 330, 390, 320, 350, 360, 320, 380],
+    data: [400, 370, 330, 390, 320, 350, 360, 320, 380, 400, 400, 400],
   },
   {
     name: "Journal 3",
-    data: [400, 370, 330, 390, 320, 350, 360, 320, 380],
+    data: [400, 370, 330, 390, 320, 350, 360, 320, 380, 400, 400, 400],
   },
 ];
 
@@ -78,7 +77,7 @@ export const barChartOptionsConsumption = {
     theme: "dark",
   },
   xaxis: {
-    categories: ["17", "18", "19", "20", "21", "22", "23", "24", "25"],
+    categories: ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"],
     show: false,
     labels: {
       show: true,

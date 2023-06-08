@@ -2,13 +2,63 @@ import { Box, Flex, Text, Select, useColorModeValue } from "@chakra-ui/react";
 import Card from "components/card/card.js";
 //import the pie chart from components/charts
 import PieChart from "components/charts/Pie.js";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { pieChartData, pieChartOptions } from "variables/charts.js";
 import { VSeparator } from "components/seperator/Seperator.jsx";
-import { GET_JOURNALS, GET_LEGENDS } from "utils/queries";
-import { useQuery } from "@apollo/client";
+import { GET_JOURNALS, GET_JOURNAL, GET_ME } from "utils/queries";
+import { useQuery, useLazyQuery } from "@apollo/client";
 
-export default function Conversion(props, {journalId}) {
+export default function Conversion({ selectedJournal, setSelectedJournal, journalsData, ...props }) {
+
+  let [pieChartDataPrepared, setPieChartDataPrepared] = useState([])
+  let [pieChartOptionsPrepared, setPieChartOptionsPrepared] = useState(pieChartOptions)
+  // const { data: journalsData, refetch } = useQuery(GET_JOURNALS);
+  const [journal] = useLazyQuery(GET_JOURNAL, {fetchPolicy: "network-only"})
+
+  // useEffect(() => {
+  //   if (journalsData && journalsData.journals.length) {
+  //     setSelectedJournal(journalsData.journals[0]._id)
+  //   }
+  // }, [journalsData])
+
+  useEffect(async () => {
+    pieChartOptionsPrepared.labels = []
+    pieChartOptionsPrepared.colors = []
+    pieChartOptionsPrepared.fill.colors = []
+    setPieChartOptionsPrepared({ ...pieChartOptionsPrepared })
+    setPieChartDataPrepared([])
+
+    if (selectedJournal) {
+      let selectedJournalObject = await journal({ variables: { id: selectedJournal } })
+      let colors = []
+      let object = selectedJournalObject.data.journal.entries.reduce((memory, entry) => {
+        if (entry && entry.legend) {
+          if (entry.legend.label in memory) {
+            memory[entry.legend.label] += 1
+          } else {
+            memory[entry.legend.label] = 1
+            colors.push(entry.legend.color)
+          }
+        }
+        return memory
+      }, {})
+      let labels = Object.keys(object)
+      let data = Object.values(object)
+      selectedJournalObject.data.journal.legends.forEach(legend => {
+        if (!labels.includes(legend.label)) {
+          labels.push(legend.label);
+          colors.push(legend.color);
+          data.push(0);
+        }
+      })
+      pieChartOptionsPrepared.labels = labels
+      pieChartOptionsPrepared.colors = colors
+      pieChartOptionsPrepared.fill.colors = colors
+      setPieChartOptionsPrepared({ ...pieChartOptionsPrepared })
+      setPieChartDataPrepared(data)
+    }
+  }, [selectedJournal])
+
   const { ...rest } = props;
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -17,10 +67,6 @@ export default function Conversion(props, {journalId}) {
     "0px 18px 40px rgba(112, 144, 176, 0.12)",
     "unset"
   );
-
-  const { data: journalsData } = useQuery(GET_JOURNALS);
-  const { data: legendsData } = useQuery(GET_LEGENDS, {variables: {id: journalId}})
-  console.log(legendsData);
 
   return (
     <Card p='20px' align='center' direction='column' w='100%' {...rest}>
@@ -34,23 +80,28 @@ export default function Conversion(props, {journalId}) {
           Your Journal Entries
         </Text>
         <Select
+          value={selectedJournal}
+          onChange={(event) => setSelectedJournal(event.target.value)}
           fontSize='sm'
           variant='subtle'
           defaultValue='monthly'
           width='unset'
           fontWeight='700'>
+          <option value={""}>Select Journal</option>
           {(journalsData?.journals ?? []).map((journal, index) => (
-            <option key={index}>{journal.name}</option>
+            <option value={journal._id} key={journal._id}>{journal.name}</option>
           ))}
         </Select>
       </Flex>
-      <PieChart
-        h='100%'
-        w='100%'
-        chartData={pieChartData}
-        chartOptions={pieChartOptions}
-      />
-      <Card
+      {pieChartDataPrepared.length ?
+        <PieChart
+          h='100%'
+          w='100%'
+          chartData={pieChartDataPrepared}
+          chartOptions={pieChartOptionsPrepared}
+        /> : <Box>No Data</Box>
+      }
+      {/* <Card
         bg={cardColor}
         flexDirection='row'
         boxShadow={cardShadow}
@@ -84,13 +135,14 @@ export default function Conversion(props, {journalId}) {
               fontWeight='700'
               mb='5px'>
               Sad
+              {journalsData.journals[0].entries[0].legend.label}
             </Text>
           </Flex>
           <Text fontSize='lg' color={textColor} fontWeight='700'>
             25%
           </Text>
         </Flex>
-      </Card>
+      </Card> */}
     </Card>
   );
 }
