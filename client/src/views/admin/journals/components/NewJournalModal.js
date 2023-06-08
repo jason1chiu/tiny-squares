@@ -1,10 +1,29 @@
 import { useState } from "react";
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, Input, Select, useToast } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  Input,
+  Select,
+  useToast,
+} from "@chakra-ui/react";
+
+import { useQuery } from "@apollo/client";
+
+import { GET_JOURNALS } from "utils/queries";
 
 import { useAuth } from "contexts/auth.context";
 
-function NewJournalModal({ isOpen, onClose, onSubmit }) {
+export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
   const [journalName, setJournalName] = useState("");
+
+  const { data } = useQuery(GET_JOURNALS);
+
   const [journalCategory, setJournalCategory] = useState("");
   let { categories } = useAuth();
   const toast = useToast();
@@ -18,41 +37,58 @@ function NewJournalModal({ isOpen, onClose, onSubmit }) {
   };
 
   const handleSubmit = () => {
-    onSubmit({name: journalName, category: journalCategory});
-    toast({
-      title: "Journal created.",
-      description: "Your journal was successfully created!",
-      status: "success",
-      duration: 5000,
-      isClosable: true,
-      position: "top",
-      colorScheme: "purple"
-    });
+    if (data?.journals?.length >= 3) {
+      onSubmit({ name: journalName, category: journalCategory });
+    } else {
+      onSubmit({ name: journalName, category: journalCategory });
+      toast({
+        title: "Journal created.",
+        description: "Your journal was successfully created!",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+        colorScheme: "purple",
+      });
+    }
+
+    setJournalName("");
+    setJournalCategory("");
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered >
+    <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent width="100vw">
         <ModalHeader>Create a new journal</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Input value={journalName} onChange={handleInputChange} placeholder="Journal name" />
-          <Select value={journalCategory} onChange={handleSelectChange} placeholder='Select option'>
-            {categories.map(category =>
-              <option value={category}>{category}</option>
-            )}
+          <Input
+            value={journalName}
+            onChange={handleInputChange}
+            placeholder="Journal name"
+          />
+          <Select
+            value={journalCategory}
+            onChange={handleSelectChange}
+            placeholder="Select option"
+          >
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
           </Select>
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="blue" mr={3} onClick={handleSubmit}>
             Go
           </Button>
-          <Button variant="ghost" onClick={onClose}>Cancel</Button>
+          <Button variant="ghost" onClick={onClose}>
+            Cancel
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
   );
 }
-
-export default NewJournalModal;

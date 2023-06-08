@@ -13,10 +13,16 @@ const journalSchema = new Schema({
     type: String,
     required: true,
   },
-  entries: [ entrySchema ],
-  legends: [ legendSchema ],
+  legends: [{type: Schema.Types.ObjectId, ref: "Legend"}],
+  entries: [{type: Schema.Types.ObjectId, ref: "Entry"}],
   createdAt: Date,
   updatedAt: Date,
+  legends: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Legend",
+    },
+  ],
 });
 
 const Journal = model("Journal", journalSchema);

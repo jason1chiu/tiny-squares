@@ -6,7 +6,6 @@ const typeDefs = gql`
     username: String
     email: String
     journals: [Journal]
-    legends: [Legend]
   }
 
   type Journal {
@@ -17,6 +16,12 @@ const typeDefs = gql`
     legends: [Legend]
     createdAt: String
     updatedAt: String
+  }
+
+  type Legend {
+    _id: ID
+    label: String
+    color: String
   }
 
   type Entry {
@@ -34,14 +39,8 @@ const typeDefs = gql`
   type Query {
     me: User
     journals: [Journal]
-    journal(_id: ID!): Journal
-    legends: [Legend]
-  }
-
-  type Legend {
-    id: ID!
-    label: String
-    color: String
+    journal(id: ID!): Journal
+    legends(id: ID!): [Legend]
   }
 
   input JournalInput {
@@ -51,7 +50,8 @@ const typeDefs = gql`
 
   input EntryInput {
     date: String
-    color: String
+    legendId: ID
+    note: String
   }
 
   type PayLoad {
@@ -64,14 +64,19 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     updateUser(username: String!): User
     logout(email: String!): User
+    createLegend(journalId: ID!, label: String!, color: String!): [Legend]
+    updateLegend(
+      journalId: ID!
+      label: String!
+      color: String!
+      legendId: ID!
+    ): Legend
+    deleteLegend(journalId: ID!, legendId: ID!): Journal
     purchaseProduct: PayLoad
     addJournal(name: String!, category: String!): User
-    removeJournal(journalId: ID!): User
+    removeJournal(journalId: ID!): String!
     addEntry(journalId: ID!, input: EntryInput): Journal
     removeEntry(journalId: ID!, entryId: ID!): Journal
-    createLegend(label: String!, color: String!, userId: ID!): Legend!
-    updateLegend(id: ID!, label: String!, color: String!): Legend!
-    deleteLegend(id: ID!): Boolean!
   }
 `;
 

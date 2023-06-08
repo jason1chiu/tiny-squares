@@ -1,9 +1,12 @@
 // React imports
 import React, { useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
+import { motion } from "framer-motion";
+import { useCookies } from "react-cookie";
+import { useLazyQuery } from "@apollo/client";
+import { GET_ME } from "utils/queries";
 
 // Chakra imports
 import {
@@ -39,23 +42,34 @@ import { useAuth } from "contexts/auth.context";
 import Auth from "utils/auth"
 
 export default function SignIn() {
+  let [cookies, setCookie] = useCookies();
   const toast = useToast();
-  let { setUser } = useAuth();
+  let { user, setUser } = useAuth();
   let history = useHistory();
+
   // Chakra color mode
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
   const textColorBrand = useColorModeValue("brand.500", "white");
   const brandStars = useColorModeValue("brand.500", "brand.400");
- 
+  const MotionButton = motion(Button);
   const [show, setShow] = React.useState(false);
   const [showError, setShowError] = React.useState(null);
   const [email, currentEmail] = React.useState("");
   const [password, currentPassword] = React.useState("");
+  const [login] = useMutation(LOGIN_USER)
 
+  let [me] = useLazyQuery(GET_ME);
 
-  const [login, { data, error }] = useMutation(LOGIN_USER)
+  useEffect(() => {
+    if (cookies.token && user === null) {
+      me().then(data => {
+        setUser({ user: data.data.me });
+        history.push('/admin/dashboard')
+      })
+    }
+  }, [user, cookies])
 
   const handleClick = () => setShow(!show);
   const handleLogin = async () => {
@@ -66,50 +80,47 @@ export default function SignIn() {
 
     if (email && password) {
       try {
-        const {data} = await login({ variables: {...loginUser}})
-        const { token, user } = data.login;
-        const userId = user._id;
-        Auth.login(token, userId);
+        const { data } = await login({ variables: { ...loginUser } })
+        if (data && data.login) {
+          setShowError(null);
+          setUser(data.login);
+          history.push('/')
+          const { token, user } = data.login;
+          setCookie('token', token, { maxAge: 7200 });
+          const userId = user._id;
+          Auth.login(token, userId);
 
-        toast({
-          status: "success",
-          duration: 2000,
-          isClosable: true,
-          position: "top",
-          render: () => (
-            <Box color='white' p={3} bg='purple.500' borderRadius="8px">
-              Welcome back!
-            </Box>
-          ),
-        });
+          toast({
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+            position: "top",
+            render: () => (
+              <Box color='white' p={3} bg='purple.500' borderRadius="8px">
+                Welcome back!
+              </Box>
+            ),
+          });
+        } else if (data && data.login === null) {
+          setShowError("Incorrect credentials")
+        }
 
       } catch (error) {
         console.error("Erroring logging in", error);
-     toast({
-        title: "Error logging in",
-        description: error.message, // Display the error message
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "top",
-        backgroundColor: "red.500",
-      });
+        toast({
+          title: "Error logging in",
+          description: error.message, // Display the error message
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+          backgroundColor: "red.500",
+        });
+      }
+    } else {
+      setShowError("Some fields are missing!")
     }
-  } else {
-    setShowError("Some fields are missing!")
   }
-}
-
-  useEffect(() => {
-    console.log(data);
-    if (data && data.login) {
-      setShowError(null);
-      setUser(data.login);
-      history.push('/')
-    } else if (data && data.login === null) {
-      setShowError("Incorrect credentials")
-    }
-  }, [data])
 
   return (
     <DefaultAuth imageBackground={imageAuth} image={imageAuth}>
@@ -148,27 +159,10 @@ export default function SignIn() {
           mx={{ base: "auto", lg: "unset" }}
           me='auto'
           mb={{ base: "20px", md: "auto" }}>
-          {/* <Button
-            fontSize='sm'
-            me='0px'
-            mb='26px'
-            py='15px'
-            h='50px'
-            borderRadius='16px'
-            bg={googleBg}
-            color={googleText}
-            fontWeight='500'
-            _hover={googleHover}
-            _active={googleActive}
-            _focus={googleActive}>
-            <Icon as={FcGoogle} w='20px' h='20px' me='10px' />
-            Sign in with Google
-          </Button> */}
+
           <Flex align='center' mb='25px'>
             <HSeparator />
-            {/* <Text color='gray.400' mx='14px'>
-              or
-            </Text> */}
+
             <HSeparator />
           </Flex>
           {showError && <Alert status='error'>
@@ -251,16 +245,19 @@ export default function SignIn() {
                 </FormLabel>
               </FormControl>
             </Flex>
-            <Button
+            <MotionButton
               onClick={handleLogin}
               fontSize='sm'
               variant='brand'
               fontWeight='500'
               w='100%'
               h='50'
-              mb='24px'>
+              mb='24px'
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}>
               Sign In
-            </Button>
+            </MotionButton>
           </FormControl>
           <Flex
             flexDirection='column'
