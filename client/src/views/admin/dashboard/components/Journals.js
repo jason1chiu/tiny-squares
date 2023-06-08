@@ -18,6 +18,9 @@ export default function Journals(props) {
     "0px 18px 40px rgba(112, 144, 176, 0.12)",
     "unset"
   );
+
+  const hasJournals = data?.journals && data.journals.length > 0;
+
   return (
     <Card mb={{ base: "0px", "2xl": "20px" }}>
       <Text
@@ -29,9 +32,15 @@ export default function Journals(props) {
       >
         Journals
       </Text>
-      <Text color={textColorSecondary} fontSize="md" me="26px" mb="40px">
-        Update your journals daily
-      </Text>
+      {hasJournals ? (
+        <Text color={textColorSecondary} fontSize="md" me="26px" mb="40px">
+          Update your journals daily
+        </Text>
+      ) : (
+        <Text color={textColorSecondary} fontSize="md" me="26px" mb="40px">
+          You have no journals yet!
+        </Text>
+      )}
       {(data?.journals ?? []).map((journal, index) => (
         <Journal
           key={journal._id}

@@ -87,17 +87,6 @@ import {
               </Text>
             </Flex>
             <VStack position="absolute" right={8} top={8} spacing={2}>
-              
-            <Tooltip hasArrow label="Delete" fontSize="sm">
-              
-            <Button size="xs" colorScheme="purple" onClick={onDeleteClick} >
-              <Icon as={MdClose}/>
-            </Button>
-
-          </Tooltip>
-          
-        </VStack>
-
               <CloseButton size="sm" colorScheme="purple" onClick={() => setShowDeleteAlert(true)} />
 
               {showDeleteAlert && (
@@ -109,7 +98,7 @@ import {
                     </AlertDialogHeader>
 
                     <AlertDialogBody>
-                      <Alert status="warning" variant="subtle" flexDirection="column" alignItems="center" justifyContent="center" textAlign="center" h="auto">
+                      <Alert status="warning" colorScheme="purple" variant="subtle" flexDirection="column" alignItems="center" justifyContent="center" textAlign="center" h="auto">
                         <AlertIcon boxSize="40px" mr={0} />
                         <AlertDescription mt={4} fontSize="md">
                           But you've been doing so well! Are you sure you want to delete?
@@ -119,7 +108,7 @@ import {
 
                     <AlertDialogFooter>
                       <Button onClick={onCloseClick}>Cancel</Button>
-                      <Button colorScheme="red" onClick={onDeleteConfirm} ml={3}>
+                      <Button colorScheme="purple" onClick={onDeleteConfirm} ml={3}>
                         Delete
                       </Button>
                     </AlertDialogFooter>
@@ -127,7 +116,6 @@ import {
                 </AlertDialog>
               )}
             </VStack>
-
             <Button
               variant="darkBrand"
               color="white"
