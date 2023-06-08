@@ -133,8 +133,8 @@ const Legend = ({ journalId }) => {
         ) : (
           <>
             <Button
-              variant="ghost"
-              color="white"
+              variant="outline"
+              color={pColor}
               fontSize="sm"
               fontWeight="500"
               borderRadius="70px"
