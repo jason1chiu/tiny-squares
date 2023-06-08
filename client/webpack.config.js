@@ -20,7 +20,7 @@ module.exports = () => {
       //Webpack plug to generate html files & injects the bundles
       new HtmlWebpackPlugin({
         template: './index.html',
-        title: 'JATE',
+        title: 'Tiny Squares',
         favicon: 'favicon.ico',
       }),
      
@@ -34,9 +34,9 @@ module.exports = () => {
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
-        name: 'Just Another Text Editor',
-        short_name: 'JATE',
-        description: 'Text Editor',
+        name: 'Tiny Squares',
+        short_name: 'Tiny Squares',
+        description: 'Tiny Squares',
         background_color: '#225ca3',
         theme_color: '#225ca3',
         start_url: '/',
