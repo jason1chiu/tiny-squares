@@ -4,21 +4,21 @@ import purpleJournal from "assets/img/store/3.png"
 
 const productsArray = [
   {
-    id: "price_1NGBhVCS0MFKcelVR2DbYj9S",
+    id: "price_1NGkoaCS0MFKcelVsPHlR5r4",
     title: "$1 Donation",
     price: 1.00,
     img: ProductivityPlanner,
     benefits: ["Buy us a gum ball"]
   },
   {
-    id: "price_1NGBhzCS0MFKcelVfc18YYP2",
+    id: "price_1NGkqFCS0MFKcelVSTB7pj7U",
     title: "$3 Donation",
     price: 3.00,
     img: WellnessJournal,
     benefits: ["Buy us a small plain Starbucks coffee"]
   },
   {
-    id: "price_1NGBiXCS0MFKcelVavX5doc2",
+    id: "price_1NGkqsCS0MFKcelVqyoaYwou",
     title: "$15 Donation",
     price: 15.00,
     img: purpleJournal,
