@@ -16,8 +16,8 @@ app.post("/admin/store/checkout", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items: lineItems,
     mode: 'payment',
-    success_url: "http://localhost:3000/success",
-    cancel_url: "http://localhost:3000/cancel"
+    success_url: "https://vast-refuge-16124.herokuapp.com/success",
+    cancel_url: "https://vast-refuge-16124.herokuapp.com/cancel"
   });
 
   res.send(JSON.stringify({

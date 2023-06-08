@@ -8,7 +8,7 @@ export function CartModal(props) {
 
     const checkout = async () => {
       // *** When deploying to heroku, change url to https://your-app-name.herokuapp.com/admin/store/checkout
-      await fetch("http://localhost:3001/admin/store/checkout", {
+      await fetch("https://vast-refuge-16124.herokuapp.com/admin/store/checkout", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'

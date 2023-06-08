@@ -25,7 +25,7 @@ export default function App() {
   }
 
   const client = new ApolloClient({
-    uri: "http://localhost:3001/graphql",
+    uri: "https://vast-refuge-16124.herokuapp.com/graphql",
     cache: new InMemoryCache({ query: true, data: false }),
     headers: {
       authorization: getToken(user, cookies),

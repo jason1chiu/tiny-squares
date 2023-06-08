@@ -48,8 +48,8 @@ app.post("/admin/store/checkout", async (req, res) => {
     line_items: lineItems,
     mode: 'payment',
     // *** When deploying to heroku, change url to https://your-app-name.herokuapp.com/success
-    success_url: "http://localhost:3000/success",
-    cancel_url: "http://localhost:3000/cancel"
+    success_url: "https://vast-refuge-16124.herokuapp.com/success",
+    cancel_url: "https://vast-refuge-16124.herokuapp.com/cancel"
   });
 
   res.send(JSON.stringify({
@@ -63,7 +63,6 @@ app.get('*', (req, res) => {
 
 db.once('open', () => {
   app.listen(PORT, () => {
-    console.log(`🌍 Now listening on localhost:${PORT}`);
-    console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+    console.log(`🌍`)
   });
 });
