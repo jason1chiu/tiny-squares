@@ -12,7 +12,8 @@
 const mongoose = require("mongoose");
 
 // Don't forget to replace `<password>` with your actual password
-const uri = "mongodb+srv://TinySquares:TinySquares54!@cluster0.lm5et7y.mongodb.net/tinysquares?retryWrites=true&w=majority";
+// const uri = "mongodb+srv://TinySquares:TinySquares54!@cluster0.lm5et7y.mongodb.net/tinysquares?retryWrites=true&w=majority";
+const uri = process.env.MONGODB_URI || "mongodb+srv://TinySquares:TinySquares54!@cluster0.lm5et7y.mongodb.net/tinysquares?retryWrites=true&w=majority";
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
