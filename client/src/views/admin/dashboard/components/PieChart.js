@@ -5,8 +5,10 @@ import PieChart from "components/charts/Pie.js";
 import React from "react";
 import { pieChartData, pieChartOptions } from "variables/charts.js";
 import { VSeparator } from "components/seperator/Seperator.jsx";
+import { GET_JOURNALS, GET_LEGENDS } from "utils/queries";
+import { useQuery } from "@apollo/client";
 
-export default function Conversion(props) {
+export default function Conversion(props, {journalId}) {
   const { ...rest } = props;
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -15,6 +17,11 @@ export default function Conversion(props) {
     "0px 18px 40px rgba(112, 144, 176, 0.12)",
     "unset"
   );
+
+  const { data: journalsData } = useQuery(GET_JOURNALS);
+  const { data: legendsData } = useQuery(GET_LEGENDS, {variables: {id: journalId}})
+  console.log(legendsData);
+
   return (
     <Card p='20px' align='center' direction='column' w='100%' {...rest}>
       <Flex
@@ -32,9 +39,9 @@ export default function Conversion(props) {
           defaultValue='monthly'
           width='unset'
           fontWeight='700'>
-          <option value='daily'>Daily</option>
-          <option value='monthly'>Monthly</option>
-          <option value='yearly'>Yearly</option>
+          {(journalsData?.journals ?? []).map((journal, index) => (
+            <option key={index}>{journal.name}</option>
+          ))}
         </Select>
       </Flex>
       <PieChart

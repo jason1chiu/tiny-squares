@@ -87,6 +87,17 @@ import {
               </Text>
             </Flex>
             <VStack position="absolute" right={8} top={8} spacing={2}>
+              
+            <Tooltip hasArrow label="Delete" fontSize="sm">
+              
+            <Button size="xs" colorScheme="purple" onClick={onDeleteClick} >
+              <Icon as={MdClose}/>
+            </Button>
+
+          </Tooltip>
+          
+        </VStack>
+
               <CloseButton size="sm" colorScheme="purple" onClick={() => setShowDeleteAlert(true)} />
 
               {showDeleteAlert && (
@@ -116,6 +127,7 @@ import {
                 </AlertDialog>
               )}
             </VStack>
+
             <Button
               variant="darkBrand"
               color="white"
