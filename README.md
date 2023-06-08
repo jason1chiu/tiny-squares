@@ -1,13 +1,3 @@
-![GitHub license](https://img.shields.io/badge/license-MIT-pink.svg)
-![repo size](https://img.shields.io/github/repo-size/cleclair71/TechTapas?color=yellow)
-![commits](https://img.shields.io/github/commit-activity/m/cleclair71/TechTapas/main)
-![language](https://img.shields.io/github/languages/top/cleclair71/TechTapas)
-![bcrypt](https://img.shields.io/github/package-json/dependency-version/cleclair71/TechTapas/bcrypt)
-![sequelize](https://img.shields.io/github/package-json/dependency-version/cleclair71/TechTapas/sequelize?color=lime)
-![mysql2](https://img.shields.io/github/package-json/dependency-version/cleclair71/TechTapas/mysql2?color=orange)
-![dotenv](https://img.shields.io/github/package-json/dependency-version/cleclair71/TechTapas/dotenv?color=blue)
-![express](https://img.shields.io/github/package-json/dependency-version/cleclair71/TechTapas/express?color=lime)
-![express-handlebars](https://img.shields.io/github/package-json/dependency-version/cleclair71/TechTapas/express-handlebars?color=orange)
 
 <a name="readme-top"></a>
 <br />
