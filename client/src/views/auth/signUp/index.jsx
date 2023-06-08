@@ -183,13 +183,13 @@ export default function SignUp() {
               Email<Text color={brandStars}>*</Text>
             </FormLabel>
             <Input
+            variant="auth"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value)
                 setShowError(null);
               }}
               isRequired={true}
-              variant='auth'
               fontSize='sm'
               ms={{ base: "0px", md: "0px" }}
               type='email'
@@ -208,13 +208,13 @@ export default function SignUp() {
               Username<Text color={brandStars}>*</Text>
             </FormLabel>
             <Input
+            variant="auth"
               value={username}
               onChange={(e) => {
                 setUsername(e.target.value)
                 setShowError(null);
               }}
               isRequired={true}
-              variant='auth'
               fontSize='sm'
               ms={{ base: "0px", md: "0px" }}
               type='email'
@@ -233,6 +233,7 @@ export default function SignUp() {
             </FormLabel>
             <InputGroup size='md'>
               <Input
+              variant="auth"
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value)
@@ -244,7 +245,6 @@ export default function SignUp() {
                 mb='12px'
                 size='lg'
                 type={show ? "text" : "password"}
-                variant='auth'
               />
               <InputRightElement display='flex' alignItems='center' mt='4px'>
                 <Icon
@@ -266,6 +266,7 @@ export default function SignUp() {
             </FormLabel>
             <InputGroup size='md'>
               <Input
+              variant="auth"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 isRequired={true}
@@ -274,7 +275,6 @@ export default function SignUp() {
                 mb='24px'
                 size='lg'
                 type={show ? "text" : "password"}
-                variant='auth'
               />
               <InputRightElement display='flex' alignItems='center' mt='4px'>
                 <Icon

@@ -105,25 +105,19 @@ const Legend = ({ journalId }) => {
         Legend
       </Heading>
       <HStack spacing={2}>
-        <Input
+        <Input variant="auth"
           size="sm"
           type="color"
           value={color}
           onChange={(e) => setColor(e.target.value)}
-          borderColor="secondaryGray.500"
-          borderRadius="md"
-          color="secondaryGray.500"
           w="60px"
         />
-        <Input
-          borderRadius="md"
-          size="sm"
-          type="text"
+        <Input variant="auth"
+  
           placeholder="Happy"
           value={label}
           onChange={(e) => setLabel(e.target.value)}
-          borderColor={textColor}
-          color="secondaryGray.500"
+   
         />
         {!selectedLegend ? (
           <Button
