@@ -41,7 +41,7 @@ export default function Footer() {
             <Link
             mx='3px'
             color={textColor}
-            href='https://www.tiny-squares.com'
+            href='https://github.com/jason1chiu/tiny-squares'
             target='_blank'
             fontWeight='700'>
             TinySquares
@@ -57,22 +57,11 @@ export default function Footer() {
           <Link
             fontWeight='500'
             color={textColor}
-            href='https://www.tiny-squares.com'>
+            href='https://github.com/jason1chiu/tiny-squares/tree/main'>
             Support
           </Link>
           </ListItem>
-        <ListItem
-          me={{
-            base: "20px",
-            md: "44px",
-          }}>
-          <Link
-            fontWeight='500'
-            color={textColor}
-            href='https://www.tiny-squares.com'>
-                Terms of Use
-            </Link>
-        </ListItem>
+       
         </List>
         </Flex>
     )
