@@ -11,7 +11,7 @@
     "start:prod": "cd server && npm start",
     "start:dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
-    "heroku-postbuild": "npm run start:prod || npm run start:dev"
+    "heroku-postbuild": "webpack --config webpack.config.js && npm run start:dev"
   },
   "keywords": [],
   "author": "",
