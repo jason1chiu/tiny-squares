@@ -71,19 +71,7 @@ export default function JournalBars({ gridArea, journalsData }) {
           lineHeight='100%'>
           Journal Usage
         </Text>
-        <Button
-          align='center'
-          justifyContent='center'
-          bg={bgButton}
-          _hover={bgHover}
-          _focus={bgFocus}
-          _active={bgFocus}
-          w='37px'
-          h='37px'
-          lineHeight='100%'
-          borderRadius='10px'>
-          <Icon as={MdBarChart} color={iconColor} w='24px' h='24px' />
-        </Button>
+        
       </Flex>
 
       <Box h='240px' mt='auto'>

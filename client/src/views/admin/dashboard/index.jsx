@@ -1,4 +1,4 @@
-import { Box, Grid } from "@chakra-ui/react";
+import { Box, Grid, SimpleGrid } from "@chakra-ui/react";
 
 import React, { useEffect, useState } from "react";
 import PieChart from "views/admin/dashboard/components/PieChart";
@@ -25,17 +25,9 @@ export default function Overview() {
 
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
-      <Grid
-        templateColumns={{
-          base: "1fr",
-          lg: "1.34fr 1fr 1.62fr",
-        }}
-        templateRows={{
-          base: "repeat(3, 1fr)",
-          lg: "1fr",
-        }}
-        gap={{ base: "20px", xl: "20px" }}
-      >
+  
+      <SimpleGrid
+        columns={{ base: 1, md: 2, xl: 2 }} gap='20px' mb='20px'>
         {data?.journals && (
           <Profile
             banner={profile}
@@ -43,35 +35,35 @@ export default function Overview() {
             name={user.user.username}
             entries={entries}
             journals={data?.journals?.length}
+            minH="365px"
           />
         )}
-        <PieChart selectedJournal={selectedJournal} setSelectedJournal={setSelectedJournal} journalsData={data} gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }} />
+        <PieChart 
+          selectedJournal={selectedJournal} 
+          setSelectedJournal={setSelectedJournal} 
+          journalsData={data} 
+          // gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }} 
+          // minH="365px"
+        />
+        
+      </SimpleGrid>
+      <SimpleGrid
+        columns={{ base: 1, md: 2, xl: 2 }} gap='20px' mb='20px'
+      >
+       
         {data &&
-          <ColumnsTable journalsData={[...data.journals]}
-            gridArea={{ base: "3 / 1 / 4 / 2", lg: "1 / 3 / 2 / 4" }}
+          <ColumnsTable 
+            journalsData={[...data.journals]}
+            // gridArea={{ base: "3 / 1 / 4 / 2", lg: "1 / 3 / 2 / 4" }}
+            // minH="365px"
           />
         }
-      </Grid>
-      <Grid
-        mb="20px"
-        templateColumns={{
-          base: "1fr",
-          lg: "repeat(2, 1fr)",
-          "2xl": "1.34fr 1.62fr 1fr",
-        }}
-        templateRows={{
-          base: "1fr",
-          lg: "repeat(2, 1fr)",
-          "2xl": "1fr",
-        }}
-        gap={{ base: "20px", xl: "20px" }}
-      >
-        <Journals
-          gridArea={{ base: "3 / 1 / 4 / 2", lg: "1 / 3 / 2 / 4" }}
-          minH="365px"
-          pe="20px"
+         <Journals
+          // gridArea={{ base: "1 / 1 / 2 / 4", lg: "1 / 1 / 2 / 4" }}
+          // minH="365px"
+          // pe="20px"
         />
-      </Grid>
+      </SimpleGrid>
     </Box>
   );
 }

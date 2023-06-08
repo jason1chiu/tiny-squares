@@ -43,7 +43,7 @@ export default function Footer() {
             <Link
             mx='3px'
             color={textColor}
-            href='https://www.tiny-squares.com'
+            href='https://github.com/jason1chiu/tiny-squares/tree/main'
             target='_blank'
             fontWeight='700'>
             TinySquares
@@ -61,7 +61,7 @@ export default function Footer() {
             fontWeight='500'
             color={linkColor}
             target='_blank'
-            href='https://github.com/app-generator/react-horizon-ui-chakra'>
+            href='https://github.com/jason1chiu/tiny-squares/tree/main'>
             Github
           </Link>
         </ListItem>

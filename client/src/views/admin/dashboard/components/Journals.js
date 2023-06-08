@@ -22,7 +22,7 @@ export default function Journals(props) {
   const hasJournals = data?.journals && data.journals.length > 0;
 
   return (
-    <Card mb={{ base: "0px", "2xl": "20px" }}>
+    <Card mb={{ base: "0px", lg: "20px" }} align='center'>
       <Text
         color={textColorPrimary}
         fontWeight="bold"
