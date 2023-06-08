@@ -56,9 +56,10 @@ app.post("/admin/store/checkout", async (req, res) => {
       quantity: item.quantity
     })
   });
-
+  
+// no information about the user is being sent to the stripe
   if (!req.user.stripeCustomerId) {
-    customer = await stripe.customers.create();
+    customer = await stripe.customers.create(); // create a new customer
     await User.findByIdAndUpdate(req.user._id, { stripeCustomerId: customer.id });
   } else {
     customer = await stripe.customers.retrieve(req.user.stripeCustomerId);
