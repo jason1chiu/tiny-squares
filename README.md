@@ -14,8 +14,10 @@
 
  <div align="center">
  <h1 align="center">TinySquares</h1>
-    <a href="https://github.com/utgroup3/Nomad-Nebula">
-     <img src="./public/img/transparentwhite.png" alt="Logo" height="200">
+  
+    <a href="https://github.com/jason1chiu/tiny-squares">
+    
+    <img src="./client/public/ts.png" alt="Logo" height="200">
    </a>
     <p align="center">
       Your Life, One Pixel at a Time
@@ -26,7 +28,7 @@
 
 - [About the Project](#description)
 
-- [Added Features](#features)
+<!-- - [Added Features](#features) -->
 
 - [Installation](#installation)
 
@@ -50,14 +52,17 @@
 ## :rocket: About The Project
 
 <p align="center">
-  <img src="assets\Capture.JPG"/>
+  <!-- <img src="assets\Capture.JPG"/> -->
+  <img src='./client/public/TS-home.png' alt='home'>
 </p>
 
-Welcome to TechTapas, a CMS-style blog site where developers can publish their thoughts and opinions on technical concepts, recent advancements, and new technologies. This site is built using the MVC paradigm in its architectural structure, using Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication.
+<h3 align="center"> Introducing TinySquares: </h3>
+
+Your ultimate destination for personalized lifestyle journals. Track sports, health, and mindfulness effortlessly. Our visually appealing pixel calendar design gives a clear year-long overview of your progress. Dive deeper with statistics and pie charts for insightful data representation. Join us and unlock your full potential 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<a name="features"></a>
+<!-- <a name="features"></a>
 
 ## :star: Added Features
 
@@ -67,7 +72,7 @@ Welcome to TechTapas, a CMS-style blog site where developers can publish their t
 - Cancel option that sends you to main page
 - .env file that protects password
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 <a name="installation"></a>
 
@@ -85,13 +90,16 @@ git clone https://github.com/jason1chiu/tiny-squares
 cd tiny-squares
 ```
 
-3. Install [`sequelize`](https://www.npmjs.com/package/inquirer), [`figlet`](https://www.npmjs.com/search?q=figlet), [`dotenv`](https://www.npmjs.com/package/dotenv), [`mysql2`](https://www.npmjs.com/package/mysql2), [`handlebars`](https://www.npmjs.com/package/handlebars) and [`express`](https://www.npmjs.com/package/console.table)
+<!-- 3. Install [`sequelize`](https://www.npmjs.com/package/inquirer), [`figlet`](https://www.npmjs.com/search?q=figlet), [`dotenv`](https://www.npmjs.com/package/dotenv), [`mysql2`](https://www.npmjs.com/package/mysql2), [`handlebars`](https://www.npmjs.com/package/handlebars) and [`express`](https://www.npmjs.com/package/console.table) [`chakra`](https://chakra-ui.com/)
+ -->
+3. Install [`chakra`](https://www.npmjs.com/package/@chakra-ui/react), [`react`](https://www.npmjs.com/package/react), [`apollo-server-express`](https://www.apollographql.com/docs/apollo-server/previous-versions/), [`bcrypt`](https://www.npmjs.com/package/bcrypt), [`express`](https://www.npmjs.com/package/console.table), [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken), [`mongoose`](https://www.npmjs.com/package/mongoose), [`dotenv`](https://www.npmjs.com/package/dotenv), [`stripe`](https://www.npmjs.com/package/stripe), and [`cors`](https://www.npmjs.com/package/cors)
+
 
 ```bash
 npm i
 ```
 
-4. Create a .env file in the root directory and add your MySQL username, password, and database name in the following format:
+<!-- 4. Create a .env file in the root directory and add your MySQL username, password, and database name in the following format:
 
 ```bash
 DB_NAME='your_database_name'
@@ -109,9 +117,9 @@ DB_PW='your_mysql_password'
 
 ```bash
 \Nomad-Nebula> npm start
-```
+``` -->
 
-5.  to _http://localhost:3001_ in your browser to access the site
+4.  to _http://localhost:3000_ in your browser to access the site
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -123,8 +131,10 @@ DB_PW='your_mysql_password'
      <img src="assets\app.gif">
    </div>
    <br />
+   
    <p align="center"> The deployed site can be found on
-   <a href="https://drive.google.com/file/d/1oZJElx4QXzcGZlfQwMoUEVd9D6Ld_YKO/view?usp=sharing">Heroku</a>
+   <!-- <a href="https://drive.google.com/file/d/1oZJElx4QXzcGZlfQwMoUEVd9D6Ld_YKO/view?usp=sharing">Heroku</a> -->
+   <img src='./client/public/TS-dash.png' alt='dashboard pic'>
    </p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
