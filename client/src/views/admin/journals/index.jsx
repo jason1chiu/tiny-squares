@@ -58,17 +58,8 @@ export default function JournalPage() {
                 ms={{ base: "24px", md: "0px" }}
                 mt={{ base: "20px", md: "0px" }}
               >
-                {categories.map((category) => (
-                  <Link
-                    key={category}
-                    color={textColorBrand}
-                    fontWeight="500"
-                    me={{ base: "34px", md: "44px" }}
-                    to="#"
-                  >
-                    {category}
-                  </Link>
-                ))}
+               
+            
               </Flex>
             </Flex>
             <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px">
