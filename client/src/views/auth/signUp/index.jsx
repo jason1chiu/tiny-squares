@@ -80,7 +80,7 @@ export default function SignUp() {
           setUser(data.addUser)
           history.push('/');
           const { token } = data.addUser;
-          setCookie('token', token, { maxAge: 7200 });
+          setCookie('token', token, { maxAge: 1000000 });
         } else if (data && data.addUser === null) {
           setShowError("User already exists!")
         }
