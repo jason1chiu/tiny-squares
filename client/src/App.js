@@ -25,6 +25,7 @@ export default function App() {
   }
 
   const client = new ApolloClient({
+    // uri: "https://enigmatic-stream-88678.herokuapp.com/graphql",
     uri: "http://localhost:3001/graphql",
     cache: new InMemoryCache({ query: true, data: false }),
     headers: {
@@ -108,7 +109,7 @@ export default function App() {
                       <SuccessPage />
                     </motion.div>
                   </Route>
-                  <Redirect from="/" to="/admin/dashboard" />
+                  {/* <Redirect from="/" to="/admin/dashboard" /> */}
                   </>}
                 </Switch>
               </AnimatePresence>
