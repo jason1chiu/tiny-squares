@@ -1,24 +1,42 @@
 import {
-    Box,
-    Button,
-    Flex,
-    Icon,
-    Image,
-    Text,
-    useColorModeValue,
-    Tooltip,
+  Box,
+  Button,
+  Flex,
+  Icon,
+  Image,
+  Text,
+  useColorModeValue,
+  Tooltip,
   VStack,
-  } from "@chakra-ui/react";
+  CloseButton,
+  AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogCloseButton,
+  Alert,
+  AlertIcon,
+  AlertDescription,
+} from "@chakra-ui/react";
   import { MdClose, MdEdit } from "react-icons/md";
   import Card from "components/card/card";
   import React, { useState } from "react";
 
-
-
   export default function Preview(props) {
     const { image, name, author, onViewClick, onDeleteClick } = props;
     const textColor = useColorModeValue("navy.700", "white");
-    
+    const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+  
+    const onCloseClick = () => {
+      setShowDeleteAlert(false);
+    };
+  
+    const onDeleteConfirm = () => {
+      setShowDeleteAlert(false);
+      onDeleteClick();
+    };
 
     return (
       <Card p='20px'>
@@ -69,27 +87,61 @@ import {
               </Text>
             </Flex>
             <VStack position="absolute" right={8} top={8} spacing={2}>
+              
             <Tooltip hasArrow label="Delete" fontSize="sm">
+              
             <Button size="xs" colorScheme="purple" onClick={onDeleteClick} >
               <Icon as={MdClose}/>
             </Button>
+
           </Tooltip>
           
         </VStack>
+
+              <CloseButton size="sm" colorScheme="purple" onClick={() => setShowDeleteAlert(true)} />
+
+              {showDeleteAlert && (
+                <AlertDialog isOpen={true} leastDestructiveRef={undefined} onClose={onCloseClick}>
+                  <AlertDialogOverlay />
+                  <AlertDialogContent>
+                    <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                      Delete Confirmation
+                    </AlertDialogHeader>
+
+                    <AlertDialogBody>
+                      <Alert status="warning" variant="subtle" flexDirection="column" alignItems="center" justifyContent="center" textAlign="center" h="auto">
+                        <AlertIcon boxSize="40px" mr={0} />
+                        <AlertDescription mt={4} fontSize="md">
+                          But you've been doing so well! Are you sure you want to delete?
+                        </AlertDescription>
+                      </Alert>
+                    </AlertDialogBody>
+
+                    <AlertDialogFooter>
+                      <Button onClick={onCloseClick}>Cancel</Button>
+                      <Button colorScheme="red" onClick={onDeleteConfirm} ml={3}>
+                        Delete
+                      </Button>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              )}
+            </VStack>
+
             <Button
-                variant='darkBrand'
-                color='white'
-                fontSize='sm'
-                fontWeight='500'
-                borderRadius='70px'
-                px='24px'
-                py='5px'
-                onClick={onViewClick}>
-                VIEW
+              variant="darkBrand"
+              color="white"
+              fontSize="sm"
+              fontWeight="500"
+              borderRadius="70px"
+              px="24px"
+              py="5px"
+              onClick={onViewClick}
+            >
+              VIEW
             </Button>
           </Flex>
         </Flex>
-        
       </Flex>
     </Card>
   );
