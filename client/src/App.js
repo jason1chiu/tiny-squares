@@ -109,7 +109,7 @@ export default function App() {
                       <SuccessPage />
                     </motion.div>
                   </Route>
-                  {/* <Redirect from="/" to="/admin/dashboard" /> */}
+                  <Redirect from="/" to="/admin/dashboard" />
                   </>}
                 </Switch>
               </AnimatePresence>
