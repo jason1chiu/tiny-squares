@@ -23,14 +23,13 @@ import { useAuth } from "contexts/auth.context";
 import { useMutation } from "@apollo/client";
 import { UPDATE_USER } from "utils/mutations.js";
 
-function EditProfileModal() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+function EditProfileModal({ isOpen, onClose }) {
   const [username, setUsername] = useState("");
   const [file, setFile] = useState(null);
   const [updateUser, { error }] = useMutation(UPDATE_USER);
   const { editUser } = useAuth();
   const toast = useToast();
-  const bColor = useColorModeValue("secondaryGray.300", "white");
+
   const tColor = useColorModeValue ("brand.800", "white")
   const pColor = useColorModeValue("brand.600", "white")
 
@@ -66,7 +65,7 @@ function EditProfileModal() {
 
   return (
     <>
-      <Button onClick={onOpen}>Edit Profile</Button>
+  
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

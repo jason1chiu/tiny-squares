@@ -238,7 +238,7 @@ export default function HeaderLinks(props) {
                 onClick={onOpen} // open the modal when this item is clicked
                 variants={menuItemVariants}
               >
-                <Icon as={MdEdit} w={5} h={5} mr={2} />
+                <Icon as={MdEdit} w={5} h={5} mr={2} /> Edit Profile
                 <EditProfileModal isOpen={isOpen} onClose={onClose} />
               </MotionMenuItem>
 
