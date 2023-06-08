@@ -5,24 +5,24 @@ import purpleJournal from "assets/img/store/3.png"
 const productsArray = [
   {
     id: "price_1NGBhVCS0MFKcelVR2DbYj9S",
-    title: "Basic Package",
-    price: 5.99,
+    title: "$1 Donation",
+    price: 1.00,
     img: ProductivityPlanner,
-    benefits: ["1 Journal"]
+    benefits: ["Buy us a gum ball"]
   },
   {
     id: "price_1NGBhzCS0MFKcelVfc18YYP2",
-    title: "Standard Package",
-    price: 10.99,
+    title: "$3 Donation",
+    price: 3.00,
     img: WellnessJournal,
-    benefits: ["3 Journals"]
+    benefits: ["Buy us a small plain Starbucks coffee"]
   },
   {
     id: "price_1NGBiXCS0MFKcelVavX5doc2",
-    title: "Premium Package",
-    price: 20.99,
+    title: "$15 Donation",
+    price: 15.00,
     img: purpleJournal,
-    benefits: ["7 Journals"]
+    benefits: ["Buy us a large Starbucks coffee"]
 },
 ]
 
