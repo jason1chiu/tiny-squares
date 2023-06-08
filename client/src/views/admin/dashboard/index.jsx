@@ -1,6 +1,6 @@
 import { Box, Grid } from "@chakra-ui/react";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PieChart from "views/admin/dashboard/components/PieChart";
 import Profile from "views/admin/dashboard/components/Profile";
 import Journals from "views/admin/dashboard/components/Journals";
@@ -14,7 +14,9 @@ import { useQuery } from "@apollo/client";
 
 export default function Overview() {
   let { user } = useAuth();
-  const { data } = useQuery(GET_JOURNALS);
+  const { data } = useQuery(GET_JOURNALS, {fetchPolicy: "network-only"});
+
+  let [selectedJournal, setSelectedJournal] = useState(null);
 
   const entries = (data?.journals ?? []).reduce(
     (sum, journal) => sum + (journal.entries?.length || 0),
@@ -43,11 +45,12 @@ export default function Overview() {
             journals={data?.journals?.length}
           />
         )}
-        <PieChart gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }} />
-
-        <ColumnsTable
-          gridArea={{ base: "3 / 1 / 4 / 2", lg: "1 / 3 / 2 / 4" }}
-        />
+        <PieChart selectedJournal={selectedJournal} setSelectedJournal={setSelectedJournal} journalsData={data} gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }} />
+        {data &&
+          <ColumnsTable journalsData={[...data.journals]}
+            gridArea={{ base: "3 / 1 / 4 / 2", lg: "1 / 3 / 2 / 4" }}
+          />
+        }
       </Grid>
       <Grid
         mb="20px"

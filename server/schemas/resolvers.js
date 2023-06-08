@@ -29,8 +29,9 @@ const resolvers = {
     journal: async (parent, { id }, context) => {
       let results = await Journal.findById(id)
         .populate("entries")
-        .populate("legends");
-
+        .populate("legends")
+      .exec()
+        console.log({results: results.entries[0]});
       return results;
     },
     legends: async (parent, { id }, context) => {
