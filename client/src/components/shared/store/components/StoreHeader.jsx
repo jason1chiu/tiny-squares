@@ -25,6 +25,7 @@ const StoreHeader = () => {
       headers: {
         'Content-Type': 'application/json'
       },
+    // await fetch("http://localhost:3000/admin/store/checkout", {
       body: JSON.stringify({ items: cart.items })
     }).then((response) => {
       return response.json();
