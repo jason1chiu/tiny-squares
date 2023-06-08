@@ -2,7 +2,7 @@ import React from "react";
 
 import { Flex, Link, Text } from "@chakra-ui/react";
 
-import banner from "assets/img/bannercover.png";
+import banner from "assets/img/banner7.png";
 
 export default function Banner() {
   return (
@@ -27,7 +27,7 @@ export default function Banner() {
         }}
         fontWeight='700'
         lineHeight={{ base: "32px", md: "42px" }}>
-        Discover or Create your own Journal
+        A Year in Pixels
       </Text>
       <Text
         fontSize='md'
@@ -43,15 +43,9 @@ export default function Banner() {
         fontWeight='500'
         mb='40px'
         lineHeight='28px'>
-        Enter in this creative world.
+        Track your moods, habits, and goals. 
       </Text>
-      <Flex align='center'>
-        <Link>
-          <Text color='white' fontSize='sm' fontWeight='500'>
-            Create New Journal
-          </Text>
-        </Link>
-      </Flex>
+
     </Flex>
   );
 }
