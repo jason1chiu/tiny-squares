@@ -1,6 +1,6 @@
 import { Text, useColorModeValue } from "@chakra-ui/react";
 import Journal from "./Journal";
-import Journal1 from "assets/img/bannercover.png";
+import Journal1 from "assets/img/jp.png";
 import { GET_JOURNALS } from "utils/queries";
 
 import { useQuery } from "@apollo/client";
