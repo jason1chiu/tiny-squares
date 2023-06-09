@@ -47,8 +47,6 @@ export default function Journals(props) {
           boxShadow={cardShadow}
           mb="20px"
           image={Journal1}
-          // link="https://tinysquares.herokuapp.com/admin/journals"
-          
           ranking={index + 1}
           title={journal.name}
         />

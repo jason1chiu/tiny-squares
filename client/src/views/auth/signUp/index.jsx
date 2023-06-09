@@ -221,7 +221,7 @@ export default function SignUp() {
               fontSize='sm'
               ms={{ base: "0px", md: "0px" }}
               type='email'
-              placeholder='Enter your email'
+              placeholder='Enter your username'
               mb='24px'
               fontWeight='500'
               size='lg'
