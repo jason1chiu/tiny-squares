@@ -42,7 +42,7 @@
 ## :rocket: About The Project
 
 <p align="center">
-  <!-- <img src="assets\Capture.JPG"/> -->
+ 
   <img src='./client/public/TS-home.png' alt='home'>
 </p>
 
@@ -50,9 +50,9 @@
 
 Your ultimate destination for personalized lifestyle journals. Track sports, health, and mindfulness effortlessly. Our visually appealing pixel calendar design gives a clear year-long overview of your progress. Dive deeper with statistics and pie charts for insightful data representation. Join us and unlock your full potential 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<a name="features"></a>
+
+
 
 <!-- ## :star: Added Features
 
@@ -124,7 +124,7 @@ DB_PW='your_mysql_password'
    
    <p align="center"> The deployed site can be found on
  
-   [Heroku]([https://dev.mysql.com/doc/refman/8.0/en/creating-database.html](https://tinysquares.herokuapp.com/)
+   [Heroku]([https://dev.mysql.com/doc/refman/8.0/en/creating-database.html](https://tinysquares.herokuapp.com/))
    <img src='./client/public/TS-dash.png' alt='dashboard pic'>
    </p>
 
