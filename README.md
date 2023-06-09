@@ -122,11 +122,10 @@ DB_PW='your_mysql_password'
    </div>
    <br />
    
-   <p align="center"> The deployed site can be found on
- 
-   [Heroku]([https://dev.mysql.com/doc/refman/8.0/en/creating-database.html](https://tinysquares.herokuapp.com/))
+
+ <a href="https://tinysquares.herokuapp.com/">Deployed Website</a>
    <img src='./client/public/TS-dash.png' alt='dashboard pic'>
-   </p>
+   
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
