@@ -8,7 +8,6 @@ import { ADD_JOURNAL } from "utils/mutations";
 import { GET_JOURNALS } from "utils/queries";
 
 import { useAuth } from "contexts/auth.context";
-import BuyOptionsModal from "components/shared/store/components/BuyOptionsModal";
 import { useQuery } from "@apollo/client";
 
 export default function NewCard() {
@@ -16,26 +15,13 @@ export default function NewCard() {
   let { user } = useAuth();
   const { data, refetch } = useQuery(GET_JOURNALS);
 
-  const [isBuyOptionsModalOpen, setBuyOptionsModalOpen] = useState(false);
-
-  const openBuyOptionsModal = () => {
-    setBuyOptionsModalOpen(true);
-  };
-
-  const closeBuyOptionsModal = () => {
-    setBuyOptionsModalOpen(false);
-  };
   const [isModalOpen, setModalOpen] = useState(false);
   const [hover, setHover] = useState(false);
   const iconColor = useColorModeValue("secondaryGray.600", "secondaryGray.600");
   const iconHoverColor = useColorModeValue("brand.500", "white");
 
   const openModal = () => {
-    if (user.journalsCount >= 3) {
-      openBuyOptionsModal();
-    } else {
-      setModalOpen(true);
-    }
+    setModalOpen(true);
   };
 
   const closeModal = () => {
@@ -43,18 +29,12 @@ export default function NewCard() {
   };
 
   const handleAddJournal = async (journal) => {
-    if (data?.journals?.length >= 3) {
-      // If the user already has 3 journals, open the buy options modal
-      setBuyOptionsModalOpen(true);
-    } else {
-      try {
-        await addJournal({ variables: journal });
-
-        refetch();
-        closeModal();
-      } catch (error) {
-        console.error("Error creating jornal: ", error);
-      }
+    try {
+      await addJournal({ variables: journal });
+      refetch();
+      closeModal();
+    } catch (error) {
+      console.error("Error creating journal: ", error);
     }
   };
 
@@ -86,10 +66,6 @@ export default function NewCard() {
         isOpen={isModalOpen}
         onClose={closeModal}
         onSubmit={handleAddJournal}
-      />
-      <BuyOptionsModal
-        isOpen={isBuyOptionsModalOpen}
-        onClose={() => setBuyOptionsModalOpen(false)}
       />
     </Card>
   );

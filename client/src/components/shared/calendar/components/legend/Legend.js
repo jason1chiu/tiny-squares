@@ -14,7 +14,7 @@ import {
 import { GET_LEGENDS } from "utils/queries";
 import { CREATE_LEGEND, UPDATE_LEGEND, DELETE_LEGEND } from "utils/mutations";
 
-const Legend = ({ journalId }) => {
+const Legend = ({ journalId, refetchEntries }) => {
   const [color, setColor] = useState("#000000");
   const [label, setLabel] = useState("");
   const [selectedLegend, setSelectedLegend] = useState(null);
@@ -27,8 +27,8 @@ const Legend = ({ journalId }) => {
   const [createLegend] = useMutation(CREATE_LEGEND);
   const [updateLegend] = useMutation(UPDATE_LEGEND);
   const [deleteLegend] = useMutation(DELETE_LEGEND);
-
-  const textColor = useColorModeValue("secondaryGray.500", "white");
+  const tColor = useColorModeValue("brand.800", "white")
+  const pColor = useColorModeValue("secondaryGray.600", "white")
   const titleColor = useColorModeValue("navy.700", "white");
 
   const handleAddLegend = async () => {
@@ -74,6 +74,7 @@ const Legend = ({ journalId }) => {
       });
 
       refetch();
+      refetchEntries()
     } catch (error) {
       console.error("Failed to delete legend:", error);
     }
@@ -104,28 +105,28 @@ const Legend = ({ journalId }) => {
       <Heading color={titleColor} size="sm" mb={2}>
         Legend
       </Heading>
-      <HStack spacing={2}>
+      <HStack spacing={1}>
         <Input variant="auth"
           size="sm"
           type="color"
           value={color}
           onChange={(e) => setColor(e.target.value)}
-          w="60px"
+          w="50px"
         />
         <Input variant="auth"
-  
+
           placeholder="Happy"
           value={label}
           onChange={(e) => setLabel(e.target.value)}
-   
+
         />
         {!selectedLegend ? (
           <Button
-            variant="darkBrand"
+            variant="brand"
             color="white"
             fontSize="sm"
             fontWeight="500"
-            borderRadius="70px"
+
             onClick={handleAddLegend}
           >
             Add
@@ -133,8 +134,8 @@ const Legend = ({ journalId }) => {
         ) : (
           <>
             <Button
-              variant="darkBrand"
-              color="white"
+              variant="outline"
+              color={pColor}
               fontSize="sm"
               fontWeight="500"
               borderRadius="70px"
@@ -157,7 +158,7 @@ const Legend = ({ journalId }) => {
       {(data?.legends ?? []).map((legend, index) => (
         <HStack
           key={legend._id}
-          spacing={2}
+          spacing={4}
           alignItems="center"
           justifyContent="space-between"
         >
@@ -183,21 +184,20 @@ const Legend = ({ journalId }) => {
           ) : (
             <>
               <Button
-                variant="darkBrand"
-                color="white"
+                variant="outline"
                 fontSize="sm"
                 fontWeight="500"
-                borderRadius="70px"
+                color={pColor}
                 onClick={() => handleEditLegend(legend)}
               >
                 Edit
               </Button>
               <Button
-                variant="darkBrand"
-                color="white"
+                variant="outline"
+                color={pColor}
                 fontSize="sm"
                 fontWeight="500"
-                borderRadius="70px"
+
                 onClick={() => handleDeleteLegend(legend._id)}
               >
                 Delete

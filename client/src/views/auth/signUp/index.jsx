@@ -39,6 +39,7 @@ import DefaultAuth from "layouts/auth/Default";
 import imageAuth from "assets/img/authimage.png"
 import { ADD_USER } from "utils/mutations.js";
 import { useAuth } from "contexts/auth.context";
+import Auth from "utils/auth"
 
 export default function SignUp() {
   let { setUser } = useAuth();
@@ -79,7 +80,9 @@ export default function SignUp() {
           setShowError(null);
           setUser(data.addUser)
           history.push('/');
-          const { token } = data.addUser;
+          const { token, user } = data.addUser;
+          const userId = user._id;
+          Auth.login(token, userId, user);
           setCookie('token', token, { maxAge: 1000000 });
         } else if (data && data.addUser === null) {
           setShowError("User already exists!")
@@ -218,7 +221,7 @@ export default function SignUp() {
               fontSize='sm'
               ms={{ base: "0px", md: "0px" }}
               type='email'
-              placeholder='Enter your email'
+              placeholder='Enter your username'
               mb='24px'
               fontWeight='500'
               size='lg'

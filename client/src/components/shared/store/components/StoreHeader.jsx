@@ -2,7 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import Logo from "assets/img/Logo.png"
 import { CartContext } from "components/shared/store/js/CartContext"
 import CartProduct from 'components/shared/store/js/CartProduct'
-import { Button, Flex, Text, Box, Grid, Image, GridItem,
+import {
+  Button, Flex, Text, Box, Grid, Image, GridItem,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -10,7 +11,8 @@ import { Button, Flex, Text, Box, Grid, Image, GridItem,
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  useDisclosure } from '@chakra-ui/react'
+  useDisclosure
+} from '@chakra-ui/react'
 const StoreHeader = () => {
   const cart = useContext(CartContext)
 
@@ -18,9 +20,12 @@ const StoreHeader = () => {
 
   const productsCount = cart.items.reduce((sum, product) => sum + product.quantity, 0);
 
+  const url = "https://localhost:3000/admin/store/checkout"
+  // const url = "https://tinysquares.herokuapp.com/admin/store/checkout"
+
   const checkout = async () => {
     // *** When deploying to heroku, change url to https://your-app-name.herokuapp.com/admin/store/checkout
-    await fetch("https://tinysquares.herokuapp.com/admin/store/checkout", {
+    await fetch(url, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -37,25 +42,25 @@ const StoreHeader = () => {
 
   return (
     <>
-        {/* Logo as the Store Banner */}
-        <Grid templateColumns='repeat(2, 1fr)' gap={4}>
-          <GridItem w='100%'>
-            <Image src={Logo} alt="logo"></Image>
-            </GridItem>
+      {/* Logo as the Store Banner */}
+      <Grid templateColumns='repeat(2, 1fr)' gap={4}>
+        <GridItem w='100%'>
+          <Image src={Logo} alt="logo"></Image>
+        </GridItem>
 
-            <Flex justifyContent="flex-end">
-              <Button onClick={onOpen}>Cart ({productsCount} Items)</Button>
-            </Flex>
-        </Grid>
+        <Flex justifyContent="flex-end">
+          <Button onClick={onOpen}>Cart ({productsCount} Items)</Button>
+        </Flex>
+      </Grid>
 
-        <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Shopping Cart</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             {/* If products 0, say cart is empty. If > 0, show items */}
-          {productsCount > 0 ?
+            {productsCount > 0 ?
               <>
                 <p>Items In Your Cart:</p>
 
@@ -76,13 +81,13 @@ const StoreHeader = () => {
             <Button colorScheme='blue' mr={3} onClick={onClose}>
               Close
             </Button>
-      
+
           </ModalFooter>
         </ModalContent>
       </Modal>
-       
-      
-     
+
+
+
 
       {/* {show && (
         

@@ -26,7 +26,7 @@
 
 - [Contributing](#contributing)
 
-- [Resources](#resources)
+<!-- - [Resources](#resources) -->
 
 - [license](#license)
 
@@ -42,7 +42,7 @@
 ## :rocket: About The Project
 
 <p align="center">
-  <!-- <img src="assets\Capture.JPG"/> -->
+ 
   <img src='./client/public/TS-home.png' alt='home'>
 </p>
 
@@ -50,19 +50,19 @@
 
 Your ultimate destination for personalized lifestyle journals. Track sports, health, and mindfulness effortlessly. Our visually appealing pixel calendar design gives a clear year-long overview of your progress. Dive deeper with statistics and pie charts for insightful data representation. Join us and unlock your full potential 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- <a name="features"></a>
 
-## :star: Added Features
 
-- Styled tables and console logs using Chalk
-- Banner logo using Figlet
+
+<!-- ## :star: Added Features
+
+- Create and delete custom Pixel Journals
+- K
 - View, add, delete and update functions
 - Cancel option that sends you to main page
-- .env file that protects password
+- .env file that protects password -->
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <a name="installation"></a>
 
@@ -122,11 +122,10 @@ DB_PW='your_mysql_password'
    </div>
    <br />
    
-   <p align="center"> The deployed site can be found on
-   <!-- <a href="https://drive.google.com/file/d/1oZJElx4QXzcGZlfQwMoUEVd9D6Ld_YKO/view?usp=sharing">Heroku</a> -->
-   <a href='#'> Heroku </a>
+
+ <a href="https://tinysquares.herokuapp.com/">Deployed Website</a>
    <img src='./client/public/TS-dash.png' alt='dashboard pic'>
-   </p>
+   
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -175,7 +174,7 @@ MIT
 
 <a name="resources"></a>
 
-## :mag_right: Resources
+<!-- ## :mag_right: Resources
 
 - [Creating and Selecting a Database](https://dev.mysql.com/doc/refman/8.0/en/creating-database.html)
 - [Handlebars](https://www.npmjs.com/package/handlebars)
@@ -185,7 +184,7 @@ MIT
 - [Everything you should know about ‘module’ & ‘require’ in Node.js](https://www.freecodecamp.org/news/require-module-in-node-js-everything-about-module-require-ccccd3ad383/)
 - [break](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/break)
 - [ShieldsIO](https://shields.io/category/funding)
-
+ -->
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <a name="questions"></a>
@@ -200,7 +199,6 @@ If you have any questions about this project, please don't hesitate to reach out
 
 2. **Create a new issue:** If you can't find the answer to your question in the documentation, please create a new issue in the project's issue tracker. Be sure to provide as much detail as possible about your question, including any relevant code snippets or screenshots.
 
-3. **Contact cleclair71 directly:** If you prefer to contact me directly, you can do so by sending me an email at cassieleclair71@gmail.com. Please include "Question about README Generator" in the subject line so that I can quickly identify your message.
 
    <p align="center"> 
    <a href="https://github.com/cleclair71/hr-hub">My Repository</a>
