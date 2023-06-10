@@ -6,7 +6,7 @@ import Confetti from 'react-confetti';
 function SuccessPage() {
   return (
     <>
-    <Confetti />
+      <Confetti />
       <Box
         display="flex"
         justifyContent="center"
@@ -14,19 +14,19 @@ function SuccessPage() {
         height="100vh"
         fontSize="50px"
       >
-      <p>Thank You For Your Order! 🎊 <br />
+        <p>Thank You For Your Order! 🎊 <br />
 
-        <Link to={"/success"}>
+          <Link to={"/"}>
             <Center fontSize="2rem" css={{
-                cursor: 'pointer',
-                transition: 'color 0.3s ease',
-                '&:hover': {
-                  color: 'blue',
-                },
-              }}>Back to Main Page</Center>
-        </Link>
-      </p>
-    
+              cursor: 'pointer',
+              transition: 'color 0.3s ease',
+              '&:hover': {
+                color: 'blue',
+              },
+            }}>Back to Main Page</Center>
+          </Link>
+        </p>
+
       </Box>
     </>
   );

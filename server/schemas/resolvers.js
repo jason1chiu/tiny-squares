@@ -125,8 +125,18 @@ const resolvers = {
           { new: true }
         );
 
+        let journal = await Journal.findById(journalId);
+        await Promise.all(
+          journal.legends.map((legend) =>
+            Legend.findByIdAndDelete(legend._id)
+          )
+        )
+        await Promise.all(
+          journal.entries.map((entry) =>
+            Entry.findByIdAndDelete(entry._id)
+          )
+        )
         await Journal.findByIdAndDelete(journalId);
-
         return "Journal Deleted";
       }
 

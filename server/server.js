@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.post("/admin/store/checkout", async (req, res) => {
-
+  console.log(req.body.cart);
   const items = req.body.cart;
   let lineItems = [];
   items.forEach((item) => {
@@ -55,9 +55,9 @@ app.post("/admin/store/checkout", async (req, res) => {
     cancel_url: "http://localhost:3000/cancel"
   });
 
-  res.send(JSON.stringify({
+  res.json({
     url: session.url
-  }))
+  })
 })
 
 app.get('*', (req, res) => {
