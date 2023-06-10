@@ -24,7 +24,7 @@ import { useMutation } from "@apollo/client";
 import { UPDATE_USER } from "utils/mutations.js";
 
 function EditProfileModal({ isOpen, onClose }) {
-  const [username, setUsername] = useState("");
+  let [username, setUsername] = useState("");
   const [file, setFile] = useState(null);
   const [updateUser, { error }] = useMutation(UPDATE_USER);
   const { editUser } = useAuth();
@@ -65,7 +65,6 @@ function EditProfileModal({ isOpen, onClose }) {
 
   return (
     <>
-  
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

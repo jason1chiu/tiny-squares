@@ -14,7 +14,7 @@ import {
 import { GET_LEGENDS } from "utils/queries";
 import { CREATE_LEGEND, UPDATE_LEGEND, DELETE_LEGEND } from "utils/mutations";
 
-const Legend = ({ journalId }) => {
+const Legend = ({ journalId, refetchEntries }) => {
   const [color, setColor] = useState("#000000");
   const [label, setLabel] = useState("");
   const [selectedLegend, setSelectedLegend] = useState(null);
@@ -74,6 +74,7 @@ const Legend = ({ journalId }) => {
       });
 
       refetch();
+      refetchEntries()
     } catch (error) {
       console.error("Failed to delete legend:", error);
     }
@@ -113,11 +114,11 @@ const Legend = ({ journalId }) => {
           w="50px"
         />
         <Input variant="auth"
-  
+
           placeholder="Happy"
           value={label}
           onChange={(e) => setLabel(e.target.value)}
-   
+
         />
         {!selectedLegend ? (
           <Button
@@ -125,7 +126,7 @@ const Legend = ({ journalId }) => {
             color="white"
             fontSize="sm"
             fontWeight="500"
-            
+
             onClick={handleAddLegend}
           >
             Add
@@ -196,7 +197,7 @@ const Legend = ({ journalId }) => {
                 color={pColor}
                 fontSize="sm"
                 fontWeight="500"
-               
+
                 onClick={() => handleDeleteLegend(legend._id)}
               >
                 Delete
