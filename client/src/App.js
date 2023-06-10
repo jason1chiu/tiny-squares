@@ -39,21 +39,24 @@ export default function App() {
           <React.StrictMode>
             <BrowserRouter>
               <Switch>
+                <Route path={`/success`}>
+                  <SuccessPage />
+                </Route>
+                <Route path={`/cancel`}>
+                    <CancelPage />
+                  </Route>
                 <Route path={`/auth`}>
                   <AuthLayout />
                 </Route>
                 {!user && <Redirect to="/auth/sign-in" />}
                 {user && <>
-                <Route path={`/admin`}>
-                  <AdminLayout />
-                </Route>
-                <Route path={`/cancel`}>
-                  <CancelPage />
-                </Route>
-                <Route path={`/success`}>
+                  <Route path={`/admin`}>
+                    <AdminLayout />
+                  </Route>
+                  {/* <Route path={`/success`}>
                   <SuccessPage />
-                </Route>
-                <Redirect from="/" to="/admin/dashboard" />
+                </Route> */}
+                  <Redirect from="/" to="/admin/dashboard" />
                 </>}
               </Switch>
             </BrowserRouter>

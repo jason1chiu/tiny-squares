@@ -37,7 +37,6 @@ const Board = ({ journalId, data }) => {
   // }, [data?.journal?.entries]);
 
   useEffect(() => {
-    debugger
     let preparedData = (data?.journal?.entries ?? []).reduce(
       (accumulator, currentValue) => {
         accumulator[currentValue.date] = currentValue;
