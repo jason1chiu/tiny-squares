@@ -30,8 +30,8 @@ const resolvers = {
       let results = await Journal.findById(id)
         .populate("entries")
         .populate("legends")
-      .exec()
-        console.log({results: results.entries[0]});
+        .exec()
+      console.log({ results: results.entries[0] });
       return results;
     },
     legends: async (parent, { id }, context) => {
@@ -111,7 +111,6 @@ const resolvers = {
           { new: true }
         ).populate("journals");
 
-        console.log(updatedUser);
         return updatedUser;
       }
 
@@ -173,13 +172,25 @@ const resolvers = {
     },
 
     deleteLegend: async (parent, { journalId, legendId }, context) => {
+
+      await Legend.findByIdAndDelete(legendId);
+      let docs = await Entry.find({ legend: { _id: legendId } })
+      await Promise.all(
+        docs.map((entry) =>
+          Promise.all([Journal.findOneAndUpdate(
+            { _id: journalId },
+            { $pull: { entries: entry._id } },
+            { new: true }
+          ),
+          Entry.findByIdAndDelete(entry._id)
+          ])
+        )
+      )
       const updatedJournal = await Journal.findOneAndUpdate(
         { _id: journalId },
         { $pull: { legends: legendId } },
         { new: true }
       );
-
-      await Legend.findByIdAndDelete(legendId);
 
       return updatedJournal;
     },

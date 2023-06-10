@@ -1,10 +1,8 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, GridItem, Box, Text, useColorModeValue } from "@chakra-ui/react";
 import Card from "components/card/card";
 import Cell from "components/shared/calendar/components/board/Cell";
-import { useQuery, useMutation } from "@apollo/client";
-import { GET_JOURNAL } from "utils/queries";
-
+import { useMutation } from "@apollo/client";
 import { ADD_ENTRY } from "utils/mutations";
 
 const months = [
@@ -22,17 +20,25 @@ const months = [
   "Dec",
 ];
 
-const Board = ({ journalId }) => {
-  const { data } = useQuery(GET_JOURNAL, {
-    variables: {
-      id: journalId,
-    },
-  });
-
+const Board = ({ journalId, data }) => {
+  
+  let [entriesMap, setEntriesMap] = useState({})
   let [addEntry] = useMutation(ADD_ENTRY);
 
-  const entriesMap = useMemo(() => {
-    return (data?.journal?.entries ?? []).reduce(
+  // const entriesMap = useMemo(() => {
+  //   return (data?.journal?.entries ?? []).reduce(
+  //     (accumulator, currentValue) => {
+  //       accumulator[currentValue.date] = currentValue;
+
+  //       return accumulator;
+  //     },
+  //     {}
+  //   );
+  // }, [data?.journal?.entries]);
+
+  useEffect(() => {
+    debugger
+    let preparedData = (data?.journal?.entries ?? []).reduce(
       (accumulator, currentValue) => {
         accumulator[currentValue.date] = currentValue;
 
@@ -40,7 +46,8 @@ const Board = ({ journalId }) => {
       },
       {}
     );
-  }, [data?.journal?.entries]);
+    setEntriesMap(preparedData)
+  }, [data?.journal?.entries, data?.journal?.length])
 
   const textColor = useColorModeValue("secondaryGray.400", "white");
 

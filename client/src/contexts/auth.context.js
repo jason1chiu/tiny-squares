@@ -9,10 +9,12 @@ export const AuthProvider = ({ children }) => {
 
   const categories = ["Mood", "Health", "Habit"];
   const editUser = (newUserData) => {
-    setUser((prevUser) => {
-      prevUser.user.username = newUserData.username;
-      return { ...prevUser };
-    });
+    debugger
+    setUser({user: newUserData});
+    // setUser((prevUser) => {
+    //   prevUser.user.username = newUserData.username;
+    //   return { ...prevUser };
+    // });
   };
 
   return (
