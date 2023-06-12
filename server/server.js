@@ -48,11 +48,11 @@ app.post("/admin/store/checkout", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items: lineItems,
     mode: 'payment',
-    // *** When deploying to heroku, change url to https://your-app-name.herokuapp.com/success
-    // success_url: "https://tinysquares.herokuapp.com/success",
-    // cancel_url: "https://tinysquares.herokuapp.com/cancel"
-    success_url: "http://localhost:3000/success",
-    cancel_url: "http://localhost:3000/cancel"
+
+    success_url: "https://tinysquares.herokuapp.com/success",
+    cancel_url: "https://tinysquares.herokuapp.com/cancel"
+    // success_url: "http://localhost:3000/success",
+    // cancel_url: "http://localhost:3000/cancel"
   });
 
   res.json({

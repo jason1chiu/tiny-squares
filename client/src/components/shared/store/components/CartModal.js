@@ -8,8 +8,8 @@ export function CartModal(props) {
     const bColor = useColorModeValue("secondaryGray.500", "white");
     const tColor = useColorModeValue ("brand.800", "white")
     const checkout = async () => {
-      // *** When deploying to heroku, change url to https://your-app-name.herokuapp.com/admin/store/checkout
-      await fetch("http://localhost:3001/admin/store/checkout", {
+      
+      await fetch("/admin/store/checkout", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'

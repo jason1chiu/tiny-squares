@@ -20,12 +20,10 @@ const StoreHeader = () => {
 
   const productsCount = cart.items.reduce((sum, product) => sum + product.quantity, 0);
 
-  const url = "https://localhost:3000/admin/store/checkout"
-  // const url = "https://tinysquares.herokuapp.com/admin/store/checkout"
 
   const checkout = async () => {
-    // *** When deploying to heroku, change url to https://your-app-name.herokuapp.com/admin/store/checkout
-    await fetch(url, {
+   
+    await fetch("/admin/store/checkout", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
