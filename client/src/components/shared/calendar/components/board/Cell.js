@@ -41,7 +41,7 @@ const Cell = ({ journalEntriesMap, day, month, onSave, journalId }) => {
         borderRadius="md"
         cursor="pointer"
         onClick={handleCellClick}
-        whileHover={{ scale: 1.05 }}
+        whileHover={{ scale: 1.2 }}
         transition={{ type: 'spring', stiffness: 500 }}
         style={{
           backgroundImage: `
