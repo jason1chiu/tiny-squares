@@ -64,7 +64,7 @@ const Board = ({ journalId, data }) => {
   };
 
   return (
-    <Card mt={4} mb={4} mx="auto" minh="80vh" w="auto">
+    <Card mt={4} mb={4} mx="auto" minh="90vh" w="auto">
       <Grid templateColumns="repeat(13, 1fr)" gap={0} h="100%" w="100%">
         <GridItem></GridItem>
         {Array.from({ length: 12 }, (_, index) => (
