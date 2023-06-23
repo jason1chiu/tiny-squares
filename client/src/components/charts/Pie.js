@@ -6,8 +6,26 @@ class PieChart extends React.Component {
     super(props);
 
     this.state = {
-      chartData: [],
-      chartOptions: {},
+      chartData: this.props.chartData,
+      chartOptions: {
+        ...this.props.chartOptions,
+        chart: {
+          ...this.props.chartOptions.chart,
+          animations: {
+            enabled: true,
+            easing: 'easeinout',
+            speed: 800,
+            animateGradually: {
+              enabled: true,
+              delay: 150
+            },
+            dynamicAnimation: {
+              enabled: true,
+              speed: 350
+            }
+          }
+        },
+      },
     };
   }
 

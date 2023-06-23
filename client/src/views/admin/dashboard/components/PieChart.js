@@ -7,7 +7,7 @@ import { pieChartData, pieChartOptions } from "variables/charts.js";
 import { VSeparator } from "components/seperator/Seperator.jsx";
 import { GET_JOURNALS, GET_JOURNAL, GET_ME } from "utils/queries";
 import { useQuery, useLazyQuery } from "@apollo/client";
-
+import { motion } from 'framer-motion';
 export default function Conversion({ selectedJournal, setSelectedJournal, journalsData, ...props }) {
 
   let [pieChartDataPrepared, setPieChartDataPrepared] = useState([])
@@ -17,11 +17,14 @@ export default function Conversion({ selectedJournal, setSelectedJournal, journa
 
   const tColor = useColorModeValue("secondaryGray.500", "white");
 
-  // useEffect(() => {
-  //   if (journalsData && journalsData.journals.length) {
-  //     setSelectedJournal(journalsData.journals[0]._id)
-  //   }
-  // }, [journalsData])
+
+  
+  useEffect(() => {
+    if (journalsData && journalsData.journals.length) {
+      setSelectedJournal(journalsData.journals[0]._id);
+      journal({ variables: { id: journalsData.journals[0]._id } });
+    }
+  }, [journalsData])
 
   useEffect(async () => {
     pieChartOptionsPrepared.labels = []
