@@ -2,8 +2,22 @@ export const pieChartOptions = {
   // labels: ["Happy", "Sad", "Angry", "Neutral", "Fearful", "Disgusted", "Surprised"],
   // colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
   chart: {
+    animations: {
+      enabled: true,
+      easing: 'easeinout',
+      speed: 800,
+      animateGradually: {
+        enabled: true,
+        delay: 150
+      },
+      dynamicAnimation: {
+        enabled: true,
+        speed: 350
+      }
+    },
     width: "50px",
   },
+  
   type: "pie",
   states: {
     hover: {

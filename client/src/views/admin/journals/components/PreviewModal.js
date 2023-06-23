@@ -25,12 +25,12 @@ export default function JournalModal({ isOpen, onClose, journal }) {
     <Modal  isOpen={isOpen} onClose={onClose} isCentered size="xl" scrollBehavior="inside">
       <Overlay />
       <ModalContent>
-        <ModalHeader color={titleColor}>{journal.name}</ModalHeader>
+        <ModalHeader color={titleColor} borderBottom="1px" borderBottomColor="secondaryGray.200">{journal.name} </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Overview journal_id={journal._id}/>
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter borderTop="1px" borderTopColor="secondaryGray.200">
           <Button onClick={onClose}>Close</Button>
         </ModalFooter>
       </ModalContent>
