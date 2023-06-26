@@ -11,9 +11,16 @@ import {
   Input,
   Select,
   useToast,
-  useColorModeValue
+  FormLabel,
+  useColorModeValue,
+  Box,
+  Image,
+  Grid,
+  useDisclosure,
+  IconButton,
+  Collapse
 } from "@chakra-ui/react";
-
+import { FiUpload } from "react-icons/fi";
 import { useQuery } from "@apollo/client";
 
 import { GET_JOURNALS } from "utils/queries";
@@ -22,8 +29,12 @@ import { useAuth } from "contexts/auth.context";
 
 export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
   const [journalName, setJournalName] = useState("");
+  const [journalImage, setJournalImage] = useState(1); // Add this
+  const { isOpen: isJournalImageOpen, onToggle: onJournalImageToggle } = useDisclosure(); // And this
+
   const bColor = useColorModeValue("secondaryGray.600", "white");
   const tColor = useColorModeValue("brand.800", "white");
+  const pColor = useColorModeValue("brand.600", "white");
   const { data } = useQuery(GET_JOURNALS);
 
   const [journalCategory, setJournalCategory] = useState("");
@@ -38,11 +49,17 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
     setJournalCategory(event.target.value);
   };
 
+  // Add this function
+  const handleJournalImageChange = (imageNumber) => {
+    setJournalImage(imageNumber);
+    onJournalImageToggle();
+  };
+
   const handleSubmit = () => {
     if (data?.journals?.length >= 3) {
-      onSubmit({ name: journalName, category: journalCategory });
+      onSubmit({ name: journalName, category: journalCategory, image: `/img/journal/${journalImage}.webp` }); // Change this line
     } else {
-      onSubmit({ name: journalName, category: journalCategory });
+      onSubmit({ name: journalName, category: journalCategory, image: `/img/journal/${journalImage}.webp` }); // And this line
       toast({
         title: "Journal created.",
         description: "Your journal was successfully created!",
@@ -56,6 +73,7 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
 
     setJournalName("");
     setJournalCategory("");
+    setJournalImage(1); // And this
   };
 
   return (
@@ -65,15 +83,17 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
         <ModalHeader color={tColor}>Create a new journal</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
+          <FormLabel mt={3} color={pColor}>Journal Name</FormLabel>
           <Input
-          variant="auth"
+            variant="auth"
             value={journalName}
             onChange={handleInputChange}
             placeholder="Journal name"
           />
+          <FormLabel mt={3} color={pColor}>Select Avatar</FormLabel>
           <Select
-          color = {bColor}
-          variant="auth"
+            color = {bColor}
+            variant="auth"
             value={journalCategory}
             onChange={handleSelectChange}
             placeholder="Select option"
@@ -84,6 +104,29 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
               </option>
             ))}
           </Select>
+          <FormLabel mt={3} color={pColor}>Select Journal Image</FormLabel>  
+          <Box>
+            <IconButton aria-label="Select journal image" icon={<FiUpload />} onClick={onJournalImageToggle} />
+            <Collapse in={isJournalImageOpen}>
+              <Grid templateColumns="repeat(3, 1fr)" gap={3}>
+                {[...Array(20)].map((_, i) => (
+                  <Box
+                    key={i}
+                    onClick={() => handleJournalImageChange(i + 1)}
+                    cursor="pointer"
+                    border={journalImage === (i + 1) ? '2px solid purple.500' : ''}
+                    transition="transform 0.3s"
+                    _hover={{
+                      transform: 'scale(1.2)',
+                    }}
+                  >
+                    <Image src={`/img/journal/${i + 1}.webp`} borderRadius='full'  boxSize='100px'
+    objectFit='cover'/>
+                  </Box>
+                ))}
+              </Grid>
+            </Collapse>
+          </Box>
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="purple" mr={3} onClick={handleSubmit}>
