@@ -124,8 +124,8 @@ import { useAuth } from "contexts/auth.context";
 import { useMutation } from "@apollo/client";
 import { UPDATE_USER } from "utils/mutations.js";
 
-function EditProfileModal({ isOpen, onClose }) {
-  let [username, setUsername] = useState("");
+function EditProfileModal({ isOpen, onClose, currentUsername }) {
+  let [username, setUsername] = useState(currentUsername || "");
   const [avatar, setAvatar] = useState(1);
   const [cover, setCover] = useState(1);  // Add state for cover
   const { isOpen: isAvatarOpen, onToggle: onAvatarToggle } = useDisclosure();
@@ -187,7 +187,7 @@ function EditProfileModal({ isOpen, onClose }) {
             <Input variant="auth"
               value={username}
               onChange={handleUsernameChange}
-              placeholder="Username"
+              placeholder={currentUsername || "Username"}
             />
             <FormLabel mt={3} color={pColor}>Select Avatar</FormLabel>
             <Box>

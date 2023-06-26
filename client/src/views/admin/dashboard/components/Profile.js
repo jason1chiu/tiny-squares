@@ -224,7 +224,7 @@ export default function Profile(props) {
           </Flex>
         </Flex>
       </Card>
-      <EditProfileModal isOpen={isOpen} onClose={onClose} />
+      <EditProfileModal isOpen={isOpen} onClose={onClose} currentUsername={user && user.user ? user.user.username : ''} />
     </>
   );
 }
