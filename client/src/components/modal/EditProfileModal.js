@@ -120,38 +120,44 @@ import {
   Image
 } from "@chakra-ui/react";
 import { FiUpload } from "react-icons/fi";
-import axios from 'axios';
 import { useAuth } from "contexts/auth.context";
 import { useMutation } from "@apollo/client";
 import { UPDATE_USER } from "utils/mutations.js";
 
-
 function EditProfileModal({ isOpen, onClose }) {
   let [username, setUsername] = useState("");
-  const [file, setFile] = useState(null);
-  const [updateUser, { error }] = useMutation(UPDATE_USER);
+  const [avatar, setAvatar] = useState(1);
+  const [cover, setCover] = useState(1);  // Add state for cover
+  const { isOpen: isAvatarOpen, onToggle: onAvatarToggle } = useDisclosure();
+  const { isOpen: isCoverOpen, onToggle: onCoverToggle } = useDisclosure();  // Disclosure for cover
   const { editUser } = useAuth();
   const toast = useToast();
-  const { isOpen: isAvatarOpen, onToggle: onAvatarToggle } = useDisclosure();
-  const [avatar, setAvatar] = useState(1);
+  const [updateUser, { error }] = useMutation(UPDATE_USER);
 
-  const tColor = useColorModeValue ("brand.800", "white")
-  const pColor = useColorModeValue("brand.600", "white")
-
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-  };
+  const tColor = useColorModeValue ("brand.800", "white");
+  const pColor = useColorModeValue("brand.600", "white");
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
+
+  const handleAvatarChange = (avatarNumber) => {
+    setAvatar(avatarNumber);
+    onAvatarToggle();
+  }
+
+  const handleCoverChange = (coverNumber) => {
+    setCover(coverNumber);
+    onCoverToggle();
+  }
 
   const handleSaveProfile = async () => {
     try {
       const { data } = await updateUser({
         variables: {
           username: username,
-          avatar: `/img/avatar/${avatar}.webp`
+          avatar: `/img/avatar/${avatar}.webp`,
+          cover: `/img/cover/${cover}.webp`,  // Add cover to variables
         },
       });
       editUser(data.updateUser);
@@ -168,11 +174,6 @@ function EditProfileModal({ isOpen, onClose }) {
       console.error(error);
     }
   };
-
-  const handleAvatarChange = (avatarNumber) => {
-    setAvatar(avatarNumber);
-    onAvatarToggle();
-  }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -205,6 +206,28 @@ function EditProfileModal({ isOpen, onClose }) {
                     }}
                   >
                     <Image src={`/img/avatar/${i + 1}.webp`} />
+                  </Box>
+                  ))}
+                </Grid>
+              </Collapse>
+            </Box>
+            <FormLabel mt={3} color={pColor}>Select Cover Photo</FormLabel>  
+            <Box>
+              <IconButton aria-label="Select cover photo" icon={<FiUpload />} onClick={onCoverToggle} />
+              <Collapse in={isCoverOpen}>
+                <Grid templateColumns="repeat(3, 1fr)" gap={3}>
+                  {[...Array(18)].map((_, i) => (
+                    <Box
+                    key={i}
+                    onClick={() => handleCoverChange(i + 1)}
+                    cursor="pointer"
+                    border={cover === (i + 1) ? '2px solid purple.500' : ''}
+                    transition="transform 0.3s"
+                    _hover={{
+                      transform: 'scale(1.2)',
+                    }}
+                  >
+                    <Image src={`/img/cover/${i + 1}.webp`} />
                   </Box>
                   ))}
                 </Grid>
