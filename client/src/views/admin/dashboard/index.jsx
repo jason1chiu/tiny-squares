@@ -14,7 +14,7 @@ import { useQuery } from "@apollo/client";
 
 export default function Overview() {
   let { user } = useAuth();
-  const { data } = useQuery(GET_JOURNALS, {fetchPolicy: "network-only"});
+  const { data } = useQuery(GET_JOURNALS, { fetchPolicy: "network-only" });
 
   let [selectedJournal, setSelectedJournal] = useState(null);
 
@@ -25,7 +25,7 @@ export default function Overview() {
 
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
-  
+
       <SimpleGrid
         columns={{ base: 1, md: 2, xl: 2 }} gap='20px' mb='20px'>
         {data?.journals && (
@@ -38,30 +38,23 @@ export default function Overview() {
             minH="365px"
           />
         )}
-        <PieChart 
-          selectedJournal={selectedJournal} 
-          setSelectedJournal={setSelectedJournal} 
-          journalsData={data} 
-          // gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }} 
-          // minH="365px"
+        <PieChart
+          selectedJournal={selectedJournal}
+          setSelectedJournal={setSelectedJournal}
+          journalsData={data}
         />
-        
+
       </SimpleGrid>
       <SimpleGrid
         columns={{ base: 1, md: 2, xl: 2 }} gap='20px' mb='20px'
       >
-       
+
         {data &&
-          <ColumnsTable 
+          <ColumnsTable
             journalsData={[...data.journals]}
-            // gridArea={{ base: "3 / 1 / 4 / 2", lg: "1 / 3 / 2 / 4" }}
-            // minH="365px"
           />
         }
-         <Journals
-          // gridArea={{ base: "1 / 1 / 2 / 4", lg: "1 / 1 / 2 / 4" }}
-          // minH="365px"
-          // pe="20px"
+        <Journals
         />
       </SimpleGrid>
     </Box>

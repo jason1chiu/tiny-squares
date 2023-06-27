@@ -15,7 +15,7 @@ export default function Overview({ journal_id }) {
   });
 
   return (
-    <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
+    <Box pt={{ base: "10px", md: "10px", xl: "10px" }}>
       <Grid>
         <Legend
           journalId={journal_id}
