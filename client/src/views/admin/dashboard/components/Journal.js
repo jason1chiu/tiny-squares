@@ -1,3 +1,51 @@
+// import {
+//   Box,
+//   Flex,
+//   Icon,
+//   Image,
+//   Link,
+//   Text,
+//   useColorModeValue,
+// } from "@chakra-ui/react";
+
+// import Card from "components/card/card.js";
+// import React from "react";
+
+// export default function Journal(props) {
+//   const { title, ranking, link, image, ...rest } = props;
+
+//   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
+//   const textColorSecondary = "gray.400";
+//   const brandColor = useColorModeValue("brand.500", "white");
+//   const bg = useColorModeValue("white", "navy.700");
+
+//   return (
+//     <Card bg={bg} {...rest} p="14px">
+//       <Flex align="center" direction={{ base: "column", md: "row" }}>
+//         <Image h="80px" w="80px" src={image} borderRadius="8px" me="20px" objectFit='cover' />
+//         <Box mt={{ base: "10px", md: "0" }}>
+//           <Text
+//             color={textColorPrimary}
+//             fontWeight="500"
+//             fontSize="md"
+//             mb="4px"
+//           >
+//             {title}
+//           </Text>
+//           <Text
+//             fontWeight="500"
+//             color={textColorSecondary}
+//             fontSize="sm"
+//             me="4px"
+//           >
+//             Journal #{ranking}
+//           </Text>
+//         </Box>
+//       </Flex>
+//     </Card>
+//   );
+// }
+
 import {
   Box,
   Flex,
@@ -6,13 +54,19 @@ import {
   Link,
   Text,
   useColorModeValue,
+  useDisclosure
 } from "@chakra-ui/react";
+import { motion } from 'framer-motion'; // <-- import here
+import PreviewModal from "views/admin/journals/components/PreviewModal";
 
 import Card from "components/card/card.js";
 import React from "react";
 
+const MotionBox = motion(Box); // <-- define here
+
 export default function Journal(props) {
-  const { title, ranking, link, image, ...rest } = props;
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { title, ranking, link, image, journal, ...rest } = props;
 
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "gray.400";
@@ -20,28 +74,40 @@ export default function Journal(props) {
   const bg = useColorModeValue("white", "navy.700");
 
   return (
-    <Card bg={bg} {...rest} p="14px">
-      <Flex align="center" direction={{ base: "column", md: "row" }}>
-        <Image h="80px" w="80px" src={image} borderRadius="8px" me="20px" objectFit='cover' />
-        <Box mt={{ base: "10px", md: "0" }}>
-          <Text
-            color={textColorPrimary}
-            fontWeight="500"
-            fontSize="md"
-            mb="4px"
-          >
-            {title}
-          </Text>
-          <Text
-            fontWeight="500"
-            color={textColorSecondary}
-            fontSize="sm"
-            me="4px"
-          >
-            Journal #{ranking}
-          </Text>
-        </Box>
-      </Flex>
-    </Card>
+    <>
+      <MotionBox
+        bg={bg}
+        {...rest}
+        p="14px"
+        borderRadius="7px"
+        onClick={onOpen}
+        cursor="pointer" 
+        whileHover={{ scale: 1.1 }} 
+        transition={{ type: 'spring', stiffness: 500 }} 
+      >
+        <Flex align="center" direction={{ base: "column", md: "row" }}>
+          <Image h="80px" w="80px" src={image} borderRadius="8px" me="20px" objectFit='cover' />
+          <Box mt={{ base: "10px", md: "0" }}>
+            <Text
+              color={textColorPrimary}
+              fontWeight="500"
+              fontSize="md"
+              mb="4px"
+            >
+              {title}
+            </Text>
+            <Text
+              fontWeight="500"
+              color={textColorSecondary}
+              fontSize="sm"
+              me="4px"
+            >
+              Journal #{ranking}
+            </Text>
+          </Box>
+        </Flex>
+      </MotionBox>
+      <PreviewModal isOpen={isOpen} onClose={onClose} journal={journal} />
+    </>
   );
 }
