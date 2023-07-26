@@ -55,6 +55,7 @@ export const GET_JOURNALS = gql`
       _id
       name
       category
+
       entries {
         _id
         note
