@@ -55,6 +55,7 @@ export const GET_JOURNALS = gql`
       _id
       name
       category
+      updatedAt  
       entries {
         _id
         note
@@ -68,6 +69,7 @@ export const GET_JOURNALS = gql`
     }
   }
 `;
+
 
 export const GET_STATS = gql`
   query getStats($userId: ID!) {

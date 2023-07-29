@@ -11,8 +11,6 @@ const resolvers = {
           .populate("journals")
           .populate("entries");
 
-        console.log("TEST", { userData });
-
         return userData;
       }
 
@@ -24,14 +22,17 @@ const resolvers = {
         .populate("journals")
         .populate("entries");
 
+      console.log("userData.journals:", userData.journals);
+
       return userData.journals;
     },
+
     journal: async (parent, { id }, context) => {
       let results = await Journal.findById(id)
         .populate("entries")
         .populate("legends")
-        .exec()
-      console.log({ results: results.entries[0] });
+        .exec();
+
       return results;
     },
     legends: async (parent, { id }, context) => {
@@ -104,17 +105,24 @@ const resolvers = {
 
     addJournal: async (parent, { name, category }, context) => {
       if (context.user) {
-        const journal = await Journal.create({ name, category });
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { journals: journal._id } },
-          { new: true }
-        ).populate("journals");
+        try {
+          const journal = await Journal.create({ name, category });
+          const updatedUser = await User.findOneAndUpdate(
+            { _id: context.user._id },
+            { $addToSet: { journals: journal._id } },
+            { new: true }
+          ).populate("journals");
 
-        return updatedUser;
+          console.log("updatedUser", updatedUser);
+
+          return updatedUser;
+        } catch (error) {
+          // Log any errors
+          console.log("Error in addJournal:", error);
+        }
+      } else {
+        throw new AuthenticationError("You need to be logged in!");
       }
-
-      throw new AuthenticationError("You need to be logged in!");
     },
 
     removeJournal: async (parent, { journalId }, context) => {
@@ -127,15 +135,11 @@ const resolvers = {
 
         let journal = await Journal.findById(journalId);
         await Promise.all(
-          journal.legends.map((legend) =>
-            Legend.findByIdAndDelete(legend._id)
-          )
-        )
+          journal.legends.map((legend) => Legend.findByIdAndDelete(legend._id))
+        );
         await Promise.all(
-          journal.entries.map((entry) =>
-            Entry.findByIdAndDelete(entry._id)
-          )
-        )
+          journal.entries.map((entry) => Entry.findByIdAndDelete(entry._id))
+        );
         await Journal.findByIdAndDelete(journalId);
         return "Journal Deleted";
       }
@@ -182,20 +186,20 @@ const resolvers = {
     },
 
     deleteLegend: async (parent, { journalId, legendId }, context) => {
-
       await Legend.findByIdAndDelete(legendId);
-      let docs = await Entry.find({ legend: { _id: legendId } })
+      let docs = await Entry.find({ legend: { _id: legendId } });
       await Promise.all(
         docs.map((entry) =>
-          Promise.all([Journal.findOneAndUpdate(
-            { _id: journalId },
-            { $pull: { entries: entry._id } },
-            { new: true }
-          ),
-          Entry.findByIdAndDelete(entry._id)
+          Promise.all([
+            Journal.findOneAndUpdate(
+              { _id: journalId },
+              { $pull: { entries: entry._id } },
+              { new: true }
+            ),
+            Entry.findByIdAndDelete(entry._id),
           ])
         )
-      )
+      );
       const updatedJournal = await Journal.findOneAndUpdate(
         { _id: journalId },
         { $pull: { legends: legendId } },
@@ -219,16 +223,6 @@ const resolvers = {
       )
         .populate("legends")
         .populate("entries");
-
-      console.log({ updatedJournal });
-
-      const dateTest = updatedJournal?.entries?.[0];
-
-      console.log({
-        dateTest,
-        testTwo: new Date(1701406800000),
-        testThree: new Date("1691121600000"),
-      });
 
       return updatedJournal;
     },
