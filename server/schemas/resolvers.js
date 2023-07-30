@@ -22,8 +22,6 @@ const resolvers = {
         .populate("journals")
         .populate("entries");
 
-      console.log("userData.journals:", userData.journals);
-
       return userData.journals;
     },
 
