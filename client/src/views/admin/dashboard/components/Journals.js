@@ -27,7 +27,7 @@ export default function Journals(props) {
   console.log("journals:", data?.journals);
 
   const outdatedJournals = data?.journals.filter((journal) => {
-    const updatedAt = new Date(journal.updatedAt);
+    const updatedAt = new Date(Number(journal.updatedAt)); // Convert timestamp string to number
     return (
       updatedAt.getTime() < today.getTime() ||
       (updatedAt.getDate() === today.getDate() &&
@@ -35,6 +35,7 @@ export default function Journals(props) {
         updatedAt.getFullYear() === today.getFullYear())
     );
   });
+  
 
   // Log the outdatedJournals
   console.log("outdatedJournals:", outdatedJournals);
