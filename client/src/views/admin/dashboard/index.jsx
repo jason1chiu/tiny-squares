@@ -25,9 +25,7 @@ export default function Overview() {
 
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
-
-      <SimpleGrid
-        columns={{ base: 1, md: 2, xl: 2 }} gap='20px' mb='20px'>
+      <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px" mb="20px">
         {data?.journals && (
           <Profile
             banner={profile}
@@ -43,19 +41,10 @@ export default function Overview() {
           setSelectedJournal={setSelectedJournal}
           journalsData={data}
         />
-
       </SimpleGrid>
-      <SimpleGrid
-        columns={{ base: 1, md: 2, xl: 2 }} gap='20px' mb='20px'
-      >
-
-        {data &&
-          <ColumnsTable
-            journalsData={[...data.journals]}
-          />
-        }
-        <Journals
-        />
+      <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px" mb="20px">
+        {data && <ColumnsTable journalsData={[...data.journals]} />}
+        <Journals />
       </SimpleGrid>
     </Box>
   );
