@@ -84,7 +84,6 @@ const resolvers = {
     },
 
     updateUser: async (parent, { username }, context) => {
-      // console.log(context);
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
@@ -101,10 +100,10 @@ const resolvers = {
       return { email };
     },
 
-    addJournal: async (parent, { name, category }, context) => {
+    addJournal: async (parent, { name, category, image }, context) => {
       if (context.user) {
         try {
-          const journal = await Journal.create({ name, category });
+          const journal = await Journal.create({ name, category, image });
           const updatedUser = await User.findOneAndUpdate(
             { _id: context.user._id },
             { $addToSet: { journals: journal._id } },

@@ -45,12 +45,13 @@ export const LOGOUT_USER = gql`
 `;
 
 export const ADD_JOURNAL = gql`
-  mutation addJournal($name: String!, $category: String!) {
-    addJournal(name: $name, category: $category) {
+  mutation addJournal($name: String!, $category: String!, $image: String!) {
+    addJournal(name: $name, category: $category, image: $image) {
       journals {
         _id
         name
         category
+        image
       }
     }
   }
