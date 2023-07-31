@@ -1,14 +1,14 @@
 // React imports from "react";
-import { MdShoppingCart, MdEdit } from "react-icons/md";
+import { MdShoppingCart, MdEdit, MdHelpOutline } from "react-icons/md";
 import { FaEthereum } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import EditProfileModal from "components/modal/EditProfileModal";
 import { CartContext } from 'components/shared/store/js/CartContext'
-import { useContext } from 'react'
+import { useState, useContext } from "react";
 import { BsShop } from "react-icons/bs";
 import { CartModal } from 'components/shared/store/components/CartModal'
 import { useCookies } from "react-cookie";
-
+// import Tutorial from "components/navbar/tutorial";
 
 import { motion } from 'framer-motion';
 import BuyOptionsModal from 'components/shared/store/components/BuyOptionsModal'
@@ -35,6 +35,7 @@ export default function HeaderLinks(props) {
   const [logout] = useMutation(LOGOUT_USER);
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  
   const MotionMenuList = motion(MenuList);
   const MotionMenuItem = motion(MenuItem);
   const menuVariants = {
@@ -84,7 +85,7 @@ export default function HeaderLinks(props) {
   const totalQuantity = cart.getTotalQuantity();
   const { isOpen: buyOptionsModalIsOpen, onOpen: openBuyOptionsModal, onClose: closeBuyOptionsModal } = useDisclosure();
   const { isOpen: cartModalIsOpen, onOpen: openCartModal, onClose: closeCartModal } = useDisclosure();
-
+  // const [runTutorial, setRunTutorial] = useState(false);
   return (
     user && user.user &&
     <Flex
@@ -167,7 +168,7 @@ export default function HeaderLinks(props) {
             </Box>
           )}
           color={navbarIcon}
-          _hover={{ color: "secondaryGray.900" }} // replace "yourColor" with the color you want when hovering
+          _hover={{ color: "secondaryGray.900" }} 
           onClick={openCartModal}
         />
         <CartModal isOpen={cartModalIsOpen} onClose={closeCartModal} />
@@ -186,7 +187,15 @@ export default function HeaderLinks(props) {
         />
         <BuyOptionsModal isOpen={buyOptionsModalIsOpen} onClose={closeBuyOptionsModal} />
       </Menu>
-
+      {/* <Tutorial run={runTutorial} setRun={setRunTutorial} />
+    <Menu>
+        <IconButton
+          icon={<MdHelpOutline size="24" />}
+          color={navbarIcon}
+          _hover={{ color: "secondaryGray.900" }}
+          onClick={() => setRunTutorial(true)} // Start the tutorial when the icon is clicked
+        />
+    </Menu> */}
       <Menu>
         <MenuButton p="0px">
 

@@ -34,6 +34,7 @@ const Cell = ({ journalEntriesMap, day, month, onSave, journalId }) => {
   return (
     <>
       <MotionBox
+      id="cell-step"
         h="100%"
         w="100%"
         borderWidth="1px"
