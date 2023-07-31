@@ -1,16 +1,13 @@
-import { Text, useColorModeValue, Link, Tooltip } from "@chakra-ui/react"; // <-- add Link and Tooltip imports
-import { useHistory } from "react-router-dom"; // <-- add useHistory import
+import { Text, useColorModeValue, Link, Tooltip } from "@chakra-ui/react";
+import { useHistory } from "react-router-dom";
 import Journal from "./Journal";
-import Journal1 from "assets/img/jp.png";
 import { GET_JOURNALS } from "utils/queries";
 import { useQuery } from "@apollo/client";
 import Card from "components/card/card.js";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function Journals(props) {
-  const { data } = useQuery(GET_JOURNALS);
-
-  console.log("data.journals:", data?.journals);
+  const { loading, data, refetch } = useQuery(GET_JOURNALS);
 
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "gray.400";
@@ -23,9 +20,6 @@ export default function Journals(props) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  // Log the journals
-  console.log("journals:", data?.journals);
-
   const outdatedJournals = data?.journals.filter((journal) => {
     const updatedAt = new Date(Number(journal.updatedAt)); // Convert timestamp string to number
     return (
@@ -35,14 +29,17 @@ export default function Journals(props) {
         updatedAt.getFullYear() === today.getFullYear())
     );
   });
-  
-
-  // Log the outdatedJournals
-  console.log("outdatedJournals:", outdatedJournals);
 
   const hasJournals = outdatedJournals?.length > 0;
-
   const history = useHistory();
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Card mb={{ base: "0px", lg: "20px" }} align="center">
@@ -73,7 +70,7 @@ export default function Journals(props) {
           key={journal._id}
           boxShadow={cardShadow}
           mb="20px"
-          image={Journal1}
+          image={journal.image}
           ranking={index + 1}
           title={journal.name}
           journal={journal}

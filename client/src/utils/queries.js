@@ -10,6 +10,7 @@ export const GET_ME = gql`
         _id
         name
         category
+        image
         entries {
           _id
           note
@@ -30,6 +31,8 @@ export const GET_JOURNAL = gql`
     journal(id: $id) {
       _id
       name
+      category
+      image
       entries {
         _id
         note
@@ -55,6 +58,7 @@ export const GET_JOURNALS = gql`
       _id
       name
       category
+      image
       updatedAt  
       entries {
         _id

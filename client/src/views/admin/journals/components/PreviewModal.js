@@ -15,12 +15,7 @@ import Overview from "components/shared/calendar/index";
 import { MdHelpOutline } from "react-icons/md";
 import Joyride, { CallBackProps, STATUS } from 'react-joyride';
 
-const Overlay = () => (
-  <ModalOverlay
-    bg="blackAlpha.700"
-
-  />
-);
+const Overlay = () => <ModalOverlay bg="blackAlpha.700" />;
 
 export default function JournalModal({ isOpen, onClose, journal }) {
   const titleColor = useColorModeValue("navy.700", "white");
@@ -76,7 +71,7 @@ export default function JournalModal({ isOpen, onClose, journal }) {
     return offsetTop;
   }
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered size="xl" scrollBehavior="inside">
+    <Modal  isOpen={isOpen} onClose={onClose} isCentered size="xl" scrollBehavior="inside">
       <Joyride
         callback={handleJoyrideCallback}
         continuous
@@ -92,9 +87,7 @@ export default function JournalModal({ isOpen, onClose, journal }) {
       />
       <Overlay />
       <ModalContent>
-
-        <ModalHeader color={titleColor} borderBottom="1px" borderBottomColor="secondaryGray.200">{journal.name}
-          <IconButton
+        <ModalHeader color={titleColor} borderBottom="1px" borderBottomColor="secondaryGray.200">{journal.name}{" "} <IconButton
             icon={<MdHelpOutline size="24" />}
             color={navbarIcon}
             variant="ghost"
@@ -103,12 +96,10 @@ export default function JournalModal({ isOpen, onClose, journal }) {
               setRunTutorial(true);
               document.body.style.overflow = 'hidden'; // Prevent scrolling on the body
             }}
-          /></ModalHeader>
+          /> </ModalHeader>
         <ModalCloseButton />
         <ModalBody ref={modalBodyRef}>
-
-          <Overview journal_id={journal._id} />
-
+          <Overview journal_id={journal._id}/>
         </ModalBody>
 
         <ModalFooter borderTop="1px" borderTopColor="secondaryGray.200">
