@@ -12,6 +12,7 @@ const typeDefs = gql`
     _id: ID
     name: String
     category: String
+    image: String
     entries: [Entry]
     legends: [Legend]
     createdAt: String
@@ -46,6 +47,7 @@ const typeDefs = gql`
   input JournalInput {
     name: String
     category: String
+    image: String
   }
 
   input EntryInput {
@@ -68,7 +70,7 @@ const typeDefs = gql`
     updateLegend(journalId: ID!, label: String!, color: String!, legendId: ID!): Legend
     deleteLegend(journalId: ID!, legendId: ID!): Journal
     purchaseProduct: PayLoad
-    addJournal(name: String!, category: String!): User
+    addJournal(name: String!, category: String!, image: String!): User
     removeJournal(journalId: ID!): String!
     addEntry(journalId: ID!, input: EntryInput): Journal
     removeEntry(journalId: ID!, entryId: ID!): Journal

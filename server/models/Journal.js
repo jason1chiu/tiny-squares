@@ -16,6 +16,9 @@ const journalSchema = new Schema(
     },
     legends: [{ type: Schema.Types.ObjectId, ref: "Legend" }],
     entries: [{ type: Schema.Types.ObjectId, ref: "Entry" }],
+    image: {
+      type: String,
+    },
   },
   {
     timestamps: true,

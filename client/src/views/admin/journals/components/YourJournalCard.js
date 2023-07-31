@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Preview from "components/card/preview";
 
 import { useDisclosure } from "@chakra-ui/react";
@@ -7,16 +7,17 @@ import { useAuth } from "contexts/auth.context";
 
 import { useQuery, useMutation } from "@apollo/client";
 import {REMOVE_JOURNAL} from "utils/mutations"
-import { GET_JOURNALS, GET_ME } from "utils/queries";
+import { GET_JOURNALS } from "utils/queries";
 
 export default function YourJournalCard({ journal }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   let { user } = useAuth(); 
 
-  const { loading, error, data, refetch } = useQuery(GET_JOURNALS);
+  const { data, refetch } = useQuery(GET_JOURNALS);
+  
+  console.log(journal.image);
 
   const [removeJournal] = useMutation(REMOVE_JOURNAL);
-
 
   const handleDeleteJournal = async (journalId) => {
     try {

@@ -18,7 +18,7 @@ import {
   Grid,
   useDisclosure,
   IconButton,
-  Collapse
+  Collapse,
 } from "@chakra-ui/react";
 import { FiUpload } from "react-icons/fi";
 import { useQuery } from "@apollo/client";
@@ -29,8 +29,9 @@ import { useAuth } from "contexts/auth.context";
 
 export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
   const [journalName, setJournalName] = useState("");
-  const [journalImage, setJournalImage] = useState(1); // Add this
-  const { isOpen: isJournalImageOpen, onToggle: onJournalImageToggle } = useDisclosure(); // And this
+  const [journalImage, setJournalImage] = useState(1);
+  const { isOpen: isJournalImageOpen, onToggle: onJournalImageToggle } =
+    useDisclosure(); // And this
 
   const bColor = useColorModeValue("secondaryGray.600", "white");
   const tColor = useColorModeValue("brand.800", "white");
@@ -57,9 +58,17 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
 
   const handleSubmit = () => {
     if (data?.journals?.length >= 3) {
-      onSubmit({ name: journalName, category: journalCategory, image: `/img/journal/${journalImage}.webp` }); // Change this line
+      onSubmit({
+        name: journalName,
+        category: journalCategory,
+        image: `/img/journal/${journalImage}.webp`,
+      });
     } else {
-      onSubmit({ name: journalName, category: journalCategory, image: `/img/journal/${journalImage}.webp` }); // And this line
+      onSubmit({
+        name: journalName,
+        category: journalCategory,
+        image: `/img/journal/${journalImage}.webp`,
+      });
       toast({
         title: "Journal created.",
         description: "Your journal was successfully created!",
@@ -83,16 +92,20 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
         <ModalHeader color={tColor}>Create a new journal</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <FormLabel mt={3} color={pColor}>Journal Name</FormLabel>
+          <FormLabel mt={3} color={pColor}>
+            Journal Name
+          </FormLabel>
           <Input
             variant="auth"
             value={journalName}
             onChange={handleInputChange}
             placeholder="Journal name"
           />
-          <FormLabel mt={3} color={pColor}>Select Avatar</FormLabel>
+          <FormLabel mt={3} color={pColor}>
+            Select Avatar
+          </FormLabel>
           <Select
-            color = {bColor}
+            color={bColor}
             variant="auth"
             value={journalCategory}
             onChange={handleSelectChange}
@@ -104,9 +117,21 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
               </option>
             ))}
           </Select>
-          <FormLabel mt={3} color={pColor}>Select Journal Image</FormLabel>  
+          <FormLabel mt={3} color={pColor}>
+            Select Journal Image
+          </FormLabel>
           <Box>
-            <IconButton aria-label="Select journal image" icon={<FiUpload />} onClick={onJournalImageToggle} />
+            <Image
+              src={journalImage ? `/img/journal/${journalImage}.webp` : ""}
+              borderRadius="full"
+              boxSize="100px"
+              objectFit="cover"
+            />
+            <IconButton
+              aria-label="Select journal image"
+              icon={<FiUpload />}
+              onClick={onJournalImageToggle}
+            />
             <Collapse in={isJournalImageOpen}>
               <Grid templateColumns="repeat(3, 1fr)" gap={3}>
                 {[...Array(20)].map((_, i) => (
@@ -114,14 +139,20 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
                     key={i}
                     onClick={() => handleJournalImageChange(i + 1)}
                     cursor="pointer"
-                    border={journalImage === (i + 1) ? '2px solid purple.500' : ''}
+                    border={
+                      journalImage === i + 1 ? "2px solid purple.500" : ""
+                    }
                     transition="transform 0.3s"
                     _hover={{
-                      transform: 'scale(1.2)',
+                      transform: "scale(1.2)",
                     }}
                   >
-                    <Image src={`/img/journal/${i + 1}.webp`} borderRadius='full'  boxSize='100px'
-    objectFit='cover'/>
+                    <Image
+                      src={`/img/journal/${i + 1}.webp`}
+                      borderRadius="full"
+                      boxSize="100px"
+                      objectFit="cover"
+                    />
                   </Box>
                 ))}
               </Grid>
