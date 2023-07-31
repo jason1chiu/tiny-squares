@@ -45,6 +45,7 @@ export default function NewCard() {
         boxShadow: "lg",
       }}
       onClick={openModal} // Open the modal when the card is clicked
+      id="new-card-step" 
     >
       <Box
         h="200px"

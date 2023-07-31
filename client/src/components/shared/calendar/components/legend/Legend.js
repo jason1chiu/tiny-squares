@@ -112,6 +112,7 @@ const Legend = ({ journalId, refetchEntries }) => {
       </Heading> */}
       <HStack spacing={1}>
         <MotionBox
+         id="color-step"
           alignItems="center"
           justifyContent="center"
           boxSize={7}
@@ -137,7 +138,7 @@ const Legend = ({ journalId, refetchEntries }) => {
             h="100%"
             w="100%"
             opacity={0}
-
+           
             borderRadius="md"
             cursor="pointer"
           />
@@ -146,7 +147,7 @@ const Legend = ({ journalId, refetchEntries }) => {
           variant="auth"
           placeholder="e.g. Happy"
           value={label}
-
+          id="label-step"
           onChange={(e) => setLabel(e.target.value)}
         />
         {!selectedLegend ? (
@@ -154,7 +155,7 @@ const Legend = ({ journalId, refetchEntries }) => {
             icon={<AddIcon />}
             onClick={handleAddLegend}
             color="gray.700"
-
+          id="add-step"
           />
         ) : (
           <>
@@ -180,7 +181,7 @@ const Legend = ({ journalId, refetchEntries }) => {
           animate={{ rotate: isCollapsed ? 0 : 180 }}
           transition={{ duration: 0.5 }}
           color="gray.700"
-
+          id="legend-step"
         />
       </HStack>
 
