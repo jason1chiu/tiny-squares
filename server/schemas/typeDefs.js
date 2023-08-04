@@ -5,6 +5,7 @@ const typeDefs = gql`
     _id: ID
     username: String
     email: String
+    avatar: String
     journals: [Journal]
   }
 
@@ -64,7 +65,7 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    updateUser(username: String!): User
+    updateUser(username: String!, avatar: String!): User
     logout(email: String!): User
     createLegend(journalId: ID!, label: String!, color: String!): [Legend]
     updateLegend(journalId: ID!, label: String!, color: String!, legendId: ID!): Legend

@@ -30,8 +30,9 @@ function getRandomImage() {
 const MotionBox = motion(Box);
 
 export default function Profile(props) {
-  const { banner, avatar, name, entries, journals } = props;
+  const { avatar, name, entries, journals } = props;
   let { user, setUser } = useAuth();
+
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "gray.400";
   const borderColor = useColorModeValue(
@@ -90,7 +91,7 @@ export default function Profile(props) {
             w="87px"
             border="4px solid"
             borderColor={borderColor}
-            name={user && user.user ? user.user.username : "Default Name"}
+            src={user && user.user ? avatar : "Default Name"}
           />
           <Box
             position="absolute"

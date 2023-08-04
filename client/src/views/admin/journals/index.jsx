@@ -10,7 +10,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { MdHelpOutline } from "react-icons/md";
-import Joyride, { CallBackProps, STATUS } from 'react-joyride';
+import Joyride, { CallBackProps, STATUS } from "react-joyride";
 
 import Banner from "views/admin/journals/components/Banner";
 import YourJournalCard from "views/admin/journals/components/YourJournalCard";
@@ -30,12 +30,13 @@ export default function JournalPage() {
 
   const tutorialSteps = [
     {
-      target: '#new-card-step',
-      content: 'Create a new journal by clicking the + button',
+      target: "#new-card-step",
+      content: "Create a new journal by clicking the + button",
     },
     {
-      target: '#journal-card-step',
-      content: 'Your Journals will appear here. Click the view button to update your journal.',
+      target: "#journal-card-step",
+      content:
+        "Your Journals will appear here. Click the view button to update your journal.",
     },
   ];
 
@@ -86,12 +87,12 @@ export default function JournalPage() {
               >
                 Create New
                 <IconButton
-          icon={<MdHelpOutline size="24" />}
-          color={navbarIcon}
-         variant="ghost"
-          _hover={{ color: "secondaryGray.900" }}
-          onClick={() => setRunTutorial(true)} // Start the tutorial when the icon is clicked
-        />
+                  icon={<MdHelpOutline size="24" />}
+                  color={navbarIcon}
+                  variant="ghost"
+                  _hover={{ color: "secondaryGray.900" }}
+                  onClick={() => setRunTutorial(true)} // Start the tutorial when the icon is clicked
+                />
               </Text>
               <Flex
                 align="center"
@@ -113,13 +114,22 @@ export default function JournalPage() {
               direction={{ base: "column", md: "row" }}
               align={{ base: "start", md: "center" }}
             >
-              <Text color={titleColor} fontSize="2xl" ms="24px" fontWeight="700">
+              <Text
+                color={titleColor}
+                fontSize="2xl"
+                ms="24px"
+                fontWeight="700"
+              >
                 Your Journals
               </Text>
             </Flex>
 
             {data?.journals && data.journals.length > 0 ? (
-              <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px" id="journal-card-step">
+              <SimpleGrid
+                columns={{ base: 1, md: 3 }}
+                gap="20px"
+                id="journal-card-step"
+              >
                 {data.journals.map((journal) => (
                   <YourJournalCard key={journal._id} journal={journal} />
                 ))}

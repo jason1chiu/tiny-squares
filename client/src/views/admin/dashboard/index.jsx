@@ -7,28 +7,27 @@ import ColumnsTable from "views/admin/dashboard/components/ColumnsTable";
 import profile from "assets/img/bannercover.png";
 import avatar from "assets/img/bannercover.png";
 import { useAuth } from "contexts/auth.context";
-import { GET_JOURNALS } from "utils/queries";
+import { GET_JOURNALS, GET_ME } from "utils/queries";
 import { useQuery } from "@apollo/client";
-import Joyride, { CallBackProps, STATUS } from 'react-joyride';
+import Joyride, { CallBackProps, STATUS } from "react-joyride";
 import { tutorialStyles } from "theme/components/tutorial";
-
 
 export default function Overview() {
   let { user } = useAuth();
   const { loading, data, refetch } = useQuery(GET_JOURNALS);
- 
-  console.log(data)
-  
+  const { loading: userLoading, data: userData } = useQuery(GET_ME);
+
   const [runTutorial, setRunTutorial] = useState(false);
 
   const tutorialSteps = [
     {
-      target: '#new-card-step',
-      content: 'Create a new journal by clicking the + button',
+      target: "#new-card-step",
+      content: "Create a new journal by clicking the + button",
     },
     {
-      target: '#journal-card-step',
-      content: 'Your Journals will appear here. Click the view button to update your journal.',
+      target: "#journal-card-step",
+      content:
+        "Your Journals will appear here. Click the view button to update your journal.",
     },
   ];
 
@@ -55,8 +54,11 @@ export default function Overview() {
   if (loading) {
     return <div>Loading...</div>;
   }
-
   
+  if (userLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       <Joyride
@@ -70,7 +72,7 @@ export default function Overview() {
         {data?.journals && (
           <Profile
             banner={profile}
-            avatar={avatar}
+            avatar={userData.me.avatar}
             name={user.user.username}
             entries={entries}
             journals={data?.journals?.length}
