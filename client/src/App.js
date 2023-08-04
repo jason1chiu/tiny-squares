@@ -13,7 +13,6 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { useAuth } from "contexts/auth.context";
 import { useCookies } from "react-cookie";
 
-
 // Create an Apollo Client and specify the connection to your GraphQL API
 
 export default function App() {
@@ -54,7 +53,6 @@ export default function App() {
                   <>
                     <Route path={`/admin`}>
                       <AdminLayout />
-                     
                     </Route>
                     {/* <Route path={`/success`}>
                   <SuccessPage />
