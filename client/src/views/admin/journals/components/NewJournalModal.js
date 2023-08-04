@@ -102,7 +102,7 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
             placeholder="Journal name"
           />
           <FormLabel mt={3} color={pColor}>
-            Select Avatar
+            Select Category
           </FormLabel>
           <Select
             color={bColor}

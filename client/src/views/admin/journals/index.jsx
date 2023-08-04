@@ -18,6 +18,7 @@ import P2 from "assets/img/jp.png";
 import { useQuery } from "@apollo/client";
 import { GET_JOURNALS } from "utils/queries";
 import NewCard from "views/admin/journals/components/NewCard";
+import { tutorialStyles } from "theme/components/tutorial";
 
 export default function JournalPage() {
   const textColor = useColorModeValue("secondaryGray.500", "white");
@@ -54,6 +55,7 @@ export default function JournalPage() {
         continuous
         run={runTutorial}
         steps={tutorialSteps}
+        styles={tutorialStyles}
       />
       {/* Main Fields */}
       <Grid
