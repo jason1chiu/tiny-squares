@@ -158,23 +158,23 @@ export default function JournalModal({ isOpen, onClose, journal }) {
   const tutorialSteps = [
     {
       target: '#label-step',
-      content: 'Create a new journal by clicking the + button',
+      content: 'Add a label here',
     },
     {
       target: '#color-step',
-      content: 'Your Journals will appear here. Click the view button to update your journal.',
+      content: 'Click the color button to pick the color that best represents your label',
     },
     {
       target: '#add-step',
-      content: 'Your Journals will appear here. Click the view button to update your journal.',
+      content: 'Click the + button to add label to legend',
     },
     {
       target: '#legend-step',
-      content: 'Your Journals will appear here. Click the view button to update your journal.',
+      content: 'Click the chevron to expand the legend',
     },
     {
       target: '#cell-step',
-      content: 'Your Journals will appear here. Click the view button to update your journal.',
+      content: 'Now you can update your journal by clicking on a pixel',
       placement: 'center',
     },
   ];
