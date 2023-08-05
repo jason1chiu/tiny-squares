@@ -52,21 +52,21 @@ export default function Journals(props) {
           mt="10px"
           mb="4px"
           _hover={{ color: "gray.500" }}
-        >
+          id="jlink-step">
           Journals
         </Link>
       </Tooltip>
       {hasJournals ? (
-        <Text color={textColorSecondary} fontSize="md" me="26px" mb="40px">
+        <Text color={textColorSecondary} fontSize="md" me="26px" mb="40px" >
           Update your journals daily
         </Text>
       ) : (
-        <Text color={textColorSecondary} fontSize="md" me="26px" mb="40px">
+        <Text color={textColorSecondary} fontSize="md" me="26px" mb="40px" id="update-step">
           No Journals to Update
         </Text>
       )}
       {outdatedJournals?.map((journal, index) => (
-        <Journal
+        <Journal id="update-step"
           key={journal._id}
           boxShadow={cardShadow}
           mb="20px"

@@ -74,7 +74,7 @@ export default function Conversion({ selectedJournal, setSelectedJournal, journa
   );
 
   return (
-    <Card Card mb={{ base: "0px", lg: "20px" }} align='center' >
+    <Card Card mb={{ base: "0px", lg: "20px" }} align='center' id="entries-step">
       <Flex
         px={{ base: "0px", "2xl": "10px" }}
         justifyContent='space-between'
