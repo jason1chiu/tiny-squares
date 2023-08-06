@@ -34,7 +34,7 @@ import {
 
 import PropTypes from "prop-types";
 
-// Apollow imports
+// Apollo imports
 import { useMutation } from "@apollo/client";
 
 // File imports
