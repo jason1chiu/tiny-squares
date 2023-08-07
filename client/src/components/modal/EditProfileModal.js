@@ -33,7 +33,7 @@ function EditProfileModal({ isOpen, onClose, currentUsername }) {
   const { isOpen: isCoverOpen, onToggle: onCoverToggle } = useDisclosure(); // Disclosure for cover
   const { editUser } = useAuth();
   const toast = useToast();
-  const [updateUser, { error }] = useMutation(UPDATE_USER);
+  const [updateUser] = useMutation(UPDATE_USER);
 
   const tColor = useColorModeValue("brand.800", "white");
   const pColor = useColorModeValue("brand.600", "white");
