@@ -22,6 +22,10 @@ const userSchema = new Schema(
       required: true,
     },
     journals: [{type: Schema.Types.ObjectId, ref: "Journal"}],
+    premium: {
+      type: Boolean,
+      default: false, 
+    },
   },
   {
     toJSON: {

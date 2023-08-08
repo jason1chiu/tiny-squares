@@ -48,6 +48,22 @@ const resolvers = {
   },
 
   Mutation: {
+
+    updateUserPremiumStatus: async (_, {  premium }, context) => {
+      if(context.user) {
+        const updatePremium = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $set: { premium } },
+          { new: true }
+        );
+
+        return updatePremium
+      } else {
+        throw new AuthenticationError("User not authenticated");
+      }
+    },
+
+    
     addUser: async (parent, { username, email, password }) => {
       let results = await User.create({ username, email, password })
         .then((user) => {

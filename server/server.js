@@ -10,6 +10,7 @@ const { ApolloServer } = require('apollo-server-express');
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
 
+
 const app = express();
 app.use(cors());
 const PORT = process.env.PORT || 3001;
@@ -32,9 +33,14 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
+
 app.post("/admin/store/checkout", async (req, res) => {
-  console.log(req.body.cart);
-  const items = req.body.cart;
+
+  console.log("Cart:", req.body.requestData.cart);
+  console.log("User ID:", req.body.requestData.userId);
+  const userId = req.body.requestData.userId
+  const items = req.body.requestData.cart;
+
   let lineItems = [];
   items.forEach((item) => {
     lineItems.push(
@@ -49,9 +55,9 @@ app.post("/admin/store/checkout", async (req, res) => {
     line_items: lineItems,
     mode: 'payment',
 
-    // success_url: "https://tinysquares.herokuapp.com/success",
+    // success_url: `https://tinysquares.herokuapp.com/success?userId=${userId}`,
     // cancel_url: "https://tinysquares.herokuapp.com/cancel"
-    success_url: "http://localhost:3000/success",
+    success_url: `http://localhost:3000/success?userId=${userId}`,
     cancel_url: "http://localhost:3000/cancel"
   });
 
@@ -59,6 +65,7 @@ app.post("/admin/store/checkout", async (req, res) => {
     url: session.url
   })
 })
+
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
