@@ -99,11 +99,11 @@ const resolvers = {
       return results;
     },
 
-    updateUser: async (parent, { username }, context) => {
+    updateUser: async (parent, { username, avatar }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $set: { username: username } },
+          { $set: { username: username, avatar: avatar } },
           { new: true }
         );
 

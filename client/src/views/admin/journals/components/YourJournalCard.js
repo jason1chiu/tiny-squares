@@ -6,16 +6,14 @@ import PreviewModal from "views/admin/journals/components/PreviewModal";
 import { useAuth } from "contexts/auth.context";
 
 import { useQuery, useMutation } from "@apollo/client";
-import {REMOVE_JOURNAL} from "utils/mutations"
+import { REMOVE_JOURNAL } from "utils/mutations";
 import { GET_JOURNALS } from "utils/queries";
 
 export default function YourJournalCard({ journal }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  let { user } = useAuth(); 
+  let { user } = useAuth();
 
-  const { data, refetch } = useQuery(GET_JOURNALS);
-  
-  console.log(journal.image);
+  const { refetch } = useQuery(GET_JOURNALS);
 
   const [removeJournal] = useMutation(REMOVE_JOURNAL);
 
@@ -25,12 +23,12 @@ export default function YourJournalCard({ journal }) {
         variables: { journalId },
       });
       console.log("Journal deleted:", data.removeJournal);
-      refetch(); 
+      refetch();
     } catch (error) {
       console.error("Error deleting journal:", error);
     }
-  }
-  
+  };
+
   return (
     <>
       <Preview

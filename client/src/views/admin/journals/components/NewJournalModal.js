@@ -22,9 +22,7 @@ import {
 } from "@chakra-ui/react";
 import { FiUpload } from "react-icons/fi";
 import { useQuery } from "@apollo/client";
-
 import { GET_JOURNALS } from "utils/queries";
-
 import { useAuth } from "contexts/auth.context";
 
 export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
@@ -102,7 +100,7 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
             placeholder="Journal name"
           />
           <FormLabel mt={3} color={pColor}>
-            Select Avatar
+            Select Category
           </FormLabel>
           <Select
             color={bColor}

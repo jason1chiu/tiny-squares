@@ -1,5 +1,6 @@
 import {
   Box,
+  Icon,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
@@ -11,6 +12,7 @@ import {
 import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import LinksAdminNav from "components/navbar/LinksAdminNav";
+import { MdHelpOutline } from "react-icons/md";
 
 export default function AdminNavbar(props) {
   const [scrolled, setScrolled] = useState(false);
@@ -133,6 +135,7 @@ export default function AdminNavbar(props) {
           >
             {brandText}
           </Link>
+          {brandText === "Dashboard" ? <Icon as="MdHelpOutline" />: ""}
         </Box>
         <Box ms="auto" w={{ sm: "100%", md: "unset" }}>
           <LinksAdminNav

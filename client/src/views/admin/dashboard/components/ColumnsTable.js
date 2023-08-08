@@ -5,6 +5,7 @@ import {
   Icon,
   Text,
   useColorModeValue,
+  IconButton
 } from "@chakra-ui/react";
 
 import Card from "components/card/card.js";
@@ -14,6 +15,9 @@ import { GET_JOURNAL } from "utils/queries";
 import { useLazyQuery } from "@apollo/client";
 import { barChartDataConsumption, barChartOptionsConsumption } from "variables/charts.js";
 import { MdBarChart } from "react-icons/md";
+import { MdHelpOutline } from "react-icons/md";
+import { tutorialStyles } from "theme/components/tutorial";
+import Joyride, { STATUS, LIFECYCLE } from 'react-joyride';
 
 export default function JournalBars({ gridArea, journalsData }) {
   // const { ...rest } = props;
@@ -57,11 +61,52 @@ export default function JournalBars({ gridArea, journalsData }) {
     { bg: "secondaryGray.300" },
     { bg: "whiteAlpha.100" }
   );
+  const navbarIcon = useColorModeValue("gray.400", "white");
 
+  const [runTutorial, setRunTutorial] = useState(false);
 
+    // Define the steps for the tutorial
+    const tutorialSteps = [
+      {
+        target: "#entries-step", // Add appropriate target elements
+        content: "Compiles your entries from individual journals and displays your data in a pie chart. Hover over the chart for more information.",
+      },
+      {
+        target: "#usage-step", // Add appropriate target elements
+        content: "Compiles data from all your journals and displays it in a bar chart.",
+      },
+      {
+        target: "#jlink-step", // Add appropriate target elements
+        content: "You can navigate to the journal page by clicking the link.",
+      },
+      {
+        target: "#update-step", // Add appropriate target elements
+        content: "Your journals that have not yet been updated will appear here. Clicking on them will allow you to update them.",
+      },
+    ];
+
+      // Callback function to handle Joyride status changes
+  const handleJoyrideCallback = (data) => {
+    const { status } = data;
+    const finishedStatuses = [STATUS.FINISHED, STATUS.SKIPPED];
+
+    if (finishedStatuses.includes(status)) {
+      setRunTutorial(false);
+      document.body.style.overflow = 'auto'; // Reset overflow when the tutorial ends
+    }
+  };
 
   return (
-    <Card align='center' direction='column' w='100%' gridArea={gridArea}>
+    <Card align='center' direction='column' w='100%' gridArea={gridArea} id="usage-step">
+      <Joyride
+  callback={handleJoyrideCallback}
+  continuous
+  run={runTutorial}
+  steps={tutorialSteps}
+  scrollToFirstStep={false}
+  scrollToSteps={false}
+  styles={tutorialStyles}
+/>
       <Flex align='center' w='100%' px='15px' py='10px'>
         <Text
           me='auto'
@@ -71,7 +116,16 @@ export default function JournalBars({ gridArea, journalsData }) {
           lineHeight='100%'>
           Journal Usage
         </Text>
-        
+        <IconButton
+        icon={<MdHelpOutline size="20" />}
+        color={navbarIcon} // Make sure navbarIcon is defined in your code
+        variant="ghost"
+        _hover={{ color: "secondaryGray.900" }}
+        onClick={() => {
+          setRunTutorial(true);
+          document.body.style.overflow = 'hidden';
+        }}
+      />
       </Flex>
 
       <Box h='240px' mt='auto'>

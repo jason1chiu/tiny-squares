@@ -21,6 +21,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    avatar: {
+      type: String,
+      default: "/img/avatar/1.webp",
+    },
     journals: [{type: Schema.Types.ObjectId, ref: "Journal"}],
     premium: {
       type: Boolean,

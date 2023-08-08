@@ -12,6 +12,7 @@ import {
   useColorModeValue,
   Collapse,
   IconButton,
+  Center,
 } from "@chakra-ui/react";
 import { GET_LEGENDS } from "utils/queries";
 import { CREATE_LEGEND, UPDATE_LEGEND, DELETE_LEGEND } from "utils/mutations";

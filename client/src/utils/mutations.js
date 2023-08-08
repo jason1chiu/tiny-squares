@@ -28,11 +28,11 @@ export const ADD_USER = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation updateUser($username: String!) {
-    updateUser(username: $username) {
+  mutation updateUser($username: String!, $avatar: String!) {
+    updateUser(username: $username, avatar: $avatar) {
       _id
       username
-      email
+      avatar
     }
   }
 `;

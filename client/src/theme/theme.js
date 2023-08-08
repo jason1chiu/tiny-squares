@@ -3,7 +3,6 @@ import { CardComponent } from "./additions/card";
 import { buttonStyles } from "./components/button";
 import { badgeStyles } from "./components/badge";
 import { inputStyles } from "./components/input";
-import { progressStyles } from "./components/progress";
 import { textareaStyles } from "./components/textarea";
 import { switchStyles } from "./components/switch";
 import { linkStyles } from "./components/link";
@@ -16,7 +15,6 @@ export default extendTheme(
   badgeStyles, // badge styles
   buttonStyles, // button styles
   linkStyles, // link styles
-  progressStyles, // progress styles
   inputStyles, // input styles
   textareaStyles, // textarea styles
   switchStyles, // switch styles
