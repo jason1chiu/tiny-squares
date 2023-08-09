@@ -21,14 +21,9 @@ export default function Journals(props) {
   today.setHours(0, 0, 0, 0);
 
   const outdatedJournals = data?.journals.filter((journal) => {
-    const updatedAt = new Date(Number(journal.updatedAt)); // Convert timestamp string to number
-    return (
-      updatedAt.getTime() < today.getTime() ||
-      (updatedAt.getDate() === today.getDate() &&
-        updatedAt.getMonth() === today.getMonth() &&
-        updatedAt.getFullYear() === today.getFullYear())
-    );
-  });
+    const updatedAt = new Date(Number(journal.updatedAt));
+    return updatedAt.getTime() < today.getTime();
+});
 
   const hasJournals = outdatedJournals?.length > 0;
   const history = useHistory();
@@ -72,6 +67,7 @@ export default function Journals(props) {
           mb="20px"
           image={journal.image}
           ranking={index + 1}
+          updatedAt={journal.updatedAt}
           title={journal.name}
           journal={journal}
         />
