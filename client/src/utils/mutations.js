@@ -41,8 +41,6 @@ export const UPDATE_USER_PREMIUM_STATUS = gql`
   mutation updateUserPremiumStatus($userId: ID!, $premium: Boolean!) {
     updateUserPremiumStatus(userId: $userId, premium: $premium) {
       _id
-      username
-      email
       premium
     }
   }
