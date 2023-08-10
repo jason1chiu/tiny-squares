@@ -1,24 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Center, useColorModeValue } from "@chakra-ui/react";
 import { MdAddCircle } from "react-icons/md";
 import Card from "components/card/card";
 import NewJournalModal from "views/admin/journals/components/NewJournalModal";
 import { useMutation } from "@apollo/client";
 import { ADD_JOURNAL } from "utils/mutations";
-import { GET_JOURNALS } from "utils/queries";
+import { GET_JOURNALS, GET_ME } from "utils/queries";
 
 import { useAuth } from "contexts/auth.context";
 import { useQuery } from "@apollo/client";
 
 export default function NewCard() {
   let [addJournal, { error }] = useMutation(ADD_JOURNAL);
+  const [journalLimitReached, setJournalLimitReached] = useState(false);
+
   let { user } = useAuth();
   const { data, refetch } = useQuery(GET_JOURNALS);
+  const { data: meData, refetch: meRefetch } = useQuery(GET_ME); // Query for user data
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [hover, setHover] = useState(false);
   const iconColor = useColorModeValue("secondaryGray.600", "secondaryGray.600");
   const iconHoverColor = useColorModeValue("brand.500", "white");
+
+    // Update journal limit state based on user's journal count
+    useEffect(() => {
+      if (meData && meData.me && meData.me.journals.length >= 3) {
+        setJournalLimitReached(true);
+      } else {
+        setJournalLimitReached(false);
+      }
+    }, [meData]);
 
   const openModal = () => {
     setModalOpen(true);
@@ -31,7 +43,8 @@ export default function NewCard() {
   const handleAddJournal = async (journal) => {
     try {
       await addJournal({ variables: journal });
-      refetch();
+      refetch(); // refetch journal data
+      meRefetch(); // refetch user data to prevent additional journals unless premium
       closeModal();
     } catch (error) {
       console.error("Error creating journal: ", error);
@@ -44,7 +57,16 @@ export default function NewCard() {
       _hover={{
         boxShadow: "lg",
       }}
-      onClick={openModal} // Open the modal when the card is clicked
+      onClick={() => {
+
+        // If user has 3 journals, but does not have premium status
+        if (journalLimitReached && !meData.me.premium) {
+          console.log("Purchase premium!")
+        } else {
+          openModal(); // Call the openModal function
+        }
+
+      }} 
       id="new-card-step" 
     >
       <Box
@@ -63,6 +85,7 @@ export default function NewCard() {
           <MdAddCircle size="150px" />
         </Center>
       </Box>
+      
       <NewJournalModal
         isOpen={isModalOpen}
         onClose={closeModal}
