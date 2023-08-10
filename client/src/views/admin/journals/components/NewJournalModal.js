@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -22,7 +22,7 @@ import {
 } from "@chakra-ui/react";
 import { FiUpload } from "react-icons/fi";
 import { useQuery } from "@apollo/client";
-import { GET_JOURNALS } from "utils/queries";
+import { GET_JOURNALS, GET_ME } from "utils/queries";
 import { useAuth } from "contexts/auth.context";
 
 export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
@@ -31,14 +31,25 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
   const { isOpen: isJournalImageOpen, onToggle: onJournalImageToggle } =
     useDisclosure(); // And this
 
+  const [journalLimitReached, setJournalLimitReached] = useState(false);
+
   const bColor = useColorModeValue("secondaryGray.600", "white");
   const tColor = useColorModeValue("brand.800", "white");
   const pColor = useColorModeValue("brand.600", "white");
   const { data } = useQuery(GET_JOURNALS);
+  const { data: meData, refetch: meRefetch } = useQuery(GET_ME); 
 
   const [journalCategory, setJournalCategory] = useState("");
   let { categories } = useAuth();
   const toast = useToast();
+
+  useEffect(() => {
+    if (meData && meData.me && meData.me.journals.length >= 3) {
+      setJournalLimitReached(true);
+    } else {
+      setJournalLimitReached(false);
+    }
+  }, [meData]);
 
   const handleInputChange = (event) => {
     setJournalName(event.target.value);
@@ -83,6 +94,28 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
     setJournalImage(1); // And this
   };
 
+  // If user does not have premium and max journals reached, modal informing them pops up
+  if (journalLimitReached && !meData.me.premium) {
+    return (
+    <Modal isOpen={isOpen} onClose={onClose} isCentered>
+    <ModalOverlay />
+    <ModalContent width="100vw">
+      <ModalHeader color={tColor}>Maximum Journal Amount Reached</ModalHeader>
+      <ModalCloseButton />
+      <ModalBody>
+        Your current plan only includes 3 journals. Please purchase premium if you'd like to add more.
+      </ModalBody>
+      <ModalFooter>
+        <Button color={tColor} variant="ghost" onClick={onClose}>
+          Ok
+        </Button>
+      </ModalFooter>
+    </ModalContent>
+  </Modal>
+    )
+  }
+
+  // Otherwise, they can add journals as normal
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
@@ -169,3 +202,4 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
     </Modal>
   );
 }
+

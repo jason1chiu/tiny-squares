@@ -16,7 +16,7 @@ export default function NewCard() {
 
   let { user } = useAuth();
   const { data, refetch } = useQuery(GET_JOURNALS);
-  const { data: meData, refetch: meRefetch } = useQuery(GET_ME); // Query for user data
+  const { data: meData, refetch: meRefetch } = useQuery(GET_ME); 
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [hover, setHover] = useState(false);
@@ -58,14 +58,7 @@ export default function NewCard() {
         boxShadow: "lg",
       }}
       onClick={() => {
-
-        // If user has 3 journals, but does not have premium status
-        if (journalLimitReached && !meData.me.premium) {
-          console.log("Purchase premium!")
-        } else {
           openModal(); // Call the openModal function
-        }
-
       }} 
       id="new-card-step" 
     >
