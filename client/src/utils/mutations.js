@@ -8,6 +8,7 @@ export const LOGIN_USER = gql`
         _id
         username
         email
+        premium
       }
     }
   }
@@ -35,6 +36,17 @@ export const UPDATE_USER = gql`
     }
   }
 `;
+
+export const UPDATE_USER_PREMIUM_STATUS = gql`
+  mutation updateUserPremiumStatus($userId: ID!, $premium: Boolean!) {
+    updateUserPremiumStatus(userId: $userId, premium: $premium) {
+      _id
+      username
+      email
+      premium
+    }
+  }
+`
 
 export const LOGOUT_USER = gql`
   mutation Logout($email: String!) {

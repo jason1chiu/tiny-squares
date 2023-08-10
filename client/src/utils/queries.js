@@ -7,6 +7,7 @@ export const GET_ME = gql`
       username
       email
       avatar
+      premium
       journals {
         _id
         name

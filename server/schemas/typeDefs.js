@@ -7,6 +7,8 @@ const typeDefs = gql`
     email: String
     avatar: String
     journals: [Journal]
+    premium: Boolean
+    currentStripeSessionId: String
   }
 
   type Journal {
@@ -63,6 +65,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
+    updateUserPremiumStatus(userId: ID!, premium: Boolean!): User
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     updateUser(username: String!, avatar: String!): User

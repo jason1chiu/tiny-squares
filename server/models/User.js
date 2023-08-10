@@ -26,6 +26,10 @@ const userSchema = new Schema(
       default: "/img/avatar/1.webp",
     },
     journals: [{type: Schema.Types.ObjectId, ref: "Journal"}],
+    premium: {
+      type: Boolean,
+      default: false, 
+    },
   },
   {
     toJSON: {

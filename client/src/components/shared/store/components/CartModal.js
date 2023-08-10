@@ -7,22 +7,39 @@ export function CartModal(props) {
     const cart = useContext(CartContext);
     const bColor = useColorModeValue("secondaryGray.500", "white");
     const tColor = useColorModeValue ("brand.800", "white")
+
     const checkout = async () => {
-      
-      await fetch("/admin/store/checkout", {
+      const userId = localStorage.getItem('user_id');
+
+      const requestData = {
+        cart: cart.cart,
+        userId: userId,
+      };
+      // Change back to /admin/store/checkout when deploy to heroku
+      await fetch("http://localhost:3001/admin/store/checkout", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ cart: cart.cart })
+        body: JSON.stringify({ requestData }),
       }).then((response) => {
+        
         return response.json();
       }).then((response) => {
+        console.log(response);
         debugger
         if (response.url) {
           window.location.assign(response.url); //Forwarding user to stripe
         }
       })
+
+      await fetch("http://localhost:3001/stripe-webhook", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userId: userId }),
+      });
     }
 
     return (

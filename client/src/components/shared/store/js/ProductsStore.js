@@ -5,25 +5,28 @@ import purpleJournal from "assets/img/store/3.png"
 const productsArray = [
   {
     id: "price_1NGkoaCS0MFKcelVsPHlR5r4",
-    title: "$1 Donation",
+    title: "Premium",
     price: 1.00,
     img: ProductivityPlanner,
-    benefits: ["Buy us a gum ball"]
-  },
-  {
-    id: "price_1NGkqFCS0MFKcelVSTB7pj7U",
-    title: "$3 Donation",
-    price: 3.00,
-    img: WellnessJournal,
-    benefits: ["Buy us a small plain Starbucks coffee"]
-  },
-  {
-    id: "price_1NGkqsCS0MFKcelVqyoaYwou",
-    title: "$15 Donation",
-    price: 15.00,
-    img: purpleJournal,
-    benefits: ["Buy us a large Starbucks coffee"]
-},
+    benefits: ["This supports us directly and there are no limits to your journals!"],
+    givesPremium: true,
+  }
+//   {
+//     id: "price_1NGkqFCS0MFKcelVSTB7pj7U",
+//     title: "$3 Donation",
+//     price: 3.00,
+//     img: WellnessJournal,
+//     benefits: ["Buy us a small plain Starbucks coffee"],
+//     givesPremium: false
+//   },
+//   {
+//     id: "price_1NGkqsCS0MFKcelVqyoaYwou",
+//     title: "$15 Donation",
+//     price: 15.00,
+//     img: purpleJournal,
+//     benefits: ["Buy us a large Starbucks coffee"],
+//     givesPremium: false
+// },
 ]
 
 function getProductData(id) {
