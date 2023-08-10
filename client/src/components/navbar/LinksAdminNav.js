@@ -73,7 +73,8 @@ export default function HeaderLinks(props) {
 
   const handleLogout = async () => {
     try {
-      let email = user.user.email;
+      // let email = user.user.email; // This was returning undefined
+      let email = data.me.email;
       await logout({ variables: { email } });
       setUser(false);
       removeCookie("token");
