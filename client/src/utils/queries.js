@@ -35,6 +35,8 @@ export const GET_JOURNAL = gql`
       name
       category
       image
+      createdAt
+      updatedAt
       entries {
         _id
         note
@@ -61,7 +63,8 @@ export const GET_JOURNALS = gql`
       name
       category
       image
-      updatedAt  
+      updatedAt
+      createdAt  
       entries {
         _id
         note

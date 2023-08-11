@@ -4,10 +4,11 @@ import Journal from "./Journal";
 import { GET_JOURNALS } from "utils/queries";
 import { useQuery } from "@apollo/client";
 import Card from "components/card/card.js";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function Journals(props) {
-  const { loading, data, refetch } = useQuery(GET_JOURNALS);
+export default function Journals({ setShouldRefetch }) {
+  const { loading, data, refetch } = useQuery(GET_JOURNALS,);
+  let [outdatedJournals, setOutdatedJournals] = useState([]);
 
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "gray.400";
@@ -20,10 +21,17 @@ export default function Journals(props) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const outdatedJournals = data?.journals.filter((journal) => {
-    const updatedAt = new Date(Number(journal.updatedAt));
-    return updatedAt.getTime() < today.getTime();
-});
+  useEffect(() => {
+    const newOutdatedJournals = data?.journals.filter((journal) => {
+      const updatedAt = new Date(Number(journal.updatedAt));
+      const createdAt = new Date(Number(journal.createdAt));
+      return (
+        updatedAt.getTime() === createdAt.getTime() ||
+        updatedAt.getTime() < today.getTime()
+      );
+    });
+    setOutdatedJournals(newOutdatedJournals);
+  }, [data?.journals]);
 
   const hasJournals = outdatedJournals?.length > 0;
   const history = useHistory();
@@ -31,7 +39,7 @@ export default function Journals(props) {
   useEffect(() => {
     refetch();
   }, [refetch]);
-
+  
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -47,22 +55,31 @@ export default function Journals(props) {
           mt="10px"
           mb="4px"
           _hover={{ color: "gray.500" }}
-          id="jlink-step">
+          id="jlink-step"
+        >
           Journals
         </Link>
       </Tooltip>
       {hasJournals ? (
-        <Text color={textColorSecondary} fontSize="md" me="26px" mb="40px" >
+        <Text color={textColorSecondary} fontSize="md" me="26px" mb="40px">
           Update your journals daily
         </Text>
       ) : (
-        <Text color={textColorSecondary} fontSize="md" me="26px" mb="40px" id="update-step">
+        <Text
+          color={textColorSecondary}
+          fontSize="md"
+          me="26px"
+          mb="40px"
+          id="update-step"
+        >
           No Journals to Update
         </Text>
       )}
       {outdatedJournals?.map((journal, index) => (
-        <Journal id="update-step"
+        <Journal
+          id="update-step"
           key={journal._id}
+          refetch={journal.refetch}
           boxShadow={cardShadow}
           mb="20px"
           image={journal.image}

@@ -39,7 +39,7 @@ const MotionBox = motion(Box);
 
 export default function Profile(props) {
   const { avatar, name, entries, journals } = props;
-  let { user, setUser } = useAuth();
+  let { user,  } = useAuth();
 
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "gray.400";
@@ -61,25 +61,25 @@ export default function Profile(props) {
   const getBadge = (entries) => {
     let badge, tooltipText;
     if (entries >= 365) {
-      badge = <img src={Badge7} width="15px" />;
+      badge = <img src={Badge7} alt="Badge7" width="15px" />;
       tooltipText = "One Year";
     } else if (entries >= 182) {
-      badge = <img src={Badge6} width="15px" />;
+      badge = <img src={Badge6} alt="Badge6" width="15px" />;
       tooltipText = "Half a Year";
     } else if (entries >= 100) {
-      badge = <img src={Badge5} width="45px" />;
+      badge = <img src={Badge5} alt="Badge5" width="45px" />;
       tooltipText = "100 Entries";
     } else if (entries >= 50) {
-      badge = <img src={Badge4} width="45px" />;
+      badge = <img src={Badge4} alt="Badge4" width="45px" />;
       tooltipText = "50 Entries";
     } else if (entries >= 25) {
-      badge = <img src={Badge3} width="45px" />;
+      badge = <img src={Badge3} alt="Badge3" width="45px" />;
       tooltipText = "25 Entries";
     } else if (entries >= 10) {
-      badge = <img src={Badge2} width="45px" />;
+      badge = <img src={Badge2} alt="Badge2" width="45px" />;
       tooltipText = "10 Entries";
     } else if (entries >= 1) {
-      badge = <img src={Badge1} width="45px" />;
+      badge = <img src={Badge1} alt="Badge1" width="45px" />;
       tooltipText = "1 Entry";
     }
     return { badge, tooltipText };

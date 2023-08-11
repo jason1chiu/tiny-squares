@@ -10,7 +10,7 @@ import { motion } from "framer-motion"; // <-- import here
 import PreviewModal from "views/admin/journals/components/PreviewModal";
 import React from "react";
 
-const MotionBox = motion(Box); // <-- define here
+const MotionBox = motion(Box); 
 
 export default function Journal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
