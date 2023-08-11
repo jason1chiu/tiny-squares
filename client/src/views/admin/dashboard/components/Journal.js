@@ -14,11 +14,13 @@ const MotionBox = motion(Box); // <-- define here
 
 export default function Journal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { title, ranking, link, image, journal, ...rest } = props;
+  const { title, ranking, link, image, journal, updatedAt, ...rest } = props;
 
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "gray.400";
   const bg = useColorModeValue("white", "navy.700");
+
+  const lastUpdated = new Date(Number(updatedAt)).toLocaleDateString();
 
   return (
     <>
@@ -57,6 +59,14 @@ export default function Journal(props) {
               me="4px"
             >
               Journal # {ranking}
+            </Text>
+            <Text
+              fontWeight="500"
+              color={textColorSecondary}
+              fontSize="sm"
+              me="4px"
+            >
+              Last Updated: {lastUpdated}
             </Text>
           </Box>
         </Flex>
