@@ -9,7 +9,8 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
           .populate("journals")
-          .populate("entries");
+          .populate("entries")
+          .populate("friends");
 
         return userData;
       }
@@ -21,6 +22,7 @@ const resolvers = {
         .select("-__v -password")
         .populate("journals")
         .populate("entries");
+      
 
       return userData.journals;
     },
@@ -45,7 +47,22 @@ const resolvers = {
         throw new Error("Failed to fetch legends");
       }
     },
+
+    user: async (_, { username }, context) => {
+      if (context.user) {
+        const userData = await User.findOne({ username: username })
+          .populate("journals")
+          .populate("entries")
+          .populate("friends");
+  
+        return userData;
+      }
+      
+      throw new AuthenticationError("Unable to find user");
+    },
   },
+
+
 
   Mutation: {
 
@@ -251,6 +268,39 @@ const resolvers = {
 
       return updatedJournal;
     },
+
+    addFriend: async(_, { username }, context ) => {
+      if(!context.user) {
+        throw new AuthenticationError("Not logged in");
+      }
+
+      try {
+        const currentUser = await User.findById(context.user._id);
+
+        const friendUser = await User.findOne({ username });
+
+        if(!friendUser) {
+          throw new Error("User not found");
+        }
+
+        if (currentUser.friends.includes(friendUser._id)) {
+          throw new Error("User is already in friends list");
+        }
+
+        currentUser.friends.push(friendUser._id);
+        await currentUser.save();
+
+        return friendUser;
+      } catch (err) {
+        if (err.message === "User not found") {
+          throw new Error("User not found");
+        } else if (err.message === "User is already in friends list") {
+          throw new Error("User is already in friends list");
+        } else {
+          throw new Error("Failed to add friend");
+        }
+      }
+    }
   },
 };
 

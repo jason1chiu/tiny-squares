@@ -30,6 +30,10 @@ const userSchema = new Schema(
       type: Boolean,
       default: false, 
     },
+    friends: {
+      type: Array,
+      default: []
+    },
   },
   {
     toJSON: {

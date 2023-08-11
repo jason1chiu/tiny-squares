@@ -28,6 +28,20 @@ export const GET_ME = gql`
   }
 `;
 
+export const GET_USER = gql`
+  query user($username: String!) {
+    user(username: $username) {
+      _id
+      username
+      email
+      premium
+      journals {
+        _id
+      }
+    }
+  }
+`
+
 export const GET_JOURNAL = gql`
   query journal($id: ID!) {
     journal(id: $id) {

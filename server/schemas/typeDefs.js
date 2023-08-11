@@ -8,7 +8,7 @@ const typeDefs = gql`
     avatar: String
     journals: [Journal]
     premium: Boolean
-    currentStripeSessionId: String
+    friends: [User]
   }
 
   type Journal {
@@ -42,6 +42,7 @@ const typeDefs = gql`
 
   type Query {
     me: User
+    user(username: String!): User
     journals: [Journal]
     journal(id: ID!): Journal
     legends(id: ID!): [Legend]
@@ -68,6 +69,7 @@ const typeDefs = gql`
     updateUserPremiumStatus(userId: ID!, premium: Boolean!): User
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
+    addFriend(username: String!): User
     updateUser(username: String!, avatar: String!): User
     logout(email: String!): User
     createLegend(journalId: ID!, label: String!, color: String!): [Legend]

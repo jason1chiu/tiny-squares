@@ -6,6 +6,8 @@ const {
   addJournal,
   removeJournal,
   login,
+  getUserFriends,
+  addRemoveFriend,
 } = require('../../controllers/user-controller');
 
 // import middleware
@@ -25,5 +27,10 @@ router.route('/me')
 router.route('/journals/:journalId')
   .put(authMiddleware, addJournal)
   .delete(authMiddleware, removeJournal);
+
+// Friend routers
+router.get(":/id/friends", getUserFriends);
+
+router.patch("/:id/:friendId", addRemoveFriend)
 
 module.exports = router;
