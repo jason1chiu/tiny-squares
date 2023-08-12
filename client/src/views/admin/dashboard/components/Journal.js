@@ -6,7 +6,7 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { motion } from "framer-motion"; // <-- import here
+import { motion } from "framer-motion";
 import PreviewModal from "views/admin/journals/components/PreviewModal";
 import React from "react";
 

@@ -22,12 +22,15 @@ import { tutorialStyles } from "theme/components/tutorial";
 
 const Overlay = () => <ModalOverlay bg="blackAlpha.700" />;
 
-export default function JournalModal({ isOpen, onClose, journal }) {
+export default function JournalModal({
+  isOpen,
+  onClose,
+  journal,
+}) {
   const { data, refetch } = useQuery(GET_JOURNAL, {
     variables: {
       id: journal._id,
     },
-    refetchQueries: [{ query: GET_JOURNAL, variables: { id: journal._id } }],
   });
   const titleColor = useColorModeValue("navy.700", "white");
   const [runTutorial, setRunTutorial] = useState(false);
@@ -146,7 +149,6 @@ export default function JournalModal({ isOpen, onClose, journal }) {
           <Button
             onClick={() => {
               onClose();
-              refetch();
             }}
           >
             Close

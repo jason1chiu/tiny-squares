@@ -1,6 +1,5 @@
 import { Box, Flex, Text, Select, useColorModeValue } from "@chakra-ui/react";
 import Card from "components/card/card.js";
-//import the pie chart from components/charts
 import PieChart from "components/charts/Pie.js";
 import React, { useEffect, useState } from "react";
 import { pieChartOptions } from "variables/charts.js";
@@ -15,7 +14,7 @@ export default function Conversion({
   let [pieChartDataPrepared, setPieChartDataPrepared] = useState([]);
   let [pieChartOptionsPrepared, setPieChartOptionsPrepared] =
     useState(pieChartOptions);
-  // const { data: journalsData, refetch } = useQuery(GET_JOURNALS);
+ 
   const [journal] = useLazyQuery(GET_JOURNAL, { fetchPolicy: "network-only" });
 
   const tColor = useColorModeValue("secondaryGray.500", "white");
@@ -73,49 +72,6 @@ export default function Conversion({
 
     fetchSelectedJournalData();
   }, [selectedJournal]);
-
-  // useEffect(async () => {
-  //   pieChartOptionsPrepared.labels = [];
-  //   pieChartOptionsPrepared.colors = [];
-  //   pieChartOptionsPrepared.fill.colors = [];
-  //   setPieChartOptionsPrepared({ ...pieChartOptionsPrepared });
-  //   setPieChartDataPrepared([]);
-
-  //   if (selectedJournal) {
-  //     let selectedJournalObject = await journal({
-  //       variables: { id: selectedJournal },
-  //     });
-  //     let colors = [];
-  //     let object = selectedJournalObject.data.journal.entries.reduce(
-  //       (memory, entry) => {
-  //         if (entry && entry.legend) {
-  //           if (entry.legend.label in memory) {
-  //             memory[entry.legend.label] += 1;
-  //           } else {
-  //             memory[entry.legend.label] = 1;
-  //             colors.push(entry.legend.color);
-  //           }
-  //         }
-  //         return memory;
-  //       },
-  //       {}
-  //     );
-  //     let labels = Object.keys(object);
-  //     let data = Object.values(object);
-  //     selectedJournalObject.data.journal.legends.forEach((legend) => {
-  //       if (!labels.includes(legend.label)) {
-  //         labels.push(legend.label);
-  //         colors.push(legend.color);
-  //         data.push(0);
-  //       }
-  //     });
-  //     pieChartOptionsPrepared.labels = labels;
-  //     pieChartOptionsPrepared.colors = colors;
-  //     pieChartOptionsPrepared.fill.colors = colors;
-  //     setPieChartOptionsPrepared({ ...pieChartOptionsPrepared });
-  //     setPieChartDataPrepared(data);
-  //   }
-  // }, [selectedJournal]);
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
 

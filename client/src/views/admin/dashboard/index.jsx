@@ -40,7 +40,6 @@ export default function Overview() {
   };
 
   let [selectedJournal, setSelectedJournal] = useState(null);
-  const [shouldRefetch, setShouldRefetch] = useState(false);
 
   const entries = (data?.journals ?? []).reduce(
     (sum, journal) => sum + (journal.entries?.length || 0),
@@ -86,11 +85,8 @@ export default function Overview() {
         />
       </SimpleGrid>
       <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px" mb="20px">
-        {data && <ColumnsTable 
-        shouldRefetch={shouldRefetch}
-        setShouldRefetch={setShouldRefetch}
-        journalsData={[...data.journals]} />}
-        <Journals setShouldRefetch={setShouldRefetch}/>
+        {data && <ColumnsTable journalsData={[...data.journals]} />}
+        <Journals />
       </SimpleGrid>
     </Box>
   );

@@ -6,7 +6,7 @@ import { useQuery } from "@apollo/client";
 import Card from "components/card/card.js";
 import React, { useEffect, useState } from "react";
 
-export default function Journals({ setShouldRefetch }) {
+export default function Journals() {
   const { loading, data, refetch } = useQuery(GET_JOURNALS,);
   let [outdatedJournals, setOutdatedJournals] = useState([]);
 
@@ -55,7 +55,7 @@ export default function Journals({ setShouldRefetch }) {
           mt="10px"
           mb="4px"
           _hover={{ color: "gray.500" }}
-          id="jlink-step"
+          id="link-step"
         >
           Journals
         </Link>
@@ -79,7 +79,6 @@ export default function Journals({ setShouldRefetch }) {
         <Journal
           id="update-step"
           key={journal._id}
-          refetch={journal.refetch}
           boxShadow={cardShadow}
           mb="20px"
           image={journal.image}
