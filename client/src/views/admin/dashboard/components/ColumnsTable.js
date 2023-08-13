@@ -22,8 +22,8 @@ import Joyride, { STATUS, LIFECYCLE } from "react-joyride";
 export default function JournalBars({ gridArea, journalsData }) {
   // const { ...rest } = props;
   const [journal] = useLazyQuery(GET_JOURNAL, {
-    fetchPolicy: "network-only",
-    nextFetchPolicy: "network-only",
+    fetchPolicy: "cache-and-network",
+    // nextFetchPolicy: "network-only",
   });
 
   let [barChartDataPrepared, setbarChartDataPrepared] = useState([]);
@@ -74,7 +74,7 @@ export default function JournalBars({ gridArea, journalsData }) {
         "Compiles data from all your journals and displays it in a bar chart.",
     },
     {
-      target: "#jlink-step", // Add appropriate target elements
+      target: "#link-step", // Add appropriate target elements
       content: "You can navigate to the journal page by clicking the link.",
     },
     {

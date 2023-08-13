@@ -23,7 +23,7 @@ import { tutorialStyles } from "theme/components/tutorial";
 const Overlay = () => <ModalOverlay bg="blackAlpha.700" />;
 
 export default function JournalModal({ isOpen, onClose, journal, refresh }) {
-  const { data, refetch } = useQuery(GET_JOURNAL, {
+  const { data, refetch, client } = useQuery(GET_JOURNAL, {
     variables: {
       id: journal._id,
     },
@@ -146,7 +146,7 @@ export default function JournalModal({ isOpen, onClose, journal, refresh }) {
             onClick={() => {
               onClose();
               if (refresh) {
-                window.location.reload()
+                window.location.reload();
               }
             }}
           >

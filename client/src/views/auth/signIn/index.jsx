@@ -43,6 +43,7 @@ import Auth from "utils/auth";
 
 export default function SignIn() {
   let [cookies, setCookie] = useCookies();
+
   const toast = useToast();
   let { user, setUser } = useAuth();
   let history = useHistory();
@@ -58,6 +59,7 @@ export default function SignIn() {
   const [showError, setShowError] = React.useState(null);
   const [email, currentEmail] = React.useState("");
   const [password, currentPassword] = React.useState("");
+  const [keepUserLoggedIn, setKeepUserLoggedIn] = React.useState(false);
   const [login] = useMutation(LOGIN_USER);
 
   let [me] = useLazyQuery(GET_ME);
@@ -88,7 +90,9 @@ export default function SignIn() {
           setUser(data.login);
           history.push("/");
           const { token, user } = data.login;
+
           setCookie("token", token, { maxAge: 7200 });
+
           const userId = user._id;
           Auth.login(token, userId);
 
@@ -239,6 +243,10 @@ export default function SignIn() {
                   id="remember-login"
                   colorScheme="brandScheme"
                   me="10px"
+                  value={keepUserLoggedIn}
+                  onChange={(e) => {
+                    setKeepUserLoggedIn(e.target.checked);
+                  }}
                 />
                 <FormLabel
                   htmlFor="remember-login"

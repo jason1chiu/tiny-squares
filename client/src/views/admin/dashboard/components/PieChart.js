@@ -3,7 +3,7 @@ import Card from "components/card/card.js";
 import PieChart from "components/charts/Pie.js";
 import React, { useEffect, useState } from "react";
 import { pieChartOptions } from "variables/charts.js";
-import { GET_JOURNAL} from "utils/queries";
+import { GET_JOURNAL } from "utils/queries";
 import { useLazyQuery } from "@apollo/client";
 
 export default function Conversion({
@@ -15,7 +15,7 @@ export default function Conversion({
   let [pieChartDataPrepared, setPieChartDataPrepared] = useState([]);
   let [pieChartOptionsPrepared, setPieChartOptionsPrepared] =
     useState(pieChartOptions);
-  const [journal] = useLazyQuery(GET_JOURNAL, { fetchPolicy: "network-only" });
+  const [journal] = useLazyQuery(GET_JOURNAL, { fetchPolicy: "no-cache" });
 
   useEffect(() => {
     if (journalsData && journalsData.journals.length) {
@@ -43,12 +43,13 @@ export default function Conversion({
         let colors = [];
         let entryCounts = selectedJournalObject.data.journal.entries.reduce(
           (memory, entry) => {
-            if (entry && entry.legend) {
-              if (entry.legend.label in memory) {
-                memory[entry.legend.label] += 1;
+            let legend = selectedJournalObject.data.journal.legends.find(legend => legend._id === entry.legend._id);
+            if (legend) {
+              if (legend.label in memory) {
+                memory[legend.label] += 1;
               } else {
-                memory[entry.legend.label] = 1;
-                colors.push(entry.legend.color);
+                memory[legend.label] = 1;
+                colors.push(legend.color || "#dd0000");
               }
             }
             return memory;
@@ -56,13 +57,15 @@ export default function Conversion({
           {}
         );
 
-        let labels = Object.keys(entryCounts);
+        let labels = Object.keys(entryCounts).map((label) =>
+          label !== null && label !== "null" ? label : "No Label"
+        );
         let data = Object.values(entryCounts);
 
         selectedJournalObject.data.journal.legends.forEach((legend) => {
           if (!labels.includes(legend.label)) {
-            labels.push(legend.label);
-            colors.push(legend.color);
+            labels.push(legend.label || "No Label");
+            colors.push(legend.color || "#dd0000");
             data.push(0);
           }
         });
@@ -105,7 +108,7 @@ export default function Conversion({
           width="unset"
           fontWeight="700"
         >
-          <option value={""}>Select Journal</option>
+          <option value={""} disabled>Select Journal</option>
           {(journalsData?.journals ?? []).map((journal, index) => (
             <option value={journal._id} key={journal._id}>
               {journal.name}

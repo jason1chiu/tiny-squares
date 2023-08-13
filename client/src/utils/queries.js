@@ -62,7 +62,7 @@ export const GET_JOURNALS = gql`
       category
       image
       updatedAt
-      createdAt  
+      createdAt
       entries {
         _id
         note
@@ -73,10 +73,14 @@ export const GET_JOURNALS = gql`
           color
         }
       }
+      legends {
+        _id
+        label
+        color
+      }
     }
   }
 `;
-
 
 export const GET_STATS = gql`
   query getStats($userId: ID!) {

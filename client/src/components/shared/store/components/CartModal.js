@@ -26,8 +26,7 @@ export function CartModal(props) {
         
         return response.json();
       }).then((response) => {
-        console.log(response);
-        debugger
+        console.log(response);      
         if (response.url) {
           window.location.assign(response.url); //Forwarding user to stripe
         }
