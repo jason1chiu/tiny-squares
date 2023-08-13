@@ -12,6 +12,7 @@ import SuccessPage from "views/admin/successOrderPage";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { useAuth } from "contexts/auth.context";
 import { useCookies } from "react-cookie";
+import LandingPage from "views/auth/landing";
 
 // Create an Apollo Client and specify the connection to your GraphQL API
 
@@ -48,7 +49,8 @@ export default function App() {
                 <Route path={`/auth`}>
                   <AuthLayout />
                 </Route>
-                {!user && <Redirect to="/auth/sign-in" />}
+                {!user && <Route exact path="/" component={LandingPage} />} {/* Display LandingPage for non-logged-in users */}
+                {!user && <Redirect to="/" />}
                 {user && (
                   <>
                     <Route path={`/admin`}>
