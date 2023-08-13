@@ -1,8 +1,6 @@
 import {
   Box,
-  Button,
   Flex,
-  Icon,
   Text,
   useColorModeValue,
   IconButton,
@@ -17,7 +15,6 @@ import {
   barChartDataConsumption,
   barChartOptionsConsumption,
 } from "variables/charts.js";
-import { MdBarChart } from "react-icons/md";
 import { MdHelpOutline } from "react-icons/md";
 import { tutorialStyles } from "theme/components/tutorial";
 import Joyride, { STATUS, LIFECYCLE } from "react-joyride";
@@ -36,7 +33,6 @@ export default function JournalBars({ gridArea, journalsData }) {
 
   useEffect(() => {
     if (journalsData) {
-      // setbarChartDataPrepared([])
       Promise.all(
         journalsData.map(async (item, index) => {
           return journal({ variables: { id: item._id } }).then((response) => {
@@ -53,8 +49,6 @@ export default function JournalBars({ gridArea, journalsData }) {
             };
             return row;
           });
-          // setbarChartDataPrepared([...preparedData.map(i => ({...i}))])
-          // setbarChartDataPrepared(JSON.parse(JSON.stringify(preparedData)))
         })
       ).then((data) => {
         setbarChartDataPrepared(data);
