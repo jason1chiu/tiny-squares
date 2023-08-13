@@ -42,6 +42,7 @@ export default function Conversion({
 
         let colors = [];
         let entryCounts = selectedJournalObject.data.journal.entries.reduce(
+          let legent
           (memory, entry) => {
             if (entry && entry.legend) {
               if (entry.legend.label in memory) {
@@ -105,7 +106,7 @@ export default function Conversion({
           width="unset"
           fontWeight="700"
         >
-          <option value={""}>Select Journal</option>
+          <option value={""} disabled>Select Journal</option>
           {(journalsData?.journals ?? []).map((journal, index) => (
             <option value={journal._id} key={journal._id}>
               {journal.name}
