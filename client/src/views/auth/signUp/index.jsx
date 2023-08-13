@@ -65,6 +65,13 @@ export default function SignUp() {
   const [addUser] = useMutation(ADD_USER);
 
   const handleClick = () => setShow(!show);
+
+  const validatePassword = (password) => {
+    // Min 8 characters, at least one uppercase letter, one lowercase letter, one special character, and one number
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    return passwordRegex.test(password);
+  };
+
   const handleAddUser = async (event) => {
     event.preventDefault();
     let newUser = {
@@ -72,6 +79,20 @@ export default function SignUp() {
       email: email,
       password: password,
     };
+
+    if (!validatePassword(password)) {
+      toast({
+        title: "Password Validation Failed",
+        description: "Please ensure your password meets the requirements.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+        backgroundColor: "red.500",
+      });
+      return; // Return to prevent further code execution
+    }
+
     if (password === confirmPassword && password && username && email) {
       try {
         let { data } = await addUser({ variables: newUser });
