@@ -48,22 +48,38 @@ const resolvers = {
   },
 
   Mutation: {
-
-    updateUserPremiumStatus: async (_, {  premium }, context) => {
-      if(context.user) {
+    updateUserPremiumStatus: async (_, { premium }, context) => {
+      if (context.user) {
         const updatePremium = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $set: { premium } },
           { new: true }
         );
 
-        return updatePremium
+        return updatePremium;
       } else {
         throw new AuthenticationError("User not authenticated");
       }
     },
 
-    
+    // addUser: async (parent, { username, email, password }) => {
+    //   console.log("Received email in resolver:", email);
+
+    //   try {
+    //     const user = await User.create({ username, email, password });
+    //     const token = signToken(user);
+    //     return { token, user };
+    //   } catch (error) {
+    //     // If it's a Mongoose validation error, send the error message, else send a generic error message
+    //     if (error.name === "ValidationError") {
+    //       throw new Error(error.message);
+    //     } else {
+    //       console.log(error);
+    //       throw new Error("Server error during user creation.");
+    //     }
+    //   }
+    // },
+
     addUser: async (parent, { username, email, password }) => {
       let results = await User.create({ username, email, password })
         .then((user) => {

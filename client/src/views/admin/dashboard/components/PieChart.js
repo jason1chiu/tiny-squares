@@ -1,13 +1,11 @@
 import { Box, Flex, Text, Select, useColorModeValue } from "@chakra-ui/react";
 import Card from "components/card/card.js";
-//import the pie chart from components/charts
 import PieChart from "components/charts/Pie.js";
 import React, { useEffect, useState } from "react";
-import { pieChartData, pieChartOptions } from "variables/charts.js";
-import { VSeparator } from "components/seperator/Seperator.jsx";
-import { GET_JOURNALS, GET_JOURNAL, GET_ME } from "utils/queries";
-import { useQuery, useLazyQuery } from "@apollo/client";
-import { motion } from "framer-motion";
+import { pieChartOptions } from "variables/charts.js";
+import { GET_JOURNAL} from "utils/queries";
+import { useLazyQuery } from "@apollo/client";
+
 export default function Conversion({
   selectedJournal,
   setSelectedJournal,
@@ -17,10 +15,7 @@ export default function Conversion({
   let [pieChartDataPrepared, setPieChartDataPrepared] = useState([]);
   let [pieChartOptionsPrepared, setPieChartOptionsPrepared] =
     useState(pieChartOptions);
-  // const { data: journalsData, refetch } = useQuery(GET_JOURNALS);
   const [journal] = useLazyQuery(GET_JOURNAL, { fetchPolicy: "network-only" });
-
-  const tColor = useColorModeValue("secondaryGray.500", "white");
 
   useEffect(() => {
     if (journalsData && journalsData.journals.length) {
@@ -29,65 +24,68 @@ export default function Conversion({
     }
   }, [journalsData]);
 
-  useEffect(async () => {
-    pieChartOptionsPrepared.labels = [];
-    pieChartOptionsPrepared.colors = [];
-    pieChartOptionsPrepared.fill.colors = [];
-    setPieChartOptionsPrepared({ ...pieChartOptionsPrepared });
-    setPieChartDataPrepared([]);
+  useEffect(() => {
+    const prepareChartData = async () => {
+      let newOptions = {
+        ...pieChartOptionsPrepared,
+        labels: [],
+        colors: [],
+        fill: { colors: [] },
+      };
+      setPieChartOptionsPrepared(newOptions);
+      setPieChartDataPrepared([]);
 
-    if (selectedJournal) {
-      let selectedJournalObject = await journal({
-        variables: { id: selectedJournal },
-      });
-      let colors = [];
-      let object = selectedJournalObject.data.journal.entries.reduce(
-        (memory, entry) => {
-          if (entry && entry.legend) {
-            if (entry.legend.label in memory) {
-              memory[entry.legend.label] += 1;
-            } else {
-              memory[entry.legend.label] = 1;
-              colors.push(entry.legend.color);
+      if (selectedJournal) {
+        let selectedJournalObject = await journal({
+          variables: { id: selectedJournal },
+        });
+
+        let colors = [];
+        let entryCounts = selectedJournalObject.data.journal.entries.reduce(
+          (memory, entry) => {
+            if (entry && entry.legend) {
+              if (entry.legend.label in memory) {
+                memory[entry.legend.label] += 1;
+              } else {
+                memory[entry.legend.label] = 1;
+                colors.push(entry.legend.color);
+              }
             }
+            return memory;
+          },
+          {}
+        );
+
+        let labels = Object.keys(entryCounts);
+        let data = Object.values(entryCounts);
+
+        selectedJournalObject.data.journal.legends.forEach((legend) => {
+          if (!labels.includes(legend.label)) {
+            labels.push(legend.label);
+            colors.push(legend.color);
+            data.push(0);
           }
-          return memory;
-        },
-        {}
-      );
-      let labels = Object.keys(object);
-      let data = Object.values(object);
-      selectedJournalObject.data.journal.legends.forEach((legend) => {
-        if (!labels.includes(legend.label)) {
-          labels.push(legend.label);
-          colors.push(legend.color);
-          data.push(0);
-        }
-      });
-      pieChartOptionsPrepared.labels = labels;
-      pieChartOptionsPrepared.colors = colors;
-      pieChartOptionsPrepared.fill.colors = colors;
-      setPieChartOptionsPrepared({ ...pieChartOptionsPrepared });
-      setPieChartDataPrepared(data);
-    }
+        });
+
+        newOptions = {
+          ...newOptions,
+          labels: labels,
+          colors: colors,
+          fill: { colors: colors },
+        };
+        setPieChartOptionsPrepared(newOptions);
+        setPieChartDataPrepared(data);
+      }
+    };
+
+    prepareChartData();
   }, [selectedJournal]);
 
-  const { ...rest } = props;
-
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const cardColor = useColorModeValue("white", "navy.700");
-  const cardShadow = useColorModeValue(
-    "0px 18px 40px rgba(112, 144, 176, 0.12)",
-    "unset"
-  );
+  const boxColor = useColorModeValue("secondaryGray.500", "white");
 
   return (
-    <Card
-      Card
-      mb={{ base: "0px", lg: "20px" }}
-      align="center"
-      id="entries-step"
-    >
+    <Card mb={{ base: "0px", lg: "20px" }} align="center" id="entries-step">
       <Flex
         px={{ base: "0px", "2xl": "10px" }}
         justifyContent="space-between"
@@ -123,7 +121,7 @@ export default function Conversion({
           chartOptions={pieChartOptionsPrepared}
         />
       ) : (
-        <Box color={tColor} pt="50px">
+        <Box color={boxColor} pt="50px">
           Select a journal to view stats
         </Box>
       )}
