@@ -14,7 +14,7 @@ function CancelPage() {
       >
       <p>Your order has been cancelled. <br />
 
-        <Link to={"/"}>
+        <Link to={"/admin/dashboard"}>
             <Center fontSize="2rem" css={{
                 cursor: 'pointer',
                 transition: 'color 0.3s ease',

@@ -14,7 +14,7 @@ const MotionBox = motion(Box); // <-- define here
 
 export default function Journal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { title, ranking, link, image, journal, updatedAt, ...rest } = props;
+  const { title, link, image, journal, updatedAt, ...rest } = props;
 
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "gray.400";
@@ -51,14 +51,6 @@ export default function Journal(props) {
               mb="4px"
             >
               {title}
-            </Text>
-            <Text
-              fontWeight="500"
-              color={textColorSecondary}
-              fontSize="sm"
-              me="4px"
-            >
-              Journal # {ranking}
             </Text>
             <Text
               fontWeight="500"
