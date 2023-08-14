@@ -234,7 +234,7 @@ export default function SignIn() {
               </InputRightElement>
             </InputGroup>
             <Flex justifyContent="space-between" align="center" mb="24px">
-              <FormControl display="flex" alignItems="center">
+              {/* <FormControl display="flex" alignItems="center">
                 <Checkbox
                   id="remember-login"
                   colorScheme="brandScheme"
@@ -249,7 +249,7 @@ export default function SignIn() {
                 >
                   Keep me logged in
                 </FormLabel>
-              </FormControl>
+              </FormControl> */}
             </Flex>
             <MotionButton
               onClick={handleLogin}
