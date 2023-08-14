@@ -42,7 +42,6 @@ export default function Conversion({
 
         let colors = [];
         let entryCounts = selectedJournalObject.data.journal.entries.reduce(
-          let legent
           (memory, entry) => {
             if (entry && entry.legend) {
               if (entry.legend.label in memory) {
