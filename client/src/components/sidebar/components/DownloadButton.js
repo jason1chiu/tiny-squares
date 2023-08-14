@@ -41,7 +41,9 @@ function DownloadButton() {
       align='center'
       bg={bgColor}
       borderRadius='30px'
-      position='relative'>
+      position='relative'
+      mr={{base: "5", md: "0", xl: "5"}}
+      ml="2">
       <Flex
         border='5px solid'
         borderColor={borderColor}
@@ -65,7 +67,7 @@ function DownloadButton() {
         justify='center'
         px='15px'
         pt='55px'>
-        {/* <Text
+        <Text
           fontSize={{ base: "lg", xl: "18px" }}
           color='white'
           fontWeight='bold'
@@ -74,8 +76,8 @@ function DownloadButton() {
           px='10px'
           mt="10px"
           mb='6px'>
-          Download Application
-        </Text> */}
+          Download TinySquares
+        </Text>
         <Text
           fontSize='14px'
           color={"white"}
