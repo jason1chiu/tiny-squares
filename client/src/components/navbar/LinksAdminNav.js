@@ -73,13 +73,12 @@ export default function HeaderLinks(props) {
 
   const handleLogout = async () => {
     try {
-      // let email = user.user.email; // This was returning undefined
       let email = data.me.email;
       await logout({ variables: { email } });
       setUser(false);
       removeCookie("token");
       localStorage.clear();
-      setTimeout(() => history.push("/auth/sign-in"), 100);
+      setTimeout(() => history.push("/TinySquares"), 100);
     } catch (error) {
       console.error("Error logging out", error);
     }
@@ -184,7 +183,7 @@ export default function HeaderLinks(props) {
                 borderRadius="8px"
                 mb="10px"
               >
-                <ItemContent info="infor" aName="name" />
+                <ItemContent info="info" aName="name" />
               </MenuItem>
             </Flex>
           </MenuList>
