@@ -2,7 +2,7 @@ import { Box, Flex, Icon, Text } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 import React from "react";
 import Footer from "components/footer/FooterAuth";
-import FixedPlugin from "components/fixedPlugin/FixedPlugin";
+
 
 import { NavLink } from "react-router-dom";
 
