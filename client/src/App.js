@@ -1,5 +1,6 @@
 import React from "react";
 import "assets/css/index.css";
+
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import AdminLayout from "layouts/admin";
 import AuthLayout from "layouts/auth";
@@ -39,19 +40,23 @@ export default function App() {
           <React.StrictMode>
             <BrowserRouter>
               <Switch>
-                <Route path="/success" component={SuccessPage} />
-                <Route path="/cancel" component={CancelPage} />
-                <Route path="/auth" component={AuthLayout} />
-
-                {user ? (
+                <Route exact path="/" component={LandingPage} />
+                <Route path={`/success`}>
+                  <SuccessPage />
+                </Route>
+                <Route path={`/cancel`}>
+                  <CancelPage />
+                </Route>
+                <Route path={`/auth`}>
+                  <AuthLayout />
+                </Route>
+                {!user && <Redirect to="/auth/sign-in" />}
+                {user && (
                   <>
-                    <Route path="/admin" component={AdminLayout} />
-                    <Redirect from="/" to="/admin/dashboard" exact />
-                  </>
-                ) : (
-                  <>
-                    <Route path="/TinySquares" component={LandingPage} />
-                    <Redirect from="/" to="/auth/sign-in" exact />
+                    <Route path={`/admin`}>
+                      <AdminLayout />
+                    </Route>
+                    <Redirect from="/" to="/admin/dashboard" />
                   </>
                 )}
               </Switch>
