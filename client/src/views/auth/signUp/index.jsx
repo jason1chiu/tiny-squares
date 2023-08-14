@@ -289,41 +289,42 @@ export default function SignUp() {
               <HStack>
                 <Icon
                   as={password.length >= 8 ? FaCheck : FaTimes}
-                  color={password.length >= 8 ? "green.400" : "red.400"}
+                  color={password.length >= 8 ? "green.400" : "purple.500"}
                 />
                 <Text fontSize="sm">Minimum 8 characters</Text>
               </HStack>
               <HStack>
                 <Icon
                   as={/[A-Z]/.test(password) ? FaCheck : FaTimes}
-                  color={/[A-Z]/.test(password) ? "green.400" : "red.400"}
+                  color={/[A-Z]/.test(password) ? "green.400" : "purple.500"}
                 />
                 <Text fontSize="sm">At least one uppercase letter</Text>
               </HStack>
               <HStack>
                 <Icon
                   as={/[a-z]/.test(password) ? FaCheck : FaTimes}
-                  color={/[a-z]/.test(password) ? "green.400" : "red.400"}
+                  color={/[a-z]/.test(password) ? "green.400" : "purple.500"}
                 />
                 <Text fontSize="sm">At least one lowercase letter</Text>
               </HStack>
               <HStack>
                 <Icon
                   as={/[\W_]/.test(password) ? FaCheck : FaTimes}
-                  color={/[\W_]/.test(password) ? "green.400" : "red.400"}
+                  color={/[\W_]/.test(password) ? "green.400" : "purple.500"}
                 />
                 <Text fontSize="sm">At least one special character</Text>
               </HStack>
               <HStack>
                 <Icon
                   as={/\d/.test(password) ? FaCheck : FaTimes}
-                  color={/\d/.test(password) ? "green.400" : "red.400"}
+                  color={/\d/.test(password) ? "green.400" : "purple.500"}
                 />
                 <Text fontSize="sm">At least one number</Text>
               </HStack>
             </VStack>
 
             <FormLabel
+            pt="4"
               ms="4px"
               fontSize="sm"
               fontWeight="500"
@@ -354,22 +355,6 @@ export default function SignUp() {
               </InputRightElement>
             </InputGroup>
             <Flex justifyContent="space-between" align="center" mb="24px">
-              <FormControl display="flex" alignItems="center">
-                <Checkbox
-                  id="remember-login"
-                  colorScheme="brandScheme"
-                  me="10px"
-                />
-                <FormLabel
-                  htmlFor="remember-login"
-                  mb="0"
-                  fontWeight="normal"
-                  color={textColor}
-                  fontSize="sm"
-                >
-                  Keep me logged in
-                </FormLabel>
-              </FormControl>
             </Flex>
             <MotionButton
               onClick={handleAddUser}

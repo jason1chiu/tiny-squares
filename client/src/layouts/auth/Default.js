@@ -48,7 +48,7 @@ function AuthImage(props) {
          </Box>
          <Footer />
        </Flex>
-       <FixedPlugin />
+       {/* <FixedPlugin /> */}
      </Flex>
    );
  }
