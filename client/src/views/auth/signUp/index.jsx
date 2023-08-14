@@ -99,7 +99,7 @@ export default function SignUp() {
         if (data && data.addUser) {
           setShowError(null);
           setUser(data.addUser);
-          history.push("/");
+          history.push("/admin/dashboard");
           const { token, user } = data.addUser;
           const userId = user._id;
           Auth.login(token, userId, user);

@@ -78,7 +78,7 @@ export default function HeaderLinks(props) {
       setUser(false);
       removeCookie("token");
       localStorage.clear();
-      setTimeout(() => history.push("/TinySquares"), 100);
+      setTimeout(() => history.push("/"), 100);
     } catch (error) {
       console.error("Error logging out", error);
     }
