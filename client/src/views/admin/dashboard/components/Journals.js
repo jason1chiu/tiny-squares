@@ -81,7 +81,6 @@ export default function Journals() {
           boxShadow={cardShadow}
           mb="20px"
           image={journal.image}
-          ranking={index + 1}
           updatedAt={journal.updatedAt}
           title={journal.name}
           journal={journal}
