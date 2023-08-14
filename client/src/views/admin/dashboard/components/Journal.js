@@ -6,7 +6,7 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { motion } from "framer-motion"; // <-- import here
+import { motion } from "framer-motion";
 import PreviewModal from "views/admin/journals/components/PreviewModal";
 import React from "react";
 
@@ -14,7 +14,7 @@ const MotionBox = motion(Box); // <-- define here
 
 export default function Journal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { title, ranking, link, image, journal, updatedAt, ...rest } = props;
+  const { title, link, image, journal, updatedAt, ...rest } = props;
 
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "gray.400";
@@ -58,20 +58,12 @@ export default function Journal(props) {
               fontSize="sm"
               me="4px"
             >
-              Journal # {ranking}
-            </Text>
-            <Text
-              fontWeight="500"
-              color={textColorSecondary}
-              fontSize="sm"
-              me="4px"
-            >
               Last Updated: {lastUpdated}
             </Text>
           </Box>
         </Flex>
       </MotionBox>
-      <PreviewModal isOpen={isOpen} onClose={onClose} journal={journal} />
+      <PreviewModal isOpen={isOpen} onClose={onClose} refresh={true} journal={journal} />
     </>
   );
 }

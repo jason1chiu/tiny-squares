@@ -86,7 +86,7 @@ export default function SignIn() {
         if (data && data.login) {
           setShowError(null);
           setUser(data.login);
-          history.push("/");
+          history.push("/admin/dashboard");
           const { token, user } = data.login;
           setCookie("token", token, { maxAge: 7200 });
           const userId = user._id;
@@ -234,22 +234,6 @@ export default function SignIn() {
               </InputRightElement>
             </InputGroup>
             <Flex justifyContent="space-between" align="center" mb="24px">
-              <FormControl display="flex" alignItems="center">
-                <Checkbox
-                  id="remember-login"
-                  colorScheme="brandScheme"
-                  me="10px"
-                />
-                <FormLabel
-                  htmlFor="remember-login"
-                  mb="0"
-                  fontWeight="normal"
-                  color={textColor}
-                  fontSize="sm"
-                >
-                  Keep me logged in
-                </FormLabel>
-              </FormControl>
             </Flex>
             <MotionButton
               onClick={handleLogin}

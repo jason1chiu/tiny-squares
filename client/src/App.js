@@ -12,6 +12,7 @@ import SuccessPage from "views/admin/successOrderPage";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { useAuth } from "contexts/auth.context";
 import { useCookies } from "react-cookie";
+import LandingPage from "views/auth/landing";
 
 // Create an Apollo Client and specify the connection to your GraphQL API
 
@@ -39,6 +40,7 @@ export default function App() {
           <React.StrictMode>
             <BrowserRouter>
               <Switch>
+                <Route exact path="/" component={LandingPage} />
                 <Route path={`/success`}>
                   <SuccessPage />
                 </Route>
@@ -54,9 +56,6 @@ export default function App() {
                     <Route path={`/admin`}>
                       <AdminLayout />
                     </Route>
-                    {/* <Route path={`/success`}>
-                  <SuccessPage />
-                </Route> */}
                     <Redirect from="/" to="/admin/dashboard" />
                   </>
                 )}

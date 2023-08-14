@@ -13,7 +13,10 @@ import { tutorialStyles } from "theme/components/tutorial";
 
 export default function Overview() {
   let { user } = useAuth();
-  const { loading, data, refetch } = useQuery(GET_JOURNALS);
+  const { loading, data, refetch } = useQuery(GET_JOURNALS, {
+    fetchPolicy: "network-only",
+    nextFetchPolicy: "network-only",
+  });
   const { loading: userLoading, data: userData } = useQuery(GET_ME);
 
   const [runTutorial, setRunTutorial] = useState(false);
@@ -86,7 +89,7 @@ export default function Overview() {
       </SimpleGrid>
       <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px" mb="20px">
         {data && <ColumnsTable journalsData={[...data.journals]} />}
-        <Journals />
+        <Journals journalsData={[...data.journals]} />
       </SimpleGrid>
     </Box>
   );
