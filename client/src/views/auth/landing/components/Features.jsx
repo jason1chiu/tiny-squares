@@ -24,17 +24,18 @@ const Features = () => {
 
   return (
     <Flex
-    w="100vw"
-    h="100vh"
-    bg="white"
-    flexDirection="column"
-    p={10}
+      w="100vw"
+      minH="100vh" // Change this to minimum height instead of fixed height
+      bg="white"
+      flexDirection="column"
+      p={10}
+      mb="10"
     >
       <Heading size="md" color="#a46cf5" textAlign="left">
         How it works
       </Heading>
       <Heading mb="20" size="2xl" mt={4} textAlign="left">
-        Add, Update, < br/> and View Your Progression
+        Add, Update, <br /> and View Your Progression
       </Heading>
       <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={10} mt={10}>
         {cards.map((card, index) => (
