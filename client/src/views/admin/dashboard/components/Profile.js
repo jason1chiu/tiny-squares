@@ -82,6 +82,11 @@ export default function Profile(props) {
       badge = <img src={Badge1} alt="Badge1" width="45px" />;
       tooltipText = "1 Entry";
     }
+    if (!badge) {
+      badge = <span></span>;
+      tooltipText = "No Badge";
+    }
+
     return { badge, tooltipText };
   };
 
@@ -148,43 +153,47 @@ export default function Profile(props) {
             />
           </Box>
         </Stack>
-        <Text
-          color={textColorPrimary}
-          fontWeight="bold"
-          fontSize="xl"
-          mt="10px"
-        >
-          {name}
-        </Text>
-        <Flex w="max-content" mx="auto" mt="26px" justify="space-between">
-        <Flex mx="auto" me="60px" align="center" direction="column">
-          <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
-            {entries}
-          </Text>
-          <Text color={textColorSecondary} fontSize="sm" fontWeight="400">
-            Entries
-          </Text>
-        </Flex>
-        <Flex mx="auto" me="60px" align="center" direction="column">
-          <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
-            {journals}
-          </Text>
-          <Text color={textColorSecondary} fontSize="sm" fontWeight="400">
-            Journals
-          </Text>
-        </Flex>
         <Tooltip label={tooltipText} aria-label={tooltipText}>
-          <Flex mx="auto" align="center" direction="column">
-            {badge}
-          </Flex>
+          <Text color={textColorPrimary} fontWeight="bold" fontSize="xl" mt="10px">
+            {name}{badge}
+
+            <span></span>
+
+          </Text>
         </Tooltip>
-      </Flex>
-    </Card>
-    <EditProfileModal
-      isOpen={isOpen}
-      onClose={onClose}
-      currentUsername={user && user.user ? user.user.username : ""}
-    />
-  </>
-);
+
+        <Flex w="max-content" mx="auto" mt="26px" justify="center" align="center">
+  <Flex mx="60px" align="center" direction="column">
+    <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
+      {entries}
+    </Text>
+    <Text color={textColorSecondary} fontSize="sm" fontWeight="400">
+      Entries
+    </Text>
+  </Flex>
+  <Flex mx="60px" align="center" direction="column">
+    <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
+      {journals}
+    </Text>
+    <Text color={textColorSecondary} fontSize="sm" fontWeight="400">
+      Journals
+    </Text>
+  </Flex>
+  <Flex mx="60px" align="center" direction="column">
+    <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
+      {journals} {/* {friends} */}
+    </Text>
+    <Text color={textColorSecondary} fontSize="sm" fontWeight="400">
+      Friends
+    </Text>
+  </Flex>
+</Flex>
+      </Card>
+      <EditProfileModal
+        isOpen={isOpen}
+        onClose={onClose}
+        currentUsername={user && user.user ? user.user.username : ""}
+      />
+    </>
+  );
 }
