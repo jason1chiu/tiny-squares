@@ -25,17 +25,6 @@ const Board = ({ journalId, data }) => {
   let [entriesMap, setEntriesMap] = useState({})
   let [addEntry] = useMutation(ADD_ENTRY);
 
-  // const entriesMap = useMemo(() => {
-  //   return (data?.journal?.entries ?? []).reduce(
-  //     (accumulator, currentValue) => {
-  //       accumulator[currentValue.date] = currentValue;
-
-  //       return accumulator;
-  //     },
-  //     {}
-  //   );
-  // }, [data?.journal?.entries]);
-
   useEffect(() => {
     let preparedData = (data?.journal?.entries ?? []).reduce(
       (accumulator, currentValue) => {
