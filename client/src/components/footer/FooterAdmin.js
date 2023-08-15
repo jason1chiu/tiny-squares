@@ -48,21 +48,7 @@ export default function Footer() {
             </Link>
         </Text>
       </Text>
-      <List display='flex'>
-      <ListItem
-          me={{
-            base: "20px",
-            md: "44px",
-          }}>
-          <Link
-            fontWeight='500'
-            color={textColor}
-            href='https://github.com/jason1chiu/tiny-squares/tree/main'>
-            Support
-          </Link>
-          </ListItem>
-       
-        </List>
+      
         </Flex>
     )
 }
