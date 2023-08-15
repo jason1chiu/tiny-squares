@@ -163,7 +163,7 @@ export default function Profile(props) {
         </Tooltip>
 
         <Flex w="max-content" mx="auto" mt="26px" justify="center" align="center">
-  <Flex mx="60px" align="center" direction="column">
+  <Flex mx="30%" align="center" direction="column">
     <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
       {entries}
     </Text>
@@ -171,7 +171,7 @@ export default function Profile(props) {
       Entries
     </Text>
   </Flex>
-  <Flex mx="60px" align="center" direction="column">
+  <Flex mx="30%" align="center" direction="column">
     <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
       {journals}
     </Text>
@@ -179,7 +179,7 @@ export default function Profile(props) {
       Journals
     </Text>
   </Flex>
-  <Flex mx="60px" align="center" direction="column">
+  <Flex mx="30%" align="center" direction="column">
     <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
       {journals} {/* {friends} */}
     </Text>
