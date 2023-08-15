@@ -100,13 +100,13 @@ export default function HeaderLinks(props) {
     "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
   );
 
-  const cart = useContext(CartContext);
-  const totalQuantity = cart.getTotalQuantity();
-  const {
-    isOpen: buyOptionsModalIsOpen,
-    onOpen: openBuyOptionsModal,
-    onClose: closeBuyOptionsModal,
-  } = useDisclosure();
+  // const cart = useContext(CartContext);
+  // const totalQuantity = cart.getTotalQuantity();
+  // const {
+  //   isOpen: buyOptionsModalIsOpen,
+  //   onOpen: openBuyOptionsModal,
+  //   onClose: closeBuyOptionsModal,
+  // } = useDisclosure();
   const {
     isOpen: cartModalIsOpen,
     onOpen: openCartModal,
@@ -206,7 +206,7 @@ export default function HeaderLinks(props) {
                   right="-10px"
                   fontSize=".7em"
                 >
-                  {totalQuantity}
+                  {/* {totalQuantity} */}
                 </Badge>
               </Box>
             }
@@ -216,7 +216,7 @@ export default function HeaderLinks(props) {
           />
           <CartModal isOpen={cartModalIsOpen} onClose={closeCartModal} />
         </Menu>
-        <Menu>
+        {/* <Menu>
           <IconButton
             icon={
               <Box position="relative">
@@ -231,7 +231,7 @@ export default function HeaderLinks(props) {
             isOpen={buyOptionsModalIsOpen}
             onClose={closeBuyOptionsModal}
           />
-        </Menu>
+        </Menu> */}
         <Menu>
           <MenuButton p="0px">
             <Avatar
