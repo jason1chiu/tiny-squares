@@ -1,10 +1,11 @@
 import React from "react";
-import { Button, Box, Flex, Image, Heading, Text } from "@chakra-ui/react";
+import { Button, Box, Flex, Image, Heading, Text, useColorModeValue } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import bannerimg from "assets/img/jpb.png";
 import logo from "assets/img/ts.png";
 import { motion } from "framer-motion";
 import graphic from "assets/img/graphic.png";
+
 const MotionImage = motion(Image);
 const MotionBox = motion(Box);
 const MotionButton = motion(Button);
@@ -36,6 +37,7 @@ const graphicVariant = {
 };
 
 export default function LandingPage() {
+  const tColor = useColorModeValue("brand.800", "white");
   const text = "Your life, \n one pixel at a time";
   return (
     <Flex
