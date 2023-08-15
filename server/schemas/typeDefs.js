@@ -6,6 +6,7 @@ const typeDefs = gql`
     username: String
     email: String
     avatar: String
+    cover: String
     journals: [Journal]
     premium: Boolean
     currentStripeSessionId: String
@@ -68,7 +69,7 @@ const typeDefs = gql`
     updateUserPremiumStatus(userId: ID!, premium: Boolean!): User
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    updateUser(username: String!, avatar: String!): User
+    updateUser(username: String!, avatar: String!, cover: String!): User
     logout(email: String!): User
     createLegend(journalId: ID!, label: String!, color: String!): [Legend]
     updateLegend(journalId: ID!, label: String!, color: String!, legendId: ID!): Legend
