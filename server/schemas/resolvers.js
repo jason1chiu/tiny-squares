@@ -304,7 +304,9 @@ const resolvers = {
         }
 
         currentUser.friends.push(friendUser._id);
-        await currentUser.save();
+        friendUser.friends.push(currentUser._id);
+        
+        await Promise.all([currentUser.save(), friendUser.save()]);
 
         return friendUser;
       } catch (err) {
