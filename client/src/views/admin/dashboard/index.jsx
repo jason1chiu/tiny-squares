@@ -10,6 +10,7 @@ import { GET_JOURNALS, GET_ME } from "utils/queries";
 import { useQuery } from "@apollo/client";
 import Joyride, { STATUS } from "react-joyride";
 import { tutorialStyles } from "theme/components/tutorial";
+import Friends from "views/admin/dashboard/components/Friends";
 
 export default function Overview() {
   let { user } = useAuth();
@@ -70,7 +71,7 @@ export default function Overview() {
         steps={tutorialSteps}
         styles={tutorialStyles}
       />
-      <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px" mb="20px">
+      <SimpleGrid columns={{ base: 1, md: 3, xl: 3 }} gap="20px" mb="20px">
         {data?.journals && (
           <Profile
             banner={profile}
@@ -81,15 +82,16 @@ export default function Overview() {
             minH="365px"
           />
         )}
+        <Friends /> {/* Make sure you pass the friends data */}
+        <Journals journalsData={[...data.journals]} />
+      </SimpleGrid>
+      <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px" mb="20px">
         <PieChart
           selectedJournal={selectedJournal}
           setSelectedJournal={setSelectedJournal}
           journalsData={data}
         />
-      </SimpleGrid>
-      <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px" mb="20px">
         {data && <ColumnsTable journalsData={[...data.journals]} />}
-        <Journals journalsData={[...data.journals]} />
       </SimpleGrid>
     </Box>
   );
