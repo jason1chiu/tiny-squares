@@ -7,7 +7,6 @@ const typeDefs = gql`
     email: String
     avatar: String
     cover: String
-    badge: String
     friends: [User]
     journals: [Journal]
     premium: Boolean

@@ -21,7 +21,7 @@ export default function Friend({ friend }) {
         </Text>
       </Flex>
       <Badge ms="auto" colorScheme={friend.badgeColor} fontSize="sm">
-        {friend.badge}
+        {data && data.user.journals.some((journal) => journal.entries.length > 0) && "Badge"}
       </Badge>
     </Flex>
   );
