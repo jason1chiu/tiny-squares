@@ -21,7 +21,7 @@
 // ];
 
 // const Board = ({ journalId, data }) => {
-  
+
 //   let [entriesMap, setEntriesMap] = useState({})
 //   let [addEntry] = useMutation(ADD_ENTRY);
 
@@ -95,7 +95,7 @@ import { Grid, GridItem, Box, Text, useColorModeValue } from "@chakra-ui/react";
 import { useQuery, useMutation } from "@apollo/client";
 import Card from "components/card/card";
 import Cell from "components/shared/calendar/components/board/Cell";
-import { GET_LEGENDS } from "utils/queries";
+import { GET_LEGENDS, GET_JOURNAL, GET_JOURNALS, GET_ME } from "utils/queries";
 import { ADD_ENTRY } from "utils/mutations";
 
 const months = [
@@ -115,11 +115,14 @@ const months = [
 
 const Board = ({ journalId, data }) => {
   let [entriesMap, setEntriesMap] = useState({});
-  let [addEntry] = useMutation(ADD_ENTRY);
+
+  let [addEntry] = useMutation(ADD_ENTRY, {
+    refetchQueries: [GET_JOURNAL, GET_JOURNALS, GET_ME],
+  });
 
   const legendsQuery = useQuery(GET_LEGENDS, {
     variables: { id: journalId },
-  }); 
+  });
   const legends = legendsQuery?.data?.legends ?? [];
 
   useEffect(() => {
@@ -179,7 +182,7 @@ const Board = ({ journalId, data }) => {
                 </Box>
               </GridItem>
             ))}
-             </React.Fragment>
+          </React.Fragment>
         ))}
       </Grid>
     </Card>

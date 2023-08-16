@@ -14,7 +14,6 @@ import Joyride, { CallBackProps, STATUS } from "react-joyride";
 import Archive from "views/admin/journals/components/archive/ArchiveCard";
 import Banner from "views/admin/journals/components/Banner";
 import YourJournalCard from "views/admin/journals/components/YourJournalCard";
-import P2 from "assets/img/jp.png";
 import { useQuery } from "@apollo/client";
 import { GET_JOURNALS } from "utils/queries";
 import NewCard from "views/admin/journals/components/NewCard";
@@ -23,7 +22,7 @@ import { tutorialStyles } from "theme/components/tutorial";
 export default function JournalPage() {
   const textColor = useColorModeValue("secondaryGray.500", "white");
   const titleColor = useColorModeValue("brand.700", "white");
-  const textColorBrand = useColorModeValue("brand.500", "white");
+  
   const { data } = useQuery(GET_JOURNALS);
   const [runTutorial, setRunTutorial] = useState(false);
   const navbarIcon = useColorModeValue("gray.400", "white");

@@ -7,6 +7,8 @@ const typeDefs = gql`
     email: String
     avatar: String
     cover: String
+    badge: String
+    friends: [User]
     journals: [Journal]
     premium: Boolean
     currentStripeSessionId: String
@@ -43,6 +45,7 @@ const typeDefs = gql`
 
   type Query {
     me: User
+    user(username: String!): User
     journals: [Journal]
     journal(id: ID!): Journal
     legends(id: ID!): [Legend]
@@ -71,6 +74,7 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     updateUser(username: String!, avatar: String!, cover: String!): User
     logout(email: String!): User
+    addFriend(username: String!): User
     createLegend(journalId: ID!, label: String!, color: String!): [Legend]
     updateLegend(journalId: ID!, label: String!, color: String!, legendId: ID!): Legend
     deleteLegend(journalId: ID!, legendId: ID!): Journal
