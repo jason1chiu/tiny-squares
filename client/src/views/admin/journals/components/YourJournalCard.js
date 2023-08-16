@@ -11,6 +11,9 @@ import { GET_JOURNALS, GET_ME } from "utils/queries";
 
 export default function YourJournalCard({ journal }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const createdDate = new Date(Number(journal.createdAt));
+  
+  const createdYear = createdDate.getFullYear();
   let { user } = useAuth();
 
   const { refetch } = useQuery(GET_JOURNALS);
@@ -36,7 +39,8 @@ export default function YourJournalCard({ journal }) {
     <>
       <Preview
         name={journal.name}
-        author={user.user.username}
+        // author={user.user.username}
+        author={createdYear}
         image={journal.image}
         onViewClick={onOpen}
         onDeleteClick={() => handleDeleteJournal(journal._id)} // Pass journal ID to the delete function
