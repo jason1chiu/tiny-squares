@@ -9,7 +9,7 @@ import { BsShop } from "react-icons/bs";
 import { CartModal } from "components/shared/store/components/CartModal";
 import { useCookies } from "react-cookie";
 // import Tutorial from "components/navbar/tutorial";
-
+import premiumBadge from "assets/img/badge/premium.png";
 import { motion } from "framer-motion";
 import BuyOptionsModal from "components/shared/store/components/BuyOptionsModal";
 
@@ -192,23 +192,19 @@ export default function HeaderLinks(props) {
           <IconButton
             icon={
               <Box position="relative">
-                <MdShoppingCart size="24" tm="100px" />
-                <Badge
-                  colorScheme="purple"
-                  boxShadow="md"
-                  position="absolute"
-                  boxSize="20px"
-                  borderRadius="full"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  top="-18px"
-                  right="-10px"
-                  fontSize=".7em"
-                >
-                  {/* {totalQuantity} */}
-                </Badge>
-              </Box>
+  <BsShop size="24" tm="100px" />
+  <img
+    src={premiumBadge}
+    alt="Premium Badge"
+    style={{
+      position: 'absolute',
+      top: '-18px',
+      right: '-10px',
+      width: '20px', 
+      height: '20px' 
+    }}
+  />
+</Box>
             }
             color={navbarIcon}
             _hover={{ color: "secondaryGray.900" }}
