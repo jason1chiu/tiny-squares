@@ -1,10 +1,11 @@
 import { Button, Flex, Image, Text, useColorModeValue } from "@chakra-ui/react";
-import { IoCloudDownloadOutline } from "react-icons/io5";
+import { IoCloudDownloadOutline, IoClose } from "react-icons/io5";
 import React, { useState, useEffect } from "react";
 import Logo from "assets/img/ts.png"
 
 function DownloadButton() {
   const [installEvent, setInstallEvent] = useState(null);
+  const [isVisible, setIsVisible] = useState(true);
   const bgColor = "linear-gradient(135deg, #785bc8 0%, #b69dde 100%)";
   const borderColor = useColorModeValue("white", "navy.800");
 
@@ -33,6 +34,10 @@ function DownloadButton() {
       setInstallEvent(null);
     });
   };
+  const handleClose = () => {
+    setIsVisible(false); // Hide the component
+  };
+  if (!isVisible) return null;
 
   return (
     <Flex
@@ -44,6 +49,9 @@ function DownloadButton() {
       position='relative'
       mr={{base: "5", md: "0", xl: "5"}}
       ml="2">
+        <Button variant="ghost" color="secondaryGray.500" onClick={handleClose} position="absolute" top={2} right={2}>
+        <IoClose />
+      </Button>
       <Flex
         border='5px solid'
         borderColor={borderColor}

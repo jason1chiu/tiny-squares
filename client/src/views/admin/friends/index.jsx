@@ -11,14 +11,14 @@ import {
 } from "@chakra-ui/react";
 import { MdHelpOutline } from "react-icons/md";
 import Joyride, { CallBackProps, STATUS } from "react-joyride";
-
-import Banner from "views/admin/journals/components/Banner";
+import FriendTable from "views/admin/friends/components/FriendTable";
+import Banner from "views/admin/friends/components/Banner";
 
 import P2 from "assets/img/jp.png";
 import { useQuery } from "@apollo/client";
 
-import NewFriendCard from "views/admin/friends/components/NewFriendCard";
-import { tutorialStyles } from "theme/components/tutorial";
+// import NewFriendCard from "views/admin/friends/components/NewFriendCard";
+// import { tutorialStyles } from "theme/components/tutorial";
 
 export default function FriendPage() {
   const textColor = useColorModeValue("secondaryGray.500", "white");
@@ -27,6 +27,7 @@ export default function FriendPage() {
 
   const [runTutorial, setRunTutorial] = useState(false);
   const navbarIcon = useColorModeValue("gray.400", "white");
+ 
 
   const tutorialSteps = [
     {
@@ -66,13 +67,13 @@ export default function FriendPage() {
 
           <Flex direction="column">
             <Flex
-              mt="45px"
+              // mt="45px"
               mb="20px"
               justifyContent="space-between"
               direction={{ base: "column", md: "row" }}
               align={{ base: "start", md: "center" }}
             >
-              <Text
+              {/* <Text
                 color={titleColor}
                 fontSize="2xl"
                 ms="24px"
@@ -86,8 +87,8 @@ export default function FriendPage() {
                   _hover={{ color: "secondaryGray.900" }}
                   onClick={() => setRunTutorial(true)} // Start the tutorial when the icon is clicked
                 />
-              </Text>
-              <Flex
+              </Text> */}
+              {/* <Flex
                 align="center"
                 me="20px"
                 ms={{ base: "24px", md: "0px" }}
@@ -95,10 +96,10 @@ export default function FriendPage() {
               >
                 {/* Other components */}
               </Flex>
-            </Flex>
-            <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px">
+            {/* </Flex> */}
+            {/* <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px">
               <NewFriendCard />
-            </SimpleGrid>
+            </SimpleGrid> */}
 
             <Flex
               mt="45px"
@@ -116,7 +117,7 @@ export default function FriendPage() {
                 Your Friends
               </Text>
             </Flex>
-
+< FriendTable />
             {/* {data?.journals && data.journals.length > 0 ? (
               <SimpleGrid
                 columns={{ base: 1, md: 3 }}
@@ -134,10 +135,10 @@ export default function FriendPage() {
             )} */}
           </Flex>
         </Flex>
-        <Flex
+        {/* <Flex
           flexDirection="column"
           gridArea={{ xl: "1 / 3 / 2 / 4", "2xl": "1 / 2 / 2 / 3" }}
-        ></Flex>
+        ></Flex> */}
       </Grid>
     </Box>
   );
