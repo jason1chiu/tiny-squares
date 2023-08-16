@@ -13,17 +13,18 @@ import { MdHelpOutline } from "react-icons/md";
 import Joyride, { CallBackProps, STATUS } from "react-joyride";
 
 import Banner from "views/admin/journals/components/Banner";
-import YourJournalCard from "views/admin/journals/components/YourJournalCard";
+
+import P2 from "assets/img/jp.png";
 import { useQuery } from "@apollo/client";
-import { GET_JOURNALS } from "utils/queries";
-import NewCard from "views/admin/journals/components/NewCard";
+
+import NewFriendCard from "views/admin/friends/components/NewFriendCard";
 import { tutorialStyles } from "theme/components/tutorial";
 
-export default function JournalPage() {
+export default function FriendPage() {
   const textColor = useColorModeValue("secondaryGray.500", "white");
   const titleColor = useColorModeValue("brand.700", "white");
-  
-  const { data } = useQuery(GET_JOURNALS);
+  const textColorBrand = useColorModeValue("brand.500", "white");
+
   const [runTutorial, setRunTutorial] = useState(false);
   const navbarIcon = useColorModeValue("gray.400", "white");
 
@@ -49,14 +50,7 @@ export default function JournalPage() {
   };
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-      {/* Joyride Component */}
-      <Joyride
-        callback={handleJoyrideCallback}
-        continuous
-        run={runTutorial}
-        steps={tutorialSteps}
-        styles={tutorialStyles}
-      />
+
       {/* Main Fields */}
       <Grid
         mb="20px"
@@ -84,7 +78,7 @@ export default function JournalPage() {
                 ms="24px"
                 fontWeight="700"
               >
-                Create New
+                Find Friends
                 <IconButton
                   icon={<MdHelpOutline size="24" />}
                   color={navbarIcon}
@@ -103,7 +97,7 @@ export default function JournalPage() {
               </Flex>
             </Flex>
             <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px">
-              <NewCard />
+              <NewFriendCard />
             </SimpleGrid>
 
             <Flex
@@ -119,11 +113,11 @@ export default function JournalPage() {
                 ms="24px"
                 fontWeight="700"
               >
-                Your Journals
+                Your Friends
               </Text>
             </Flex>
 
-            {data?.journals && data.journals.length > 0 ? (
+            {/* {data?.journals && data.journals.length > 0 ? (
               <SimpleGrid
                 columns={{ base: 1, md: 3 }}
                 gap="20px"
@@ -137,7 +131,7 @@ export default function JournalPage() {
               <Text color={textColor} fontSize="lg" ms="24px" mt="20px">
                 You have no journals yet!
               </Text>
-            )}
+            )} */}
           </Flex>
         </Flex>
         <Flex

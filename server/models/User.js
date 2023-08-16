@@ -2,9 +2,6 @@ const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
 
-// Import journalSchema
-const { journalSchema } = require("./Journal");
-
 const userSchema = new Schema(
   {
     username: {
@@ -18,32 +15,37 @@ const userSchema = new Schema(
       unique: true,
       match: [/.+@.+\..+/, "Must use a valid email address"],
     },
-password: {
-    type: String,
-    required: true,
-    validate: {
-        validator: function(v) {
-            // At least 8 characters long
-            const lengthCheck = v.length >= 8;
+    password: {
+      type: String,
+      required: true,
+      validate: {
+        validator: function (v) {
+          // At least 8 characters long
+          const lengthCheck = v.length >= 8;
 
-            // At least one uppercase letter
-            const uppercaseCheck = /[A-Z]/.test(v);
+          // At least one uppercase letter
+          const uppercaseCheck = /[A-Z]/.test(v);
 
-            // At least one lowercase letter
-            const lowercaseCheck = /[a-z]/.test(v);
+          // At least one lowercase letter
+          const lowercaseCheck = /[a-z]/.test(v);
 
-            // At least one digit
-            const digitCheck = /\d/.test(v);
+          // At least one digit
+          const digitCheck = /\d/.test(v);
 
-            // At least one special character
-            const specialCharCheck = /[\W_]/.test(v);
+          // At least one special character
+          const specialCharCheck = /[\W_]/.test(v);
 
-            return lengthCheck && uppercaseCheck && lowercaseCheck && digitCheck && specialCharCheck;
+          return (
+            lengthCheck &&
+            uppercaseCheck &&
+            lowercaseCheck &&
+            digitCheck &&
+            specialCharCheck
+          );
         },
-        message: props => 'Password validation failed!'
-    }
-},
-
+        message: (props) => "Password validation failed!",
+      },
+    },
     avatar: {
       type: String,
       default: "/img/avatar/1.webp",
@@ -52,10 +54,14 @@ password: {
       type: String,
       default: "/img/cover/1.webp",
     },
-    journals: [{type: Schema.Types.ObjectId, ref: "Journal"}],
+    friends: {
+      type: Array,
+      default: []
+    },
+    journals: [{ type: Schema.Types.ObjectId, ref: "Journal" }],
     premium: {
       type: Boolean,
-      default: false, 
+      default: false,
     },
   },
   {

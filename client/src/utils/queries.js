@@ -8,6 +8,11 @@ export const GET_ME = gql`
       email
       avatar
       cover
+      friends {
+        _id
+        username
+        avatar
+      }
       premium
       journals {
         _id
@@ -55,6 +60,17 @@ export const GET_JOURNAL = gql`
   }
 `;
 
+export const GET_USER = gql`
+  query user($username: String!) {
+    user(username: $username) {
+      _id
+      username
+      avatar
+      badge
+    }
+  }
+`;
+
 export const GET_JOURNALS = gql`
   query getJournals {
     journals {
@@ -63,7 +79,7 @@ export const GET_JOURNALS = gql`
       category
       image
       updatedAt
-      createdAt  
+      createdAt
       entries {
         _id
         note
@@ -77,7 +93,6 @@ export const GET_JOURNALS = gql`
     }
   }
 `;
-
 
 export const GET_STATS = gql`
   query getStats($userId: ID!) {

@@ -47,6 +47,17 @@ export const UPDATE_USER_PREMIUM_STATUS = gql`
   }
 `
 
+export const ADD_FRIEND = gql`
+  mutation addFriend($username: String!) {
+    addFriend(username: $username) {
+      _id
+      username
+      avatar
+      badge
+    }
+  }
+`
+
 export const LOGOUT_USER = gql`
   mutation Logout($email: String!) {
     logout(email: $email) {

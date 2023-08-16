@@ -81,7 +81,7 @@ export default function Overview() {
             minH="365px"
           />
         )}
-        <Friends /> {/* Make sure you pass the friends data */}
+        <Friends friends={[...userData.me.friends]} />
         <Journals journalsData={[...data.journals]} />
       </SimpleGrid>
       <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px" mb="20px">
