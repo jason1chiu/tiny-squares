@@ -38,7 +38,7 @@ function getRandomImage() {
 const MotionBox = motion(Box);
 
 export default function Profile(props) {
-  const { avatar, name, entries, journals } = props;
+  const { avatar, name, cover, entries, journals } = props;
   let { user, setUser } = useAuth();
 
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
@@ -95,17 +95,12 @@ export default function Profile(props) {
   return (
     <>
       <Card mb={{ base: "0px", lg: "20px" }} align="center">
-        <MotionBox
-          bgImage={`url(${bgImage})`}
+      <Box
+          bgImage={`url(${cover})`}
           bgSize="cover"
           borderRadius="16px"
           h="131px"
           w="100%"
-          key={bgImage}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          // exit={{ opacity: .2 }}
-          transition={{ duration: 1 }}
           position="relative"
           _hover={{ cursor: "pointer" }}
           onClick={onOpen}
@@ -117,7 +112,7 @@ export default function Profile(props) {
             _groupHover={{ opacity: 1 }} // Show on hover
             onClick={onOpen}
           ></Box>
-        </MotionBox>
+        </Box>
         <Stack
           direction="row"
           spacing={4}
