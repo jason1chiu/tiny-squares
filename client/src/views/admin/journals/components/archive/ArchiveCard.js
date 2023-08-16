@@ -14,7 +14,7 @@ export default function Archive() {
     // let [archiveJournal, { error }] = useMutation(ARCHIVE_JOURNAL); 
     const [isModalOpen, setModalOpen] = useState(false);
     const [hover, setHover] = useState(false);
-  const iconColor = useColorModeValue("secondaryGray.600", "secondaryGray.600");
+  const iconColor = useColorModeValue("purple.500", "purple.500");
   const iconHoverColor = useColorModeValue("brand.500", "white");
 
   const openModal = () => {

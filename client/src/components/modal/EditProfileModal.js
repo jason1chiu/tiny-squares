@@ -162,7 +162,11 @@ function EditProfileModal({ isOpen, onClose, currentUsername }) {
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="brand" mr={3} onClick={handleSaveProfile}>
+          <Button variant="brand"
+            color="white"
+            fontSize="sm"
+            fontWeight="500"
+             mr={3} onClick={handleSaveProfile}>
             Save
           </Button>
           <Button variant="ghost" onClick={onClose} color={tColor}>

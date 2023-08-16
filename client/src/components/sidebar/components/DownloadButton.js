@@ -5,7 +5,7 @@ import Logo from "assets/img/ts.png"
 
 function DownloadButton() {
   const [installEvent, setInstallEvent] = useState(null);
-  const bgColor = "linear-gradient(135deg, #6f2dbd 0%, #b69dde 100%)";
+  const bgColor = "linear-gradient(135deg, #785bc8 0%, #b69dde 100%)";
   const borderColor = useColorModeValue("white", "navy.800");
 
   useEffect(() => {
@@ -47,7 +47,7 @@ function DownloadButton() {
       <Flex
         border='5px solid'
         borderColor={borderColor}
-        bg='linear-gradient(135deg, #6f2dbd 0%, #b69dde 100%)'
+        bg='linear-gradient(135deg, #785bc8 0%, #b69dde 100%)'
         borderRadius='50%'
         w='84px'
         h='84px'

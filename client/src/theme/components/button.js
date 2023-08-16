@@ -19,6 +19,12 @@ export const buttonStyles = {
         outline: () => ({
           borderRadius: "16px",
         }),
+        ghost: () => ({
+          borderRadius: "70px",
+          fontSize: "sm",
+          fontWeight: "500",
+        }),
+
         brand: (props) => ({
           bg: mode("brand.500", "brand.400")(props),
           color: "white",
@@ -33,17 +39,21 @@ export const buttonStyles = {
           },
         }),
         darkBrand: (props) => ({
-          bg: mode("brand.900", "brand.400")(props),
+          bg: mode("purple.500", "purple.500")(props),
           color: "white",
           _focus: {
-            bg: mode("brand.900", "brand.400")(props),
+            bg: mode("purple.500", "purple.500")(props),
           },
           _active: {
-            bg: mode("brand.900", "brand.400")(props),
+            bg: mode("purple.500", "purple.500")(props),
           },
           _hover: {
-            bg: mode("brand.800", "brand.400")(props),
+            bg: mode("brand.600", "brand.400")(props),
           },
+          borderRadius: "70px",
+          fontWeight: "500",
+          fontSize: "sm",
+          variant: "brand"
         }),
         lightBrand: (props) => ({
           bg: mode("#F2EFFF", "whiteAlpha.100")(props),
