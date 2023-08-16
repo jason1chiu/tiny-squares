@@ -74,7 +74,7 @@ export default function Overview() {
       <SimpleGrid columns={{ base: 1, md: 3, xl: 3 }} gap="20px" mb="20px">
         {data?.journals && (
           <Profile
-            banner={profile}
+            cover={userData.me.cover}
             avatar={userData.me.avatar}
             name={user.user.username}
             entries={entries}

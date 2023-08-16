@@ -48,6 +48,10 @@ password: {
       type: String,
       default: "/img/avatar/1.webp",
     },
+    cover: {
+      type: String,
+      default: "/img/cover/1.webp",
+    },
     journals: [{type: Schema.Types.ObjectId, ref: "Journal"}],
     premium: {
       type: Boolean,

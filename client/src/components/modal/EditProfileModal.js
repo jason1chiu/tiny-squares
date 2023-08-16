@@ -130,7 +130,7 @@ function EditProfileModal({ isOpen, onClose, currentUsername }) {
             </FormLabel>
             <Box>
               <Image
-                src={avatar ? `/img/avatar/${avatar}.webp` : ""}
+                src={cover ? `/img/cover/${cover}.webp` : ""}
                 borderRadius="full"
                 boxSize="100px"
                 objectFit="cover"
@@ -142,7 +142,7 @@ function EditProfileModal({ isOpen, onClose, currentUsername }) {
               />
               <Collapse in={isCoverOpen}>
                 <Grid templateColumns="repeat(3, 1fr)" gap={3}>
-                  {[...Array(18)].map((_, i) => (
+                  {[...Array(10)].map((_, i) => (
                     <Box
                       key={i}
                       onClick={() => handleCoverChange(i + 1)}
