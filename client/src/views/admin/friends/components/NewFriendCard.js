@@ -10,17 +10,15 @@ import { GET_ME } from "utils/queries";
 import { useAuth } from "contexts/auth.context";
 import { useQuery } from "@apollo/client";
 
-import FindFriendModal from "views/admin/friends/components/FindFriendModal"
+import FindFriendModal from "views/admin/friends/components/FindFriendModal";
 
 export default function NewFriendCard() {
-
   let { user } = useAuth();
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [hover, setHover] = useState(false);
   const iconColor = useColorModeValue("secondaryGray.600", "secondaryGray.600");
   const iconHoverColor = useColorModeValue("brand.500", "white");
-
 
   const openModal = () => {
     setModalOpen(true);
@@ -30,7 +28,6 @@ export default function NewFriendCard() {
     setModalOpen(false);
   };
 
-
   return (
     <Card
       p="20px"
@@ -38,9 +35,9 @@ export default function NewFriendCard() {
         boxShadow: "lg",
       }}
       onClick={() => {
-          openModal(); // Call the openModal function
-      }} 
-      id="new-card-step" 
+        openModal(); // Call the openModal function
+      }}
+      id="new-card-step"
     >
       <Box
         h="200px"
@@ -58,11 +55,11 @@ export default function NewFriendCard() {
           <MdAddCircle size="150px" />
         </Center>
       </Box>
-      
+
       <FindFriendModal
         isOpen={isModalOpen}
         onClose={closeModal}
-        onSubmit={console.log("click")}
+        onSubmit={() => console.log("click")}
       />
     </Card>
   );

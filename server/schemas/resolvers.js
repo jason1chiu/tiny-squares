@@ -272,7 +272,6 @@ const resolvers = {
 
       try {
         const currentUser = await User.findById(context.user._id);
-
         const friendUser = await User.findOne({ username });
 
         if (!friendUser) {
@@ -281,6 +280,10 @@ const resolvers = {
 
         if (currentUser.friends.includes(friendUser._id)) {
           throw new Error("User is already in friends list");
+        }
+
+        if (context.user._id.includes(friendUser._id)) {
+          throw new Error("Cannot add yourself as a friend");
         }
 
         currentUser.friends.push(friendUser._id);
@@ -294,6 +297,8 @@ const resolvers = {
           throw new Error("User not found");
         } else if (err.message === "User is already in friends list") {
           throw new Error("User is already in friends list");
+        } else if (err.message === "Cannot add yourself as a friend") {
+          throw new Error("Cannot add yourself as a friend");
         } else {
           throw new Error("Failed to add friend");
         }
