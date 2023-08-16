@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -9,16 +9,9 @@ import {
   ModalCloseButton,
   Button,
   Input,
-  Select,
   useToast,
   FormLabel,
   useColorModeValue,
-  Box,
-  Image,
-  Grid,
-  useDisclosure,
-  IconButton,
-  Collapse,
 } from "@chakra-ui/react";
 import { FiUpload } from "react-icons/fi";
 import { useQuery, useMutation } from "@apollo/client";

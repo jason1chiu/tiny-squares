@@ -27,7 +27,6 @@ export default function FriendPage() {
 
   const [runTutorial, setRunTutorial] = useState(false);
   const navbarIcon = useColorModeValue("gray.400", "white");
- 
 
   const tutorialSteps = [
     {
@@ -51,7 +50,6 @@ export default function FriendPage() {
   };
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-
       {/* Main Fields */}
       <Grid
         mb="20px"
@@ -72,35 +70,7 @@ export default function FriendPage() {
               justifyContent="space-between"
               direction={{ base: "column", md: "row" }}
               align={{ base: "start", md: "center" }}
-            >
-              {/* <Text
-                color={titleColor}
-                fontSize="2xl"
-                ms="24px"
-                fontWeight="700"
-              >
-                Find Friends
-                <IconButton
-                  icon={<MdHelpOutline size="24" />}
-                  color={navbarIcon}
-                  variant="ghost"
-                  _hover={{ color: "secondaryGray.900" }}
-                  onClick={() => setRunTutorial(true)} // Start the tutorial when the icon is clicked
-                />
-              </Text> */}
-              {/* <Flex
-                align="center"
-                me="20px"
-                ms={{ base: "24px", md: "0px" }}
-                mt={{ base: "20px", md: "0px" }}
-              >
-                {/* Other components */}
-              </Flex>
-            {/* </Flex> */}
-            {/* <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px">
-              <NewFriendCard />
-            </SimpleGrid> */}
-
+            ></Flex>
             <Flex
               mt="45px"
               mb="20px"
@@ -117,28 +87,9 @@ export default function FriendPage() {
                 Your Friends
               </Text>
             </Flex>
-< FriendTable />
-            {/* {data?.journals && data.journals.length > 0 ? (
-              <SimpleGrid
-                columns={{ base: 1, md: 3 }}
-                gap="20px"
-                id="journal-card-step"
-              >
-                {data.journals.map((journal) => (
-                  <YourJournalCard key={journal._id} journal={journal} />
-                ))}
-              </SimpleGrid>
-            ) : (
-              <Text color={textColor} fontSize="lg" ms="24px" mt="20px">
-                You have no journals yet!
-              </Text>
-            )} */}
+            <FriendTable />
           </Flex>
         </Flex>
-        {/* <Flex
-          flexDirection="column"
-          gridArea={{ xl: "1 / 3 / 2 / 4", "2xl": "1 / 2 / 2 / 3" }}
-        ></Flex> */}
       </Grid>
     </Box>
   );
