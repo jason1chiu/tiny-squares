@@ -181,19 +181,23 @@ export default function HeaderLinks(props) {
           <IconButton
             icon={
               <Box position="relative">
-                <BsShop size="24" tm="100px" />
-                <img
-                  src={premiumBadge}
-                  alt="Premium Badge"
-                  style={{
-                    position: "absolute",
-                    top: "-18px",
-                    right: "-10px",
-                    width: "20px",
-                    height: "20px",
-                  }}
-                />
-              </Box>
+              {!data.me.premium && (
+    <>
+      <BsShop size="24" tm="100px" />
+      <img
+        src={premiumBadge}
+        alt="Premium Badge"
+        style={{
+          position: "absolute",
+          top: "-18px",
+          right: "-10px",
+          width: "20px",
+          height: "20px",
+        }}
+      />
+    </>
+  )}
+</Box>
             }
             color={navbarIcon}
             _hover={{ color: "secondaryGray.900" }}
