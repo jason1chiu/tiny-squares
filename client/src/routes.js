@@ -8,6 +8,7 @@ import {
 
 import Journals from "views/admin/journals";
 import Dashboard from "views/admin/dashboard";
+import Friends from "views/admin/friends"
 import SignIn from "views/auth/signIn";
 import SignUp from "views/auth/signUp";
 
@@ -26,6 +27,13 @@ const routes = [
     path: "/journals",
     icon: <Icon as={MdMenuBook} width='20px' height='20px' color='inherit' />,
     component: Journals,
+  },
+  {
+    name: "Friends",
+    layout: "/admin",
+    path: "/friends",
+    icon: <Icon as={MdMenuBook} width='20px' height='20px' color='inherit' />,
+    component: Friends,
   },
   {
     name: "Sign In",

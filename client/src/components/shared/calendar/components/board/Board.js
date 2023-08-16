@@ -21,7 +21,7 @@
 // ];
 
 // const Board = ({ journalId, data }) => {
-  
+
 //   let [entriesMap, setEntriesMap] = useState({})
 //   let [addEntry] = useMutation(ADD_ENTRY);
 
@@ -115,11 +115,13 @@ const months = [
 
 const Board = ({ journalId, data }) => {
   let [entriesMap, setEntriesMap] = useState({});
+
   let [addEntry] = useMutation(ADD_ENTRY);
 
   const legendsQuery = useQuery(GET_LEGENDS, {
     variables: { id: journalId },
-  }); 
+  });
+  
   const legends = legendsQuery?.data?.legends ?? [];
 
   useEffect(() => {
@@ -179,7 +181,7 @@ const Board = ({ journalId, data }) => {
                 </Box>
               </GridItem>
             ))}
-             </React.Fragment>
+          </React.Fragment>
         ))}
       </Grid>
     </Card>

@@ -9,7 +9,8 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
           .populate("journals")
-          .populate("entries");
+          .populate("entries")
+          .populate("friends");
 
         return userData;
       }
@@ -45,6 +46,19 @@ const resolvers = {
         throw new Error("Failed to fetch legends");
       }
     },
+
+    user: async (_, { username }, context) => {
+      if (context.user) {
+        const userData = await User.findOne({ username: username })
+          .populate("journals")
+          .populate("entries")
+          .populate("friends");
+
+        return userData;
+      }
+
+      throw new AuthenticationError("Unable to find user");
+    },
   },
 
   Mutation: {
@@ -62,23 +76,6 @@ const resolvers = {
       }
     },
 
-    // addUser: async (parent, { username, email, password }) => {
-    //   console.log("Received email in resolver:", email);
-
-    //   try {
-    //     const user = await User.create({ username, email, password });
-    //     const token = signToken(user);
-    //     return { token, user };
-    //   } catch (error) {
-    //     // If it's a Mongoose validation error, send the error message, else send a generic error message
-    //     if (error.name === "ValidationError") {
-    //       throw new Error(error.message);
-    //     } else {
-    //       console.log(error);
-    //       throw new Error("Server error during user creation.");
-    //     }
-    //   }
-    // },
 
     addUser: async (parent, { username, email, password }) => {
       let results = await User.create({ username, email, password })
@@ -115,11 +112,11 @@ const resolvers = {
       return results;
     },
 
-    updateUser: async (parent, { username, avatar, cover }, context) => {
+    updateUser: async (parent, { username, avatar }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $set: { username: username, avatar: avatar, cover: cover } },
+          { $set: { username: username, avatar: avatar } },
           { new: true }
         );
 
@@ -266,6 +263,46 @@ const resolvers = {
       await Entry.findByIdAndDelete(entryId);
 
       return updatedJournal;
+    },
+
+    addFriend: async (_, { username }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("Not logged in");
+      }
+
+      try {
+        const currentUser = await User.findById(context.user._id);
+        const friendUser = await User.findOne({ username });
+
+        if (!friendUser) {
+          throw new Error("User not found");
+        }
+
+        if (currentUser.friends.includes(friendUser._id)) {
+          throw new Error("User is already in friends list");
+        }
+
+        if (context.user._id.includes(friendUser._id)) {
+          throw new Error("Cannot add yourself as a friend");
+        }
+
+        currentUser.friends.push(friendUser._id);
+        friendUser.friends.push(currentUser._id);
+
+        await Promise.all([currentUser.save(), friendUser.save()]);
+
+        return friendUser;
+      } catch (err) {
+        if (err.message === "User not found") {
+          throw new Error("User not found");
+        } else if (err.message === "User is already in friends list") {
+          throw new Error("User is already in friends list");
+        } else if (err.message === "Cannot add yourself as a friend") {
+          throw new Error("Cannot add yourself as a friend");
+        } else {
+          throw new Error("Failed to add friend");
+        }
+      }
     },
   },
 };

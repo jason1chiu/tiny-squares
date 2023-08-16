@@ -10,7 +10,6 @@ import {
   ModalCloseButton,
   Button,
   Textarea,
-  useDisclosure,
   Menu,
   useColorModeValue,
   MenuButton,
@@ -19,7 +18,7 @@ import {
   HStack,
   VStack,
 } from "@chakra-ui/react";
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon } from "@chakra-ui/icons";
 
 const CellModal = ({
   isOpen,
@@ -44,12 +43,17 @@ const CellModal = ({
   const handleSave = () => {
     onSave(selectedLegend, selectedNote);
   };
+
   const titleColor = useColorModeValue("navy.700", "white");
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader color={titleColor} borderBottom="1px" borderBottomColor="secondaryGray.200">
+        <ModalHeader
+          color={titleColor}
+          borderBottom="1px"
+          borderBottomColor="secondaryGray.200"
+        >
           Log your Day
         </ModalHeader>
         <ModalCloseButton />
@@ -77,7 +81,11 @@ const CellModal = ({
                 </MenuButton>
                 <MenuList>
                   {(legends ?? []).map((legend, index) => (
-                    <MenuItem key={index} onClick={() => setSelectedLegend(legend)} minH='48px'>
+                    <MenuItem
+                      key={index}
+                      onClick={() => setSelectedLegend(legend)}
+                      minH="48px"
+                    >
                       <HStack spacing={2} align="center">
                         <Box
                           boxSize="2rem"

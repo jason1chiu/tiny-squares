@@ -13,10 +13,9 @@ import Friends from "views/admin/dashboard/components/Friends";
 
 export default function Overview() {
   let { user } = useAuth();
-  const { loading, data, refetch } = useQuery(GET_JOURNALS, {
-    fetchPolicy: "network-only",
-    nextFetchPolicy: "network-only",
-  });
+  
+  const { loading, data, refetch } = useQuery(GET_JOURNALS);
+
   const { loading: userLoading, data: userData } = useQuery(GET_ME);
 
   const [runTutorial, setRunTutorial] = useState(false);
@@ -81,7 +80,7 @@ export default function Overview() {
             minH="365px"
           />
         )}
-        <Friends /> {/* Make sure you pass the friends data */}
+        <Friends friends={[...userData.me.friends]} />
         <Journals journalsData={[...data.journals]} />
       </SimpleGrid>
       <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px" mb="20px">
