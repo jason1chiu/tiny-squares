@@ -9,7 +9,7 @@ import { BsShop } from "react-icons/bs";
 import { CartModal } from "components/shared/store/components/CartModal";
 import { useCookies } from "react-cookie";
 // import Tutorial from "components/navbar/tutorial";
-
+import premiumBadge from "assets/img/badge/premium.png";
 import { motion } from "framer-motion";
 import BuyOptionsModal from "components/shared/store/components/BuyOptionsModal";
 
@@ -100,13 +100,13 @@ export default function HeaderLinks(props) {
     "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
   );
 
-  const cart = useContext(CartContext);
-  const totalQuantity = cart.getTotalQuantity();
-  const {
-    isOpen: buyOptionsModalIsOpen,
-    onOpen: openBuyOptionsModal,
-    onClose: closeBuyOptionsModal,
-  } = useDisclosure();
+  // const cart = useContext(CartContext);
+  // const totalQuantity = cart.getTotalQuantity();
+  // const {
+  //   isOpen: buyOptionsModalIsOpen,
+  //   onOpen: openBuyOptionsModal,
+  //   onClose: closeBuyOptionsModal,
+  // } = useDisclosure();
   const {
     isOpen: cartModalIsOpen,
     onOpen: openCartModal,
@@ -192,23 +192,19 @@ export default function HeaderLinks(props) {
           <IconButton
             icon={
               <Box position="relative">
-                <MdShoppingCart size="24" tm="100px" />
-                <Badge
-                  colorScheme="purple"
-                  boxShadow="md"
-                  position="absolute"
-                  boxSize="20px"
-                  borderRadius="full"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  top="-18px"
-                  right="-10px"
-                  fontSize=".7em"
-                >
-                  {totalQuantity}
-                </Badge>
-              </Box>
+  <BsShop size="24" tm="100px" />
+  <img
+    src={premiumBadge}
+    alt="Premium Badge"
+    style={{
+      position: 'absolute',
+      top: '-18px',
+      right: '-10px',
+      width: '20px', 
+      height: '20px' 
+    }}
+  />
+</Box>
             }
             color={navbarIcon}
             _hover={{ color: "secondaryGray.900" }}
@@ -216,7 +212,7 @@ export default function HeaderLinks(props) {
           />
           <CartModal isOpen={cartModalIsOpen} onClose={closeCartModal} />
         </Menu>
-        <Menu>
+        {/* <Menu>
           <IconButton
             icon={
               <Box position="relative">
@@ -231,7 +227,7 @@ export default function HeaderLinks(props) {
             isOpen={buyOptionsModalIsOpen}
             onClose={closeBuyOptionsModal}
           />
-        </Menu>
+        </Menu> */}
         <Menu>
           <MenuButton p="0px">
             <Avatar
