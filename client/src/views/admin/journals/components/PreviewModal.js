@@ -128,6 +128,7 @@ export default function JournalModal({ isOpen, onClose, journal, refresh }) {
                 onClick={() => {
                   setRunTutorial(true);
                   document.body.style.overflow = "hidden";
+                  debugger
                 }}
               />
             </Box>

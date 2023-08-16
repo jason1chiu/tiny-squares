@@ -66,7 +66,11 @@ export const GET_USER = gql`
       _id
       username
       avatar
-      badge
+      journals {
+        entries {
+          _id
+        }
+      }
     }
   }
 `;

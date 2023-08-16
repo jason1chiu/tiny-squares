@@ -13,10 +13,9 @@ import Friends from "views/admin/dashboard/components/Friends";
 
 export default function Overview() {
   let { user } = useAuth();
-  const { loading, data, refetch } = useQuery(GET_JOURNALS, {
-    fetchPolicy: "network-only",
-    nextFetchPolicy: "network-only",
-  });
+  
+  const { loading, data, refetch } = useQuery(GET_JOURNALS);
+
   const { loading: userLoading, data: userData } = useQuery(GET_ME);
 
   const [runTutorial, setRunTutorial] = useState(false);

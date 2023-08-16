@@ -20,7 +20,7 @@ export default function Conversion({
   useEffect(() => {
     if (journalsData && journalsData.journals.length) {
       setSelectedJournal(journalsData.journals[0]._id);
-      journal({ variables: { id: journalsData.journals[0]._id } });
+      // journal({ variables: { id: journalsData.journals[0]._id } });
     }
   }, [journalsData]);
 
