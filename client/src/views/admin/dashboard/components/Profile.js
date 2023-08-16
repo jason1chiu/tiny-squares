@@ -13,12 +13,6 @@ import {
 import { FiEdit } from "react-icons/fi"; // Edit icon
 import Card from "components/card/card.js";
 import { useAuth } from "contexts/auth.context";
-import { useEffect, useState } from "react";
-import bImage from "assets/img/rand/b.jpg";
-import cImage from "assets/img/rand/c.jpg";
-import dImage from "assets/img/rand/d.jpg";
-import eImage from "assets/img/rand/e.jpg";
-import { motion } from "framer-motion";
 import EditProfileModal from "components/modal/EditProfileModal";
 import Badge1 from "assets/img/badge/1.webp";
 import Badge2 from "assets/img/badge/2.webp";
@@ -27,15 +21,6 @@ import Badge4 from "assets/img/badge/4.webp";
 import Badge5 from "assets/img/badge/5.webp";
 import Badge6 from "assets/img/badge/6.webp";
 import Badge7 from "assets/img/badge/7.webp";
-
-const images = [bImage, cImage, dImage, eImage];
-
-function getRandomImage() {
-  const randomIndex = Math.floor(Math.random() * images.length);
-  return images[randomIndex];
-}
-
-const MotionBox = motion(Box);
 
 export default function Profile(props) {
   const { avatar, name, cover, entries, journals } = props;
@@ -49,15 +34,6 @@ export default function Profile(props) {
   );
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [bgImage, setBgImage] = useState(getRandomImage());
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setBgImage(getRandomImage());
-    }, 15000);
-
-    return () => clearInterval(interval);
-  }, []);
   const getBadge = (entries) => {
     let badge, tooltipText;
     if (entries >= 365) {
@@ -95,7 +71,7 @@ export default function Profile(props) {
   return (
     <>
       <Card mb={{ base: "0px", lg: "20px" }} align="center">
-      <Box
+        <Box
           bgImage={`url(${cover})`}
           bgSize="cover"
           borderRadius="16px"
@@ -149,40 +125,49 @@ export default function Profile(props) {
           </Box>
         </Stack>
         <Tooltip label={tooltipText} aria-label={tooltipText}>
-          <Text color={textColorPrimary} fontWeight="bold" fontSize="xl" mt="10px">
-            {name}{badge}
-
-            <span></span>
-
+          <Text
+            color={textColorPrimary}
+            fontWeight="bold"
+            fontSize="xl"
+            mt="10px"
+          >
+            {name}
+            {badge}
           </Text>
         </Tooltip>
 
-        <Flex w="max-content" mx="auto" mt="26px" justify="center" align="center">
-  <Flex mx="30%" align="center" direction="column">
-    <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
-      {entries}
-    </Text>
-    <Text color={textColorSecondary} fontSize="sm" fontWeight="400">
-      Entries
-    </Text>
-  </Flex>
-  <Flex mx="30%" align="center" direction="column">
-    <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
-      {journals}
-    </Text>
-    <Text color={textColorSecondary} fontSize="sm" fontWeight="400">
-      Journals
-    </Text>
-  </Flex>
-  <Flex mx="30%" align="center" direction="column">
-    <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
-      {journals} {/* {friends} */}
-    </Text>
-    <Text color={textColorSecondary} fontSize="sm" fontWeight="400">
-      Friends
-    </Text>
-  </Flex>
-</Flex>
+        <Flex
+          w="max-content"
+          mx="auto"
+          mt="26px"
+          justify="center"
+          align="center"
+        >
+          <Flex mx="30%" align="center" direction="column">
+            <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
+              {entries}
+            </Text>
+            <Text color={textColorSecondary} fontSize="sm" fontWeight="400">
+              Entries
+            </Text>
+          </Flex>
+          <Flex mx="30%" align="center" direction="column">
+            <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
+              {journals}
+            </Text>
+            <Text color={textColorSecondary} fontSize="sm" fontWeight="400">
+              Journals
+            </Text>
+          </Flex>
+          <Flex mx="30%" align="center" direction="column">
+            <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
+              {journals} {/* {friends} */}
+            </Text>
+            <Text color={textColorSecondary} fontSize="sm" fontWeight="400">
+              Friends
+            </Text>
+          </Flex>
+        </Flex>
       </Card>
       <EditProfileModal
         isOpen={isOpen}
