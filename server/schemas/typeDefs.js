@@ -10,9 +10,16 @@ const typeDefs = gql`
     friends: [User]
     journals: [Journal]
     premium: Boolean
-    currentStripeSessionId: String
+    notifications: [Notification]
   }
 
+  type Notification {
+    id: ID
+    content: String
+    type: String
+    read: Boolean
+  }
+  
   type Journal {
     _id: ID
     name: String
