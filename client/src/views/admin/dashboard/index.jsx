@@ -17,6 +17,7 @@ export default function Overview() {
   const { loading, data, refetch } = useQuery(GET_JOURNALS);
 
   const { loading: userLoading, data: userData } = useQuery(GET_ME);
+  console.log(userData);
 
   const [runTutorial, setRunTutorial] = useState(false);
 
@@ -77,6 +78,7 @@ export default function Overview() {
             name={user.user.username}
             entries={entries}
             journals={data?.journals?.length}
+            friends={userData?.friends?.length}
             minH="365px"
           />
         )}

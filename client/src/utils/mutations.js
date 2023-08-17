@@ -53,7 +53,6 @@ export const ADD_FRIEND = gql`
       _id
       username
       avatar
-      badge
     }
   }
 `

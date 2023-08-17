@@ -23,7 +23,7 @@ import Badge6 from "assets/img/badge/6.webp";
 import Badge7 from "assets/img/badge/7.webp";
 import premiumBadge from "assets/img/badge/premium.png";
 export default function Profile(props) {
-  const { avatar, name, cover, entries, journals } = props;
+  const { avatar, name, cover, entries, journals, friends } = props;
   let { user, setUser } = useAuth();
 
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
@@ -90,61 +90,51 @@ export default function Profile(props) {
           ></Box>
         </Box>
         <Stack
-    direction="row"
-    spacing={4}
-    align="center"
-    justifyContent="center"
-    role="group"
-    mt="-43px"
-    mb="10px"
-    position="relative"
-  >
-    <Flex // New Flex container
-      position="relative"
-      alignItems="center"
-      justifyContent="center"
-    >
-      <Avatar
-        h="87px"
-        w="87px"
-        border="4px solid"
-        borderColor={borderColor}
-        src={user && user.user ? avatar : "Default Name"}
-      />
-      {user && user.user && user.user.isPremium ? (
-    <img
-      src={premiumBadge}
-      alt="Premium Badge"
-      style={{
-        position: "absolute",
-        bottom: "10px",
-        right: "10px", // Adjust this value to position the badge
-        width: "20px",
-        height: "20px",
-        zIndex: "100",
-      }}
-    />
-  ) : null}
-    </Flex>
-    <Box
-      position="absolute"
-      right="20px"
-      top="15px"
-      opacity={0}
-      _groupHover={{ opacity: 1 }} // Show on hover
-      onClick={onOpen}
-    >
-      {/* <IconButton
-        icon={<FiEdit />}
-        color="white"
-        size="md"
-        aria-label="Edit"
-        bgColor="transparent"
-        bg="transparent"
-        _hover={{ bg: "transparent" }}
-      /> */}
-    </Box>
-  </Stack>
+          direction="row"
+          spacing={4}
+          align="center"
+          justifyContent="center"
+          role="group"
+          mt="-43px"
+          mb="10px"
+          position="relative"
+        >
+          <Flex // New Flex container
+            position="relative"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Avatar
+              h="87px"
+              w="87px"
+              border="4px solid"
+              borderColor={borderColor}
+              src={user && user.user ? avatar : "Default Name"}
+            />
+            {user && user.user && user.user.isPremium ? (
+              <img
+                src={premiumBadge}
+                alt="Premium Badge"
+                style={{
+                  position: "absolute",
+                  bottom: "10px",
+                  right: "10px", // Adjust this value to position the badge
+                  width: "20px",
+                  height: "20px",
+                  zIndex: "100",
+                }}
+              />
+            ) : null}
+          </Flex>
+          <Box
+            position="absolute"
+            right="20px"
+            top="15px"
+            opacity={0}
+            _groupHover={{ opacity: 1 }} // Show on hover
+            onClick={onOpen}
+          ></Box>
+        </Stack>
         <Tooltip label={tooltipText} aria-label={tooltipText}>
           <Text
             color={textColorPrimary}
@@ -182,7 +172,7 @@ export default function Profile(props) {
           </Flex>
           <Flex mx="30%" align="center" direction="column">
             <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
-              {journals} {/* {friends} */}
+              {friends}
             </Text>
             <Text color={textColorSecondary} fontSize="sm" fontWeight="400">
               Friends
