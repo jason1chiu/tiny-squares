@@ -157,7 +157,7 @@ export default function HeaderLinks(props) {
             me={{ base: '30px', md: 'unset' }}
             minW={{ base: 'unset', md: '400px', xl: '450px' }}
             maxW={{ base: '360px', md: 'unset' }}>
-            <Flex jusitfy="space-between" w="100%" mb="20px">
+            <Flex justify="space-between" w="100%" mb="20px">
               <Text fontSize="md" fontWeight="600" color={textColor}>
                 Notifications
               </Text>
