@@ -19,7 +19,7 @@ import Joyride, { STATUS, LIFECYCLE } from "react-joyride";
 import { useQuery } from "@apollo/client";
 import { GET_JOURNAL } from "utils/queries";
 import { tutorialStyles } from "theme/components/tutorial";
-
+import { toPng } from 'html-to-image';
 const Overlay = () => <ModalOverlay bg="blackAlpha.700" />;
 
 export default function JournalModal({ isOpen, onClose, journal, refresh }) {
@@ -55,7 +55,20 @@ export default function JournalModal({ isOpen, onClose, journal, refresh }) {
       placement: "center",
     },
   ];
+  const downloadImage = () => {
+    const node = document.getElementById('your-board-id');
 
+    toPng(node)
+    .then((dataUrl) => {
+      const link = document.createElement('a');
+      link.download = 'my-journal.png';
+      link.href = dataUrl;
+      link.click();
+    })
+    .catch((error) => {
+      console.error('Oops, something went wrong!', error);
+    });
+};
   const handleJoyrideCallback = (data) => {
     const { status, step, lifecycle, type } = data;
     const finishedStatuses = [STATUS.FINISHED, STATUS.SKIPPED];
@@ -143,16 +156,21 @@ export default function JournalModal({ isOpen, onClose, journal, refresh }) {
           <Overview journal_id={journal._id} data={data} refetch={refetch} />
         </ModalBody>
         <ModalFooter borderTop="1px" borderTopColor="secondaryGray.200">
-          <Button
-            onClick={() => {
-              onClose();
-              if (refresh) {
-                window.location.reload()
-              }
-            }}
-          >
-            Close
-          </Button>
+        <Button
+    onClick={downloadImage}
+  >
+    Export
+  </Button>
+  <Button
+    onClick={() => {
+      onClose();
+      if (refresh) {
+        window.location.reload();
+      }
+    }}
+  >
+    Close
+  </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

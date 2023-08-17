@@ -152,8 +152,8 @@ const Board = ({ journalId, data }) => {
   };
 
   return (
-    <Card mt={4} mb={4} mx="auto" minh="90vh" w="auto">
-      <Grid templateColumns="repeat(13, 1fr)" gap={0} h="100%" w="100%">
+    <Card mt={4} mb={4} mx="auto" minh="90vh" w="auto" >
+      <Grid templateColumns="repeat(13, 1fr)" gap={0} h="100%" w="100%" id="your-board-id">
         <GridItem></GridItem>
         {Array.from({ length: 12 }, (_, index) => (
           <GridItem key={`month-${index}`} textAlign="center">
@@ -168,7 +168,7 @@ const Board = ({ journalId, data }) => {
               <Text color={textColor} fontSize="lg">{`${rowIndex + 1}`}</Text>
             </GridItem>
             {Array.from({ length: 12 }, (_, colIndex) => (
-              <GridItem key={`cell-${rowIndex}-${colIndex}`}>
+              <GridItem key={`cell-${rowIndex}-${colIndex}`} >
                 <Box h="100%">
                   <Cell
                     journalEntriesMap={entriesMap}
