@@ -3,6 +3,7 @@ import { MdEdit } from "react-icons/md";
 import { FaEthereum } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import EditProfileModal from "components/modal/EditProfileModal";
+import { MdNotificationsNone } from 'react-icons/md';
 import { BsShop } from "react-icons/bs";
 import { CartModal } from "components/shared/store/components/CartModal";
 import { useCookies } from "react-cookie";
@@ -46,7 +47,7 @@ export default function HeaderLinks(props) {
   let [, , removeCookie] = useCookies();
   let { user, setUser } = useAuth();
   const { loading, data } = useQuery(GET_ME);
-
+  const textColorBrand = useColorModeValue('brand.700', 'brand.400');
   const [logout] = useMutation(LOGOUT_USER);
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -142,7 +143,38 @@ export default function HeaderLinks(props) {
         </Flex>
 
         <SidebarResponsive routes={routes} />
-
+        <Menu>
+          <MenuButton p="0px">
+            <Icon mt="9px" as={MdNotificationsNone} color={navbarIcon} w="24px" h="24px" />
+          </MenuButton>
+          <MenuList
+            boxShadow={shadow}
+            p="20px"
+            borderRadius="20px"
+            bg={menuBg}
+            border="none"
+            mt="22px"
+            me={{ base: '30px', md: 'unset' }}
+            minW={{ base: 'unset', md: '400px', xl: '450px' }}
+            maxW={{ base: '360px', md: 'unset' }}>
+            <Flex jusitfy="space-between" w="100%" mb="20px">
+              <Text fontSize="md" fontWeight="600" color={textColor}>
+                Notifications
+              </Text>
+              <Text fontSize="sm" fontWeight="500" color={textColorBrand} ms="auto" cursor="pointer">
+                Mark all read
+              </Text>
+            </Flex>
+            <Flex flexDirection="column">
+              <MenuItem _hover={{ bg: 'none' }} _focus={{ bg: 'none' }} px="0" borderRadius="8px" mb="10px">
+                <ItemContent info="Horizon UI Dashboard PRO" aName="Alicia" />
+              </MenuItem>
+              <MenuItem _hover={{ bg: 'none' }} _focus={{ bg: 'none' }} px="0" borderRadius="8px" mb="10px">
+                <ItemContent info="Horizon Design System Free" aName="Josh Henry" />
+              </MenuItem>
+            </Flex>
+          </MenuList>
+        </Menu>
         <Menu>
           <MenuList
             boxShadow={shadow}
@@ -181,23 +213,23 @@ export default function HeaderLinks(props) {
           <IconButton
             icon={
               <Box position="relative">
-              {!data.me.premium && (
-    <>
-      <BsShop size="24" tm="100px" />
-      <img
-        src={premiumBadge}
-        alt="Premium Badge"
-        style={{
-          position: "absolute",
-          top: "-18px",
-          right: "-10px",
-          width: "20px",
-          height: "20px",
-        }}
-      />
-    </>
-  )}
-</Box>
+                {!data.me.premium && (
+                  <>
+                    <BsShop size="24" tm="100px" />
+                    <img
+                      src={premiumBadge}
+                      alt="Premium Badge"
+                      style={{
+                        position: "absolute",
+                        top: "-18px",
+                        right: "-10px",
+                        width: "20px",
+                        height: "20px",
+                      }}
+                    />
+                  </>
+                )}
+              </Box>
             }
             color={navbarIcon}
             _hover={{ color: "secondaryGray.900" }}

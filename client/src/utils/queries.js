@@ -30,6 +30,12 @@ export const GET_ME = gql`
           }
         }
       }
+      notifications {
+        id
+        content
+        type
+        read
+      }
     }
   }
 `;

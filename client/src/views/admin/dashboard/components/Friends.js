@@ -2,19 +2,20 @@ import React from "react";
 import { Text, useColorModeValue, Tooltip, Link } from "@chakra-ui/react";
 import Card from "components/card/card.js";
 import Friend from "views/admin/dashboard/components/Friend.js"; 
+import { useHistory } from "react-router-dom";
 
 export default function Friends({ friends }) {
     const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
     const secondaryTextColor = useColorModeValue("secondaryGray.300", "secondaryGray.600");
   
     // Replace with the actual link to the Friends tab when you have it
-    const friendsTabLink = "/path/to/friends/tab";
-  
+    const friendsTabLink = "/admin/friends";
+    const history = useHistory();
     return (
       <Card mb={{ base: "0px", lg: "20px" }} align="center">
         <Tooltip label="View all" fontSize="md">
           <Link
-            href={friendsTabLink} // Set the link here
+            onClick={() => history.push("/admin/friends")} // Set the link here
             color={textColorPrimary}
             fontWeight="bold"
             fontSize="2xl"
