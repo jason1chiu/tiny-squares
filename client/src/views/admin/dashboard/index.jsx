@@ -78,7 +78,7 @@ export default function Overview() {
             name={user.user.username}
             entries={entries}
             journals={data?.journals?.length}
-            friends={userData?.friends?.length}
+            friends={userData?.me.friends.length}
             minH="365px"
           />
         )}

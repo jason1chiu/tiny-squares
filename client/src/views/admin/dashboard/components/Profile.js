@@ -154,6 +154,7 @@ export default function Profile(props) {
           justify="center"
           align="center"
         >
+          
           <Flex mx="30%" align="center" direction="column">
             <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
               {entries}
@@ -162,6 +163,7 @@ export default function Profile(props) {
               Entries
             </Text>
           </Flex>
+
           <Flex mx="30%" align="center" direction="column">
             <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
               {journals}
@@ -170,6 +172,7 @@ export default function Profile(props) {
               Journals
             </Text>
           </Flex>
+
           <Flex mx="30%" align="center" direction="column">
             <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
               {friends}
