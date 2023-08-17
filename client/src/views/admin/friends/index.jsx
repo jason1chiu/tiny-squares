@@ -5,49 +5,23 @@ import {
   Grid,
   Text,
   useColorModeValue,
-  SimpleGrid,
-  Link,
-  IconButton,
 } from "@chakra-ui/react";
-import { MdHelpOutline } from "react-icons/md";
 import Joyride, { CallBackProps, STATUS } from "react-joyride";
 import FriendTable from "views/admin/friends/components/FriendTable";
 import Banner from "views/admin/friends/components/Banner";
-
-import P2 from "assets/img/jp.png";
+import { GET_ME } from "utils/queries";
 import { useQuery } from "@apollo/client";
 
-// import NewFriendCard from "views/admin/friends/components/NewFriendCard";
-// import { tutorialStyles } from "theme/components/tutorial";
-
 export default function FriendPage() {
-  const textColor = useColorModeValue("secondaryGray.500", "white");
+
+  const{ loading, data, refetch } = useQuery(GET_ME);
+
   const titleColor = useColorModeValue("brand.700", "white");
-  const textColorBrand = useColorModeValue("brand.500", "white");
 
-  const [runTutorial, setRunTutorial] = useState(false);
-  const navbarIcon = useColorModeValue("gray.400", "white");
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-  const tutorialSteps = [
-    {
-      target: "#new-card-step",
-      content: "Create a new journal by clicking the + button",
-    },
-    {
-      target: "#journal-card-step",
-      content:
-        "Your Journals will appear here. Click the view button to update your journal.",
-    },
-  ];
-
-  const handleJoyrideCallback = (data) => {
-    const { status } = data;
-    const finishedStatuses = [STATUS.FINISHED, STATUS.SKIPPED];
-
-    if (finishedStatuses.includes(status)) {
-      setRunTutorial(false);
-    }
-  };
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
       {/* Main Fields */}
@@ -87,7 +61,7 @@ export default function FriendPage() {
                 Your Friends
               </Text>
             </Flex>
-            <FriendTable />
+            <FriendTable friends={[...data.me.friends]}/>
           </Flex>
         </Flex>
       </Grid>
