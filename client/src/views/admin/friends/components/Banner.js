@@ -66,7 +66,7 @@ export default function Banner() {
         Connect with go getters like you
       </Text>
       <Button
-        w="20%"
+        w="40%"
         variant="brand"
         color="white"
         fontSize="sm"
