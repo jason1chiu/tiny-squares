@@ -4,17 +4,13 @@ import { useQuery, useMutation } from "@apollo/client";
 import {
   Box,
   Input,
-  Button,
   VStack,
   HStack,
   Text,
-  Heading,
-  useColorModeValue,
   Collapse,
   IconButton,
-  Center,
 } from "@chakra-ui/react";
-import { GET_LEGENDS } from "utils/queries";
+import { GET_LEGENDS, GET_JOURNAL, GET_JOURNALS } from "utils/queries";
 import { CREATE_LEGEND, UPDATE_LEGEND, DELETE_LEGEND } from "utils/mutations";
 
 import { AddIcon, EditIcon, DeleteIcon, CloseIcon, CheckIcon, ChevronDownIcon } from '@chakra-ui/icons';
@@ -26,16 +22,26 @@ const Legend = ({ journalId, refetchEntries }) => {
   const [selectedLegend, setSelectedLegend] = useState(null);
   const userId = localStorage.getItem("user_id");
   const [isCollapsed, setIsCollapsed] = useState(true);
+  
   const { data, refetch, loading, error } = useQuery(GET_LEGENDS, {
     variables: { id: journalId },
   });
+
   const MotionBox = motion(Box);
   const MotionIconButton = motion(IconButton);
-  const [createLegend] = useMutation(CREATE_LEGEND);
-  const [updateLegend] = useMutation(UPDATE_LEGEND);
-  const [deleteLegend] = useMutation(DELETE_LEGEND);
 
-  const titleColor = useColorModeValue("navy.700", "white");
+  const [createLegend] = useMutation(CREATE_LEGEND);
+
+  const [updateLegend] = useMutation(UPDATE_LEGEND
+  //   , {
+   /*  refetchQueries: [GET_LEGENDS, GET_JOURNAL, GET_JOURNALS], */
+  // }
+  );
+  const [deleteLegend] = useMutation(DELETE_LEGEND
+/*     , {
+    refetchQueries: [GET_LEGENDS, GET_JOURNAL, GET_JOURNALS],
+  } */
+  );
 
   const handleAddLegend = async () => {
     try {
@@ -108,9 +114,6 @@ const Legend = ({ journalId, refetchEntries }) => {
 
   return (
     <VStack spacing={4}>
-      {/* <Heading color={titleColor} size="sm" mb={2} >
-        Legend
-      </Heading> */}
       <HStack spacing={1}>
         <MotionBox
          id="color-step"

@@ -27,7 +27,7 @@ export default function YourJournalCard({ journal }) {
       const { data } = await removeJournal({
         variables: { journalId },
       });
-      console.log("Journal deleted:", data.removeJournal);
+ 
       refetch(); // refetch journal data
       meRefetch(); //refetch user data
     } catch (error) {

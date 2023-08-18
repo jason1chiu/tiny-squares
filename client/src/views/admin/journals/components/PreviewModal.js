@@ -19,15 +19,17 @@ import Joyride, { STATUS, LIFECYCLE } from "react-joyride";
 import { useQuery } from "@apollo/client";
 import { GET_JOURNAL } from "utils/queries";
 import { tutorialStyles } from "theme/components/tutorial";
-import { toPng } from 'html-to-image';
+import { toPng } from "html-to-image";
+
 const Overlay = () => <ModalOverlay bg="blackAlpha.700" />;
 
 export default function JournalModal({ isOpen, onClose, journal, refresh }) {
-  const { data, refetch } = useQuery(GET_JOURNAL, {
+  const { data } = useQuery(GET_JOURNAL, {
     variables: {
       id: journal._id,
     },
   });
+
   const titleColor = useColorModeValue("navy.700", "white");
   const [runTutorial, setRunTutorial] = useState(false);
   const navbarIcon = useColorModeValue("gray.400", "white");
@@ -61,19 +63,20 @@ export default function JournalModal({ isOpen, onClose, journal, refresh }) {
     },
   ];
   const downloadImage = () => {
-    const node = document.getElementById('your-board-id');
+    const node = document.getElementById("your-board-id");
 
     toPng(node)
-    .then((dataUrl) => {
-      const link = document.createElement('a');
-      link.download = 'my-journal.png';
-      link.href = dataUrl;
-      link.click();
-    })
-    .catch((error) => {
-      console.error('Oops, something went wrong!', error);
-    });
-};
+      .then((dataUrl) => {
+        const link = document.createElement("a");
+        link.download = "my-journal.png";
+        link.href = dataUrl;
+        link.click();
+      })
+      .catch((error) => {
+        console.error("Oops, something went wrong!", error);
+      });
+  };
+
   const handleJoyrideCallback = (data) => {
     const { status, step, lifecycle, type } = data;
     const finishedStatuses = [STATUS.FINISHED, STATUS.SKIPPED];
@@ -146,21 +149,22 @@ export default function JournalModal({ isOpen, onClose, journal, refresh }) {
                 onClick={() => {
                   setRunTutorial(true);
                   document.body.style.overflow = "hidden";
-                  debugger
                 }}
               />
             </Box>
             <Box flexGrow={1}></Box>
-            <Legend journalId={journal._id} refetchEntries={refetch} />
+            <Legend journalId={journal._id} /> 
+            {/* refetchEntries={refetch} */}
             <Box flexGrow={1}></Box>
             <ModalCloseButton />
           </Box>
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody overflowY="auto" maxHeight="70vh" id="cell-step">
-          <Overview journal_id={journal._id} data={data} refetch={refetch} />
+          <Overview journal_id={journal._id} data={data} />
         </ModalBody>
         <ModalFooter borderTop="1px" borderTopColor="secondaryGray.200">
+<<<<<<< HEAD
         <Button
         id="export-step"
     onClick={downloadImage}
@@ -177,6 +181,19 @@ export default function JournalModal({ isOpen, onClose, journal, refresh }) {
   >
     Close
   </Button>
+=======
+          <Button onClick={downloadImage}>Export</Button>
+          <Button
+            onClick={() => {
+              onClose();
+              if (refresh) {
+                window.location.reload();
+              }
+            }}
+          >
+            Close
+          </Button>
+>>>>>>> 5eadd49bb4625d718e0f36ad05f900c7f014cac1
         </ModalFooter>
       </ModalContent>
     </Modal>

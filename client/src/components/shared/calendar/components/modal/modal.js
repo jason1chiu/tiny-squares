@@ -40,7 +40,8 @@ const CellModal = ({
     setSelectedNote(e.target.value);
   };
 
-  const handleSave = () => {
+  const handleSave = (e) => {
+    e.stopPropagation();
     onSave(selectedLegend, selectedNote);
   };
 
