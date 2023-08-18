@@ -1,6 +1,7 @@
 import React from "react";
-import { Box, Flex, Heading, Text, SimpleGrid, Icon } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, SimpleGrid, Icon, Image } from "@chakra-ui/react";
 import { FaRegEdit, FaRegChartBar, FaPlusCircle } from "react-icons/fa"; 
+import iconBox from "assets/img/iconbox.png"
 
 const Features = () => {
   const cards = [
@@ -49,8 +50,9 @@ const Features = () => {
             flexDirection="column"
             alignItems="center"
           >
-            <Box borderRadius="full" p={8} bg="purple.500">
-              <Icon color="white" as={card.icon} w={12} h={12} />
+            <Box position="relative">
+              <Image src={iconBox} alt="Icon Box" h={{ base: "120px"}}/> 
+              <Icon color="white" as={card.icon} w={12} h={12} position="absolute" top="50%" left="50%" transform="translate(-50%, -50%)" /> 
             </Box>
             <Text mt={6} pl="5" pr="5" textAlign="center">
               {card.text}

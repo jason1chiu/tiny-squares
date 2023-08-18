@@ -11,7 +11,7 @@ export default function LandingPage() {
       <Banner />
       <WhatIs />
       <Features />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 

@@ -6,7 +6,7 @@ import buttonimg from "assets/img/2.png"
 import logo from "assets/img/ts.png";
 import { motion } from "framer-motion";
 import { ArrowRightIcon } from "@chakra-ui/icons";
-import graphic from "assets/img/landgraphic.png";
+import graphic from "assets/img/graphic.png";
 
 const MotionImage = motion(Image);
 const MotionBox = motion(Box);
@@ -37,7 +37,15 @@ const graphicVariant = {
   hidden: { opacity: 0, y: 50 },
   visible: { opacity: 1, y: 0, transition: { duration: 1, delay: 0.5 } },
 };
-
+const pulseVariant = { // Define this outside of the component
+  animate: {
+    scale: [1, 1.2, 1],
+    transition: {
+      duration: 2,
+      repeat: Infinity
+    }
+  }
+};
 export default function LandingPage() {
   const transformValue = useBreakpointValue({
     base: 'scale(1)',
@@ -71,24 +79,26 @@ export default function LandingPage() {
           position="absolute"
           top={{ base: "-2px", lg: "-2px" }}
           right={{ base: "-2px", lg: "-2px" }}
-          bg={`url(${buttonimg}) no-repeat center / cover`} 
+          bg={`url(${buttonimg}) no-repeat center / cover`}
           display="flex"
           alignItems="center"
           justifyContent="center"
           borderBottomLeftRadius="lg"
           zIndex="100"
-         
+
         >
           <MotionButton as={Link} to="/auth/sign-up" variant="brand"
-  color="white"
-  fontSize="sm"
-  fontWeight="500"
-  borderRadius="70px" initial="hidden" animate="visible"
-  background="transparent"
-  mb="3px"
->
-  Get Started <ArrowRightIcon ml={2} /> 
-</MotionButton>
+            color="white"
+            fontSize="sm"
+            fontWeight="500"
+            borderRadius="70px" initial="hidden" animate="visible"
+            background="transparent"
+            mb="3px"
+            p="16px"
+          >
+            Get Started
+            <MotionBox as={ArrowRightIcon} ml={2} variants={pulseVariant} animate="animate" />
+          </MotionButton>
         </Box>
         <Box
           w={{ base: "100%", md: "50%" }}
@@ -97,7 +107,7 @@ export default function LandingPage() {
           flexDirection="column"
           justifyContent="space-between"
         >
-          <Image src={logo} alt="Logo" w={{ base: "20%", md: "10%" }} mb="12"/>
+          <Image src={logo} alt="Logo" w={{ base: "20%", md: "10%" }} mb="12" />
           <MotionBox display="flex" flexDirection="column" justifyContent="center" flex="1" variants={sentence} initial="hidden" animate="visible">
             <Heading size="3xl" textAlign="left">
               {text.split("\n").map((line, index) => (
@@ -121,28 +131,29 @@ export default function LandingPage() {
           </MotionBox>
         </Box>
         <Box
-  w={{ base: "0", md: "50%" }}
-  h="100%"
-  p={10}
-  borderRadius="lg"
-  overflow="hidden"
-  position="relative"
-  display={{ base: "none", md: "block" }}
-  bgColor="transparent" // Making background transparent
->
-<Image 
-            src={bannerimg} 
-            objectFit="cover" 
-            objectPosition="right bottom" 
+          w={{ base: "0", md: "50%" }}
+          h="100%"
+          p={10}
+          borderRadius="lg"
+          overflow="hidden"
+          position="relative"
+          display={{ base: "none", md: "block" }}
+          bgColor="transparent" // Making background transparent
+        >
+          <MotionImage
+            src={bannerimg}
+            objectFit="cover"
+            objectPosition="right bottom"
             transform={transformValue} // Apply responsive value here
-            w="100%" 
-            h="100%" 
-            position="absolute" 
-            top={0} 
-            left={0} 
-            borderRadius="80px" 
+            w="100%"
+            h="100%"
+            position="absolute"
+            top={0}
+            left={0}
+            borderRadius="80px"
+            initial="hidden" animate="visible"
           />
-          {/* <MotionImage src={graphic} objectFit="cover" w="80%" h="80%" position="absolute" top="10%" left="10%" borderRadius="3xl" variants={graphicVariant} initial="hidden" animate="visible" /> */}
+
         </Box>
       </Box>
     </Flex>
