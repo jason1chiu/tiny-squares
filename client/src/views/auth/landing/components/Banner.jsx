@@ -1,10 +1,10 @@
 import React from "react";
-import { Button, Box, Flex, Image, Heading, Text, useColorModeValue } from "@chakra-ui/react";
+import { Button, Box, Flex, Image, Heading, Text, useColorModeValue, useBreakpointValue } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import bannerimg from "assets/img/jpb.png";
+import bannerimg from "assets/img/1.png";
 import logo from "assets/img/ts.png";
 import { motion } from "framer-motion";
-import graphic from "assets/img/graphic.png";
+import graphic from "assets/img/landgraphic.png";
 
 const MotionImage = motion(Image);
 const MotionBox = motion(Box);
@@ -37,14 +37,17 @@ const graphicVariant = {
 };
 
 export default function LandingPage() {
+  const transformValue = useBreakpointValue({
+    base: 'scale(1)',
+    md: 'scale(1.2) translateX(3.5%)',
+  });
   const tColor = useColorModeValue("brand.800", "white");
   const text = "Your life, \n one pixel at a time";
   return (
     <Flex
       w="100%"
       h="100vh"
-      bg={`url(${bannerimg}) no-repeat center center`}
-      bgSize="cover"
+      bg={`url(${bannerimg}) no-repeat right bottom / cover`}
       alignItems="center"
       justifyContent="center"
     >
@@ -92,16 +95,28 @@ export default function LandingPage() {
           </MotionBox>
         </Box>
         <Box
-          w={{ base: "0", md: "50%" }}
-          h="100%"
-          p={10}
-          borderRadius="lg"
-          overflow="hidden"
-          position="relative"
-          display={{ base: "none", md: "block" }}
-        >
-          <Image src={bannerimg} objectFit="cover" w="100%" h="100%" position="absolute" top={0} left={0} borderRadius="3xl" />
-          <MotionImage src={graphic} objectFit="cover" w="80%" h="80%" position="absolute" top="10%" left="10%" borderRadius="3xl" variants={graphicVariant} initial="hidden" animate="visible" />
+  w={{ base: "0", md: "50%" }}
+  h="100%"
+  p={10}
+  borderRadius="lg"
+  overflow="hidden"
+  position="relative"
+  display={{ base: "none", md: "block" }}
+  bgColor="transparent" // Making background transparent
+>
+<Image 
+            src={bannerimg} 
+            objectFit="cover" 
+            objectPosition="right bottom" 
+            transform={transformValue} // Apply responsive value here
+            w="100%" 
+            h="100%" 
+            position="absolute" 
+            top={0} 
+            left={0} 
+            borderRadius="3xl" 
+          />
+          {/* <MotionImage src={graphic} objectFit="cover" w="80%" h="80%" position="absolute" top="10%" left="10%" borderRadius="3xl" variants={graphicVariant} initial="hidden" animate="visible" /> */}
         </Box>
       </Box>
     </Flex>
