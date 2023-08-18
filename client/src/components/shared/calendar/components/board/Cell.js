@@ -1,19 +1,11 @@
 import React from "react";
-// import { useQuery } from "@apollo/client";
 import { Box, useDisclosure } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import CellModal from "components/shared/calendar/components/modal/modal";
-// import { GET_LEGENDS } from "utils/queries";
 
 const MotionBox = motion(Box);
 
-// const Cell = ({ journalEntriesMap, day, month, onSave, journalId }) => {
-//   const { isOpen, onOpen, onClose } = useDisclosure();
-//   const legendsQuery = useQuery(GET_LEGENDS, {
-//     variables: { id: journalId },
-//   });
-
-const Cell = ({ journalEntriesMap, day, month, onSave, journalId, legends }) => {
+const Cell = ({ journalEntriesMap, day, month, onSave, legends }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleCellClick = () => {
@@ -37,7 +29,6 @@ const Cell = ({ journalEntriesMap, day, month, onSave, journalId, legends }) => 
   return (
     <>
       <MotionBox
-      
         h="100%"
         w="100%"
         borderWidth="1px"
@@ -58,14 +49,6 @@ const Cell = ({ journalEntriesMap, day, month, onSave, journalId, legends }) => 
           border: "1px solid rgba(255,255,255,0.1)",
         }}
       ></MotionBox>
-      {/* <CellModal
-        isOpen={isOpen}
-        onClose={onClose}
-        onSave={handleSave}
-        initialColor={currentCellValue?.legend?.color}
-        initialNote={currentCellValue?.note}
-        legends={legendsQuery?.data?.legends ?? []}
-      /> */}
       <CellModal
         isOpen={isOpen}
         onClose={onClose}

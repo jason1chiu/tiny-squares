@@ -5,13 +5,16 @@ import Card from "components/card/card";
 import NewJournalModal from "views/admin/journals/components/NewJournalModal";
 import { useMutation } from "@apollo/client";
 import { ADD_JOURNAL } from "utils/mutations";
-import { GET_JOURNALS, GET_ME } from "utils/queries";
+import { GET_JOURNALS, GET_ME, GET_JOURNAL } from "utils/queries";
 
 import { useAuth } from "contexts/auth.context";
 import { useQuery } from "@apollo/client";
 
 export default function NewCard() {
-  let [addJournal, { error }] = useMutation(ADD_JOURNAL);
+  let [addJournal] = useMutation(ADD_JOURNAL, {
+    refetchQueries: [GET_JOURNALS, GET_JOURNAL, GET_ME],
+  });
+
   const [journalLimitReached, setJournalLimitReached] = useState(false);
 
   let { user } = useAuth();

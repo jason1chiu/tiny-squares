@@ -29,13 +29,14 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
   const [journalName, setJournalName] = useState("");
   const [journalImage, setJournalImage] = useState(1);
   const { isOpen: isJournalImageOpen, onToggle: onJournalImageToggle } =
-    useDisclosure(); // And this
+    useDisclosure();
 
   const [journalLimitReached, setJournalLimitReached] = useState(false);
 
   const bColor = useColorModeValue("secondaryGray.600", "white");
   const tColor = useColorModeValue("brand.800", "white");
   const pColor = useColorModeValue("brand.600", "white");
+  
   const { data } = useQuery(GET_JOURNALS);
   const { data: meData, refetch: meRefetch } = useQuery(GET_ME); 
 

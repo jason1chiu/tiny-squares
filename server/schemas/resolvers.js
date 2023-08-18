@@ -21,17 +21,49 @@ const resolvers = {
       const userData = await User.findOne({ _id: context.user._id })
         .select("-__v -password")
         .populate("journals")
-        .populate("entries");
+        .populate({
+          path: "journals",
+          populate:{
+            path: 'entries',
+            model: 'Entry'
+          }
+        })
+        .populate({
+          path: "journals",
+          populate:{
+            path: 'entries',
+            populate:{
+              path: 'legend',
+              model: 'Legend'  
+            }
+          }
+        })
+        .populate({
+          path: "journals",
+          populate:{
+            path: 'legends',
+            model: 'Legend'
+          }
+        })
+        .exec();
 
+      // console.log(userData.journals);
       return userData.journals;
     },
 
     journal: async (parent, { id }, context) => {
       let results = await Journal.findById(id)
         .populate("entries")
+        .populate({
+          path: "entries",
+          populate:{
+            path: 'legend',
+            model: 'Legend'  
+          }
+        })
         .populate("legends")
         .exec();
-
+        console.log(results)
       return results;
     },
     legends: async (parent, { id }, context) => {
@@ -112,11 +144,11 @@ const resolvers = {
       return results;
     },
 
-    updateUser: async (parent, { username, avatar }, context) => {
+    updateUser: async (parent, { username, avatar, cover }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $set: { username: username, avatar: avatar } },
+          { $set: { username: username, avatar: avatar, cover: cover } },
           { new: true }
         );
 
