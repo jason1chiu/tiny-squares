@@ -1,9 +1,5 @@
 const { Schema, model } = require("mongoose");
 
-// Import entrySchema
-const { entrySchema } = require("./Entry");
-const { legendSchema } = require("./Legend");
-
 const journalSchema = new Schema(
   {
     name: {

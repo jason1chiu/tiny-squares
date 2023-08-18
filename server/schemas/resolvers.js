@@ -21,17 +21,49 @@ const resolvers = {
       const userData = await User.findOne({ _id: context.user._id })
         .select("-__v -password")
         .populate("journals")
-        .populate("entries");
+        .populate({
+          path: "journals",
+          populate:{
+            path: 'entries',
+            model: 'Entry'
+          }
+        })
+        .populate({
+          path: "journals",
+          populate:{
+            path: 'entries',
+            populate:{
+              path: 'legend',
+              model: 'Legend'  
+            }
+          }
+        })
+        .populate({
+          path: "journals",
+          populate:{
+            path: 'legends',
+            model: 'Legend'
+          }
+        })
+        .exec();
 
+      // console.log(userData.journals);
       return userData.journals;
     },
 
     journal: async (parent, { id }, context) => {
       let results = await Journal.findById(id)
         .populate("entries")
+        .populate({
+          path: "entries",
+          populate:{
+            path: 'legend',
+            model: 'Legend'  
+          }
+        })
         .populate("legends")
         .exec();
-
+        console.log(results)
       return results;
     },
     legends: async (parent, { id }, context) => {
