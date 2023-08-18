@@ -29,7 +29,7 @@ export default function Overview() {
     {
       target: "#journal-card-step",
       content:
-        "Your Journals will appear here. Click the view button to update your journal.",
+        "Journals that have not yet been updated today will display in the journals section. Click on a journal to update it.",
     },
   ];
 

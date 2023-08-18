@@ -8,11 +8,15 @@ import {
   Link,
   Text,
   useColorModeValue,
+  IconButton,
 } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import LinksAdminNav from "components/navbar/LinksAdminNav";
+import Joyride, { STATUS } from "react-joyride";
 import { MdHelpOutline } from "react-icons/md";
+import { tutorialStyles } from "theme/components/tutorial"; // Make sure this path is correct
+
 
 export default function AdminNavbar(props) {
   const [scrolled, setScrolled] = useState(false);
@@ -26,7 +30,55 @@ export default function AdminNavbar(props) {
   });
 
   const { secondary, message, brandText } = props;
+  const [runTutorial, setRunTutorial] = useState(false);
 
+  const tutorialSteps = [
+    {
+      target: "#entries-step", // Add appropriate target elements
+      content:
+        "Compiles your entries from individual journals and displays your data in a pie chart. Hover over the chart for more information.",
+        placement: "right",
+    },
+    {
+      target: "#usage-step", // Add appropriate target elements
+      content:
+        "Compiles data from all your journals and displays it in a bar chart.",
+        placement: "right",
+    },
+    {
+      target: "#jlink-step", // Add appropriate target elements
+      content: "You can navigate to the journal page by clicking the link.",
+      placement: "right",
+    },
+    {
+      target: "#update-step", 
+      content:
+        "Your journals that have not yet been updated will appear here. Clicking on them will allow you to update them.",
+        placement: "left",
+    },
+    {
+    target: "#badge-step", 
+    content:
+      "You accumulate badges as you update your journals.",
+      placement: "right",
+  },
+  {
+    target: "#friend-step", 
+    content:
+      "You can view friends here. You can view all or add new friends by clicking the Friends link",
+      placement: "left",
+  },
+    
+  ];
+  const handleJoyrideCallback = (data) => {
+    const { status } = data;
+    const finishedStatuses = [STATUS.FINISHED, STATUS.SKIPPED];
+
+    if (finishedStatuses.includes(status)) {
+      setRunTutorial(false);
+      document.body.style.overflow = "auto"; // Reset overflow when the tutorial ends
+    }
+  };
   let mainText = useColorModeValue("navy.700", "white");
   let secondaryText = useColorModeValue("gray.700", "white");
   let navbarPosition = "fixed";
@@ -92,6 +144,15 @@ export default function AdminNavbar(props) {
         "2xl": "calc(100vw - 365px)",
       }}
     >
+      <Joyride
+        callback={handleJoyrideCallback}
+        continuous
+        run={runTutorial}
+        steps={tutorialSteps}
+        scrollToFirstStep={true}
+        scrollToSteps={true}
+        styles={tutorialStyles}
+      />
       <Flex
         w="100%"
         flexDirection={{
@@ -135,8 +196,22 @@ export default function AdminNavbar(props) {
           >
             {brandText}
           </Link>
-          {brandText === "Dashboard" ? <Icon as="MdHelpOutline" />: ""}
-        </Box>
+          {brandText === "Dashboard" ? (
+  <IconButton
+    icon={<MdHelpOutline size="20" />}
+    color="secondaryGray.500"
+    mb="10px"
+    bgColor="transparent"
+    _hover={{ color: "secondaryGray.700" }}
+    onClick={() => {
+      setRunTutorial(true);
+      document.body.style.overflow = "hidden";
+    }}
+  />
+) : (
+  ""
+)}
+</Box>
         <Box ms="auto" w={{ sm: "100%", md: "unset" }}>
           <LinksAdminNav
             onOpen={props.onOpen}

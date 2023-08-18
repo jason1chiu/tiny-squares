@@ -34,7 +34,7 @@ export default function Journal(props) {
         whileHover={{ scale: 1.1 }}
         transition={{ type: "spring", stiffness: 500 }}
       >
-        <Flex align="center" direction={{ base: "column", md: "row" }}>
+        <Flex align="center" direction={{ base: "row", md: "row" }}>
           <Image
             h="80px"
             w="80px"
@@ -45,6 +45,7 @@ export default function Journal(props) {
           />
           <Box mt={{ base: "10px", md: "0" }}>
             <Text
+            align={{ base: "left", md: "left" }}
               color={textColorPrimary}
               fontWeight="500"
               fontSize="md"

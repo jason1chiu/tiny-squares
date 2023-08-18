@@ -112,7 +112,7 @@ export default function Profile(props) {
               src={user && user.user ? avatar : "Default Name"}
             />
             {user && user.user && user.user.isPremium ? (
-              <img
+              <img 
                 src={premiumBadge}
                 alt="Premium Badge"
                 style={{
@@ -136,7 +136,7 @@ export default function Profile(props) {
           ></Box>
         </Stack>
         <Tooltip label={tooltipText} aria-label={tooltipText}>
-          <Text
+          <Text id="badge-step"
             color={textColorPrimary}
             fontWeight="bold"
             fontSize="xl"
