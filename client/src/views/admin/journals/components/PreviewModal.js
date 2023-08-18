@@ -153,7 +153,7 @@ export default function JournalModal({ isOpen, onClose, journal, refresh }) {
               />
             </Box>
             <Box flexGrow={1}></Box>
-            <Legend journalId={journal._id} /> 
+            <Legend journalId={journal._id} />
             {/* refetchEntries={refetch} */}
             <Box flexGrow={1}></Box>
             <ModalCloseButton />
@@ -164,25 +164,9 @@ export default function JournalModal({ isOpen, onClose, journal, refresh }) {
           <Overview journal_id={journal._id} data={data} />
         </ModalBody>
         <ModalFooter borderTop="1px" borderTopColor="secondaryGray.200">
-<<<<<<< HEAD
-        <Button
-        id="export-step"
-    onClick={downloadImage}
-  >
-    Export
-  </Button>
-  <Button
-    onClick={() => {
-      onClose();
-      if (refresh) {
-        window.location.reload();
-      }
-    }}
-  >
-    Close
-  </Button>
-=======
-          <Button onClick={downloadImage}>Export</Button>
+          <Button id="export-step" onClick={downloadImage}>
+            Export
+          </Button>
           <Button
             onClick={() => {
               onClose();
@@ -193,7 +177,6 @@ export default function JournalModal({ isOpen, onClose, journal, refresh }) {
           >
             Close
           </Button>
->>>>>>> 5eadd49bb4625d718e0f36ad05f900c7f014cac1
         </ModalFooter>
       </ModalContent>
     </Modal>
