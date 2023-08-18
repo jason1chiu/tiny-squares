@@ -30,7 +30,7 @@ function SidebarContent(props) {
       setUser(false);
       removeCookie("token");
       localStorage.clear();
-      setTimeout(() => history.push("/auth/sign-in"), 100);
+      setTimeout(() => history.push("/"), 100);
     } catch (error) {
       console.error("Error logging out", error);
     }
