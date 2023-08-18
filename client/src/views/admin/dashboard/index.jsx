@@ -62,7 +62,7 @@ export default function Overview() {
   }
 
   return (
-    <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
+    <Box pt={{ base: "130px", md: "80px", xl: "80px" }} mt="20px">
       <Joyride
         callback={handleJoyrideCallback}
         continuous

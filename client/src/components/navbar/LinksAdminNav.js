@@ -138,14 +138,14 @@ export default function HeaderLinks(props) {
             borderRadius="30px"
             me="7px"
           >
-            <Icon color={ethColor} w="9px" h="14px" as={FaEthereum} />
+            <Icon color={ethColor} w="9px" h="14px" as={FaEthereum} _hover={{ color: "secondaryGray.900" }}/>
           </Flex>
         </Flex>
 
         <SidebarResponsive routes={routes} />
         <Menu>
           <MenuButton p="0px">
-            <Icon mt="9px" as={MdNotificationsNone} color={navbarIcon} w="24px" h="24px" />
+            <Icon mt="9px" as={MdNotificationsNone} color={navbarIcon} w="24px" h="24px" _hover={{ color: "secondaryGray.900" }}/>
           </MenuButton>
           <MenuList
             boxShadow={shadow}
@@ -186,6 +186,7 @@ export default function HeaderLinks(props) {
             me={{ base: "30px", md: "unset" }}
             minW={{ base: "unset", md: "400px", xl: "450px" }}
             maxW={{ base: "360px", md: "unset" }}
+            _hover={{ color: "secondaryGray.900" }}
           >
             <Flex flexDirection="column">
               <MenuItem
@@ -240,7 +241,7 @@ export default function HeaderLinks(props) {
         <Menu>
           <MenuButton p="0px">
             <Avatar
-              _hover={{ cursor: "pointer" }}
+              _hover={{ cursor: "pointer", color: "secondaryGray.900"  }}
               color="white"
               src={data.me.avatar}
               bg="#11047A"

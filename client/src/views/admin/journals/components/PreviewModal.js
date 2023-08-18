@@ -54,6 +54,11 @@ export default function JournalModal({ isOpen, onClose, journal, refresh }) {
       content: "Now you can update your journal by clicking on a pixel",
       placement: "center",
     },
+    {
+      target: "#export-step",
+      content: "You can download an image of your journal here",
+      placement: "left",
+    },
   ];
   const downloadImage = () => {
     const node = document.getElementById('your-board-id');
@@ -157,6 +162,7 @@ export default function JournalModal({ isOpen, onClose, journal, refresh }) {
         </ModalBody>
         <ModalFooter borderTop="1px" borderTopColor="secondaryGray.200">
         <Button
+        id="export-step"
     onClick={downloadImage}
   >
     Export

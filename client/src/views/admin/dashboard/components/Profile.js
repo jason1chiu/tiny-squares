@@ -105,8 +105,8 @@ export default function Profile(props) {
             justifyContent="center"
           >
             <Avatar
-              h="87px"
-              w="87px"
+              h="90px"
+              w="90px"
               border="4px solid"
               borderColor={borderColor}
               src={user && user.user ? avatar : "Default Name"}
