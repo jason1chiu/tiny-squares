@@ -1,10 +1,12 @@
 import React from "react";
-import { Button, Box, Flex, Image, Heading, Text, useColorModeValue } from "@chakra-ui/react";
+import { Button, Box, Flex, Image, Heading, Text, useColorModeValue, useBreakpointValue } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import bannerimg from "assets/img/jpb.png";
+import bannerimg from "assets/img/1.png";
+import buttonimg from "assets/img/2.png"
 import logo from "assets/img/ts.png";
 import { motion } from "framer-motion";
-import graphic from "assets/img/graphic.png";
+import { ArrowRightIcon } from "@chakra-ui/icons";
+import graphic from "assets/img/landgraphic.png";
 
 const MotionImage = motion(Image);
 const MotionBox = motion(Box);
@@ -37,20 +39,23 @@ const graphicVariant = {
 };
 
 export default function LandingPage() {
+  const transformValue = useBreakpointValue({
+    base: 'scale(1)',
+    md: 'scale(1.2) translateX(3.5%)',
+  });
   const tColor = useColorModeValue("brand.800", "white");
   const text = "Your life, \n one pixel at a time";
   return (
     <Flex
       w="100%"
       h="100vh"
-      bg={`url(${bannerimg}) no-repeat center center`}
-      bgSize="cover"
+      bg={`url(${bannerimg}) no-repeat right bottom / cover`}
       alignItems="center"
       justifyContent="center"
     >
       <Box
         w="90vw"
-        h="90vh"
+        h={{ base: "80vh", md: "90vh", lg: "90vh" }}
         borderRadius="3xl"
         bgColor="white"
         boxShadow="xl"
@@ -58,7 +63,33 @@ export default function LandingPage() {
         display="flex"
         flexDirection={{ base: "column", md: "row" }}
         justifyContent="space-between"
+        position="relative"
       >
+        <Box
+          w="150px"
+          h="70px"
+          position="absolute"
+          top={{ base: "-2px", lg: "-2px" }}
+          right={{ base: "-2px", lg: "-2px" }}
+          bg={`url(${buttonimg}) no-repeat center / cover`} 
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          borderBottomLeftRadius="lg"
+          zIndex="100"
+         
+        >
+          <MotionButton as={Link} to="/auth/sign-up" variant="brand"
+  color="white"
+  fontSize="sm"
+  fontWeight="500"
+  borderRadius="70px" initial="hidden" animate="visible"
+  background="transparent"
+  mb="3px"
+>
+  Get Started <ArrowRightIcon ml={2} /> 
+</MotionButton>
+        </Box>
         <Box
           w={{ base: "100%", md: "50%" }}
           p={{ base: 4, md: 10 }}
@@ -66,7 +97,7 @@ export default function LandingPage() {
           flexDirection="column"
           justifyContent="space-between"
         >
-          <Image src={logo} alt="Logo" w={{ base: "30%", md: "10%" }} />
+          <Image src={logo} alt="Logo" w={{ base: "20%", md: "10%" }} mb="12"/>
           <MotionBox display="flex" flexDirection="column" justifyContent="center" flex="1" variants={sentence} initial="hidden" animate="visible">
             <Heading size="3xl" textAlign="left">
               {text.split("\n").map((line, index) => (
@@ -85,23 +116,33 @@ export default function LandingPage() {
               <MotionButton as={Link} to="/auth/sign-in" variants={buttonVariant} initial="hidden" animate="visible">
                 Sign In
               </MotionButton>
-              <MotionButton as={Link} to="/auth/sign-up" m={2} variants={buttonVariant} initial="hidden" animate="visible">
-                Sign Up
-              </MotionButton>
+
             </Box>
           </MotionBox>
         </Box>
         <Box
-          w={{ base: "0", md: "50%" }}
-          h="100%"
-          p={10}
-          borderRadius="lg"
-          overflow="hidden"
-          position="relative"
-          display={{ base: "none", md: "block" }}
-        >
-          <Image src={bannerimg} objectFit="cover" w="100%" h="100%" position="absolute" top={0} left={0} borderRadius="3xl" />
-          <MotionImage src={graphic} objectFit="cover" w="80%" h="80%" position="absolute" top="10%" left="10%" borderRadius="3xl" variants={graphicVariant} initial="hidden" animate="visible" />
+  w={{ base: "0", md: "50%" }}
+  h="100%"
+  p={10}
+  borderRadius="lg"
+  overflow="hidden"
+  position="relative"
+  display={{ base: "none", md: "block" }}
+  bgColor="transparent" // Making background transparent
+>
+<Image 
+            src={bannerimg} 
+            objectFit="cover" 
+            objectPosition="right bottom" 
+            transform={transformValue} // Apply responsive value here
+            w="100%" 
+            h="100%" 
+            position="absolute" 
+            top={0} 
+            left={0} 
+            borderRadius="80px" 
+          />
+          {/* <MotionImage src={graphic} objectFit="cover" w="80%" h="80%" position="absolute" top="10%" left="10%" borderRadius="3xl" variants={graphicVariant} initial="hidden" animate="visible" /> */}
         </Box>
       </Box>
     </Flex>

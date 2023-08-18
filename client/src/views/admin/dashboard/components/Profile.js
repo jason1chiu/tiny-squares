@@ -105,14 +105,14 @@ export default function Profile(props) {
             justifyContent="center"
           >
             <Avatar
-              h="87px"
-              w="87px"
+              h="90px"
+              w="90px"
               border="4px solid"
               borderColor={borderColor}
               src={user && user.user ? avatar : "Default Name"}
             />
             {user && user.user && user.user.isPremium ? (
-              <img
+              <img 
                 src={premiumBadge}
                 alt="Premium Badge"
                 style={{
@@ -136,7 +136,7 @@ export default function Profile(props) {
           ></Box>
         </Stack>
         <Tooltip label={tooltipText} aria-label={tooltipText}>
-          <Text
+          <Text id="badge-step"
             color={textColorPrimary}
             fontWeight="bold"
             fontSize="xl"

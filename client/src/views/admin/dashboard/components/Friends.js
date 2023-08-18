@@ -12,9 +12,9 @@ export default function Friends({ friends }) {
     const friendsTabLink = "/admin/friends";
     const history = useHistory();
     return (
-      <Card mb={{ base: "0px", lg: "20px" }} align="center">
+      <Card mb={{ base: "0px", lg: "20px" }} align="center" id="friend-step">
         <Tooltip label="View all" fontSize="md">
-          <Link
+          <Link 
             onClick={() => history.push("/admin/friends")} // Set the link here
             color={textColorPrimary}
             fontWeight="bold"
