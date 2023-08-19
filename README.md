@@ -1,3 +1,18 @@
+![GitHub language count](https://img.shields.io/github/languages/count/jason1chiu/tiny-squares?style=plastic&labelColor=%23785bc8&color=%2394a1be)
+![GitHub contributors](https://img.shields.io/github/contributors/jason1chiu/tiny-squares?style=plastic&labelColor=%23785bc8&color=%2394a1be)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/t/jason1chiu/tiny-squares?style=plastic&labelColor=%23785bc8&color=%2394a1be)
+![Static Badge](https://img.shields.io/badge/React-s?style=plastic&logo=React&labelColor=%23785bc8&color=%2394a1be)
+![Static Badge](https://img.shields.io/badge/Axios-s?style=plastic&logo=Axios&labelColor=%23785bc8&color=%2394a1be)
+![Static Badge](https://img.shields.io/badge/Mongoose-s?style=plastic&logo=mongoose&labelColor=%23785bc8&color=%2394a1be)
+![Static Badge](https://img.shields.io/badge/Stripe-s?style=plastic&logo=Stripe&labelColor=%23785bc8&color=%2394a1be)
+![Static Badge](https://img.shields.io/badge/Express-s?style=plastic&logo=express&labelColor=%23785bc8&color=%2394a1be)
+![Static Badge](https://img.shields.io/badge/FramerMotion-s?style=plastic&logo=Framer&labelColor=%23785bc8&color=%2394a1be)
+![Static Badge](https://img.shields.io/badge/ChakraUI-s?style=plastic&logo=ChakraUI&labelColor=%23785bc8&color=%2394a1be)
+![Static Badge](https://img.shields.io/badge/React-Joyride-s?style=plastic&labelColor=%23785bc8&color=%2394a1be)
+![Static Badge](https://img.shields.io/badge/Babel-s?style=plastic&logo=Babel&labelColor=%23785bc8&color=%2394a1be)
+![Static Badge](https://img.shields.io/badge/HTMLToIImage-s?style=plastic&labelColor=%23785bc8&color=%2394a1be)
+
+
 
 <a name="readme-top"></a>
 <br />
