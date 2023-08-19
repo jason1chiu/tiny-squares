@@ -36,27 +36,27 @@ export default function Profile(props) {
 
   const getBadge = (entries) => {
     let badge, tooltipText;
-    if (entries >= 365) {
+    if (entries >= 500) {
       badge = <img src={Badge7} alt="Badge7" width="15px" />;
-      tooltipText = "One Year";
-    } else if (entries >= 182) {
+      tooltipText = entries + " Entries";
+    } else if (entries >= 250) {
       badge = <img src={Badge6} alt="Badge6" width="15px" />;
-      tooltipText = "Half a Year";
+      tooltipText = entries + " Entries";
     } else if (entries >= 100) {
       badge = <img src={Badge5} alt="Badge5" width="45px" />;
-      tooltipText = "100 Entries";
+      tooltipText = entries + " Entries";
     } else if (entries >= 50) {
       badge = <img src={Badge4} alt="Badge4" width="45px" />;
-      tooltipText = "50 Entries";
+      tooltipText = entries + " Entries";
     } else if (entries >= 25) {
       badge = <img src={Badge3} alt="Badge3" width="45px" />;
-      tooltipText = "25 Entries";
+      tooltipText = entries + " Entries";
     } else if (entries >= 10) {
       badge = <img src={Badge2} alt="Badge2" width="45px" />;
-      tooltipText = "10 Entries";
+      tooltipText = entries + " Entries";
     } else if (entries >= 1) {
       badge = <img src={Badge1} alt="Badge1" width="45px" />;
-      tooltipText = "1 Entry";
+      tooltipText = entries + " Entries";
     }
     if (!badge) {
       badge = <span></span>;
