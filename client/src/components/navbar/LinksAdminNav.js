@@ -1,9 +1,8 @@
 // React imports from "react";
-import { MdEdit } from "react-icons/md";
+import { MdEdit, MdNotificationsNone, MdLogout } from "react-icons/md";
 import { FaEthereum } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import EditProfileModal from "components/modal/EditProfileModal";
-import { MdNotificationsNone } from 'react-icons/md';
 import { BsShop } from "react-icons/bs";
 import { CartModal } from "components/shared/store/components/CartModal";
 import { useCookies } from "react-cookie";
@@ -298,8 +297,11 @@ export default function HeaderLinks(props) {
                   color="red.400"
                   borderRadius="8px"
                   px="14px"
+                  onClick={handleLogout}
+                  variants={menuItemVariants}
                 >
-                  <Link w="100%" href="#">
+                  <Icon as={MdLogout} w={5} h={5} mr={2} /> Sign Out
+                  {/* <Link w="100%" href="#">
                     <Button
                       w="100%"
                       h="44px"
@@ -310,7 +312,7 @@ export default function HeaderLinks(props) {
                     >
                       Sign Out
                     </Button>
-                  </Link>
+                  </Link> */}
                 </MenuItem>
               </Flex>
             </Flex>
