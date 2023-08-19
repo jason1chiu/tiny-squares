@@ -18,7 +18,7 @@
 
 - [About the Project](#description)
 
-<!-- - [Added Features](#features) -->
+- [Added Features](#features)
 
 - [Installation](#installation)
 
@@ -54,13 +54,14 @@ Your ultimate destination for personalized lifestyle journals. Track sports, hea
 
 
 
-<!-- ## :star: Added Features
+## :star: Added Features
 
 - Create and delete custom Pixel Journals
-- K
-- View, add, delete and update functions
-- Cancel option that sends you to main page
-- .env file that protects password -->
+- Add and view friends
+- Journal data collected and displayed in graphs
+- Download image of your custom journal
+- Badge system based on journal entries
+- PWA feature, download the app locally
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -123,7 +124,7 @@ DB_PW='your_mysql_password'
    <br />
    
 
- <a href="https://tinysquares.herokuapp.com/">Deployed Website</a>
+ <a align="center" href="https://tinysquares.herokuapp.com/">Deployed Website</a>
    <img src='./client/public/TS-dash.png' alt='dashboard pic'>
    
 
@@ -134,33 +135,47 @@ DB_PW='your_mysql_password'
 
 ## :handshake: Contributing
 
-Thank you for your interest in contributing to this project! By contributing, you can help make this project even better for everyone.
+We welcome contributions to this project. Below is our team who has been working tirelessly to make this app come to life. Feel free to reach out to any of us on LinkedIn or GitHub.
 
-### How to Contribute
+---
 
-If you would like to contribute to this project, please follow these steps:
+### Jason Chiu
 
-1. **Fork the Project:** Fork this project to your own GitHub account.
+<div align="center">
+    <a href="https://www.linkedin.com/in/chien-cheng-chiu-0a0930257/" target="_blank">LinkedIn</a> | 
+    <a href="https://github.com/jason1chiu" target="_blank">GitHub</a>
+</div>
 
-2. **Create your Feature Branch:** Create a branch for your feature using:
+---
 
-```bash
-git checkout -b your-branch-name.
-```
+### Cassie LeClair
 
-3. **Commit your Changes:** Commit your changes using:
+<div align="center">
+    <a href="https://www.linkedin.com/in/cassie-leclair-931093b6/" target="_blank">LinkedIn</a> | 
+    <a href="https://github.com/cleclair71" target="_blank">GitHub</a>
+</div>
 
-```bash
-git commit -m "Your commit message here"
-```
+---
 
-4. **Push to the Branch:** Push your changes to the branch using:
+### Calvin Trieu
 
-```bash
-git push origin your-branch-name
-```
+<div align="center">
+    <a href="https://www.linkedin.com/in/calvin-trieu/" target="_blank">LinkedIn</a> | 
+    <a href="https://github.com/cntrieu" target="_blank">GitHub</a>
+</div>
 
-5. **Open a Pull Request:** Open a pull request to merge your changes into the main branch of the original project.
+---
+
+### Luba Mistys
+
+<div align="center">
+    | 
+    <a href="https://github.com/lmintsys" target="_blank">GitHub</a>
+</div>
+
+---
+
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -172,7 +187,7 @@ MIT
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<a name="resources"></a>
+<!-- <a name="resources"></a> -->
 
 <!-- ## :mag_right: Resources
 
@@ -185,7 +200,7 @@ MIT
 - [break](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/break)
 - [ShieldsIO](https://shields.io/category/funding)
  -->
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 <a name="questions"></a>
 
@@ -200,9 +215,9 @@ If you have any questions about this project, please don't hesitate to reach out
 2. **Create a new issue:** If you can't find the answer to your question in the documentation, please create a new issue in the project's issue tracker. Be sure to provide as much detail as possible about your question, including any relevant code snippets or screenshots.
 
 
-   <p align="center"> 
+   <!-- <p align="center"> 
    <a href="https://github.com/cleclair71/hr-hub">My Repository</a>
-   </p>
+   </p> -->
 
 ### :pray: Feedback and Suggestions
 
