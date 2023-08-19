@@ -90,25 +90,7 @@ cd tiny-squares
 npm i
 ```
 
-<!-- 4. Create a .env file in the root directory and add your MySQL username, password, and database name in the following format:
 
-```bash
-DB_NAME='your_database_name'
-DB_USER='your_mysql_username'
-DB_PW='your_mysql_password'
-```
-
-5. Create the tables in the database and seed them with test data
-
-```bash
-\Nomad-Nebula> npm run seed
-```
-
-6. Start the server
-
-```bash
-\Nomad-Nebula> npm start
-``` -->
 
 4.  to https://tinysquares.herokuapp.com/ in your browser to access the site
 
@@ -124,9 +106,13 @@ DB_PW='your_mysql_password'
    <br />
    
 
- <a align="center" href="https://tinysquares.herokuapp.com/">Deployed Website</a>
-   <img src='./client/public/TS-dash.png' alt='dashboard pic'>
-   
+<div align="center">
+  <h2><a href="https://tinysquares.herokuapp.com/" target="_blank">🌐 Deployed Website</a></h2>
+  <p>Click the link above to explore our live application!</p>
+  <a href="https://tinysquares.herokuapp.com/" target="_blank">
+    <img src='./client/public/TS-dash.png' alt='dashboard pic' style="border: 5px solid #a46cf5; border-radius: 15px;">
+  </a>
+</div>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
