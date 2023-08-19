@@ -5,7 +5,7 @@ import {
   MdLock,
   MdMenuBook
 } from "react-icons/md";
-
+import { FaUserFriends } from "react-icons/fa";
 import Journals from "views/admin/journals";
 import Dashboard from "views/admin/dashboard";
 import Friends from "views/admin/friends"
@@ -32,7 +32,7 @@ const routes = [
     name: "Friends",
     layout: "/admin",
     path: "/friends",
-    icon: <Icon as={MdMenuBook} width='20px' height='20px' color='inherit' />,
+    icon: <Icon as={FaUserFriends} width='20px' height='20px' color='inherit' />,
     component: Friends,
   },
   {
