@@ -13,10 +13,8 @@ import { motion } from "framer-motion";
 // Chakra imports
 import {
   Avatar,
-  Button,
   Flex,
   Icon,
-  Link,
   Menu,
   MenuButton,
   MenuItem,
