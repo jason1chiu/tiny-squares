@@ -121,7 +121,7 @@ export default function LandingPage() {
                 </React.Fragment>
               ))}
             </Heading>
-            <Text mt={8} textAlign="left" size="lg">Welcome to TinySquares</Text>
+            <Text mt={8} textAlign="left" size="xl">Welcome to TinySquares</Text>
             <Box mt={4}>
               <MotionButton as={Link} to="/auth/sign-in" variants={buttonVariant} initial="hidden" animate="visible">
                 Sign In
@@ -138,7 +138,7 @@ export default function LandingPage() {
           overflow="hidden"
           position="relative"
           display={{ base: "none", md: "block" }}
-          bgColor="transparent" // Making background transparent
+          bgColor="transparent" 
         >
           <MotionImage
             src={bannerimg}

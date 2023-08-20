@@ -30,7 +30,7 @@ const Features = () => {
       bg="white"
       flexDirection="column"
       p={10}
-      mb="10"
+      
     >
       <Heading size="md" color="#a46cf5" textAlign="left">
         How it works

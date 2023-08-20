@@ -2,7 +2,7 @@ import React from 'react';
 import Banner from 'views/auth/landing/components/Banner';
 import WhatIs from 'views/auth/landing/components/WhatIs';
 import Features from 'views/auth/landing/components/Features';
-import Footer from 'layouts/auth/Default'
+import Footer from 'components/footer/Footer'
 
 export default function LandingPage() {
     
@@ -11,7 +11,7 @@ export default function LandingPage() {
       <Banner />
       <WhatIs />
       <Features />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 
