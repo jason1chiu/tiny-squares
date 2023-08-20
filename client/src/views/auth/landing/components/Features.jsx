@@ -1,13 +1,13 @@
 import React from "react";
 import { Box, Flex, Heading, Text, SimpleGrid, Icon, Image } from "@chakra-ui/react";
-import { FaRegEdit, FaRegChartBar, FaPlusCircle } from "react-icons/fa"; 
+import { FaRegEdit, FaRegChartBar, FaPlusCircle, FaUserFriends } from "react-icons/fa"; 
 import iconBox from "assets/img/iconbox.png"
 
 const Features = () => {
   const cards = [
     {
       icon: FaPlusCircle,
-      text: "Create a journal through the journals tab. Choose a title, category, and cover photo that represents what you want to track the best",
+      text: "Create a journal through the journals tab. Choose a title, category, and cover photo that represents what you want to track the best.",
     },
     {
       icon: FaRegEdit,
@@ -15,18 +15,18 @@ const Features = () => {
     },
     {
       icon: FaRegChartBar,
-      text: "View your journal data. The more you update your journals, the more data will be organized visually on your dashboard",
+      text: "View your journal data. The more you update your journals, the more data will be organized visually on your dashboard.",
     },
     {
-      icon: FaPlusCircle, // Placeholder icon
-      text: "Your fourth feature description here.", // Placeholder text
+      icon: FaUserFriends, 
+      text: "Connect with friends who are on the same self improvement journey you are on!", 
     },
   ];
 
   return (
     <Flex
       w="100vw"
-      minH="100vh" // Change this to minimum height instead of fixed height
+      minH="100vh" 
       bg="white"
       flexDirection="column"
       p={10}
