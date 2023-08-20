@@ -137,19 +137,20 @@ export default function SignUp() {
   };
 
   return (
-    <DefaultAuth imageBackground={imageAuth} image={imageAuth}>
+    <DefaultAuth imageBackground={imageAuth} image={imageAuth} bgColor="white">
       <Flex
         maxW={{ base: "100%", md: "max-content" }}
         w="100%"
         mx={{ base: "auto", lg: "0px" }}
         me="auto"
-        h="100%"
+        h="100vh"
         alignItems="start"
         justifyContent="center"
         mb={{ base: "30px", md: "60px" }}
         px={{ base: "25px", md: "0px" }}
         mt={{ base: "40px", md: "14vh" }}
         flexDirection="column"
+
       >
         <Box me="auto">
           <MotionHeading
@@ -157,12 +158,12 @@ export default function SignUp() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
             color={textColor}
-            fontSize="36px"
+            fontSize="24px"
             mb="10px"
           >
             Sign Up
           </MotionHeading>
-          <Text
+          {/* <Text
             mb="36px"
             ms="4px"
             color={textColorSecondary}
@@ -170,7 +171,7 @@ export default function SignUp() {
             fontSize="md"
           >
             Enter your email and password to sign up!
-          </Text>
+          </Text> */}
         </Box>
         <Flex
           zIndex="2"
@@ -183,7 +184,7 @@ export default function SignUp() {
           me="auto"
           mb={{ base: "20px", md: "auto" }}
         >
-          <Flex align="center" mb="25px">
+          <Flex align="center" mb="15px">
             <HSeparator />
             {/* <Text color='gray.400' mx='14px'>
               or
@@ -204,7 +205,7 @@ export default function SignUp() {
               fontSize="sm"
               fontWeight="500"
               color={textColor}
-              mb="8px"
+              mb="5px"
             >
               Email<Text color={brandStars}>*</Text>
             </FormLabel>
@@ -220,7 +221,7 @@ export default function SignUp() {
               ms={{ base: "0px", md: "0px" }}
               type="email"
               placeholder="Enter your email"
-              mb="24px"
+              mb="10px"
               fontWeight="500"
               size="lg"
             />
@@ -230,7 +231,7 @@ export default function SignUp() {
               fontSize="sm"
               fontWeight="500"
               color={textColor}
-              mb="8px"
+              mb="5px"
             >
               Username<Text color={brandStars}>*</Text>
             </FormLabel>
@@ -246,7 +247,7 @@ export default function SignUp() {
               ms={{ base: "0px", md: "0px" }}
               type="email"
               placeholder="Enter your username"
-              mb="24px"
+              mb="10px"
               fontWeight="500"
               size="lg"
             />
@@ -266,12 +267,12 @@ export default function SignUp() {
                 onChange={(e) => {
                   setPassword(e.target.value);
                   setShowError(null);
-                  // Additional logic for real-time feedback can be added here if needed
+
                 }}
                 isRequired={true}
                 fontSize="sm"
                 placeholder="Min. 8 characters"
-                mb="12px"
+                mb="5px"
                 size="lg"
                 type={show ? "text" : "password"}
               />
@@ -324,7 +325,7 @@ export default function SignUp() {
             </VStack>
 
             <FormLabel
-            pt="4"
+              pt="4"
               ms="4px"
               fontSize="sm"
               fontWeight="500"
@@ -341,7 +342,7 @@ export default function SignUp() {
                 isRequired={true}
                 fontSize="sm"
                 placeholder="Confirm your password"
-                mb="24px"
+                mb="10px"
                 size="lg"
                 type={show ? "text" : "password"}
               />
@@ -354,7 +355,7 @@ export default function SignUp() {
                 />
               </InputRightElement>
             </InputGroup>
-            <Flex justifyContent="space-between" align="center" mb="24px">
+            <Flex justifyContent="space-between" align="center" mb="10px">
             </Flex>
             <MotionButton
               onClick={handleAddUser}
@@ -362,8 +363,8 @@ export default function SignUp() {
               variant="brand"
               fontWeight="500"
               w="100%"
-              h="50"
-              mb="24px"
+              h="40px"
+              mb="10px"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -386,6 +387,7 @@ export default function SignUp() {
                   as="span"
                   ms="5px"
                   fontWeight="500"
+
                 >
                   Sign In
                 </Text>

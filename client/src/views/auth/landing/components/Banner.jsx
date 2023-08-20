@@ -37,6 +37,11 @@ const graphicVariant = {
   hidden: { opacity: 0, y: 50 },
   visible: { opacity: 1, y: 0, transition: { duration: 1, delay: 0.5 } },
 };
+
+const welcomeVariant = {
+  hidden: { opacity: 0, y: -20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1, delay: 1.2 } },
+};
 const pulseVariant = { // Define this outside of the component
   animate: {
     scale: [1, 1.2, 1],
@@ -89,11 +94,11 @@ export default function LandingPage() {
         >
           <MotionButton as={Link} to="/auth/sign-up" variant="brand"
             color="white"
-            fontSize="sm"
-            fontWeight="500"
+            fontSize="md"
+            fontWeight="600"
             borderRadius="70px" initial="hidden" animate="visible"
             background="transparent"
-            mb="3px"
+            mx="8px"
             p="16px"
           >
             Get Started
@@ -121,11 +126,26 @@ export default function LandingPage() {
                 </React.Fragment>
               ))}
             </Heading>
-            <Text mt={8} textAlign="left" size="lg">Welcome to TinySquares</Text>
-            <Box mt={4}>
-              <MotionButton as={Link} to="/auth/sign-in" variants={buttonVariant} initial="hidden" animate="visible">
-                Sign In
-              </MotionButton>
+            <motion.div
+    variants={welcomeVariant}
+    initial="hidden"
+    animate="visible"
+  >
+    <Text mt={8} textAlign="left" fontSize="xl">Welcome to <Box as="span" fontWeight="bold">TinySquares</Box></Text>
+  </motion.div>
+            <Box mt={8}>
+            <MotionButton
+  as={Link}
+  to="/auth/sign-in"
+  initial="hidden"
+  animate="visible"
+  variants={buttonVariant}
+  bg="gray.200" 
+  
+  _hover={{ bg: "gray.300" }} 
+>
+  Sign In
+</MotionButton>
 
             </Box>
           </MotionBox>
@@ -138,7 +158,7 @@ export default function LandingPage() {
           overflow="hidden"
           position="relative"
           display={{ base: "none", md: "block" }}
-          bgColor="transparent" // Making background transparent
+          bgColor="transparent" 
         >
           <MotionImage
             src={bannerimg}
