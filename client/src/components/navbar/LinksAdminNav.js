@@ -23,6 +23,7 @@ import {
   useColorModeValue,
   useDisclosure,
   IconButton,
+  useToast,
   Box,
 } from "@chakra-ui/react";
 
@@ -40,6 +41,7 @@ import { useAuth } from "contexts/auth.context";
 import { GET_ME } from "utils/queries";
 import { useQuery } from "@apollo/client";
 
+
 export default function HeaderLinks(props) {
   let [, , removeCookie] = useCookies();
   let { user, setUser } = useAuth();
@@ -48,6 +50,7 @@ export default function HeaderLinks(props) {
   const [logout] = useMutation(LOGOUT_USER);
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
 
   const MotionMenuList = motion(MenuList);
   const MotionMenuItem = motion(MenuItem);
@@ -77,6 +80,18 @@ export default function HeaderLinks(props) {
       console.error("Error logging out", error);
     }
   };
+
+  const alreadyPremium = async () => {
+    toast({
+      title: "You Always Have Premium!",
+      description: "Thank you for your support!",
+      duration: 6000,
+      status: "success",
+      isClosable: true,
+      position: "top",
+      colorScheme: "green",
+    });
+  }
 
   const { secondary } = props;
 
@@ -209,29 +224,27 @@ export default function HeaderLinks(props) {
         </Menu>
         <Menu>
           <IconButton
-            icon={
-              <Box position="relative">
-                {!data.me.premium && (
-                  <>
-                    <BsShop size="24" tm="100px" />
-                    <img
-                      src={premiumBadge}
-                      alt="Premium Badge"
-                      style={{
-                        position: "absolute",
-                        top: "-18px",
-                        right: "-10px",
-                        width: "20px",
-                        height: "20px",
-                      }}
-                    />
-                  </>
-                )}
-              </Box>
-            }
+              icon={
+                <Box position="relative">
+                    <>
+                      <BsShop size="24" tm="100px" />
+                      <img
+                        src={premiumBadge}
+                        alt="Premium Badge"
+                        style={{
+                          position: "absolute",
+                          top: "-18px",
+                          right: "-10px",
+                          width: "20px",
+                          height: "20px",
+                        }}
+                      />
+                    </>
+                </Box>
+              }
             color={navbarIcon}
             _hover={{ color: "secondaryGray.900" }}
-            onClick={openCartModal}
+            onClick={data.me.premium ? alreadyPremium : openCartModal}
           />
           <CartModal isOpen={cartModalIsOpen} onClose={closeCartModal} />
         </Menu>
