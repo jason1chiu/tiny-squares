@@ -36,23 +36,11 @@ if (process.env.NODE_ENV === 'production') {
 
 app.post("/admin/store/checkout", async (req, res) => {
 
-  console.log("Cart:", req.body.requestData.cart);
-  console.log("User ID:", req.body.requestData.userId);
   const userId = req.body.requestData.userId
-  const items = req.body.requestData.cart;
-
-  let lineItems = [];
-  items.forEach((item) => {
-    lineItems.push(
-      {
-        price: item.id,
-        quantity: item.quantity
-      }
-    )
-  });
+  const item = req.body.requestData.item;
 
   const session = await stripe.checkout.sessions.create({
-    line_items: lineItems,
+    line_items: [item],
     mode: 'payment',
 
     // success_url: `https://tinysquares.herokuapp.com/success?userId=${userId}`,

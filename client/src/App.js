@@ -6,7 +6,7 @@ import AdminLayout from "layouts/admin";
 import AuthLayout from "layouts/auth";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "theme/theme";
-import CartProvider from "components/shared/store/js/CartContext";
+
 import CancelPage from "views/admin/cancelOrderPage/";
 import SuccessPage from "views/admin/successOrderPage";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
@@ -35,7 +35,7 @@ export default function App() {
 
   return (
     <ApolloProvider client={client}>
-      <CartProvider>
+     
         <ChakraProvider theme={theme}>
           <React.StrictMode>
             <BrowserRouter>
@@ -63,7 +63,7 @@ export default function App() {
             </BrowserRouter>
           </React.StrictMode>
         </ChakraProvider>
-      </CartProvider>
+   
     </ApolloProvider>
   );
 }

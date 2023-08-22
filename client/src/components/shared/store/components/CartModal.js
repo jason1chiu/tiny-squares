@@ -24,8 +24,13 @@ export function CartModal(props) {
   const checkout = async () => {
     const userId = localStorage.getItem("user_id");
 
+    const item = {
+      price: "price_1NhmKsCS0MFKcelVwa3Y1FlY",
+      quantity: 1
+    }
+
        const requestData = {
-            // cart: cart.cart,
+            item: item,
             userId: userId,
           };
           // Change back to /admin/store/checkout when deploy to heroku
@@ -47,13 +52,6 @@ export function CartModal(props) {
               }
             });
       
-          await fetch("http://localhost:3001/stripe-webhook", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ userId: userId }),
-          });
         };
 
         return (
