@@ -88,6 +88,17 @@ export default function FindFriendModal({ isOpen, onClose, onSubmit }) {
           position: "top",
           colorScheme: "red",
         });
+      } else if (error.message.includes("Cannot add yourself as a friend")) {
+        // Display a toast indicating that the user was not found
+        toast({
+          title: "Failed to Add Friend",
+          description: "Cannot add yourself as a friend.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+          colorScheme: "red",
+        });
       } else {
         // Display a generic error toast
         toast({
