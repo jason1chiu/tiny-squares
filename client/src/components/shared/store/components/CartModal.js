@@ -34,7 +34,7 @@ export function CartModal(props) {
             userId: userId,
           };
           // Change back to /admin/store/checkout when deploy to heroku
-          await fetch("http://localhost:3001/admin/store/checkout", {
+          await fetch("http://tinysquares.herokuapp.com/admin/store/checkout", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

@@ -43,10 +43,10 @@ app.post("/admin/store/checkout", async (req, res) => {
     line_items: [item],
     mode: 'payment',
 
-    // success_url: `https://tinysquares.herokuapp.com/success?userId=${userId}`,
-    // cancel_url: "https://tinysquares.herokuapp.com/cancel"
-    success_url: `http://localhost:3000/success?userId=${userId}`,
-    cancel_url: "http://localhost:3000/cancel"
+    success_url: `https://tinysquares.herokuapp.com/success?userId=${userId}`,
+    cancel_url: "https://tinysquares.herokuapp.com/cancel"
+    // success_url: `http://localhost:3000/success?userId=${userId}`,
+    // cancel_url: "http://localhost:3000/cancel"
   });
 
   res.json({

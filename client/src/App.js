@@ -25,8 +25,8 @@ export default function App() {
   }
 
   const client = new ApolloClient({
-    // uri: "https://tinysquares.herokuapp.com/graphql",
-    uri: "http://localhost:3001/graphql",
+    uri: "https://tinysquares.herokuapp.com/graphql",
+    // uri: "http://localhost:3001/graphql",
     cache: new InMemoryCache({ query: true, data: false }),
     headers: {
       authorization: getToken(user, cookies),
