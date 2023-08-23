@@ -1,11 +1,35 @@
-import React from "react";
-
-import { Flex, Link, Text } from "@chakra-ui/react";
-
+import React, { useState } from "react";
+import { Flex, Text, Button } from "@chakra-ui/react";
+import NewJournalModal from "views/admin/journals/components/NewJournalModal";
 import banner from "assets/img/banner7.png";
+import { ADD_JOURNAL } from "utils/mutations";
+import { useMutation } from "@apollo/client";
+import { GET_JOURNALS, GET_ME, GET_JOURNAL } from "utils/queries";
 
 export default function Banner() {
- 
+  let [addJournal] = useMutation(ADD_JOURNAL, {
+    refetchQueries: [GET_JOURNALS, GET_JOURNAL, GET_ME],
+  });
+
+  const [isModalOpen, setModalOpen] = useState(false);
+  const purpleColor = "purple.500";
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const handleAddJournal = async (journal) => {
+    try {
+      await addJournal({ variables: journal });
+
+      closeModal();
+    } catch (error) {
+      console.error("Error creating journal: ", error);
+    }
+  };
   return (
     <Flex
       direction='column'
@@ -46,7 +70,23 @@ export default function Banner() {
         lineHeight='28px'>
         Track your moods, habits, and goals. 
       </Text>
-
+      <Button
+        w="40%"
+        variant="brand"
+        color="white"
+        fontSize="sm"
+        fontWeight="500"
+        borderRadius="70px"
+        onClick={openModal}
+        background={purpleColor}
+      >
+        Create Journal
+      </Button>
+      <NewJournalModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onSubmit={handleAddJournal}
+      />
     </Flex>
   );
 }

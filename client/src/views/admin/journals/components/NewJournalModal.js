@@ -36,9 +36,9 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
   const bColor = useColorModeValue("secondaryGray.600", "white");
   const tColor = useColorModeValue("brand.800", "white");
   const pColor = useColorModeValue("brand.600", "white");
-  
+
   const { data } = useQuery(GET_JOURNALS);
-  const { data: meData, refetch: meRefetch } = useQuery(GET_ME); 
+  const { data: meData, refetch: meRefetch } = useQuery(GET_ME);
 
   const [journalCategory, setJournalCategory] = useState("");
   let { categories } = useAuth();
@@ -98,21 +98,21 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
   // If user does not have premium and max journals reached, modal informing them pops up
   if (journalLimitReached && !meData.me.premium) {
     return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered>
-    <ModalOverlay />
-    <ModalContent width="100vw">
-      <ModalHeader color={tColor}>Maximum Journal Amount Reached</ModalHeader>
-      <ModalCloseButton />
-      <ModalBody>
-        Your current plan only includes 3 journals. Please purchase premium if you'd like to add more.
-      </ModalBody>
-      <ModalFooter>
-        <Button color={tColor} variant="ghost" onClick={onClose}>
-          Ok
-        </Button>
-      </ModalFooter>
-    </ModalContent>
-  </Modal>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent width="100vw">
+          <ModalHeader color={tColor}>Maximum Journal Amount Reached</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            Your current plan only includes 3 journals. Please purchase premium if you'd like to add more.
+          </ModalBody>
+          <ModalFooter>
+            <Button color={tColor} variant="ghost" onClick={onClose}>
+              Ok
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     )
   }
 
@@ -152,18 +152,31 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
           <FormLabel mt={3} color={pColor}>
             Select Journal Image
           </FormLabel>
-          <Box>
-            <Image
-              src={journalImage ? `/img/journal/${journalImage}.webp` : ""}
-              borderRadius="full"
-              boxSize="100px"
-              objectFit="cover"
-            />
-            <IconButton
-              aria-label="Select journal image"
-              icon={<FiUpload />}
-              onClick={onJournalImageToggle}
-            />
+         
+          <Box
+  mx="auto"
+  position="relative"
+  cursor="pointer"
+  onClick={onJournalImageToggle}
+  _hover={{ opacity: 1 }}
+>
+  <Image
+    src={journalImage ? `/img/journal/${journalImage}.webp` : ""}
+    borderRadius="full"
+    boxSize="100px"
+    objectFit="cover"
+  />
+  <Box
+    position="absolute"
+    top="50%"
+    left="50px"
+    transform="translate(-50%, -50%)"
+    opacity="0"
+    _hover={{ opacity: "1" }}
+  >
+    <FiUpload color="white" size="44" />
+  </Box>
+</Box>
             <Collapse in={isJournalImageOpen}>
               <Grid templateColumns="repeat(3, 1fr)" gap={3}>
                 {[...Array(20)].map((_, i) => (
@@ -189,7 +202,7 @@ export default function NewJournalModal({ isOpen, onClose, onSubmit }) {
                 ))}
               </Grid>
             </Collapse>
-          </Box>
+         
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="purple" mr={3} onClick={handleSubmit}>
