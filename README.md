@@ -58,7 +58,7 @@
 
 <p align="center">
  
-  <img src='./client/public/TS-home.png' alt='home'>
+  <img src='./client/public/Screenshot2.png' alt='home'>
 </p>
 
 <h3 align="center"> Introducing TinySquares: </h3>
@@ -116,19 +116,15 @@ npm i
 ## :computer: Usage
 
 <div align="center">
-     <img src="assets\app.gif">
-   </div>
-   <br />
-   
-
-<div align="center">
   <h2><a href="https://tinysquares.herokuapp.com/" target="_blank">🌐 Deployed Website</a></h2>
   <p>Click the link above to explore our live application!</p>
   <a href="https://tinysquares.herokuapp.com/" target="_blank">
-    <img src='./client/public/TS-dash.png' alt='dashboard pic' style="border: 5px solid #a46cf5; border-radius: 15px;">
+    <img src='./client/public/Screenshot1.png' alt='dashboard pic' style="border: 5px solid #a46cf5; border-radius: 15px;">
+     <img src='./client/public/Screenshot3.png' alt='dashboard pic' style="border: 5px solid #a46cf5; border-radius: 15px;">
   </a>
 </div>
-
+ <br />
+  <br />
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
