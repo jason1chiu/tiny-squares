@@ -155,7 +155,7 @@ export default function HeaderLinks(props) {
         </Flex>
 
         <SidebarResponsive routes={routes} />
-        <Menu>
+        {/* <Menu>
           <MenuButton p="0px">
             <Icon mt="9px" as={MdNotificationsNone} color={navbarIcon} w="24px" h="24px" _hover={{ color: "secondaryGray.900" }}/>
           </MenuButton>
@@ -186,7 +186,7 @@ export default function HeaderLinks(props) {
               </MenuItem>
             </Flex>
           </MenuList>
-        </Menu>
+        </Menu> */}
         <Menu>
           <MenuList
             boxShadow={shadow}

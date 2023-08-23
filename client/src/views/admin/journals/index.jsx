@@ -91,7 +91,7 @@ return (
 
           
           <SimpleGrid columns={{ base: 2, md: 3 }} gap="20px" id="journal-card-step">
-            <NewCard /> 
+            {/* <NewCard />  */}
             {/* <Archive /> */}
             {data?.journals && data.journals.length > 0 ? (
               data.journals.map((journal) => (
